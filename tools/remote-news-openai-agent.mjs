@@ -15,11 +15,11 @@ const IS_FREE_MODEL = /:free$/i.test(OPENAI_MODEL);
 
 const TARGET_COUNT = 12;
 const FREE_CAPS = {
-  maxCandidates: 240,
-  maxFeedItems: 720,
+  maxCandidates: 80,
+  maxFeedItems: 240,
   chunkSize: 80,
-  pickCount: 16,
-  poolLimit: 160,
+  pickCount: 14,
+  poolLimit: 120,
   maxRetries: 3
 };
 
@@ -28,14 +28,19 @@ function readEnvNumber(name, fallback) {
   return Number.isFinite(n) ? n : fallback;
 }
 
-const maxCandidatesRaw = Math.max(120, readEnvNumber("REMOTE_MAX_CANDIDATES", IS_FREE_MODEL ? FREE_CAPS.maxCandidates : 1200));
-const MAX_CANDIDATES = IS_FREE_MODEL ? Math.min(FREE_CAPS.maxCandidates, maxCandidatesRaw) : maxCandidatesRaw;
+const chunkSizeRaw = Math.max(40, readEnvNumber("OPENAI_STAGE1_CHUNK_SIZE", IS_FREE_MODEL ? FREE_CAPS.chunkSize : 120));
+const OPENAI_STAGE1_CHUNK_SIZE = IS_FREE_MODEL ? FREE_CAPS.chunkSize : chunkSizeRaw;
+
+const minCandidates = IS_FREE_MODEL ? 40 : 120;
+const maxCandidatesRaw = Math.max(minCandidates, readEnvNumber("REMOTE_MAX_CANDIDATES", IS_FREE_MODEL ? FREE_CAPS.maxCandidates : 1200));
+const MAX_CANDIDATES = IS_FREE_MODEL
+  ? Math.min(FREE_CAPS.maxCandidates, OPENAI_STAGE1_CHUNK_SIZE, maxCandidatesRaw)
+  : maxCandidatesRaw;
 
 const maxFeedItemsRaw = Math.max(MAX_CANDIDATES, readEnvNumber("REMOTE_MAX_FEED_ITEMS", IS_FREE_MODEL ? FREE_CAPS.maxFeedItems : 3000));
-const MAX_FEED_ITEMS = IS_FREE_MODEL ? Math.min(FREE_CAPS.maxFeedItems, Math.max(MAX_CANDIDATES, maxFeedItemsRaw)) : maxFeedItemsRaw;
-
-const chunkSizeRaw = Math.max(40, readEnvNumber("OPENAI_STAGE1_CHUNK_SIZE", IS_FREE_MODEL ? FREE_CAPS.chunkSize : 120));
-const OPENAI_STAGE1_CHUNK_SIZE = IS_FREE_MODEL ? Math.min(FREE_CAPS.chunkSize, chunkSizeRaw) : chunkSizeRaw;
+const MAX_FEED_ITEMS = IS_FREE_MODEL
+  ? Math.min(FREE_CAPS.maxFeedItems, Math.max(MAX_CANDIDATES, maxFeedItemsRaw))
+  : maxFeedItemsRaw;
 
 const pickCountRaw = Math.max(10, readEnvNumber("OPENAI_STAGE1_PICK_COUNT", IS_FREE_MODEL ? FREE_CAPS.pickCount : 24));
 const OPENAI_STAGE1_PICK_COUNT = Math.min(OPENAI_STAGE1_CHUNK_SIZE, IS_FREE_MODEL ? Math.min(FREE_CAPS.pickCount, pickCountRaw) : pickCountRaw);
@@ -44,7 +49,7 @@ const stage2PoolRaw = Math.max(120, readEnvNumber("OPENAI_STAGE2_POOL_LIMIT", IS
 const OPENAI_STAGE2_POOL_LIMIT = IS_FREE_MODEL ? Math.min(FREE_CAPS.poolLimit, stage2PoolRaw) : stage2PoolRaw;
 
 const OPENAI_REQUEST_GAP_MS = Math.max(0, readEnvNumber("OPENAI_REQUEST_GAP_MS", IS_FREE_MODEL ? 1200 : 180));
-const retriesRaw = Math.max(0, readEnvNumber("OPENAI_MAX_RETRIES", IS_FREE_MODEL ? 2 : 3));
+const retriesRaw = Math.max(IS_FREE_MODEL ? 1 : 0, readEnvNumber("OPENAI_MAX_RETRIES", IS_FREE_MODEL ? 2 : 3));
 const OPENAI_MAX_RETRIES = IS_FREE_MODEL ? Math.min(FREE_CAPS.maxRetries, retriesRaw) : retriesRaw;
 const OPENAI_RETRY_BASE_MS = Math.max(200, readEnvNumber("OPENAI_RETRY_BASE_MS", IS_FREE_MODEL ? 1800 : 900));
 const OPENAI_RETRY_MAX_MS = Math.max(1000, Number(process.env.OPENAI_RETRY_MAX_MS || 20000));
@@ -848,6 +853,70 @@ function buildSourceStats(items) {
   return out;
 }
 
+function normalizeModelItem(raw, fallbackTime = Date.now()) {
+  if (!raw || typeof raw !== "object") return null;
+  const title = String(raw.title || raw.headline || raw.headlineZh || raw.标题 || "").trim();
+  const url = String(raw.url || raw.link || raw.href || "").trim();
+  if (!title || !url) return null;
+  const source = String(raw.source || raw.media || "Remote").trim();
+  const category = String(raw.category || raw.cat || "Market").trim();
+  return {
+    title,
+    headlineZh: String(raw.headlineZh || raw.headline || title).trim(),
+    summaryZh: String(raw.summaryZh || raw.summary || "").trim(),
+    agentReasonZh: String(raw.agentReasonZh || raw.reasonZh || raw.reason || "").trim(),
+    url,
+    source,
+    category,
+    time: safeNumber(raw.time, fallbackTime),
+    priority: safeNumber(raw.priority, 0),
+    pinnedUntil: safeNumber(raw.pinnedUntil, 0),
+    agentScore: safeNumber(raw.agentScore, 0),
+    agentRank: safeNumber(raw.agentRank, 0),
+    topicZh: String(raw.topicZh || raw.topic || "").trim()
+  };
+}
+
+function isLikelyModelItem(raw) {
+  if (!raw || typeof raw !== "object") return false;
+  const title = raw.title || raw.headline || raw.headlineZh || raw.标题;
+  const url = raw.url || raw.link || raw.href;
+  return typeof title === "string" && title.trim() && typeof url === "string" && url.trim();
+}
+
+function extractModelItemsFromPayload(payload) {
+  if (!payload || typeof payload !== "object") return [];
+  const direct = Array.isArray(payload.items) ? payload.items : null;
+  if (direct && direct.length) {
+    return direct.map((x) => normalizeModelItem(x)).filter(Boolean);
+  }
+
+  const queue = [payload];
+  const visited = new Set();
+  while (queue.length) {
+    const node = queue.shift();
+    if (!node || typeof node !== "object") continue;
+    if (visited.has(node)) continue;
+    visited.add(node);
+
+    if (Array.isArray(node)) {
+      if (node.length && node.some((x) => isLikelyModelItem(x))) {
+        return node.map((x) => normalizeModelItem(x)).filter(Boolean);
+      }
+      for (const item of node) {
+        if (item && typeof item === "object") queue.push(item);
+      }
+      continue;
+    }
+
+    for (const value of Object.values(node)) {
+      if (!value || typeof value !== "object") continue;
+      queue.push(value);
+    }
+  }
+  return [];
+}
+
 async function runOpenAi(candidates, nowIso) {
   if (!OPENAI_API_KEY) {
     throw new Error("OPENAI_API_KEY not set in remote mode.");
@@ -995,8 +1064,30 @@ async function runOpenAi(candidates, nowIso) {
       impactScore: Number((Math.max(1, row.preScore || 1) * 8.2).toFixed(2))
     }));
 
+  const ensureFinalItems = async (parsed, poolRows) => {
+    if (!parsed || typeof parsed !== "object") return parsed;
+    let items = extractModelItemsFromPayload(parsed);
+    if (items.length) {
+      return { ...parsed, items };
+    }
+
+    // Some free models return incomplete shape; do one compact rescue call.
+    const compactPool = poolRows.slice(0, Math.min(48, poolRows.length));
+    if (!compactPool.length) return parsed;
+    try {
+      console.error("[remote] openai final returned no items, retrying compact final prompt.");
+      const retry = await callOpenAi(createOpenAiFinalPayload(compactPool, nowIso));
+      items = extractModelItemsFromPayload(retry);
+      if (items.length) return { ...(retry || {}), items };
+    } catch (error) {
+      console.error(`[remote] compact final retry failed -> ${error.message}`);
+    }
+    return parsed;
+  };
+
   if (candidates.length <= OPENAI_STAGE1_CHUNK_SIZE) {
-    return await callOpenAi(createOpenAiFinalPayload(candidates, nowIso));
+    const direct = await callOpenAi(createOpenAiFinalPayload(candidates, nowIso));
+    return await ensureFinalItems(direct, candidates);
   }
 
   const chunks = chunkArray(candidates, OPENAI_STAGE1_CHUNK_SIZE);
@@ -1083,7 +1174,8 @@ async function runOpenAi(candidates, nowIso) {
   if (!stage2Pool.length) throw new Error("OpenAI stage1 produced empty pool.");
 
   console.log(`[remote] openai final start (pool=${stage2Pool.length})`);
-  const finalParsed = await callOpenAi(createOpenAiFinalPayload(stage2Pool, nowIso));
+  let finalParsed = await callOpenAi(createOpenAiFinalPayload(stage2Pool, nowIso));
+  finalParsed = await ensureFinalItems(finalParsed, stage2Pool);
   console.log("[remote] openai final done");
   if (typeof finalParsed !== "object" || !finalParsed) throw new Error("OpenAI final parsed payload invalid.");
   if (!finalParsed.globalSummaryZh && chunkSummaries.length) {
