@@ -26,6 +26,7 @@ function normalizeItem(raw) {
     headlineZh: String(raw?.headlineZh || "").trim(),
     summaryZh: String(raw?.summaryZh || "").trim(),
     agentReasonZh: String(raw?.agentReasonZh || "").trim(),
+    summary: String(raw?.summary || raw?.summaryZh || "").trim(),
     url,
     source,
     category,
@@ -81,11 +82,15 @@ async function main() {
 
     const payload = {
       pulledAt: new Date().toISOString(),
-      remoteAgentAt: String(remotePayload?.agentAt || ""),
+      remoteAgentAt: String(remotePayload?.agentAt || remotePayload?.crawledAt || ""),
       remoteVersion: String(remotePayload?.version || ""),
       remoteModel: String(remotePayload?.model || ""),
+      remoteCrawlOnly: Boolean(remotePayload?.crawlOnly),
       remoteFailedFeeds: safeNumber(remotePayload?.failedFeeds, 0),
       remoteFailedSources: Array.isArray(remotePayload?.failedSources) ? remotePayload.failedSources.slice(0, 80) : [],
+      remoteTotalFeeds: safeNumber(remotePayload?.totalFeeds, 0),
+      remoteCollectedCount: safeNumber(remotePayload?.collectedCount, 0),
+      remoteRawCount: safeNumber(remotePayload?.rawCount, items.length),
       sourceUrl: REMOTE_NEWS_URL,
       globalSummaryZh: String(remotePayload?.globalSummaryZh || "").trim(),
       items

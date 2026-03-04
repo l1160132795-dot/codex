@@ -5,10 +5,17 @@ const OUTPUT_JSON_FILE = process.env.REMOTE_OUTPUT_JSON || "remote/news.remote.j
 const OUTPUT_JS_FILE = process.env.REMOTE_OUTPUT_JS || "remote/news.remote.js";
 const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-4.1-mini";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
+const REMOTE_CRAWL_ONLY = String(process.env.REMOTE_CRAWL_ONLY || "0") === "1";
+const REMOTE_ALLOW_RULE_FALLBACK = String(process.env.REMOTE_ALLOW_RULE_FALLBACK || "0") === "1";
+const RAW_MAX_AGE_HOURS = Math.max(24, Number(process.env.RAW_MAX_AGE_HOURS || 72));
 
 const TARGET_COUNT = 12;
-const MAX_CANDIDATES = 72;
-const MAX_FEED_ITEMS = 220;
+const MAX_CANDIDATES = Math.max(120, Number(process.env.REMOTE_MAX_CANDIDATES || 1200));
+const MAX_FEED_ITEMS = Math.max(MAX_CANDIDATES, Number(process.env.REMOTE_MAX_FEED_ITEMS || 3000));
+const OPENAI_STAGE1_CHUNK_SIZE = Math.max(40, Number(process.env.OPENAI_STAGE1_CHUNK_SIZE || 120));
+const OPENAI_STAGE1_PICK_COUNT = Math.max(10, Number(process.env.OPENAI_STAGE1_PICK_COUNT || 24));
+const OPENAI_STAGE2_POOL_LIMIT = Math.max(120, Number(process.env.OPENAI_STAGE2_POOL_LIMIT || 360));
+const OPENAI_REQUEST_GAP_MS = Math.max(0, Number(process.env.OPENAI_REQUEST_GAP_MS || 180));
 
 const BASE_RSS_FEEDS = [
   { url: "https://www.federalreserve.gov/feeds/press_all.xml", source: "Fed", category: "Policy" },
@@ -17,9 +24,21 @@ const BASE_RSS_FEEDS = [
   { url: "https://www.bankofengland.co.uk/rss/news", source: "BoE", category: "Macro" },
   { url: "https://www.cnbc.com/id/100003114/device/rss/rss.html", source: "CNBC", category: "Market" },
   { url: "https://www.cnbc.com/id/100727362/device/rss/rss.html", source: "CNBC", category: "Geo" },
+  { url: "https://feeds.bbci.co.uk/news/world/rss.xml", source: "BBC", category: "Geo" },
+  { url: "https://feeds.bbci.co.uk/news/business/rss.xml", source: "BBC", category: "Market" },
+  { url: "https://www.theguardian.com/world/rss", source: "Guardian", category: "Geo" },
+  { url: "https://www.theguardian.com/business/rss", source: "Guardian", category: "Market" },
+  { url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml", source: "NYTimes", category: "Geo" },
+  { url: "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml", source: "NYTimes", category: "Macro" },
+  { url: "https://www.aljazeera.com/xml/rss/all.xml", source: "AlJazeera", category: "Geo" },
+  { url: "https://feeds.npr.org/1001/rss.xml", source: "NPR", category: "Geo" },
+  { url: "https://feeds.npr.org/1006/rss.xml", source: "NPR", category: "Macro" },
+  { url: "https://feeds.content.dowjones.io/public/rss/mw_topstories", source: "MarketWatch", category: "Market" },
   { url: "https://cointelegraph.com/rss", source: "Cointelegraph", category: "Crypto" },
   { url: "https://cn.cointelegraph.com/rss", source: "CointelegraphCN", category: "Crypto" },
   { url: "https://www.panewslab.com/rss.xml", source: "PANews", category: "Crypto" },
+  { url: "https://decrypt.co/feed", source: "Decrypt", category: "Crypto" },
+  { url: "https://blockworks.co/feed", source: "Blockworks", category: "Crypto" },
   { url: "https://www.fxstreet.com/rss/news", source: "FXStreet", category: "Macro" },
   { url: "https://www.nasdaq.com/feed/rssoutbound?category=Markets", source: "Nasdaq", category: "Market" }
 ];
@@ -36,9 +55,24 @@ const GOOGLE_NEWS_QUERIES = [
   { query: "federal reserve OR cpi OR inflation OR treasury yield", category: "Macro", hl: "en-US", gl: "US", ceid: "US:en" },
   { query: "bitcoin OR ethereum OR crypto etf", category: "Crypto", hl: "en-US", gl: "US", ceid: "US:en" },
   { query: "geopolitics OR sanctions OR conflict OR middle east", category: "Geo", hl: "en-US", gl: "US", ceid: "US:en" },
+  { query: "banking crisis OR credit spread OR liquidity risk OR treasury market", category: "Macro", hl: "en-US", gl: "US", ceid: "US:en" },
+  { query: "opec OR brent OR wti OR oil supply shock OR strait of hormuz", category: "Geo", hl: "en-US", gl: "US", ceid: "US:en" },
+  { query: "stablecoin regulation OR sec enforcement OR cftc OR crypto policy", category: "Policy", hl: "en-US", gl: "US", ceid: "US:en" },
   { query: "股市 OR 纳斯达克 OR 标普 OR 美元指数 OR 黄金 OR 原油", category: "Market", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
   { query: "美联储 OR CPI OR 通胀 OR 非农 OR 美债收益率", category: "Macro", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
-  { query: "比特币 OR 以太坊 OR 加密ETF OR 稳定币", category: "Crypto", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" }
+  { query: "比特币 OR 以太坊 OR 加密ETF OR 稳定币", category: "Crypto", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "地缘冲突 OR 制裁 OR 航运 OR 中东 OR 战争风险", category: "Geo", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "央行 OR 货币政策 OR 加息 OR 降息 OR 金融监管", category: "Policy", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" }
+];
+
+const BING_NEWS_QUERIES = [
+  { query: "global economy inflation central bank rates growth recession", category: "Macro" },
+  { query: "geopolitics sanctions conflict middle east shipping oil", category: "Geo" },
+  { query: "stock market earnings treasury yield dollar index commodities", category: "Market" },
+  { query: "crypto regulation etf stablecoin ethereum solana", category: "Crypto" },
+  { query: "federal reserve cpi payroll unemployment pce treasury", category: "Macro" },
+  { query: "opec oil gas lng shipping strait hormuz", category: "Geo" },
+  { query: "bitcoin etf inflow outflow sec cftc stablecoin", category: "Policy" }
 ];
 
 const REDDIT_HOT_FEEDS = [
@@ -69,10 +103,19 @@ const SOURCE_WEIGHTS = {
   ECB: 9.0,
   BoE: 8.8,
   Reuters: 8.1,
+  BBC: 7.6,
+  Guardian: 7.2,
+  NYTimes: 7.8,
+  NPR: 7.0,
+  AlJazeera: 6.8,
+  MarketWatch: 7.0,
   Nasdaq: 7.3,
   YahooFinance: 6.8,
   CoinDesk: 6.4,
+  Decrypt: 6.1,
+  Blockworks: 6.0,
   GoogleNews: 6.1,
+  BingNews: 5.9,
   GDELT: 5.6,
   Reddit: 3.8,
   CNBC: 7.1,
@@ -249,6 +292,13 @@ async function loadGoogleNewsRss(cfg) {
   return parseRss(xml, "GoogleNews", cfg.category || "Market");
 }
 
+async function loadBingNewsRss(cfg) {
+  const q = encodeURIComponent(String(cfg.query || ""));
+  const rssUrl = `https://www.bing.com/news/search?q=${q}&format=rss&setlang=en-us`;
+  const xml = await fetchText(rssUrl, 16000, 1);
+  return parseRss(xml, "BingNews", cfg.category || "Market");
+}
+
 async function loadRedditHot(cfg) {
   const subreddit = String(cfg.subreddit || "").trim();
   const category = String(cfg.category || "Social").trim();
@@ -360,32 +410,197 @@ function pickCandidates(rows, now = Date.now()) {
   }));
 }
 
-function createOpenAiPayload(candidates, nowIso) {
+function buildRawPool(rows, now = Date.now()) {
+  const maxAgeMs = RAW_MAX_AGE_HOURS * 3600 * 1000;
+  const filtered = rows
+    .filter((row) => row && row.title && row.url)
+    .filter((row) => Number.isFinite(Number(row.time)) && Number(row.time) >= now - maxAgeMs && Number(row.time) <= now + 10 * 60 * 1000)
+    .sort((a, b) => (Number(b.time) || 0) - (Number(a.time) || 0));
+
+  const dedup = [];
+  const seen = new Set();
+  for (const row of filtered) {
+    const key = newsDedupKey(row);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    dedup.push({
+      title: String(row.title || "").trim(),
+      summary: String(row.summary || "").trim(),
+      url: String(row.url || "").trim(),
+      source: String(row.source || "News").trim(),
+      category: String(row.category || "Market").trim(),
+      time: Number(row.time) || now,
+      engagement: Number(row.engagement) || 0
+    });
+    if (dedup.length >= MAX_FEED_ITEMS) break;
+  }
+  return dedup;
+}
+
+function chunkArray(rows, size) {
+  const out = [];
+  for (let i = 0; i < rows.length; i += size) out.push(rows.slice(i, i + size));
+  return out;
+}
+
+function chunkOutputSchema() {
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: ["chunkSummaryZh", "items"],
+    properties: {
+      chunkSummaryZh: { type: "string" },
+      items: {
+        type: "array",
+        minItems: 1,
+        maxItems: OPENAI_STAGE1_PICK_COUNT,
+        items: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "title",
+            "url",
+            "source",
+            "category",
+            "time",
+            "headlineZh",
+            "summaryZh",
+            "agentReasonZh",
+            "topicZh",
+            "eventKey",
+            "impactScore"
+          ],
+          properties: {
+            title: { type: "string" },
+            url: { type: "string" },
+            source: { type: "string" },
+            category: { type: "string", enum: ["Policy", "Geo", "Macro", "Market", "Crypto", "Social"] },
+            time: { type: "number" },
+            headlineZh: { type: "string" },
+            summaryZh: { type: "string" },
+            agentReasonZh: { type: "string" },
+            topicZh: { type: "string" },
+            eventKey: { type: "string" },
+            impactScore: { type: "number" }
+          }
+        }
+      }
+    }
+  };
+}
+
+function finalOutputSchema() {
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: ["globalSummaryZh", "items"],
+    properties: {
+      globalSummaryZh: { type: "string" },
+      items: {
+        type: "array",
+        minItems: TARGET_COUNT,
+        maxItems: TARGET_COUNT,
+        items: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "title",
+            "headlineZh",
+            "summaryZh",
+            "agentReasonZh",
+            "url",
+            "source",
+            "category",
+            "time",
+            "priority",
+            "pinnedUntil",
+            "agentScore",
+            "agentRank",
+            "topicZh"
+          ],
+          properties: {
+            title: { type: "string" },
+            headlineZh: { type: "string" },
+            summaryZh: { type: "string" },
+            agentReasonZh: { type: "string" },
+            url: { type: "string" },
+            source: { type: "string" },
+            category: { type: "string", enum: ["Policy", "Geo", "Macro", "Market", "Crypto", "Social"] },
+            time: { type: "number" },
+            priority: { type: "number" },
+            pinnedUntil: { type: "number" },
+            agentScore: { type: "number" },
+            agentRank: { type: "number" },
+            topicZh: { type: "string" }
+          }
+        }
+      }
+    }
+  };
+}
+
+function createOpenAiChunkPayload(chunkRows, nowIso, chunkIndex, totalChunks) {
   const systemPrompt = [
-    "\u4f60\u662f\u91d1\u878d\u65b0\u95fb\u603b\u7f16\u8f91\u3002",
-    "\u76ee\u6807\u662f\u4ece\u5019\u9009\u65b0\u95fb\u4e2d\u9009\u51fa\u5bf9\u5168\u7403\u91d1\u878d\u5e02\u573a\u5f71\u54cd\u6700\u5927\u768412\u6761\uff0c\u5e76\u751f\u6210\u4e2d\u6587\u6458\u8981\u3002",
-    "\u6392\u5e8f\u4f18\u5148\u7ea7\uff1a\u653f\u5e9c/\u76d1\u7ba1/\u592e\u884c\u5b98\u65b9\u52a8\u4f5c > \u5730\u7f18\u51b2\u7a81\u548c\u80fd\u6e90 > \u5b8f\u89c2\u6570\u636e > \u6838\u5fc3\u8d44\u4ea7\u4ef7\u683c\u51b2\u51fb > \u4e00\u822c\u884c\u4e1a\u8d44\u8baf\u3002",
-    "\u5982\u679c\u67d0\u4e8b\u4ef6\u5728\u4e00\u5929\u5185\u4ecd\u6709\u5168\u5c40\u5f71\u54cd\uff0c`pinnedUntil`\u8bf7\u7ed9\u5230\u73b0\u5728+24\u5c0f\u65f6\u4ee5\u4e0a\uff08\u53ef\u81f3+36\u5c0f\u65f6\uff09\u3002",
-    "\u8f93\u51fa\u5fc5\u987b\u662fJSON\uff0c\u4e14\u4e25\u683c\u7b26\u5408schema\u3002"
+    "\u4f60\u662f\u91d1\u878d\u603b\u7f16\u8f91\uff0c\u8bf7\u201c\u5168\u91cf\u9605\u8bfb\u5f53\u524d\u5206\u7247\u5019\u9009\u201d\u3002",
+    "\u4efb\u52a1\uff1a\u4ece\u5f53\u524d\u5206\u7247\u4e2d\u9009\u51fa\u5bf9\u5168\u7403\u8d44\u4ea7\u5f71\u54cd\u6700\u5927\u7684\u82e5\u5e72\u6761\uff0c\u8f93\u51fa\u4e2d\u6587\u6807\u9898/\u6458\u8981/\u7406\u7531\u3002",
+    "\u8981\u6c42\uff1a\u4e25\u683c\u8fd4\u56de JSON \u4e14\u7b26\u5408 schema\uff1beventKey \u7528\u4e8e\u8de8\u6e90\u53bb\u91cd\uff0c\u7b80\u77ed\u7a33\u5b9a\u3002",
+    "\u91cd\u8981\u4e8b\u4ef6\u4f18\u5148\uff1a\u5b98\u65b9/\u76d1\u7ba1/\u592e\u884c > \u5730\u7f18\u6218\u4e89/\u5236\u88c1 > \u901a\u80c0\u5c31\u4e1a\u5229\u7387 > \u91d1\u878d\u5e02\u573a\u5927\u5e45\u6ce2\u52a8\u3002"
+  ].join("\n");
+
+  const userPrompt = JSON.stringify({
+    now: nowIso,
+    chunk: { index: chunkIndex + 1, total: totalChunks },
+    requirements: {
+      language: "zh-CN",
+      pickTopN: OPENAI_STAGE1_PICK_COUNT,
+      summaryStyle: "1~2\u53e5\uff0c\u4e2d\u6587\uff0c\u4e0d\u7a7a\u6d1e",
+      categories: ["Policy", "Geo", "Macro", "Market", "Crypto", "Social"]
+    },
+    candidates: chunkRows
+  });
+
+  return {
+    model: OPENAI_MODEL,
+    temperature: 0.1,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt }
+    ],
+    response_format: {
+      type: "json_schema",
+      json_schema: {
+        name: "remote_news_chunk_payload",
+        strict: true,
+        schema: chunkOutputSchema()
+      }
+    }
+  };
+}
+
+function createOpenAiFinalPayload(poolRows, nowIso) {
+  const systemPrompt = [
+    "\u4f60\u662f\u5168\u7403\u91d1\u878d\u65b0\u95fb\u603b\u7f16\u8f91\u3002",
+    "\u8f93\u5165\u5df2\u662f\u201c\u7ecf\u8fc7\u5206\u7247\u9605\u8bfb\u548c\u63d0\u70bc\u201d\u7684\u9ad8\u4fe1\u53f7\u5019\u9009\u6c60\uff0c\u8bf7\u518d\u5168\u91cf\u5ba1\u9605\u5e76\u4ea7\u751f\u6700\u7ec8 Top12\u3002",
+    "\u6392\u5e8f\u6807\u51c6\uff1a\u5f71\u54cd\u9762 + \u65f6\u6548\u6027 + \u6743\u5a01\u6027 + \u5e02\u573a\u5916\u6ea2\u6548\u5e94\u3002",
+    "\u5927\u4e8b\u4ef6\u9700\u4fdd\u630124~36\u5c0f\u65f6\uff08pinnedUntil\uff09\uff0c\u4e0d\u8981\u88ab\u7ec6\u789e\u6d88\u606f\u6324\u6389\u3002"
   ].join("\n");
 
   const userPrompt = JSON.stringify({
     now: nowIso,
     requirements: {
-      targetCount: 12,
+      targetCount: TARGET_COUNT,
       language: "zh-CN",
-      summaryStyle: "1~2\u53e5\uff0c\u51c6\u786e\u3001\u7b80\u77ed\uff0c\u4e0d\u8981\u7a7a\u8bdd",
+      summaryStyle: "1~2\u53e5\uff0c\u7b80\u7ec3\u4e2d\u6587",
       categories: ["Policy", "Geo", "Macro", "Market", "Crypto", "Social"],
       notes: [
-        "\u6807\u9898headlineZh\u9700\u4e3a\u4e2d\u6587",
-        "summaryZh\u4e3a\u4e2d\u6587\u6982\u62ec",
-        "agentReasonZh\u8bf4\u660e\u5165\u9009\u539f\u56e0",
-        "agentScore\u7528 0~100 \u6d6e\u70b9\u6570",
-        "agentRank \u4ece 1 \u5230 12",
+        "headlineZh \u5fc5\u987b\u4e2d\u6587",
+        "summaryZh \u4e2d\u6587\u6982\u62ec",
+        "agentScore 0~100",
+        "agentRank 1~12",
         "time/pinnedUntil \u4f7f\u7528 Unix ms"
       ]
     },
-    candidates
+    candidates: poolRows
   });
 
   return {
@@ -400,53 +615,7 @@ function createOpenAiPayload(candidates, nowIso) {
       json_schema: {
         name: "remote_news_wall_payload",
         strict: true,
-        schema: {
-          type: "object",
-          additionalProperties: false,
-          required: ["globalSummaryZh", "items"],
-          properties: {
-            globalSummaryZh: { type: "string" },
-            items: {
-              type: "array",
-              minItems: TARGET_COUNT,
-              maxItems: TARGET_COUNT,
-              items: {
-                type: "object",
-                additionalProperties: false,
-                required: [
-                  "title",
-                  "headlineZh",
-                  "summaryZh",
-                  "agentReasonZh",
-                  "url",
-                  "source",
-                  "category",
-                  "time",
-                  "priority",
-                  "pinnedUntil",
-                  "agentScore",
-                  "agentRank",
-                  "topicZh"
-                ],
-                properties: {
-                  title: { type: "string" },
-                  headlineZh: { type: "string" },
-                  summaryZh: { type: "string" },
-                  agentReasonZh: { type: "string" },
-                  url: { type: "string" },
-                  source: { type: "string" },
-                  category: { type: "string", enum: ["Policy", "Geo", "Macro", "Market", "Crypto", "Social"] },
-                  time: { type: "number" },
-                  priority: { type: "number" },
-                  pinnedUntil: { type: "number" },
-                  agentScore: { type: "number" },
-                  agentRank: { type: "number" },
-                  topicZh: { type: "string" }
-                }
-              }
-            }
-          }
-        }
+        schema: finalOutputSchema()
       }
     }
   };
@@ -611,31 +780,138 @@ function buildSourceStats(items) {
 
 async function runOpenAi(candidates, nowIso) {
   if (!OPENAI_API_KEY) {
-    console.error("[remote] OPENAI_API_KEY not set, fallback to rule-based ranking.");
-    return null;
+    throw new Error("OPENAI_API_KEY not set in remote mode.");
   }
 
-  const body = createOpenAiPayload(candidates, nowIso);
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${OPENAI_API_KEY}`
-    },
-    body: JSON.stringify(body)
-  });
+  const callOpenAi = async (body) => {
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "");
+      throw new Error(`OpenAI HTTP ${res.status}: ${errText.slice(0, 240)}`);
+    }
+    const json = await res.json();
+    const content = json?.choices?.[0]?.message?.content;
+    const text = cleanJsonText(content);
+    if (!text) throw new Error("OpenAI empty response");
+    return JSON.parse(text);
+  };
 
-  if (!res.ok) {
-    const errText = await res.text().catch(() => "");
-    throw new Error(`OpenAI HTTP ${res.status}: ${errText.slice(0, 240)}`);
+  const nowMs = Date.parse(nowIso) || Date.now();
+  const normalizeEventKey = (item) => normalizeDedupTitle(item?.eventKey || item?.title || "").slice(0, 90);
+  const chunkFallback = (chunkRows) => chunkRows
+    .slice(0, Math.min(OPENAI_STAGE1_PICK_COUNT, chunkRows.length))
+    .map((row) => ({
+      title: row.title,
+      url: row.url,
+      source: row.source,
+      category: row.category,
+      time: row.time,
+      headlineZh: row.title,
+      summaryZh: fallbackSummaryZh(row),
+      agentReasonZh: fallbackReasonZh(row),
+      topicZh: fallbackTopicZh(row),
+      eventKey: normalizeEventKey(row),
+      impactScore: Number((Math.max(1, row.preScore || 1) * 8.2).toFixed(2))
+    }));
+
+  if (candidates.length <= OPENAI_STAGE1_CHUNK_SIZE) {
+    return await callOpenAi(createOpenAiFinalPayload(candidates, nowIso));
   }
 
-  const json = await res.json();
-  const content = json?.choices?.[0]?.message?.content;
-  const text = cleanJsonText(content);
-  if (!text) throw new Error("OpenAI empty response");
+  const chunks = chunkArray(candidates, OPENAI_STAGE1_CHUNK_SIZE);
+  const stage1Rows = [];
+  const chunkSummaries = [];
 
-  return JSON.parse(text);
+  for (let i = 0; i < chunks.length; i += 1) {
+    const chunkRows = chunks[i];
+    try {
+      const parsed = await callOpenAi(createOpenAiChunkPayload(chunkRows, nowIso, i, chunks.length));
+      const picked = Array.isArray(parsed?.items) ? parsed.items : [];
+      if (String(parsed?.chunkSummaryZh || "").trim()) {
+        chunkSummaries.push(String(parsed.chunkSummaryZh).trim());
+      }
+      if (!picked.length) {
+        stage1Rows.push(...chunkFallback(chunkRows));
+        continue;
+      }
+      for (const raw of picked) {
+        const title = String(raw?.title || "").trim();
+        const url = String(raw?.url || "").trim();
+        const source = String(raw?.source || "").trim();
+        const category = String(raw?.category || "Market").trim();
+        if (!title || !url || !source) continue;
+        stage1Rows.push({
+          title,
+          url,
+          source,
+          category,
+          time: Number(raw?.time) || nowMs,
+          headlineZh: String(raw?.headlineZh || title).trim(),
+          summaryZh: String(raw?.summaryZh || fallbackSummaryZh({ title, source, category })).trim(),
+          agentReasonZh: String(raw?.agentReasonZh || fallbackReasonZh({ title, source })).trim(),
+          topicZh: String(raw?.topicZh || fallbackTopicZh({ title, category })).trim(),
+          eventKey: normalizeEventKey(raw),
+          impactScore: Number(raw?.impactScore) || Number((Math.max(1, chunkRows.find((x) => x.url === url)?.preScore || 1) * 8.2).toFixed(2))
+        });
+      }
+    } catch (error) {
+      console.error(`[remote] openai chunk failed (${i + 1}/${chunks.length}) -> ${error.message}`);
+      stage1Rows.push(...chunkFallback(chunkRows));
+    }
+    if (OPENAI_REQUEST_GAP_MS > 0) {
+      await sleep(OPENAI_REQUEST_GAP_MS);
+    }
+  }
+
+  const dedupMap = new Map();
+  for (const row of stage1Rows) {
+    const key = row.eventKey || normalizeEventKey(row);
+    const prev = dedupMap.get(key);
+    if (!prev) {
+      dedupMap.set(key, row);
+      continue;
+    }
+    const scorePrev = Number(prev.impactScore || 0);
+    const scoreNext = Number(row.impactScore || 0);
+    if (scoreNext > scorePrev + 0.1 || (Math.abs(scoreNext - scorePrev) <= 0.1 && Number(row.time || 0) > Number(prev.time || 0))) {
+      dedupMap.set(key, row);
+    }
+  }
+
+  const stage2Pool = [...dedupMap.values()]
+    .sort((a, b) => {
+      if (Math.abs((b.impactScore || 0) - (a.impactScore || 0)) > 0.001) return (b.impactScore || 0) - (a.impactScore || 0);
+      return (b.time || 0) - (a.time || 0);
+    })
+    .slice(0, OPENAI_STAGE2_POOL_LIMIT)
+    .map((row) => ({
+      title: row.title,
+      summary: row.summaryZh,
+      url: row.url,
+      source: row.source,
+      category: row.category,
+      time: row.time,
+      preScore: Number(row.impactScore || 0),
+      eventKey: row.eventKey,
+      topicZh: row.topicZh,
+      reasonZh: row.agentReasonZh
+    }));
+
+  if (!stage2Pool.length) throw new Error("OpenAI stage1 produced empty pool.");
+
+  const finalParsed = await callOpenAi(createOpenAiFinalPayload(stage2Pool, nowIso));
+  if (typeof finalParsed !== "object" || !finalParsed) throw new Error("OpenAI final parsed payload invalid.");
+  if (!finalParsed.globalSummaryZh && chunkSummaries.length) {
+    finalParsed.globalSummaryZh = chunkSummaries.slice(0, 3).join("；");
+  }
+  return finalParsed;
 }
 
 async function ensureOutputDir(filePath) {
@@ -677,6 +953,12 @@ async function main() {
       run: () => loadGoogleNewsRss(cfg)
     });
   }
+  for (const cfg of BING_NEWS_QUERIES) {
+    jobs.push({
+      name: `BingNews ${cfg.category} ${cfg.query}`,
+      run: () => loadBingNewsRss(cfg)
+    });
+  }
   for (const cfg of REDDIT_HOT_FEEDS) {
     jobs.push({
       name: `Reddit hot r/${cfg.subreddit}`,
@@ -701,6 +983,46 @@ async function main() {
   const failedFeeds = results.filter((row) => !row.ok).length;
   const failedSources = results.filter((row) => !row.ok).map((row) => row.name);
 
+  const rawPool = buildRawPool(rows, now);
+  if (!rawPool.length) throw new Error("No remote raw rows available from feeds.");
+
+  if (REMOTE_CRAWL_ONLY) {
+    const payload = {
+      crawledAt: nowIso,
+      version: "remote-crawler.v1",
+      crawlOnly: true,
+      model: "",
+      failedFeeds,
+      failedSources,
+      totalFeeds: jobs.length,
+      collectedCount: rows.length,
+      rawCount: rawPool.length,
+      items: rawPool
+    };
+
+    const outputJs = [
+      "// Auto-generated by tools/remote-news-openai-agent.mjs (crawler mode)",
+      `window.__REMOTE_NEWS_AT__ = ${JSON.stringify(payload.crawledAt)};`,
+      `window.__REMOTE_NEWS_META__ = ${JSON.stringify({
+        version: payload.version,
+        crawlOnly: payload.crawlOnly,
+        rawCount: payload.rawCount,
+        failedFeeds: payload.failedFeeds,
+        failedSources: payload.failedSources,
+        totalFeeds: payload.totalFeeds
+      }, null, 2)};`,
+      `window.__REMOTE_NEWS__ = ${JSON.stringify(payload.items, null, 2)};`,
+      ""
+    ].join("\n");
+
+    await ensureOutputDir(OUTPUT_JSON_FILE);
+    await ensureOutputDir(OUTPUT_JS_FILE);
+    await writeFile(OUTPUT_JSON_FILE, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+    await writeFile(OUTPUT_JS_FILE, outputJs, "utf8");
+    console.log(`[remote] wrote ${OUTPUT_JSON_FILE} and ${OUTPUT_JS_FILE} with ${payload.items.length} raw items`);
+    return;
+  }
+
   const candidates = pickCandidates(rows, now);
   if (!candidates.length) throw new Error("No remote candidates available from feeds.");
 
@@ -708,13 +1030,23 @@ async function main() {
   try {
     modelPayload = await runOpenAi(candidates, nowIso);
   } catch (error) {
-    console.error(`[remote] OpenAI call failed -> ${error.message}`);
+    if (!REMOTE_ALLOW_RULE_FALLBACK) {
+      throw error;
+    }
+    console.error(`[remote] OpenAI call failed -> ${error.message}, fallback to rules enabled.`);
   }
 
   const fallbackItems = fallbackBuild(candidates, now);
-  const rawItems = Array.isArray(modelPayload?.items) ? modelPayload.items : fallbackItems;
+  const rawItems = Array.isArray(modelPayload?.items)
+    ? modelPayload.items
+    : (REMOTE_ALLOW_RULE_FALLBACK ? fallbackItems : []);
+
+  if (!rawItems.length) {
+    throw new Error("Remote OpenAI returned no items and rule fallback is disabled.");
+  }
+
   const items = sanitizeItems(rawItems, candidates, now);
-  const globalSummaryZh = String(modelPayload?.globalSummaryZh || "\u5df2\u57fa\u4e8e\u5168\u7403\u6e90\u62bd\u53d6\u9ad8\u5f71\u54cd\u65b0\u95fb\uff0c\u5e76\u6309\u5e02\u573a\u5916\u6ea2\u6548\u5e94\u5b8c\u6210Top12\u6392\u5e8f\u3002").trim();
+  const globalSummaryZh = String(modelPayload?.globalSummaryZh || "").trim();
 
   const payload = {
     agentAt: nowIso,

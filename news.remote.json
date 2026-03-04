@@ -1,204 +1,2921 @@
 {
-  "pulledAt": "2026-03-04T02:33:36.392Z",
-  "remoteAgentAt": "2026-03-04T02:16:26.899Z",
-  "remoteVersion": "remote-openai-agent.v1",
-  "remoteModel": "gpt-4.1-mini",
-  "remoteFailedFeeds": 0,
-  "remoteFailedSources": [],
-  "sourceUrl": "https://raw.githubusercontent.com/l1160132795-dot/codex/main/remote/news.remote.json",
-  "globalSummaryZh": "已基于全球源抽取高影响新闻，并按市场外溢效应完成Top12排序。",
+  "crawledAt": "2026-03-04T03:07:05.185Z",
+  "version": "remote-crawler.v1",
+  "crawlOnly": true,
+  "model": "",
+  "failedFeeds": 36,
+  "failedSources": [
+    "RSS BBC https://feeds.bbci.co.uk/news/world/rss.xml",
+    "RSS BBC https://feeds.bbci.co.uk/news/business/rss.xml",
+    "RSS Guardian https://www.theguardian.com/world/rss",
+    "RSS Guardian https://www.theguardian.com/business/rss",
+    "RSS NYTimes https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+    "RSS NYTimes https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+    "RSS AlJazeera https://www.aljazeera.com/xml/rss/all.xml",
+    "RSS YahooFinance https://finance.yahoo.com/news/rssindex",
+    "RSS Reuters https://feeds.reuters.com/reuters/businessNews",
+    "RSS Reuters https://feeds.reuters.com/reuters/worldNews",
+    "RSS CoinDesk https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "GoogleNews en-US Market stock market OR nasdaq OR s&p 500 OR dollar index OR oil OR gold",
+    "GoogleNews en-US Macro federal reserve OR cpi OR inflation OR treasury yield",
+    "GoogleNews en-US Crypto bitcoin OR ethereum OR crypto etf",
+    "GoogleNews en-US Geo geopolitics OR sanctions OR conflict OR middle east",
+    "GoogleNews en-US Macro banking crisis OR credit spread OR liquidity risk OR treasury market",
+    "GoogleNews en-US Geo opec OR brent OR wti OR oil supply shock OR strait of hormuz",
+    "GoogleNews en-US Policy stablecoin regulation OR sec enforcement OR cftc OR crypto policy",
+    "GoogleNews zh-CN Market 股市 OR 纳斯达克 OR 标普 OR 美元指数 OR 黄金 OR 原油",
+    "GoogleNews zh-CN Macro 美联储 OR CPI OR 通胀 OR 非农 OR 美债收益率",
+    "GoogleNews zh-CN Crypto 比特币 OR 以太坊 OR 加密ETF OR 稳定币",
+    "GoogleNews zh-CN Geo 地缘冲突 OR 制裁 OR 航运 OR 中东 OR 战争风险",
+    "GoogleNews zh-CN Policy 央行 OR 货币政策 OR 加息 OR 降息 OR 金融监管",
+    "Reddit hot r/worldnews",
+    "Reddit hot r/CryptoCurrency",
+    "Reddit hot r/stocks",
+    "Reddit hot r/investing",
+    "Reddit hot r/economics",
+    "Reddit search federal reserve OR CPI OR treasury yield OR stock market OR oil",
+    "Reddit search geopolitics OR sanctions OR conflict OR middle east",
+    "Reddit search bitcoin OR ethereum OR crypto ETF OR SEC",
+    "GDELT Geo",
+    "GDELT Market",
+    "GDELT Policy",
+    "GDELT Macro",
+    "GDELT Crypto"
+  ],
+  "totalFeeds": 59,
+  "collectedCount": 493,
+  "rawCount": 319,
   "items": [
     {
-      "title": "Federal Reserve Board issues enforcement actions with former employee of East Cambridge Savings Bank and former employee of United Bank",
-      "headlineZh": "Federal Reserve Board issues enforcement actions with former employee of East Cambridge Savings Bank and former employee of United Bank",
-      "summaryZh": "【政策】Federal Reserve Board issues enforcement actions w...。来源：Fed。",
-      "agentReasonZh": "官方/机构信源优先",
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260303a.htm",
-      "source": "Fed/Fed",
-      "category": "Policy",
-      "time": 1772553600000,
-      "engagement": 0,
-      "priority": 100.21,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 161.63,
-      "agentRank": 1,
-      "topicZh": "政策领域"
+      "title": "韩国KOSPI指数日内重挫10%",
+      "summary": "PANews 3月4日消息，据金十报道，韩国KOSPI指数日内重挫10.00%，现报5209.64点。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6ce-d241-702e-bbea-1d0972d42187",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772593500000,
+      "engagement": 0
     },
     {
-      "title": "Nvidia, Amazon temporarily close Dubai offices, Google employees stranded amid U.S.-Iran war",
-      "headlineZh": "Nvidia, Amazon temporarily close Dubai offices, Google employees stranded amid U.S.-Iran war",
-      "summaryZh": "【地缘】Nvidia, Amazon temporarily close Dubai offices, Go...。来源：CNBC。",
-      "agentReasonZh": "关键事件对市场扰动大",
-      "url": "https://www.cnbc.com/2026/03/03/nvidia-amazon-offices-google-dubai-iran-war.html",
+      "title": "美CFTC主席：已准备在特朗普任期内落实《CLARITY法案》",
+      "summary": "PANews 3月4日消息，美国商品期货交易委员会主席Mike Selig在X平台发文再次呼吁《CLARITY法案》尽快通过，他表示特朗普总统是正确的，CLARITY法案必须通过。他强调建立面向未来的数字资产市场结构至关重要，CFTC渴望在这一历史性政府领导下实施该法案。Selig称，特朗普正在开启美国的黄金时代，这项立法是确保美国成为全球创新领导者的关键部分，现在就是行动的时候。 Selig还透露，CFTC将就进行自我认证（se...",
+      "url": "https://www.panewslab.com/zh/articles/019cb6cd-fef7-7337-81c2-5a38c3bc9d3d",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772593440000,
+      "engagement": 0
+    },
+    {
+      "title": "China's factory activity slumps more than expected in February as holiday disrupts production",
+      "summary": "China's factory activity faltered in February as manufacturers paused production and cargo shipment to celebrate an extended holiday.",
+      "url": "https://www.cnbc.com/2026/03/04/china-factory-activity-february-pmi.html",
       "source": "CNBC/CNBC",
-      "category": "Geo",
-      "time": 1772585324000,
-      "engagement": 0,
-      "priority": 95.03,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 153.28,
-      "agentRank": 2,
-      "topicZh": "地缘冲突与能源"
+      "category": "Market",
+      "time": 1772593343000,
+      "engagement": 0
     },
     {
-      "title": "South Korea's Kospi plunges 7% amid selloff in the region as Middle East war escalates",
-      "headlineZh": "South Korea's Kospi plunges 7% amid selloff in the region as Middle East war escalates",
-      "summaryZh": "【市场】South Korea's Kospi plunges 7% amid selloff in the...。来源：CNBC。",
-      "agentReasonZh": "关键事件对市场扰动大",
+      "title": "比特币挖矿托管和云服务公司Applied Digital完成21.5亿美元债券融资",
+      "summary": "PANews 3月4日消息，据彭博社报道，比特币挖矿托管和云服务公司Applied Digital通过发行债券筹集21.5亿美元，用于为甲骨文公司扩建计算基础设施。这批五年期债券以约7.23%的收益率定价，与B级债券平均收益率持平，高盛主导此次发行。募集资金将用于建设北达科他州一座200兆瓦的数据中心，该中心已租赁给甲骨文。Applied Digital去年10月表示，该项目预计在约15年期内产生50亿美元的合同收入。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6cb-e207-74ef-972c-4be594227abe",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772593320000,
+      "engagement": 0
+    },
+    {
+      "title": "CFTC主席暗示“在接下来一个月左右”推出加密数字货币永续合约",
+      "summary": "美国证券交易委员会主席Paul Atkins和商品期货交易委员会主席Michael Selig在周二的一次活动中讨论了市场结构、预测市场和永久期货。",
+      "url": "https://cn.cointelegraph.com/news/cftc-chair-crypto-perpetual-futures?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772593136000,
+      "engagement": 0
+    },
+    {
+      "title": "某地址于10小时前建仓559万美元的WBTC和ETH",
+      "summary": "PANews 3月4日消息，据链上分析师@ai_9684xtpa监测，地址0x7c7…1F7e6于10小时前建仓559万美元的WBTC和ETH。 昨晚大盘反弹时该地址以1995美元在链上单笔买入1481.67枚ETH，以67604美元买入37.62枚WBTC，现已转移至地址0x0EA…34a54。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6c9-a0cc-77ac-8344-3f49e4f3c5ff",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772593080000,
+      "engagement": 0
+    },
+    {
+      "title": "Ronin计划调整经济模型调整，将取消被动质押奖励并转向代币加权治理",
+      "summary": "PANews 3月4日消息，Ronin在X平台宣布，随着网络将于三月下旬升级为以太坊Layer 2，Ronin将实施一系列经济模型改革，包括取消被动质押奖励和旧的验证者系统，转向“按贡献分配”机制，为有影响力的建设者提供定向奖励。财库将增加收入来源，包括提高Ronin市场交易费分成、排序器利润以及来自Ronin应用和游戏的代币收入。治理权将从验证者转向代币加权投票系统，由RON持有者投票决定财库回购、投资和DeFi活动。 Roni...",
+      "url": "https://www.panewslab.com/zh/articles/019cb6c6-d76c-74b9-8b12-944ba51b7a50",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772592960000,
+      "engagement": 0
+    },
+    {
+      "title": "Strive策略师表示，人工智能带来的通缩有可能在2036年前推动比特币（BTC）升至1100万美元",
+      "summary": "Strive的Joe Burnett认为，由人工智能驱动的通缩可能迫使政策放松，从而推动比特币在2036年达到每枚1100万美元，总市值达到230万亿美元。",
+      "url": "https://cn.cointelegraph.com/news/strive-joe-burnett-ai-deflation-bitcoin-11m-2036-forecast?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772592801000,
+      "engagement": 0
+    },
+    {
+      "title": "美国SOL现货ETF单日总净流入103.04万美元",
+      "summary": "PANews 3月4日消息，根据 SoSoValue 数据，昨日（美东时间 3 月 3 日）SOL 现货 ETF 单日总净流入 103.04 万美元。 昨日净流入最多的 SOL 现货 ETF 为 Franklin Solana ETF(SOEZ)，单日净流入 73.21 万美元，目前历史总净流入达 73.21 万美元。 其次为 Invesco Galaxy Solana ETF(QSOL)，单日净流入 29.83 万美元，目前历史...",
+      "url": "https://www.panewslab.com/zh/articles/019cb6c1-5014-72ce-95af-0dd1983fe97a",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772592600000,
+      "engagement": 0
+    },
+    {
+      "title": "South Korea's Kospi plunges 8% amid selloff in the region as Middle East war escalates",
+      "summary": "Most Asia-Pacific markets were set to open lower on Wednesday, extending a selloff amid an escalating Middle East war.",
       "url": "https://www.cnbc.com/2026/03/04/asia-markets-hang-seng-index-kospi-nikkei-225.html",
       "source": "CNBC/CNBC",
       "category": "Market",
-      "time": 1772588538000,
-      "engagement": 0,
-      "priority": 92.06,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 148.48,
-      "agentRank": 3,
-      "topicZh": "地缘冲突与能源"
+      "time": 1772592507000,
+      "engagement": 0
     },
     {
-      "title": "Prediction market 'gambling' needs state regulation, not feds, Mick Mulvaney says after Iran war bets",
-      "headlineZh": "Prediction market 'gambling' needs state regulation, not feds, Mick Mulvaney says after Iran war bets",
-      "summaryZh": "【市场】Prediction market 'gambling' needs state regulatio...。来源：CNBC。",
-      "agentReasonZh": "关键事件对市场扰动大",
-      "url": "https://www.cnbc.com/2026/03/03/prediction-market-gambling-mick-mulvaney-polymarket-kalshi.html",
-      "source": "CNBC/CNBC",
-      "category": "Market",
-      "time": 1772581019000,
-      "engagement": 0,
-      "priority": 90.31,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 145.66,
-      "agentRank": 4,
-      "topicZh": "地缘冲突与能源"
-    },
-    {
-      "title": "Gold falls to near $5,100 as inflation fears weigh amidst Middle East conflict",
-      "headlineZh": "Gold falls to near $5,100 as inflation fears weigh amidst Middle East conflict",
-      "summaryZh": "【宏观】Gold falls to near $5,100 as inflation fears weigh...。来源：FXStreet。",
-      "agentReasonZh": "关键事件对市场扰动大",
-      "url": "https://www.fxstreet.com/news/gold-falls-to-near-5-100-as-inflation-fears-weigh-amidst-middle-east-conflict-202603032312",
-      "source": "FXStreet/FXStreet",
-      "category": "Macro",
-      "time": 1772579541000,
-      "engagement": 0,
-      "priority": 89.04,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 143.61,
-      "agentRank": 5,
-      "topicZh": "地缘冲突与能源"
-    },
-    {
-      "title": "Indonesia inflation: Temporary surge, oil risks – UOB",
-      "headlineZh": "Indonesia inflation: Temporary surge, oil risks – UOB",
-      "summaryZh": "【宏观】Indonesia inflation: Temporary surge, oil risks – ...。来源：FXStreet。",
-      "agentReasonZh": "关键事件对市场扰动大",
-      "url": "https://www.fxstreet.com/news/indonesia-inflation-temporary-surge-oil-risks-uob-202603032148",
-      "source": "FXStreet/FXStreet",
-      "category": "Macro",
-      "time": 1772574480000,
-      "engagement": 0,
-      "priority": 87.86,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 141.71,
-      "agentRank": 6,
-      "topicZh": "地缘冲突与能源"
-    },
-    {
-      "title": "EUR/USD falls as Middle East tensions lift USD despite hot EZ inflation",
-      "headlineZh": "EUR/USD falls as Middle East tensions lift USD despite hot EZ inflation",
-      "summaryZh": "【宏观】EUR/USD falls as Middle East tensions lift USD des...。来源：FXStreet。",
-      "agentReasonZh": "关键事件对市场扰动大",
-      "url": "https://www.fxstreet.com/news/eur-usd-falls-as-middle-east-tensions-lift-usd-despite-hot-ez-inflation-202603032050",
-      "source": "FXStreet/FXStreet",
-      "category": "Macro",
-      "time": 1772571042000,
-      "engagement": 0,
-      "priority": 87.06,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 140.42,
-      "agentRank": 7,
-      "topicZh": "美联储与宏观"
-    },
-    {
-      "title": "伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击",
-      "headlineZh": "伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击",
-      "summaryZh": "【加密】伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击。来源：PANews。",
-      "agentReasonZh": "关键事件对市场扰动大",
-      "url": "https://www.panewslab.com/zh/articles/019cb404-32f6-77c7-87e1-e2bf37979d54",
+      "title": "比特币距离第2000万枚被挖出仅剩数天时间，剩余100万枚预计耗时114年",
+      "summary": "PANews 3月4日消息，据CoinDesk报道，比特币距离第2000万枚被挖出仅剩数天时间，目前2100万枚总供应量中已有超过95%处于流通状态。最后100万枚BTC还需114年才能挖完。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6be-2057-70e9-a3e2-98188af445cc",
       "source": "PANews/PANews",
       "category": "Crypto",
-      "time": 1772546460000,
-      "engagement": 0,
-      "priority": 76.23,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 122.95,
-      "agentRank": 8,
-      "topicZh": "加密资产与监管"
+      "time": 1772592420000,
+      "engagement": 0
     },
     {
-      "title": "随着中东冲突加剧，现货比特币（BTC）交易型开放式指数基金（ETF）录得4.58亿美元资金流入",
-      "headlineZh": "随着中东冲突加剧，现货比特币（BTC）交易型开放式指数基金（ETF）录得4.58亿美元资金流入",
-      "summaryZh": "【加密】随着中东冲突加剧，现货比特币（BTC）交易型开放式指数基金（ETF）录得4.58亿美元资金流入。来源：CointelegraphCN。",
-      "agentReasonZh": "关键事件对市场扰动大",
-      "url": "https://cn.cointelegraph.com/news/bitcoin-etf-inflows-458-million-mideast-conflict-widens?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "title": "Visa和Stripe旗下的Bridge计划将稳定币卡扩展至逾100个国家",
+      "summary": "Visa和Stripe旗下的Bridge旨在将与稳定币相关的Visa卡扩展到18个国家，并计划在年底前扩展到100多个国家，同时与Lead Bank测试稳定币结算。",
+      "url": "https://cn.cointelegraph.com/news/visa-stripe-bridge-stablecoin-card-rollout-test-onchain-settlement?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "CointelegraphCN/CointelegraphCN",
       "category": "Crypto",
-      "time": 1772534546000,
-      "engagement": 0,
-      "priority": 72.99,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 117.73,
-      "agentRank": 9,
-      "topicZh": "加密资产与监管"
+      "time": 1772592346000,
+      "engagement": 0
+    },
+    {
+      "title": "矿业公司进一步进军人工智能和高性能计算领域，MARA或将出售比特币（BTC）",
+      "summary": "在周一提交给美国证券交易委员会的文件中，这家美国比特币矿企表示，将根据市场情况考虑出售部分资产负债表上的比特币。",
+      "url": "https://cn.cointelegraph.com/news/mining-companies-ai-hpc-mara-sell-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772592084000,
+      "engagement": 0
+    },
+    {
+      "title": "日经225指数波动率指数升至2025年4月以来最高水平",
+      "summary": "PANews 3月4日消息，据金十报道，日经225指数波动率指数升至2025年4月以来最高水平。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6b6-ff87-773f-8e1d-478eb0e8bc85",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772591940000,
+      "engagement": 0
+    },
+    {
+      "title": "币安Alpha上线Robinhood、阿里巴巴等多家公司股票代币",
+      "summary": "PANews 3月4日消息，据官方页面信息，币安Alpha上线多家公司股票代币，包括Robinhood、Oracle 、Coinbase、Palantir、Intel、MicroStrategy、阿里巴巴、Micron Technology，iShares Silver Trust、iShares Gold Trust。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6b6-5e16-7156-9fef-8ad1b4084bb2",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772591880000,
+      "engagement": 0
+    },
+    {
+      "title": "交易所以太币（ETH）供应量降至多年低位：这为何重要？",
+      "summary": "随着以太币价格难以突破2000美元大关，交易所持有的以太币储备降至多年新低。供应短缺会利好多头还是空头？",
+      "url": "https://cn.cointelegraph.com/news/ether-supply-on-exchanges-drops-to-multi-year-lows-here-s-why-it-matters?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772591814000,
+      "engagement": 0
+    },
+    {
+      "title": "American Bitcoin通过新增11298台矿机提升算力",
+      "summary": "由埃里克·特朗普（Eric Trump）领导的公司新增3 EH/s算力，扩大了其在阿尔伯塔的挖矿队伍，在市场波动的情况下加大了对比特币的投资。",
+      "url": "https://cn.cointelegraph.com/news/american-bitcoin-adds-3ehs-mining-capacity-expands-btc-treasury?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772591561000,
+      "engagement": 0
+    },
+    {
+      "title": "昨夜今晨重要资讯（3月3日-3月4日）",
+      "summary": "美国政府地址转出0.0378枚BTC；Coinbase将于3月16日暂停25个永续合约交易；WTI原油日内暴涨7%。",
+      "url": "https://www.panewslab.com/zh/articles/019cb698-67f0-708c-81b8-b155d60b347f",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772591400000,
+      "engagement": 0
+    },
+    {
+      "title": "比特币（BTC）因全球资产抛售大跌3%，黄金受原油担忧“暴跌”至5000美元",
+      "summary": "因为伊朗局势升级引发的石油供应担忧影响了股市和黄金，比特币多头放弃了最新的重返7万美元的努力。",
+      "url": "https://cn.cointelegraph.com/news/bitcoin-dives-3-percent-asset-rout-5k-gold-smashed-oil-fears?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772591318000,
+      "engagement": 0
+    },
+    {
+      "title": "美国XRP现货ETF单日总净流入752.55万美元",
+      "summary": "PANews 3月4日消息，根据 SoSoValue 数据，昨日（美东时间 3 月 3 日）XRP 现货 ETF 单日总净流入 752.55 万美元。 昨日净流入最多的 XRP 现货 ETF 为 Bitwise XRP ETF(XRP)，单日净流入 608.02 万美元，目前历史总净流入达 1076.99 万美元。 其次为 Canary XRP ETF(XRPC)，单日净流入 144.52 万美元，目前历史总净流入达 144.52...",
+      "url": "https://www.panewslab.com/zh/articles/019cb6ac-05bd-721d-afba-60cd845abbfb",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772591220000,
+      "engagement": 0
+    },
+    {
+      "title": "Silver Price Forecast: XAG/USD rises to near $85.00 as Middle East war intensifies",
+      "summary": "Silver price (XAG/USD) recovers over 3% during the Asian hours on Wednesday, hovering around $85.20 per troy ounce after plunging more than 12% over the previous two sessions. The precious metal draws safe-haven deman...",
+      "url": "https://www.fxstreet.com/news/silver-price-forecast-xag-usd-rises-to-near-8500-as-middle-east-war-intensifies-202603040226",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772591194000,
+      "engagement": 0
+    },
+    {
+      "title": "Tether与瑞士卢加诺市将投资最高630万美元用于扩大比特币计划",
+      "summary": "PANews 3月4日消息，据CoinDesk报道，Tether与瑞士卢加诺市承诺投入最高500万瑞士法郎（约合630万美元），以扩大其比特币计划，目标是将卢加诺打造为全球数字基础设施枢纽。该计划建立在已有400多家商户接受比特币和USDT支付的基础之上。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6a9-c938-70c9-8156-4d92a2ab103b",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772591100000,
+      "engagement": 0
+    },
+    {
+      "title": "万事达卡将SoFiUSD增加为卡发行方结算选项",
+      "summary": "SoFi 将使万事达卡发行方能够在其由现金支持的 SoFiUSD 稳定币中结算全球支付网络上的卡交易。",
+      "url": "https://cn.cointelegraph.com/news/sofi-and-mastercard-move-stablecoin-settlement-into-global-card-network?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772590991000,
+      "engagement": 0
+    },
+    {
+      "title": "战火重燃：中东冲突如何重塑黄金与原油的风险溢价",
+      "summary": "从中东局势升级看全球资产价格的再定价。",
+      "url": "https://www.panewslab.com/zh/articles/019cb337-6dfa-7578-bb3f-72353587ac90",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772590980000,
+      "engagement": 0
+    },
+    {
+      "title": "3 Red-Hot Growth Stocks to Buy in 2026",
+      "summary": "Key PointsSoundHound AI is down significantly from its all-time high.",
+      "url": "https://www.nasdaq.com/articles/3-red-hot-growth-stocks-buy-2026-1",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772590800000,
+      "engagement": 0
+    },
+    {
+      "title": "韩国KOSPI指数日内暴跌8%",
+      "summary": "PANews 3月4日消息，据金十报道，韩国KOSPI指数日内暴跌8.00%，现报5326.34点。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6a4-cbe0-700c-870c-b5ca9d8db5d0",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772590740000,
+      "engagement": 0
+    },
+    {
+      "title": "现货黄金日内大涨100美元，涨幅1.97%",
+      "summary": "PANews 3月4日消息，据Bybit行情，现货黄金日内大涨100美元，现报5188.24美元/盎司，涨幅1.97%。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6a3-595e-717f-903b-3e669be97c96",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772590680000,
+      "engagement": 0
+    },
+    {
+      "title": "以太币价格再次在2000美元关口遭遇阻力：三月份ETH可能会跌至多低？",
+      "summary": "以太币需要守住最近在1800美元确立的关键支撑位，该支撑位与一个经典图表形态的下轨趋势线重合，该形态预示着价格可能跌破1500美元。",
+      "url": "https://cn.cointelegraph.com/news/ethereum-price-again-rejected-2k-how-low-can-eth-go-in-march?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772590593000,
+      "engagement": 0
+    },
+    {
+      "title": "某巨鲸4小时前减仓其ETH和WBTC多单，并用1203万枚USDT偿还借款",
+      "summary": "PANews 3月4日消息，据链上分析师余烬监测，一个巨鲸在4小时前减仓了他的杠杆做多仓位： 以1967美元的价格卖出3809枚ETH（749万美元）； 以67692美元的价格卖出67.1枚WBTC（454万美元）。 然后把这1203万枚USDT偿还了他在借贷平台上的杠杆借款。",
+      "url": "https://www.panewslab.com/zh/articles/019cb6a1-95b3-7383-9379-4551d092d114",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772590560000,
+      "engagement": 0
+    },
+    {
+      "title": "继“Sanae Token”市值突破2800万美元，日本首相高市否认与该迷因币有关联",
+      "summary": "日本首相高市早苗表示，她对该代币一无所知，据共同社报道，金融厅正在考虑是否有未注册运营商参与。",
+      "url": "https://cn.cointelegraph.com/news/sanae-token-27m-japan-pm-denies-links-fsa-probe?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772590454000,
+      "engagement": 0
+    },
+    {
+      "title": "币安钱包开发者：针对AI Agent的MPC钱包、DeFi理财等功能已进入审计阶段",
+      "summary": "PANews 3月4日消息，在 币安宣布推出首批7个AI Agent技能 后，币安钱包核心开发者Jackson.ll在X平台表示：“首期大部分是数据分析相关skill。并不是我们没有能力开放MPC钱包、defi理财、链上等能力。实际都开发差不多了，正在安全审计中。 但是提供这些能力的前提是为用户负责，不能让想图个鲜的用户承担过大的风险。”",
+      "url": "https://www.panewslab.com/zh/articles/019cb69e-58ad-733e-81ba-43a0f0557fad",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772590320000,
+      "engagement": 0
+    },
+    {
+      "title": "币安计划今年在亚洲新增5张监管牌照",
+      "summary": "PANews 3月4日消息，据日经亚洲报道，币安亚太区负责人SB Seker在接受采访时表示，币安计划今年在亚洲新增5张监管牌照，届时币安全球持牌司法管辖区数量将超过20个。目前，币安在亚太地区已持有澳大利亚、印度、印度尼西亚、日本、新西兰及泰国的监管授权，韩国也将因收购交易所Gopax而很快纳入持牌名单。Seker未透露新增牌照的具体目标市场，仅表示部分市场已接近完成最后阶段。",
+      "url": "https://www.panewslab.com/zh/articles/019cb69a-95fb-768b-a66a-6384568de128",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772590080000,
+      "engagement": 0
+    },
+    {
+      "title": "I was on an Emirates flight to Dubai that turned around twice because of Iranian missiles",
+      "summary": "CNBC's Emma Graham flew home to the UAE on an Emirates flight that turned around just 30 minutes from Dubai because of an Iran missile threat.",
+      "url": "https://www.cnbc.com/2026/03/03/emirates-flight-dubai-iran-missile-strikes.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772590008000,
+      "engagement": 0
+    },
+    {
+      "title": "New Zealand Dollar declines below 0.5900 amid mixed Chinese PMI data, Middle East tensions in focus",
+      "summary": "The NZD/USD pair attracts some sellers to near 0.5875 during the Asian trading hours on Wednesday. The New Zealand Dollar (NZD) remains weak against the US Dollar (USD) after the mixed Chinese economic data.",
+      "url": "https://www.fxstreet.com/news/new-zealand-dollar-declines-below-05900-amid-mixed-chinese-pmi-data-middle-east-tensions-in-focus-202603040206",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772590003000,
+      "engagement": 0
+    },
+    {
+      "title": "Prediction: Nvidia (NVDA) Will Be Worth More Than Alphabet, Apple, Amazon, Tesla, Meta, and Microsoft Combined by 2030",
+      "summary": "Key PointsNvidia is a key beneficiary of artificial intelligence (AI) spending.",
+      "url": "https://www.nasdaq.com/articles/prediction-nvidia-nvda-will-be-worth-more-alphabet-apple-amazon-tesla-meta-and-microsoft",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772589900000,
+      "engagement": 0
+    },
+    {
+      "title": "Australia is at risk of missing the $17B crypto boat, researchers say",
+      "summary": "Australia is on a trajectory for only $710 million in annual economic gains from crypto by 2030 unless there's a substantial change, the Digital Finance Cooperative Research Centre says.",
+      "url": "https://cointelegraph.com/news/australia-digital-finance-17-billion-opportunity?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772589739000,
+      "engagement": 0
+    },
+    {
+      "title": "Canadian Dollar bulls seem hesitant as firmer USD counters elevated Oil prices",
+      "summary": "The USD/CAD pair attracts fresh buyers following the previous day's late pullback from the highest level since January 23 and climbs back closer to the 1.3700 mark during the Asian session on Wednesday.",
+      "url": "https://www.fxstreet.com/news/canadian-dollar-bulls-seem-hesitant-as-firmer-usd-counters-elevated-oil-prices-202603040202",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772589723000,
+      "engagement": 0
+    },
+    {
+      "title": "“死磕BTC 40倍杠杆”的某巨鲸近一个月亏损499万美元，胜率40%",
+      "summary": "PANews 3月4日消息，据链上分析师@ai_9684xtpa监测，某巨鲸自2月18日死磕BTC 40倍杠杆合约，多空双向操作。其开仓价与清算价差价极小，通常仅数百美元，极端情况下甚至不足100美元。其近一个月亏损499万美元，50笔交易20笔盈利，胜率40%。大部分时候其都赢小亏大，但仍高频开单且持仓时间不超过24小时。",
+      "url": "https://www.panewslab.com/zh/articles/019cb694-f74e-73da-8ba9-7c58a57bc686",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772589660000,
+      "engagement": 0
+    },
+    {
+      "title": "Aave创始人回应“ACI将退出治理”：协议将继续正常运行，激励计划不受影响",
+      "summary": "PANews 3月4日消息，Aave创始人Stani Kulechov在X平台发文，回顾了Aave Chan Initiative（ACI）创始人Marc Zeller过去七年在Aave生态中的贡献，称其通过ACI帮助塑造激励计划、推动协议增长并参与DAO的演进。Kulechov表示，协议将继续正常运作，激励计划不受影响，Aave Labs将与DAO的其他服务提供商合作，确保社区平稳过渡。 此前消息， Aave关键服务商ACI拟于...",
+      "url": "https://www.panewslab.com/zh/articles/019cb68f-8f40-7013-a5ad-63aa852408ac",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772589360000,
+      "engagement": 0
+    },
+    {
+      "title": "Ripple扩展稳定币支付体系以服务银行和金融科技公司",
+      "summary": "此次升级集成了托管、财资自动化和结算工具，推动Ripple进一步深入机构跨境支付领域。",
+      "url": "https://cn.cointelegraph.com/news/ripple-expands-institutional-stablecoin-payments-platform?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772589211000,
+      "engagement": 0
+    },
+    {
+      "title": "Roy Cooper, Michael Whatley set to compete for a high-stakes North Carolina U.S. Senate seat",
+      "summary": "Former Democratic North Carolina Gov. Roy Cooper will face former Republican National Committee Chairman Michael Whatley in the state's toss-up U.S. Senate race.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5734513/north-carolina-congress-election-results-cooper-whatley",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772589202000,
+      "engagement": 0
     },
     {
       "title": "Gran Tierra Energy, Inc. Q4 Loss Widens",
-      "headlineZh": "Gran Tierra Energy, Inc. Q4 Loss Widens",
-      "summaryZh": "【市场】Gran Tierra Energy, Inc. Q4 Loss Widens。来源：Nasdaq。",
-      "agentReasonZh": "高时效且相关度较高",
+      "summary": "(RTTNews) - Gran Tierra Energy, Inc. (GTE) announced Loss for its fourth quarter of -$141.15 million",
       "url": "https://www.nasdaq.com/articles/gran-tierra-energy-inc-q4-loss-widens",
       "source": "Nasdaq/Nasdaq",
       "category": "Market",
       "time": 1772588981000,
-      "engagement": 0,
-      "priority": 71.7,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 115.65,
-      "agentRank": 10,
-      "topicZh": "市场领域"
+      "engagement": 0
+    },
+    {
+      "title": "AI Models Prefer Bitcoin Over Fiat and Stablecoins, Study Finds",
+      "summary": "Bitcoin Policy Institute study finds AI systems, including Claude, GPT, Grok, and Gemini, favored Bitcoin over fiat and other digital assets.",
+      "url": "https://decrypt.co/359890/ai-models-prefer-bitcoin-over-fiat-stablecoins-study",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772588925000,
+      "engagement": 0
+    },
+    {
+      "title": "MARA高管澄清：财库策略范围的调整并非打算清算大部分比特币储备",
+      "summary": "PANews 3月4日消息，MARA投资者关系副总裁Robert Samuels在X平台发文澄清，相关传闻称MARA已经改变比特币策略出售大部分比特币储备与事实不符，MARA在2026年提交给美国证券交易委员会的10-K文件中明确指出将扩大比特币策略范围，允许出售资产负债表上持有的比特币，此举目的是为了根据市场情况和资本配置优先事项不定期进行购买和出售，并非打算清算大部分比特币储备。Robert Samuel补充表示，出于战略目的...",
+      "url": "https://www.panewslab.com/zh/articles/019cb689-0a61-722f-be0f-2c943fba497a",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772588880000,
+      "engagement": 0
+    },
+    {
+      "title": "China’s RatingDog Manufacturing PMI climbs to 62.1 in February, Services PMI rises to 56.7",
+      "summary": "China's RatingDog Manufacturing Purchasing Managers' Index (PMI) climbed to 62.1 in February from 50.3 in January, the latest data published by RatingDog showed on Monday. This figure came in better than the expectati...",
+      "url": "https://www.fxstreet.com/news/chinas-ratingdog-manufacturing-pmi-climbs-to-621-in-february-services-pmi-rises-to-567-202603040146",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772588816000,
+      "engagement": 0
+    },
+    {
+      "title": "Ray Dalio：比特币不适合作为长期价值储存或避险资产",
+      "summary": "PANews 3月4日消息，据Cointelegraph报道，亿万富翁投资者Ray Dalio在All-In播客中对“比特币作为长期价值储存和避险资产”的观点发出警告，称其缺乏央行支持，且存在隐私限制和量子计算威胁等担忧。Dalio驳斥了比特币可以充当数字黄金的观点，称“只有一个黄金”，并强调黄金是央行持有的第二大储备货币，是最成熟的货币形式。他表示不理解央行为何会长期持有比特币。 Dalio此前曾承认比特币具备硬通货特征，但指出...",
+      "url": "https://www.panewslab.com/zh/articles/019cb680-0a26-727b-b9b7-23b9f7e98a1c",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772588340000,
+      "engagement": 0
+    },
+    {
+      "title": "研究显示48.3%的AI模型将比特币选为首选货币工具",
+      "summary": "PANews 3月4日消息，据Cointelegraph报道，比特币政策研究所一项针对36个前沿AI模型的研究发现，48.3%的模型将比特币选为首选货币工具，而非稳定币或其他形式的货币。",
+      "url": "https://www.panewslab.com/zh/articles/019cb67c-0cc9-70b9-96b0-fa97d5e82e71",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772588100000,
+      "engagement": 0
+    },
+    {
+      "title": "Web3律师研析：美股代币化的未来在哪里？",
+      "summary": "2026年2月底，据知情媒体透露，SpaceX可能最快准备在2026年3月向美国SEC提交IPO申报，根据媒体预测，这支股份的募资金额能够达到300亿美金，整体估值约1.75亿美金，直接超过Tesla和Meta，直接跻身美股七姐妹的行列。在现在这个混乱的时代，资本市场乱象频生，SpaceX预计成为史上最大的IPO，规模恐怖如斯。",
+      "url": "https://www.panewslab.com/zh/articles/019cb39b-f5e2-748c-ad07-8ccc3e3a2900",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772588040000,
+      "engagement": 0
     },
     {
       "title": "Japanese Market Sharply Lower",
-      "headlineZh": "Japanese Market Sharply Lower",
-      "summaryZh": "【市场】Japanese Market Sharply Lower。来源：Nasdaq。",
-      "agentReasonZh": "高时效且相关度较高",
+      "summary": "(RTTNews) - The Japanese stock market is trading sharply lower on Wednesday, extending the sharp losses in the previous two sessions, following the broadly negative cues from Wall Street overnight. The Nikkei 225 is t...",
       "url": "https://www.nasdaq.com/articles/japanese-market-sharply-lower-2",
       "source": "Nasdaq/Nasdaq",
       "category": "Market",
       "time": 1772587999000,
-      "engagement": 0,
-      "priority": 71.47,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 115.28,
-      "agentRank": 11,
-      "topicZh": "市场领域"
+      "engagement": 0
+    },
+    {
+      "title": "China's NBS Manufacturing PMI declines to 49.0 in February, Non-Manufacturing PMI rises to 49.5",
+      "summary": "China’s official Manufacturing Purchasing Managers' Index (PMI) eases to 49.0 in February, compared to 49.3 in the previous reading. The reading came in below the market consensus of 49.1 in the reported month.",
+      "url": "https://www.fxstreet.com/news/chinas-nbs-manufacturing-pmi-declines-to-490-in-february-non-manufacturing-pmi-rises-to-495-202603040132",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772587943000,
+      "engagement": 0
+    },
+    {
+      "title": "Indonesia Bourse Tipped To Open Under Water On Wednesday",
+      "summary": "(RTTNews) - The Indonesia stock market has moved lower in consecutive trading days, tumbling almost 300 points or 3.7 percent in that span. The Jakarta Composite Index now sits just beneath the 7,940-point plateau and...",
+      "url": "https://www.nasdaq.com/articles/indonesia-bourse-tipped-open-under-water-wednesday",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772587917000,
+      "engagement": 0
+    },
+    {
+      "title": "专注于稳定币的金融应用ARQ完成7000万美元融资，红杉资本和Founders Fund参投",
+      "summary": "PANews 3月4日消息，据彭博社报道，专注于稳定币的拉丁美洲金融应用ARQ完成7000万美元融资，红杉资本和Founders Fund参投。本轮融资将用于品牌重塑、招聘新员工，并将服务扩展到美元计价转账之外的领域，包括财富管理、本币高收益账户以及信贷业务。 ARQ原名为DolarApp，提供多币种账户、数字钱包、外汇兑换和借记卡等服务，帮助用户跨境存储和转移资金。其在拉丁美洲拥有超过200万客户，年化交易额已突破100亿美元。...",
+      "url": "https://www.panewslab.com/zh/articles/019cb678-a6ff-7704-98b8-b1f3a6b852f7",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772587860000,
+      "engagement": 0
+    },
+    {
+      "title": "My rude, ungrateful relative gave her lawyer power of attorney — and has lived to regret it. Should I get involved?",
+      "summary": "“A person who is used to controlling others does not like being controlled.”",
+      "url": "https://www.marketwatch.com/story/my-rude-ungrateful-relative-gave-her-lawyer-power-of-attorney-and-has-lived-to-regret-it-should-i-get-involved-5db8088d?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772587800000,
+      "engagement": 0
+    },
+    {
+      "title": "EUR/USD remains offered below 1.1600, seems vulnerable near multi-month low",
+      "summary": "The EUR/USD pair struggles to capitalize on the overnight bounce from the 1.1530 region, or the lowest level since November 2025, and lower for the third consecutive day on Wednesday. Spot prices slide back below the...",
+      "url": "https://www.fxstreet.com/news/eur-usd-remains-offered-below-11600-seems-vulnerable-near-multi-month-low-202603040128",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772587732000,
+      "engagement": 0
+    },
+    {
+      "title": "欧洲央行报告警告：稳定币或对货币政策构成重大风险",
+      "summary": "PANews 3月4日消息，据彭博社报道，欧洲央行的一份工作文件警告称，稳定币的广泛采用将对欧元区银行及欧洲央行的货币政策主权构成重大风险，尤其是与美元等外币挂钩的稳定币。论文指出，稳定币的快速扩张可能引发零售银行存款向数字资产重新配置，制约银行的信贷中介能力，增加政策利率向贷款规模传导的不确定性。若成熟的稳定币市场由非欧元计价工具主导，风险将进一步放大。荷兰央行行长表示，稳定币因其储备管理方式可能对金融体系核心构成风险。德国央行...",
+      "url": "https://www.panewslab.com/zh/articles/019cb672-41e7-7321-80fe-f212784e4b33",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772587440000,
+      "engagement": 0
+    },
+    {
+      "title": "CrowdStrike gives upbeat earnings outlook as AI raises the stakes around cyberthreats",
+      "summary": "CrowdStrike’s CEO cited ‘elevated demand’ for the company’s Falcon cybersecurity platform in the AI era.",
+      "url": "https://www.marketwatch.com/story/crowdstrike-gives-upbeat-earnings-outlook-as-ai-raises-the-stakes-around-cyberthreats-087a4b2e?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772587320000,
+      "engagement": 0
+    },
+    {
+      "title": "Moderna’s stock rallies 8% as deal over a patent dispute clears vaccine pipeline",
+      "summary": "The deal would provide ‘certainty’ for Moderna’s vaccine portfolio.",
+      "url": "https://www.marketwatch.com/story/modernas-stock-rallies-more-than-10-as-deal-over-a-patent-dispute-clears-vaccine-pipeline-d34e6793?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772587200000,
+      "engagement": 0
+    },
+    {
+      "title": "This AI Data Center REIT Just Guided for Its First $10 Billion Revenue Year. Is It a Buy for 2026?",
+      "summary": "Key PointsThe artificial intelligence data center business is the AI industry's next growth frontier.",
+      "url": "https://www.nasdaq.com/articles/ai-data-center-reit-just-guided-its-first-10-billion-revenue-year-it-buy-2026",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772587200000,
+      "engagement": 0
+    },
+    {
+      "title": "Donald Trump takes swipe at banks over stalled crypto bill",
+      "summary": "Trump has urged banking groups to “make a good deal” with the crypto industry and said undermining the GENIUS Act is “unacceptable.”",
+      "url": "https://cointelegraph.com/news/trump-takes-swipe-banks-over-stalled-crypto-bill?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772587194000,
+      "engagement": 0
+    },
+    {
+      "title": "Ross Stores touts ‘very strong start’ for spring shopping, boosting case for a retail rebound",
+      "summary": "Shares of Ross Stores jumped on Tuesday after the off-price clothing and home-goods chain said it expects sales gains this year, following what management said was a solid start to the spring shopping season.",
+      "url": "https://www.marketwatch.com/story/ross-stores-touts-very-strong-start-for-spring-shopping-boosting-case-for-a-retail-rebound-4d8f168b?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772587080000,
+      "engagement": 0
+    },
+    {
+      "title": "Australian Dollar remains subdued following GDP data",
+      "summary": "AUD/USD extends its losses for the second successive session, trading around 0.7010 during the Asian hours on Wednesday. The pair remains under pressure following the release of Australian Gross Domestic Product (GDP)...",
+      "url": "https://www.fxstreet.com/news/australian-dollar-remains-subdued-following-gdp-data-202603040116",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772587019000,
+      "engagement": 0
+    },
+    {
+      "title": "Continued Consolidation Called For Hong Kong Stock Market",
+      "summary": "(RTTNews) - The Hong Kong stock market has moved lower in two straight sessions, surrendering more than 860 points or 2.8 percent along the way. The Hang Seng Index now sits just beneath the 25,770-point plateau and i...",
+      "url": "https://www.nasdaq.com/articles/continued-consolidation-called-hong-kong-stock-market-0",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772587017000,
+      "engagement": 0
+    },
+    {
+      "title": "Coinbase将不支持RONIN迁移至新以太坊L2 ，用户需自行迁移资产",
+      "summary": "PANews 3月4日消息，据Coinbase官方公告， Ronin( RONIN )宣布网络将迁移至新的以太坊Layer 2网络，Coinbase不会代表客户执行此次资产迁移。若用户持有RONIN代币，需在项目团队完成迁移前将其转移至兼容的自托管钱包，否则迁移后将无法访问代币。Coinbase将于美东时间3月30日下午2点起暂停RONIN交易，订单簿已切换至仅限挂单模式。",
+      "url": "https://www.panewslab.com/zh/articles/019cb66b-12cc-7159-9a3c-36b77d3ad3bf",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772586960000,
+      "engagement": 0
+    },
+    {
+      "title": "PBOC sets USD/CNY reference rate at 6.9124 vs. 6.9088 previous",
+      "summary": "The People’s Bank of China (PBOC) sets the USD/CNY central rate for the trading session ahead on Wednesday at 6.9124 compared to the previous day's fix of 6.9088.",
+      "url": "https://www.fxstreet.com/news/pboc-sets-usd-cny-reference-rate-at-69124-vs-69088-previous-202603040115",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772586946000,
+      "engagement": 0
+    },
+    {
+      "title": "PYUSD被用于扩展TCS Blockchain在货运行业的链上贸易融资服务",
+      "summary": "PANews 3月4日消息，据The Block报道，运输贸易金融提供商TCS Blockchain宣布整合PayPal USD（PYUSD），为货运发票提供当日融资和链上结算。卡车司机可将发票兑换为TCS代币，再转为PYUSD稳定币，从而规避传统保理公司30-180天的账期及30%以上的收入损失。公司称该方案可降低90%成本，预计2026年年处理量将超10亿美元。",
+      "url": "https://www.panewslab.com/zh/articles/019cb666-c035-74ba-bc6c-97ed6211b4bd",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772586660000,
+      "engagement": 0
+    },
+    {
+      "title": "疑似Gammafund地址5小时前从币安提出9000枚ETH，约合1786万美元",
+      "summary": "PANews 3月4日消息，据链上分析师余烬监测，5小时前，地址gammafund.eth从币安提出9000枚ETH（1786万美元），价格1984美元。这个地址应该属于投资基金@Gammafund。",
+      "url": "https://www.panewslab.com/zh/articles/019cb664-842d-75a8-8d74-c12ccf100ad2",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772586540000,
+      "engagement": 0
+    },
+    {
+      "title": "NEAR联创：AI代理将成为区块链的主要用户",
+      "summary": "PANews 3月4日消息，据CoinDesk报道，NEAR联合创始人Illia Polosukhin表示，区块链的未来用户将是AI代理，AI将成为前端界面，区块链则作为后端基础设施。他认为AI将抽象掉钱包、浏览器等复杂技术，让用户无需直接接触区块链即可完成支付、资产管理和治理投票。他指出，区块链浏览器的大量存在反而暴露了技术抽象层面的失败。Polosukhin批评Meme币正在损害行业声誉，让严肃的AI研究者望而却步。他认为，未...",
+      "url": "https://www.panewslab.com/zh/articles/019cb661-aa3c-7386-a70a-6019045a2a0b",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772586360000,
+      "engagement": 0
+    },
+    {
+      "title": "Pudgy Penguins团队向币安存入4.5亿枚PENGU，约合312万美元",
+      "summary": "PANews 3月4日消息，据Onchain Lens监测，7小时前，Pudgy Penguins团队向币安存入4.5亿枚PENGU(312万美元)。",
+      "url": "https://www.panewslab.com/zh/articles/019cb660-9de1-735c-8468-aef1a185f72d",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772586240000,
+      "engagement": 0
+    },
+    {
+      "title": "China Stock Market Poised To Open In The Red On Wednesday",
+      "summary": "(RTTNews) - The China stock market on Tuesday ended the modest two-day winning streak in which it had risen more than 35 points or 0.8 percent. The Shanghai Composite Index now sits just above the 4,120-point plateau...",
+      "url": "https://www.nasdaq.com/articles/china-stock-market-poised-open-red-wednesday",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772586117000,
+      "engagement": 0
+    },
+    {
+      "title": "My mother will live in her second husband’s house if he dies before her. Will his kids be hopping mad?",
+      "summary": "“She chose a lovely man whose family has a history of remarkable longevity.”",
+      "url": "https://www.marketwatch.com/story/his-children-might-resent-her-my-widowed-mother-has-a-life-estate-does-that-override-a-prenup-and-will-0e217484?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772586000000,
+      "engagement": 0
+    },
+    {
+      "title": "币安将于今日对以太坊网络（ETH）进行钱包维护，预计需要1小时",
+      "summary": "PANews 3月4日消息，据官方公告，币安将于2026年03月04日14:00（东八区时间）对以太坊网络（ETH）进行钱包维护。为支持此次维护，币安将于2026年03月04日13:55（东八区时间）暂停对以太坊网络（ETH）的充值、提现业务。维护预计需要1小时，维护完成后将自动恢复充值、提现业务。",
+      "url": "https://www.panewslab.com/zh/articles/019cb65d-5fe0-75e8-9be8-4c98fdf3f929",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772586000000,
+      "engagement": 0
+    },
+    {
+      "title": "FATF警告稳定币成非法交易主要工具，呼吁加强对发行方的监管",
+      "summary": "PANews 3月4日消息，据CoinDesk报道，国际反洗钱标准制定机构FATF (金融行动特别工作组)发布报告警告称，稳定币已成为非法交易中使用最广泛的虚拟资产，呼吁加强对发行方的监管。报告援引Chainalysis数据指出，2025年稳定币占非法虚拟资产交易量的84%，涉及金额达1540亿美元。TRM Labs报告显示，2025年非法实体收到稳定币金额达1410亿美元，创五年新高，制裁相关活动占非法加密资金流的86%。伊朗和...",
+      "url": "https://www.panewslab.com/zh/articles/019cb65b-7998-76ac-a0c7-297bdce656cf",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772585940000,
+      "engagement": 0
+    },
+    {
+      "title": "CNBC Daily Open: Trump promises insurance and protection for Gulf shipping",
+      "summary": "“No matter what, the United States will ensure the FREE FLOW of ENERGY to the WORLD,” Trump added",
+      "url": "https://www.cnbc.com/2026/03/04/cnbc-daily-open-trump-promises-insurance-and-protection-for-gulf-shipping.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772585683000,
+      "engagement": 0
+    },
+    {
+      "title": "Australian Market Sharply Lower",
+      "summary": "(RTTNews) - Australian shares are trading sharply lower on Wednesday, extending the losses in the previous session, with the benchmark S&P/ASX 200 falling well below the 8,950 level, following the broadly negative cue...",
+      "url": "https://www.nasdaq.com/articles/australian-market-sharply-lower",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772585586000,
+      "engagement": 0
+    },
+    {
+      "title": "WTI jumps to near $74.50 on Middle East conflict, Strait of Hormuz closure threatens oil supply",
+      "summary": "West Texas Intermediate (WTI), the US crude oil benchmark, is trading around $74.50 during the early Asian trading hours on Wednesday. The WTI jumps to its highest since June 2025 as a widening conflict between the US...",
+      "url": "https://www.fxstreet.com/news/wti-jumps-to-near-7450-on-middle-east-conflict-strait-of-hormuz-closure-threatens-oil-supply-202603040052",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772585549000,
+      "engagement": 0
+    },
+    {
+      "title": "美国政府从“Villanueva”扣押钱包中转出价值约2.3万美元的比特币",
+      "summary": "PANews 3月4日消息，据The Block报道，链上数据显示，美国政府从一个标记为与“Miguel Villanueva”相关的扣押资金钱包中转出了约0.3346枚比特币，价值约2.3万美元。三笔转账分别发送至三个不同地址，随后该钱包余额已被清空。当前美国政府持有约32.8万枚比特币，价值超220亿美元。此次转账发生之际，财政部长曾表示政府的做法是停止出售扣押的比特币，而是将这些没收资产纳入数字资产储备。",
+      "url": "https://www.panewslab.com/zh/articles/019cb654-d276-73dd-9f40-89ccd12fc759",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772585520000,
+      "engagement": 0
+    },
+    {
+      "title": "Rayonier Advanced Materials Inc. Q4 Loss Rises",
+      "summary": "(RTTNews) - Rayonier Advanced Materials Inc. (RYAM) revealed Loss for its fourth quarter of -$21 million",
+      "url": "https://www.nasdaq.com/articles/rayonier-advanced-materials-inc-q4-loss-rises",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772585389000,
+      "engagement": 0
+    },
+    {
+      "title": "Nvidia, Amazon temporarily close Dubai offices, Google employees stranded amid U.S.-Iran war",
+      "summary": "Tech companies with Middle East operations have scrambled to respond as fighting rippled across the region after joint U.S.-Israeli strikes in Iran.",
+      "url": "https://www.cnbc.com/2026/03/03/nvidia-amazon-offices-google-dubai-iran-war.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772585324000,
+      "engagement": 0
+    },
+    {
+      "title": "TD Cowen：银行可能在稳定币收益之争中落败，但僵局或危及加密法案",
+      "summary": "PANews 3月4日消息，据The Block报道，TD Cowen分析指出，银行在稳定币收益之争中最终可能败北，因为反对消费者获得收益在政治上难以持续。但这一争端若拖延过久，可能危及美国加密市场结构法案CLARITY Act的通过。 OCC上周就GENIUS法案实施发布提案，纳入发行商不得直接支付稳定币收益的法定禁令，并设立“可反驳的推定”：若发行商与关联方协调后由后者向持有者支付收益，此类第三方收益安排可能违法。TD Cow...",
+      "url": "https://www.panewslab.com/zh/articles/019cb652-1207-703f-a27d-0d15ad125d8c",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772585280000,
+      "engagement": 0
+    },
+    {
+      "title": "Colombian Court Rejects Appeal for AI Writing, Then Gets Flagged By Its Own AI Detector",
+      "summary": "Colombia's top criminal court cited AI detectors to reject a lawyer's appeal. An attorney then ran the court's ruling through the same software and got a 93% match.",
+      "url": "https://decrypt.co/359869/colombian-court-rejects-appeal-for-ai-writing-then-gets-flagged-by-its-own-ai-detector",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772585205000,
+      "engagement": 0
+    },
+    {
+      "title": "1inch Network升级其平台，将Swap交易中位执行时间缩短至14秒",
+      "summary": "PANews 3月4日消息，据Cointelegraph报道，1inch Network对其平台进行了升级，提升了用户体验并加快了Swap交易速度。此次升级将Swap交易的执行时间中位数从26秒缩短至14秒。",
+      "url": "https://www.panewslab.com/zh/articles/019cb64b-428a-776f-a070-0b849558d441",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772584860000,
+      "engagement": 0
+    },
+    {
+      "title": "Circle近10小时共在Solana上新增铸造10亿枚USDC",
+      "summary": "PANews 3月4日消息，据Onchain Lens监测，过去10小时，Circle在Solana上新增铸造10亿枚USDC。2026年以来，Circle在Solana上累计增发237.5亿枚USDC。",
+      "url": "https://www.panewslab.com/zh/articles/019cb64a-1252-7658-b774-20f11588af46",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772584800000,
+      "engagement": 0
+    },
+    {
+      "title": "Ray Dalio cautions on Bitcoin, says ‘there is only one gold’",
+      "summary": "Ray Dalio says that gold is a better safe-haven asset in times of conflict compared to Bitcoin, and raised concerns about the cryptocurrency’s lack of privacy.",
+      "url": "https://cointelegraph.com/news/ray-dalio-cautions-bitcoin-safe-haven-asset?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772584736000,
+      "engagement": 0
+    },
+    {
+      "title": "2 Top Growth Stocks to Buy in the First Half of 2026",
+      "summary": "Key PointsEli Lilly should continue to post top-line growth well above the industry average.",
+      "url": "https://www.nasdaq.com/articles/2-top-growth-stocks-buy-first-half-2026-0",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772584500000,
+      "engagement": 0
+    },
+    {
+      "title": "CrowdStrike makes its case on AI with an excellent quarter — here's where we stand",
+      "summary": "Founder and CEO George Kurtz made a compelling argument that we agree with, so why can't the rest of the market get behind him?",
+      "url": "https://www.cnbc.com/2026/03/03/crowdstrike-makes-case-on-ai-with-an-excellent-quarter-where-we-stand.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772584482000,
+      "engagement": 0
+    },
+    {
+      "title": "Breaking: Australian Gross Domestic Product rises 0.8% QoQ in Q4 vs. 0.6% expected",
+      "summary": "Australia’s Gross Domestic Product (GDP) rose 0.8% QoQ in the fourth quarter (Q4) of 2025 compared with the 0.4% growth in the third quarter, the Australian Bureau of Statistics (ABS) showed on Wednesday. This reading...",
+      "url": "https://www.fxstreet.com/news/breaking-australian-gross-domestic-product-rises-08-qoq-in-q4-vs-06-expected-202603040031",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772584455000,
+      "engagement": 0
+    },
+    {
+      "title": "瑞穗银行分析师上调Circle目标价，认为油价飙升与利率前景利好稳定币交易",
+      "summary": "PANews 3月4日消息，据The Block报道，受地缘政治紧张局势推升油价、削弱降息预期影响，瑞穗银行分析师将Circle目标股价从90美元上调至100美元，维持“中性”评级。分析师认为，利率预期变化对Circle估值倍数的影响可能大于对短期收入的提振。Circle主要收入来源于USDC储备资产的利息收益，油价攀升加剧通胀担忧，市场对2026年不降息的预期增强，有利于其锁定稳定利息收益。尽管宏观环境向好，但分析师警告，稳定币...",
+      "url": "https://www.panewslab.com/zh/articles/019cb644-2c10-7679-8204-b8038ac64668",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772584380000,
+      "engagement": 0
+    },
+    {
+      "title": "DRI Healthcare Trust Reports Climb In Q4 Income",
+      "summary": "(RTTNews) - DRI Healthcare Trust (DHT-UN.TO) reported earnings for its fourth quarter that Increased, from the same period last year",
+      "url": "https://www.nasdaq.com/articles/dri-healthcare-trust-reports-climb-q4-income",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772584320000,
+      "engagement": 0
+    },
+    {
+      "title": "Taiwan Shares May Take Further Damage On Wednesday",
+      "summary": "(RTTNews) - The Taiwan stock market has tracked lower in back-to-back sessions, tumbling almost 1,100 points or 3.2 percent along the way. The Taiwan Stock Exchange now sits just beneath the 34,325-point plateau and i...",
+      "url": "https://www.nasdaq.com/articles/taiwan-shares-may-take-further-damage-wednesday",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772584317000,
+      "engagement": 0
+    },
+    {
+      "title": "稳定币收益之争持续，French Hill敦促参议院采纳众议院加密法案",
+      "summary": "PANews 3月4日消息，据The Block报道，在稳定币收益问题持续争议之际，美国众议院高层共和党人French Hill建议参议院直接采纳众议院已通过的加密市场结构法案CLARITY Act，以推动立法进程。该法案去年在众议院获得两党支持通过，但未涉及参议院当前争议焦点——稳定币收益问题。Hill表示，若参议院无法达成明确结论，建议采用获78名民主党支持的众议院版本作为解决方案。他同时指出，财政部也可介入，上周OCC已就G...",
+      "url": "https://www.panewslab.com/zh/articles/019cb63f-b34e-742e-b887-56d1f93087cd",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772584140000,
+      "engagement": 0
+    },
+    {
+      "title": "伊朗称完全控制霍尔木兹海峡，十多艘油轮被炮弹击中",
+      "summary": "PANews 3月4日消息，据新华社引援伊朗法尔斯通讯社3日报道，伊朗伊斯兰革命卫队海军副司令穆罕默德·阿克巴尔扎德表示，霍尔木兹海峡已完全处于伊朗海军的控制之下，十多艘油轮在该海峡被炮弹击中。阿克巴尔扎德说，革命卫队海军多次警告霍尔木兹海峡处于战争状态，任何船只都可能被炮弹或无人机击中。但仍有十多艘油轮无视警告，已被炮弹击中并烧毁。阿克巴尔扎德强调，在伊朗宣布霍尔木兹海峡禁止航行后，油轮、商船和渔船已无法通过该海峡。",
+      "url": "https://www.panewslab.com/zh/articles/019cb63d-4afe-756a-b0ac-3198883a53fe",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772583960000,
+      "engagement": 0
+    },
+    {
+      "title": "日韩股市大跌，韩股跌6%",
+      "summary": "PANews 3月4日消息，据金十报道，日经225指数失守55000点，日内跌幅2.31%。韩国KOSPI指数跌幅扩大至6%。",
+      "url": "https://www.panewslab.com/zh/articles/019cb63c-1a1b-75b7-9fd7-dcfb5228816f",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772583900000,
+      "engagement": 0
+    },
+    {
+      "title": "美媒：哈梅内伊之子担任伊朗最高领袖或于周三官宣",
+      "summary": "PANews 3月4日消息，据金十引援纽约时报报道，据三位熟悉相关讨论情况的伊朗官员透露，哈梅内伊之子穆杰塔巴已成为伊朗最高领袖的领先人选。官员们表示，伊朗专家会议正在考虑于周三上午宣布穆杰塔巴成为接班人，但部分人对此表示了保留意见，他们担心此举可能会使他成为美国和以色列的攻击目标。",
+      "url": "https://www.panewslab.com/zh/articles/019cb63a-c235-70ef-a564-810f715c9628",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772583780000,
+      "engagement": 0
+    },
+    {
+      "title": "贝莱德近10小时从Coinbase提取4376枚BTC，并存入567枚BTC和7553枚ETH",
+      "summary": "PANews 3月4日消息，据Onchain Lens监测，过去10小时，贝莱德从Coinbase提取4376枚BTC(2.98亿美元)，并向Coinbase存入567枚BTC(3805万美元)和7553枚ETH(1470万美元)。净流入总计3809枚BTC(2.6亿美元)。",
+      "url": "https://www.panewslab.com/zh/articles/019cb63a-00a1-768e-a459-d6872436ac9b",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772583720000,
+      "engagement": 0
+    },
+    {
+      "title": "QuickLogic (QUIK) Q4 2025 Earnings Call Transcript",
+      "summary": "@media (max-width: 768px) { .image-container { width: 100% !important; float: none !important; margin: 0 0 1rem 0 !important; } } Image source: The Mo",
+      "url": "https://www.nasdaq.com/articles/quicklogic-quik-q4-2025-earnings-call-transcript",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772583702000,
+      "engagement": 0
+    },
+    {
+      "title": "Coinbase CEO承认Base应用中的SocialFi功能“效果不太理想”",
+      "summary": "PANews 3月4日消息，据The Block报道，Coinbase首席执行官Brian Armstrong在播客采访中表示，去年在Base应用中测试的SocialFi功能“效果不太理想”。Armstrong称，这是一个实验性的尝试但未能达到预期，目前Base应用已转向更专注于交易功能，成为Coinbase应用的自我托管版本。 Base应用曾大力推广创作者币功能，将社交媒体帖子和创作者账户代币化。然而，Coinbase此后已缩减...",
+      "url": "https://www.panewslab.com/zh/articles/019cb638-b009-70d2-a9a6-f3893a441934",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772583660000,
+      "engagement": 0
+    },
+    {
+      "title": "Simply Good Foods: A Hidden Gem or a Fading Brand?",
+      "summary": "Explore the exciting world of The Simply Good Foods Company (NASDAQ: SMPL) with our contributing expert analysts in this Motley Fool Scoreboard episode. Check out the video below to gain valuable insights into market...",
+      "url": "https://www.nasdaq.com/articles/simply-good-foods-hidden-gem-or-fading-brand",
+      "source": "Nasdaq/Nasdaq",
+      "category": "Market",
+      "time": 1772583600000,
+      "engagement": 0
+    },
+    {
+      "title": "a16z Crypto更新Jolt zkVM以原生支持零知识证明，并质疑“ZK”标签的滥用",
+      "summary": "PANews 3月4日消息，据The Block报道，a16z Crypto在一篇关于其Jolt zkVM的博客文章中，对某些开发者环境中“ZK”一词的通俗用法提出批评。文章指出，大多数zkVM实际上并不具备零知识属性，除非应用昂贵的“包装”程序。作者还提到，“zk”往往成为“简洁性”的代名词，即证明“简短且验证快速”，而非真正的零知识隐私。随着社区对隐私的关注日益增长，这种术语的误用正成为一个真正的问题。 a16z的开源Jolt...",
+      "url": "https://www.panewslab.com/zh/articles/019cb633-f5f8-7276-a16a-88634ad131ae",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772583360000,
+      "engagement": 0
+    },
+    {
+      "title": "Vitalik：以太坊的目标应是构建“庇护技术”，而非效仿苹果或谷歌",
+      "summary": "PANews 3月4日消息，据The Block报道，以太坊联合创始人Vitalik Buterin在X平台发文表示，以太坊的目标不是成为苹果或谷歌那样的公司，而是构建“庇护技术”——自由开源的科技，让人们能够在外部压力下保持生活、工作、交流、管理风险和积累财富的能力。他强调，加密货币不应仅被视为提高效率或追求光鲜的科技行业。 Buterin回应了社区对以太坊社会影响力的担忧，承认以太坊似乎在改善受监控资本主义、武装冲突等问题影响...",
+      "url": "https://www.panewslab.com/zh/articles/019cb62c-a971-7227-b582-32a8df171eef",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772582880000,
+      "engagement": 0
+    },
+    {
+      "title": "China is set to kick off its big policy meeting. What will be the key announcements?",
+      "summary": "Chinese Premier Li Qiang is set to announce economic targets and policies for the year ahead on Thursday.",
+      "url": "https://www.cnbc.com/2026/03/04/china-two-sessions-policy-meeting.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772582829000,
+      "engagement": 0
+    },
+    {
+      "title": "印第安纳州州长已签署比特币权利法案，允许在州退休计划中使用数字资产",
+      "summary": "PANews 3月4日消息，据Cointelegraph报道，美国印第安纳州州长已正式签署HB 1042法案（即比特币权利法案），使其成为法律。该法案旨在保护比特币权利，禁止对加密货币实施歧视性税收政策，并允许在州退休计划中使用数字资产。 根据 此前消息 ，若该法案获得州长签署，将于2026年7月1日生效。",
+      "url": "https://www.panewslab.com/zh/articles/019cb62b-7c64-77da-9253-9c6a30c565fe",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772582820000,
+      "engagement": 0
+    },
+    {
+      "title": "Sam Altman tells OpenAI staffers that military's 'operational decisions' are up to the government",
+      "summary": "In an all-hands meetings with OpenAI employees on Tuesday, CEO Sam Altman said his company doesn't get to choose how the military uses its technology.",
+      "url": "https://www.cnbc.com/2026/03/03/sam-altman-tells-openai-staff-operational-decisions-up-to-government.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772582639000,
+      "engagement": 0
+    },
+    {
+      "title": "特朗普：因国会迟迟未通过市场结构法案，稳定币法案GENIUS受到银行业“威胁”",
+      "summary": "PANews 3月4日消息，据The Block报道，美国总统特朗普在Truth Social发文表示，稳定币立法GENIUS法案正受到银行的威胁和破坏。特朗普称，美国需要尽快完成市场结构立法，美国人应该让他们的钱赚更多钱。他指出，银行正创下利润纪录，不能允许它们破坏强大的加密议程，否则这些议程将流向其他国家。 特朗普明确表示，银行不应试图削弱GENIUS法案或挟持CLARITY法案，它们需要与加密行业达成良好协议，因为这符合美国...",
+      "url": "https://www.panewslab.com/zh/articles/019cb625-efbc-743b-8f7d-a58254346b1b",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772582400000,
+      "engagement": 0
+    },
+    {
+      "title": "Coinbase将Limitless (LMTS)列入上币路线图",
+      "summary": "PANews 3月4日消息，据官方公告，Coinbase将Limitless (LMTS)列入上币路线图，交易上线需满足做市和技术条件，具体时间待定。",
+      "url": "https://www.panewslab.com/zh/articles/019cb624-f623-7293-8b19-8c7480157219",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772582340000,
+      "engagement": 0
+    },
+    {
+      "title": "Wall Street’s ‘fear gauge’ is rising as Iran conflict escalates. Here’s what investors should watch.",
+      "summary": "The VIX hit its highest level since November. Here are some key tells investors should watch to determine when to buy back into stocks.",
+      "url": "https://www.marketwatch.com/story/wall-streets-fear-gauge-is-rising-as-iran-conflict-escalates-heres-what-investors-should-watch-543b5d5c?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772581800000,
+      "engagement": 0
+    },
+    {
+      "title": "X Warns Against Creator Payouts Over Undisclosed AI War Videos",
+      "summary": "X’s head of product, Nikita Bier, says creators posting AI-generated war videos without disclosure will lose access to X’s revenue-sharing program.",
+      "url": "https://decrypt.co/359880/x-suspend-creator-payouts-undisclosed-ai-war-videos",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772581800000,
+      "engagement": 0
+    },
+    {
+      "title": "Vote counting underway in Texas primary that may be crucial to control of the Senate",
+      "summary": "The GOP and Democratic primaries mark a potential litmus test for what direction base voters want their parties to go ahead of midterm elections this fall that will determine power in Congress.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5734515/texas-primary-election-results-james-talarico-jasmine-crockett-john-cornyn-ken-paxton",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772581222000,
+      "engagement": 0
+    },
+    {
+      "title": "Prediction market 'gambling' needs state regulation, not feds, Mick Mulvaney says after Iran war bets",
+      "summary": "Mick Mulvaney also said prediction markets, by offering contracts on events such as wars, could represent a security risk for the U.S.",
+      "url": "https://www.cnbc.com/2026/03/03/prediction-market-gambling-mick-mulvaney-polymarket-kalshi.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772581019000,
+      "engagement": 0
+    },
+    {
+      "title": "Software stocks just quietly trounced chip stocks to a historic extent — but don’t get too excited",
+      "summary": "The six-day outperformance of the software sector is merely a blip on the radar over a longer span.",
+      "url": "https://www.marketwatch.com/story/software-stocks-just-quietly-trounced-chip-stocks-to-a-historic-extent-but-dont-get-too-excited-5babf59c?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772580900000,
+      "engagement": 0
+    },
+    {
+      "title": "US President Donald Trump says will provide insurance for ships in Gulf amid Iranian attacks",
+      "summary": "US President Donald Trump said the country's navy will offer insurance to ships in the Gulf after Iran largely succeeded in shutting down the Strait of Hormuz, BBC reported on Tuesday. Trump added that the US military...",
+      "url": "https://www.fxstreet.com/news/us-president-donald-trump-says-will-provide-insurance-for-ships-in-gulf-amid-iranian-attacks-202603032329",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772580572000,
+      "engagement": 0
+    },
+    {
+      "title": "Here’s what happened in crypto today",
+      "summary": "Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, NFTs, Web3 and crypto regulation.",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772579848000,
+      "engagement": 0
+    },
+    {
+      "title": "Here are the U.S. airlines most vulnerable to rising fuel prices",
+      "summary": "Citi draws out a surprisingly eclectic list of U.S. airlines more at risk from dramatic jet-fuel increases",
+      "url": "https://www.marketwatch.com/story/here-are-the-u-s-airlines-most-vulnerable-to-rising-fuel-prices-b3ed82b3?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772579820000,
+      "engagement": 0
+    },
+    {
+      "title": "Gold falls to near $5,100 as inflation fears weigh amidst Middle East conflict",
+      "summary": "Gold price (XAU/USD) faces some selling pressure near $5,100 during the early Asian session on Wednesday. The precious metal falls amid a renewed US Dollar (USD) demand and dimming prospects for US rate cuts.",
+      "url": "https://www.fxstreet.com/news/gold-falls-to-near-5-100-as-inflation-fears-weigh-amidst-middle-east-conflict-202603032312",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772579541000,
+      "engagement": 0
+    },
+    {
+      "title": "Trump Urges Congress to Move on Crypto Rules Amid Banking Clash",
+      "summary": "The dispute centers on whether crypto firms should be allowed to offer stablecoin yield, an issue that has stalled key negotiations.",
+      "url": "https://decrypt.co/359866/trump-urges-congress-move-on-crypto-rules-banking-clash",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772579460000,
+      "engagement": 0
+    },
+    {
+      "title": "How Nvidia turned a steal of a deal into its secret weapon",
+      "summary": "Building on the foundations of its $7 billion Mellanox acquisition, Nvidia has made networking sales a major driver of its growth",
+      "url": "https://www.marketwatch.com/story/how-nvidia-turned-a-steal-of-a-deal-into-its-secret-weapon-17c2027a?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772579220000,
+      "engagement": 0
+    },
+    {
+      "title": "Humans' pull toward alcohol may have ancient origins (according to chimp pee)",
+      "summary": "Scientists learned that wild African chimpanzees consume alcohol by eating fermented fruit, suggesting that human attraction to alcohol may have ancient evolutionary origins.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5726442/humans-pull-toward-alcohol-may-have-ancient-origins-according-to-chimp-pee",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772579171000,
+      "engagement": 0
+    },
+    {
+      "title": "The stock market’s wild swings are sending a message about the escalating Iran conflict",
+      "summary": "Stocks swung violently Tuesday as investors tried again to assess the potential impact of the escalating military strife in the Middle East, sparked by U.S. and Israeli strikes that resulted in the killing of Iran’s S...",
+      "url": "https://www.marketwatch.com/story/the-stock-markets-wild-swings-are-sending-a-message-about-the-escalating-iran-conflict-9dc81cac?mod=mw_rss_topstories",
+      "source": "MarketWatch/MarketWatch",
+      "category": "Market",
+      "time": 1772578920000,
+      "engagement": 0
+    },
+    {
+      "title": "GBP/USD slips below key averages as geopolitical risks mount",
+      "summary": "GBP/USD fell about 0.35% on Tuesday, settling around 1.3350 after slipping below the 200-day Exponential Moving Average (EMA) for the first time since early December.",
+      "url": "https://www.fxstreet.com/news/gbp-usd-slips-below-key-averages-as-geopolitical-risks-mount-202603032301",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772578892000,
+      "engagement": 0
+    },
+    {
+      "title": "AUD/JPY rebounds from daily lows, eyes 111.70 for bullish breakout",
+      "summary": "The AUD/JPY trims some of its earlier but is ending the session on a normal note, down 0.63%, after bouncing off daily lows below the 111.00 figure. At the time of writing, the cross-pair trades at 110.89.",
+      "url": "https://www.fxstreet.com/news/aud-jpy-rebounds-from-daily-lows-eyes-11170-for-bullish-breakout-202603032300",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772578814000,
+      "engagement": 0
+    },
+    {
+      "title": "USD/JPY extends rally as Middle East conflict adds to Yen weakness",
+      "summary": "USD/JPY rose about 0.15% on Tuesday, pushing close to 157.60 as the pair continued to grind higher following last week's sharp rally.",
+      "url": "https://www.fxstreet.com/news/usd-jpy-extends-rally-as-middle-east-conflict-adds-to-yen-weakness-202603032259",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772578750000,
+      "engagement": 0
+    },
+    {
+      "title": "CNY: Policy targets in focus at Two Sessions – Commerzbank",
+      "summary": "Commerzbank’s Volkmar Baur highlights that China’s ‘Two Sessions’ will set key macro targets and publish a new five-year plan lasting to 2030, with implications for the Yuan.",
+      "url": "https://www.fxstreet.com/news/cny-policy-targets-in-focus-at-two-sessions-commerzbank-202603032252",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772578320000,
+      "engagement": 0
+    },
+    {
+      "title": "The lead U.S. cyber agency is stretched thin as Iran hacking threat escalates",
+      "summary": "Last week, CISA's acting director was reassigned to a new division within DHS and the agency is operating under a partial shutdown.",
+      "url": "https://www.cnbc.com/2026/03/03/iran-cisa-cybersecurity-war-threat.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772577552000,
+      "engagement": 0
+    },
+    {
+      "title": "What's at stake for crypto as 3 US states kick off party primaries?",
+      "summary": "Super PACs backed by the crypto industry are expected to spend millions of dollars in the 2026 midterm elections after many of their chosen candidates won in 2024.",
+      "url": "https://cointelegraph.com/news/crypto-laws-states-party-primaries?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772577199000,
+      "engagement": 0
+    },
+    {
+      "title": "NZD/USD Price Forecast: Bears loom after testing 200-DMA downwards",
+      "summary": "The New Zealand Dollar extends its losses for the second straight day amid a firm US Dollar courtesy of the Middle East conflict, which fueled fears of higher inflation sparked by the jump in Oil prices. The NZD/USD t...",
+      "url": "https://www.fxstreet.com/news/nzd-usd-price-forecast-bears-loom-after-testing-200-dma-downwards-202603032229",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772576989000,
+      "engagement": 0
+    },
+    {
+      "title": "Locals prefer satoshis to dollars, says Africa Bitcoin chair Stafford Masie",
+      "summary": "In an interview with Natalie Brunell on Coin Stories, Masie described Bitcoin as functional currency in parts of Africa amid rapid inflation and currency debasement.",
+      "url": "https://cointelegraph.com/news/where-i-come-from-bitcoin-is-money-says-africa-bitcoin-corp-chair-stafford-masie?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772576794000,
+      "engagement": 0
+    },
+    {
+      "title": "Pregnant migrant girls are being sent to a Texas shelter flagged as medically risky",
+      "summary": "Government officials and advocates for the children worry the goal is to concentrate them in Texas, where abortion is banned.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5712323/pregnant-migrant-girls-texas-shelter",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772576068000,
+      "engagement": 0
+    },
+    {
+      "title": "An Arkansas manufacturer pins hope on apprenticeships",
+      "summary": "Virco Manufacturing has made school furniture since 1950. Now with competition from imports and an aging workforce, Virco is hoping to build the workforce it needs to survive through apprenticeships.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5616268/an-arkansas-manufacturer-pins-hope-on-apprenticeships",
+      "source": "NPR/NPR",
+      "category": "Macro",
+      "time": 1772575539000,
+      "engagement": 0
+    },
+    {
+      "title": "South Koreans Paid in Crypto for 'Revenge' Attacks Involving Human Waste, Say Police: Report",
+      "summary": "Police in South Korea have arrested people in a \"revenge\" group that were paid in crypto to make threats and vandalize property, per a local report.",
+      "url": "https://decrypt.co/359862/south-koreans-paid-crypto-revenge-attacks-human-waste-police-report",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772575128000,
+      "engagement": 0
+    },
+    {
+      "title": "Epstein files: Howard Lutnick volunteers to testify to House Oversight Committee",
+      "summary": "Commerce Secretary Lutnick \"has proactively agreed to appear voluntarily\" before the House Oversight Committee, said Chairman James Comer, R-Ky.",
+      "url": "https://www.cnbc.com/2026/03/03/lutnick-epstein-trump-house-oversight.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772575114000,
+      "engagement": 0
+    },
+    {
+      "title": "Best Buy’s holiday sales disappoint, but retailer shows progress in growing profits",
+      "summary": "Best Buy beat fourth-quarter earnings expectations but missed Wall Street's revenue estimates.",
+      "url": "https://www.cnbc.com/2026/03/03/best-buy-bby-q4-2026-earnings.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772575101000,
+      "engagement": 0
+    },
+    {
+      "title": "Target says it's on track to end its sales slump after another lackluster quarter",
+      "summary": "The big-box retailer Target posted its fiscal fourth-quarter results as it hosted an investor meeting at its Minneapolis headquarters.",
+      "url": "https://www.cnbc.com/2026/03/03/target-tgt-q4-2025-earnings.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772574822000,
+      "engagement": 0
+    },
+    {
+      "title": "CFTC chair teases crypto perpetual futures in ‘the next month or so‘",
+      "summary": "SEC Chair Paul Atkins and CFTC Chair Michael Selig addressed market structure, prediction markets and perpetual futures at a Tuesday event.",
+      "url": "https://cointelegraph.com/news/cftc-chair-crypto-perpetual-futures?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772574736000,
+      "engagement": 0
+    },
+    {
+      "title": "MARA exec pushes back on Bitcoin treasury sell-off narrative",
+      "summary": "MARA has \"fact checked\" claims it adopted a Bitcoin sell-off strategy, clarifying its filing allows flexible sales but does not signal a majority liquidation.",
+      "url": "https://cointelegraph.com/news/mara-bitcoin-sell-off-claims-fact-check-treasury-strategy?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772574622000,
+      "engagement": 0
+    },
+    {
+      "title": "The 2026 World Cup faces big challenges with only 100 days to go",
+      "summary": "Will Iran compete? Will violence in Mexico flare up? And what about funding for host cities in the U.S.? With only 100 days left before it begins, the 2026 World Cup is facing a lot of uncertainty.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5733993/fifa-world-cup-iran-war-us-canada-mexico",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772574604000,
+      "engagement": 0
+    },
+    {
+      "title": "Indonesia inflation: Temporary surge, oil risks – UOB",
+      "summary": "UOB economists Enrico Tanuwidjaja and Vincentius Ming Shen note Indonesia’s February CPI jumped to 4.76% year-on-year, above Bank Indonesia’s target, driven by base effects from electricity tariffs, higher Gold prices...",
+      "url": "https://www.fxstreet.com/news/indonesia-inflation-temporary-surge-oil-risks-uob-202603032148",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772574480000,
+      "engagement": 0
+    },
+    {
+      "title": "Tillis calls Noem's leadership a 'disaster' in fiery Senate hearing",
+      "summary": "DHS Secretary Kristi Noem testified before the Senate Judiciary Committee after coming under fire for her leadership during a nationwide immigration sweep.",
+      "url": "https://www.cnbc.com/2026/03/03/dhs-noem-immigration-minneapolis-senate-judiciary-hearing.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772573832000,
+      "engagement": 0
+    },
+    {
+      "title": "Pinterest shares pop 9% as activist Elliott Management takes $1 billion stake",
+      "summary": "Pinterest's stock has plummeted this year as the social media company grapples with slowing growth and advertising competition.",
+      "url": "https://www.cnbc.com/2026/03/03/pinterest-pins-elliott-management.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772571790000,
+      "engagement": 0
+    },
+    {
+      "title": "A glimpse of Iran, through the eyes of its artists and journalists",
+      "summary": "Understanding one of the world's oldest civilizations can't be achieved through a single film or book. But recent works of literature, journalism, music and film by Iranians are a powerful starting point.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5734031/iran-books-movies-music",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772571724000,
+      "engagement": 0
+    },
+    {
+      "title": "EUR/USD falls as Middle East tensions lift USD despite hot EZ inflation",
+      "summary": "EUR/USD edges down during the North American session yet it has bounced off daily lows hit at 1.1530 on heightened tensions in the Middle East, despite a jump on inflation in the Eurozone. The pair trades at 1.1618, d...",
+      "url": "https://www.fxstreet.com/news/eur-usd-falls-as-middle-east-tensions-lift-usd-despite-hot-ez-inflation-202603032050",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772571042000,
+      "engagement": 0
+    },
+    {
+      "title": "BitGo expands MiCA-compliant crypto-as-a-service across EEA",
+      "summary": "The rollout enables banks and fintechs in 30 European markets to embed licensed custody, payments on- and off-ramps and trading through API-based infrastructure.",
+      "url": "https://cointelegraph.com/news/bitgo-expands-mica-compliant-crypto-as-a-service-across-the-eea?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772570574000,
+      "engagement": 0
+    },
+    {
+      "title": "US Dollar Index nears 3-month high: Is this good or bad for Bitcoin?",
+      "summary": "US Dollar Index strength, fear that BTC miners may liquidate their reserves and Bitcoin’s performance compared to stocks raise concerns among investors.",
+      "url": "https://cointelegraph.com/news/us-dollar-index-nears-3-month-high-is-this-good-or-bad-for-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772570440000,
+      "engagement": 0
+    },
+    {
+      "title": "'More Accurate, Less Cringe': OpenAI Rolls Out GPT-5.3 Instant in ChatGPT",
+      "summary": "OpenAI's latest ChatGPT update targets tone and accuracy, aiming to make everyday AI conversations smoother and more useful.",
+      "url": "https://decrypt.co/359837/more-accurate-less-cringe-openai-gpt-5-3-instant-chatgpt",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772569412000,
+      "engagement": 0
+    },
+    {
+      "title": "Forex Today: US Dollar holds safe-haven bid as Middle East tensions escalate",
+      "summary": "The US Dollar (USD) is drawing safe-haven support amid sharply escalating tensions in the Middle East, prompting renewed investor concern.",
+      "url": "https://www.fxstreet.com/news/forex-today-us-dollar-holds-safe-haven-bid-as-middle-east-tensions-escalate-202603032019",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772569161000,
+      "engagement": 0
+    },
+    {
+      "title": "Ripple expands stablecoin payments stack for banks, fintechs",
+      "summary": "The upgrade integrates custody, treasury automation and settlement tools as Ripple pushes deeper into institutional cross-border payments.",
+      "url": "https://cointelegraph.com/news/ripple-expands-institutional-stablecoin-payments-platform?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772568089000,
+      "engagement": 0
+    },
+    {
+      "title": "Trump administration offers shifting narrative for U.S. war in Iran as Democrats pounce",
+      "summary": "Trump said when the invasion began his objective was to \"defend the American people by eliminating imminent threats from the Iranian regime, a vicious group.\"",
+      "url": "https://www.cnbc.com/2026/03/03/trump-iran-shifting-narrative-us-war.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772567230000,
+      "engagement": 0
+    },
+    {
+      "title": "Bitcoin Climbs, Stocks and Gold Drop as Iran Conflict Stokes Uncertainty",
+      "summary": "Bitcoin outpaced major U.S. stock indexes on Tuesday, rising as investors weighed the prospect of broader military conflict in Iran.",
+      "url": "https://decrypt.co/359829/bitcoin-climbs-stocks-gold-drop-iran-conflict-stokes-uncertainty",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772566746000,
+      "engagement": 0
+    },
+    {
+      "title": "US Dollar Index rallies toward 100.00 as Iran conflict drives safe-haven flows",
+      "summary": "The US Dollar Index (DXY) jumped about 0.55% on Tuesday, rallying to around 99.09 and extending Monday's sharp move higher.",
+      "url": "https://www.fxstreet.com/news/dxy-rallies-toward-10000-as-iran-conflict-drives-safe-haven-flows-202603031933",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772566427000,
+      "engagement": 0
+    },
+    {
+      "title": "USD/CAD slips as surging crude oil lifts the Canadian Dollar",
+      "summary": "USD/CAD slips about 0.10% on Tuesday, settling near 1.3660 in a thin daily change after Monday's broader US Dollar (USD) bid failed to carry through. The pair has been trending lower since the January highs close to 1...",
+      "url": "https://www.fxstreet.com/news/usd-cad-slips-as-surging-crude-oil-lifts-the-canadian-dollar-202603031928",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772566127000,
+      "engagement": 0
+    },
+    {
+      "title": "Ether supply on exchanges drops to multi-year lows: Here’s why it matters",
+      "summary": "Ether reserves held on exchanges fell to a new multi-year low as ETH price struggles to trade above $2,000. Will the supply crunch benefit bulls or bears?",
+      "url": "https://cointelegraph.com/news/ether-supply-on-exchanges-drops-to-multi-year-lows-here-s-why-it-matters?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772564261000,
+      "engagement": 0
+    },
+    {
+      "title": "Ex-LAPD Officer Found Guilty of $350K ‘Wrench Attack’ Bitcoin Robbery",
+      "summary": "Eric Halem faces life in prison on kidnapping and robbery charges after stealing $350,000 in crypto from a teenager during a home invasion.",
+      "url": "https://decrypt.co/359818/ex-lapd-officer-found-guilty-350k-wrench-attack-bitcoin",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772564175000,
+      "engagement": 0
+    },
+    {
+      "title": "Blackstone’s Gray: Market ‘noise’ fueled record redemptions from world’s largest private credit fund",
+      "summary": "Blackstone president Jon Gray defended the quality of loans within the firm's flagship private credit fund.",
+      "url": "https://www.cnbc.com/2026/03/03/blackstone-private-credit-fund.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772564130000,
+      "engagement": 0
+    },
+    {
+      "title": "Apple raises MacBook prices across the board as M5 chips, new displays signal AI-first strategy",
+      "summary": "Apple’s Mac refresh moves the lineup further upmarket, pairing higher prices with faster performance in a push to give customers a reason to upgrade.",
+      "url": "https://www.cnbc.com/2026/03/03/apple-macbook-prices-m5-ai.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772563785000,
+      "engagement": 0
+    },
+    {
+      "title": "USD/JPY rises as US Dollar gains amid Iran conflict",
+      "summary": "USD/JPY trades higher on Tuesday as broad-based US Dollar (USD) strength weighs on the Japanese Yen (JPY). At the time of writing, the pair is hovering around 157.77, its highest level since January 23.",
+      "url": "https://www.fxstreet.com/news/usd-jpy-rises-as-us-dollar-gains-amid-iran-conflict-202603031824",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772562277000,
+      "engagement": 0
+    },
+    {
+      "title": "Gold slumps over 4% as US yields surge on Middle East escalation",
+      "summary": "Gold (XAU/USD) drops more than 4% on Tuesday as high US Treasury yields weighed on the yellow metal, which usually works as a hedge amid global geopolitical uncertainty and conflicts.",
+      "url": "https://www.fxstreet.com/news/gold-slumps-over-4-as-us-yields-surge-on-middle-east-escalation-202603031815",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772561749000,
+      "engagement": 0
+    },
+    {
+      "title": "Mastercard adds SoFiUSD as settlement option for card issuers",
+      "summary": "SoFi will enable Mastercard issuers to settle card transactions in its cash-backed SoFiUSD stablecoin across the global payments network.",
+      "url": "https://cointelegraph.com/news/sofi-and-mastercard-move-stablecoin-settlement-into-global-card-network?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772561001000,
+      "engagement": 0
+    },
+    {
+      "title": "Core Scientific May Sell 'All' Bitcoin to Finance AI Pivot",
+      "summary": "Core Scientific unveiled plans to reduce its Bitcoin holdings significantly as its data center buildout continues ramping up.",
+      "url": "https://decrypt.co/359808/core-scientific-may-sell-all-bitcoin-finance-ai-pivot",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772559754000,
+      "engagement": 0
+    },
+    {
+      "title": "Middle East war sends natural gas prices soaring, raising growth shock risk for Europe and Asia",
+      "summary": "Disruption to LNG supplies could dent European growth and harm reindustrialization ambitions.",
+      "url": "https://www.cnbc.com/2026/03/03/middle-east-war-gas-energy-lng-drone-qatar-strait-hormuz-price-shock.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772559248000,
+      "engagement": 0
+    },
+    {
+      "title": "President Trump is trying to make it harder to vote. Here's why that matters",
+      "summary": "Trump is promoting tighter restrictions on mail-in ballots as well as passage of the SAVE Act, which requires proof of citizenship to vote. UCLA professor Richard Hasen unpacks the ramifications.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5734005/president-trump-is-trying-to-make-it-harder-to-vote-heres-why-that-matters",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772559203000,
+      "engagement": 0
+    },
+    {
+      "title": "Five races to watch on the day the 2026 midterm elections kick off",
+      "summary": "Results from Tuesday's races in three states could be telling for how the rest of the midterm season will unfold.",
+      "url": "https://www.cnbc.com/2026/03/03/2026-midterm-elections-five-races-to-watch.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772559081000,
+      "engagement": 0
+    },
+    {
+      "title": "Google employees call for military limits on AI amid Iran strikes, Anthropic fallout",
+      "summary": "Employees at Alphabet and OpenAI are pushing for stricter limits on the military's use of AI, as tensions rise following the blacklisting of Anthropic's models.",
+      "url": "https://www.cnbc.com/2026/03/03/anthropic-fallout-iran-war-tech-military-ai.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772559031000,
+      "engagement": 0
+    },
+    {
+      "title": "Fed’s Kashkari: Too soon to know how Iran war will affect inflation",
+      "summary": "Neel Kashkari, President of the Federal Reserve (Fed) Bank of Minneapolis, said that the Iran war impact could have an effect in the monetary policy, but it is too soon to know if it could even impact inflation at the...",
+      "url": "https://www.fxstreet.com/news/feds-kashkari-too-soon-to-know-how-iran-war-will-affect-inflation-202603031718",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772558306000,
+      "engagement": 0
+    },
+    {
+      "title": "Why Bermuda is testing a fully onchain economy instead of crypto mandates",
+      "summary": "Bermuda’s onchain economy plan prioritizes pilots, stablecoins and regulation over forced crypto adoption. Here’s why testing comes first.",
+      "url": "https://cointelegraph.com/explained/why-bermuda-is-testing-a-fully-onchain-economy-instead-of-crypto-mandates?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772558117000,
+      "engagement": 0
+    },
+    {
+      "title": "FCC chief tells CNBC WBD-Paramount merger deal is ‘cleaner’ than Netflix's, will be approved 'quickly'",
+      "summary": "FCC Chairman Brendan Carr told CNBC on Tuesday that Netflix's previous Warner Bros. Discovery offer \"raised a lot of competition concerns.\"",
+      "url": "https://www.cnbc.com/2026/03/03/fcc-chair-brendan-carr-wbd-paramount-merger-deal-netflix.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772557167000,
+      "engagement": 0
+    },
+    {
+      "title": "Dow Jones Industrial Average plunges as Iran war fears rattle Wall Street",
+      "summary": "The Dow Jones Industrial Average (DJIA) dropped around 850 points, or 1.7%, to trade near 48,000 at midday Tuesday as escalating conflict in the Middle East sent shockwaves through global markets. The S&P 500 fell 1.6...",
+      "url": "https://www.fxstreet.com/news/dow-jones-industrial-average-plunges-as-iran-war-fears-rattle-wall-street-202603031659",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772557145000,
+      "engagement": 0
+    },
+    {
+      "title": "New York Fed's Williams says tariff burden falls 'overwhelmingly' on U.S. businesses and consumers",
+      "summary": "Williams said that not only were the tariffs being felt at home, but they also were keeping the Fed from reaching its 2% inflation goal.",
+      "url": "https://www.cnbc.com/2026/03/03/new-york-feds-williams-says-tariff-burden-falls-overwhelmingly-on-us-businesses-and-consumers.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772556823000,
+      "engagement": 0
+    },
+    {
+      "title": "Banking, payments services disrupted after Amazon UAE data centers hit in drone strikes",
+      "summary": "U.S. and Israeli strikes on Iran have prompted a wave of retaliatory attacks across the Middle East.",
+      "url": "https://www.cnbc.com/2026/03/03/iran-war-uae-drone-strikes-aws-data-centers.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772556697000,
+      "engagement": 0
+    },
+    {
+      "title": "Mining companies move deeper into AI, HPC as MARA may sell Bitcoin",
+      "summary": "In a Monday SEC filing, the US Bitcoin miner said it would consider selling some of the coins on its balance sheet, depending on market conditions.",
+      "url": "https://cointelegraph.com/news/mining-companies-ai-hpc-mara-sell-bitcoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772556666000,
+      "engagement": 0
+    },
+    {
+      "title": "AUD/USD drops under 0.7000 as US Dollar strengthens amid Middle East war",
+      "summary": "AUD/USD extends its pullback and trades around 0.6990 on Tuesday at the time of writing, down 1.36% on the day, after breaking below the 0.7000 level. The pair is now hovering at multi-week lows, pressured by renewed...",
+      "url": "https://www.fxstreet.com/news/aud-usd-drops-under-07000-as-usd-strengthens-amid-middle-east-war-202603031649",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772556542000,
+      "engagement": 0
+    },
+    {
+      "title": "European stocks close 3% lower as Middle East conflict intensifies",
+      "summary": "European stocks ended firmly in negative territory Tuesday as the geopolitical crisis in the Middle East continued to weigh on market sentiment.",
+      "url": "https://www.cnbc.com/2026/03/03/european-markets-stoxx-600-ftse-dax-cac-iran-latest-spring-statement-uk.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772556486000,
+      "engagement": 0
+    },
+    {
+      "title": "A new one-a-day-pill holds promise for HIV's 'forgotten population'",
+      "summary": "It's designed to take the place of complicated, multiple drug regimens that many people with HIV need to follow. And it's also beneficial because the HIV virus is always evolving.",
+      "url": "https://www.npr.org/2026/03/03/nx-s1-5727702/hiv-aids-pill",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772556196000,
+      "engagement": 0
+    },
+    {
+      "title": "Bitcoin Miner MARA Says It May Sell BTC Holdings in Strategy Shift",
+      "summary": "Publicly traded Bitcoin miner MARA Holdings may sell more of its BTC as part of a strategy shift, the firm said in a new SEC filing.",
+      "url": "https://decrypt.co/359806/bitcoin-miner-mara-may-sell-btc-strategy-shift",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772555872000,
+      "engagement": 0
+    },
+    {
+      "title": "American Bitcoin boosts hashrate with 11,298 new mining machines",
+      "summary": "The Eric Trump-led company adds 3 EH/s in new capacity, expanding its Alberta mining fleet as it deepens exposure to BTC amid volatile market conditions.",
+      "url": "https://cointelegraph.com/news/american-bitcoin-adds-3ehs-mining-capacity-expands-btc-treasury?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772555790000,
+      "engagement": 0
+    },
+    {
+      "title": "ECB: Energy shock keeps policy steady – Nomura",
+      "summary": "Nomura’s Andrzej Szczepaniak, Josie Anderson, George Buckley and David Seif argue that the European Central Bank will largely look through recent energy-driven market moves and keep its focus on its end-horizon HICP f...",
+      "url": "https://www.fxstreet.com/news/ecb-energy-shock-keeps-policy-steady-nomura-202603031632",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772555551000,
+      "engagement": 0
+    },
+    {
+      "title": "The Strait of Hormuz is facing a blockade. These countries will be most impacted",
+      "summary": "A closure of the Strait of Hormuz would send shock waves through global energy markets, but the pain would be felt most acutely in Asia.",
+      "url": "https://www.cnbc.com/2026/03/03/strait-of-hormuz-closure-which-countries-will-be-hit-the-most.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772555231000,
+      "engagement": 0
+    },
+    {
+      "title": "Anthropic 'made a mistake' in Pentagon talks and should 'correct course,' FCC boss says",
+      "summary": "In tense negotiations, Anthropic sought specific restrictions on the use of its AI technology by the Department of Defense, which the agency did not agree to.",
+      "url": "https://www.cnbc.com/2026/03/03/anthropic-pentagon-department-of-defense-ai-fcc-chair.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772554908000,
+      "engagement": 0
+    },
+    {
+      "title": "巴西央行要求加密交易所每日证明资产充足并隔离客户资金",
+      "summary": "PANews 3月4日消息，据 DL News 报道，巴西央行发布新规，要求持牌加密交易平台自 2027 年 1 月 1 日起每日提交报告，证明有足够资金应对黑客攻击等风险，并按照商业银行标准执行数据保护与保密义务。新规还要求交易所将自有法币与加密资产账户和客户资产账户完全分离，并按照专门会计手册将加密资产计入资产负债表。此外，监管机构将对跨境转账设置限制和审核，提高链上资金流向可追踪性，以遏制利用加密资产进行洗钱、逃税和资助犯罪活动。",
+      "url": "https://www.panewslab.com/zh/articles/019cb474-fac9-7029-ab88-fec9bf3621f1",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772554020000,
+      "engagement": 0
+    },
+    {
+      "title": "Fed’s Williams: Eventual rate cuts aimed at keeping policy from being too restrictive",
+      "summary": "John Williams, President of the Federal Reserve (Fed) Bank of New York, did not address the economic impact of the Iran conflict at the America's Credit Unions Governmental Affairs Conference, in Washington DC on Tues...",
+      "url": "https://www.fxstreet.com/news/feds-williams-eventual-rate-cuts-aimed-at-keeping-policy-from-being-too-restrictive-202603031606",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772553998000,
+      "engagement": 0
+    },
+    {
+      "title": "Federal Reserve Board issues enforcement actions with former employee of East Cambridge Savings Bank and former employee of United Bank",
+      "summary": "Federal Reserve Board issues enforcement actions with former employee of East Cambridge Savings Bank and former employee of United Bank",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260303a.htm",
+      "source": "Fed/Fed",
+      "category": "Policy",
+      "time": 1772553600000,
+      "engagement": 0
+    },
+    {
+      "title": "JPMorgan CEO Jamie Dimon Slams Stablecoin Yield Demands: 'The Public Will Pay'",
+      "summary": "Jamie Dimon said if crypto companies like Coinbase want to offer stablecoin rewards, then they should become banks. “Then you can do whatever you want,” he said.",
+      "url": "https://decrypt.co/359799/jpmorgan-ceo-jamie-dimon-slams-stablecoin-yield-demands",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772553516000,
+      "engagement": 0
+    },
+    {
+      "title": "Fed’s Schmid: Inflation is hot",
+      "summary": "Jeffrey Schmid, President of the Federal Reserve (Fed) Bank of Kansas City said that there’s no room to be complacent on inflation, claiming that inflation is hot and that demand is outpacing supply at the Metro Denve...",
+      "url": "https://www.fxstreet.com/news/feds-schmid-inflation-is-hot-202603031553",
+      "source": "FXStreet/FXStreet",
+      "category": "Macro",
+      "time": 1772553236000,
+      "engagement": 0
+    },
+    {
+      "title": "Web 4.0能否快速落地？将会产生怎样的影响？",
+      "summary": "Web 4.0 不仅具备快速落地的技术可行性，并且其早期形态已经通过 x402、Base 网络与 Conway 终端在极客社区中悄然启动。",
+      "url": "https://www.panewslab.com/zh/articles/019caed1-a7e0-77ae-9597-1e09dddb710d",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772553060000,
+      "engagement": 0
+    },
+    {
+      "title": "美国CFTC主席：将在未来几周内为加密永续合约在美国合规落地提供指引",
+      "summary": "PANews 3月3日消息，据CoinDesk报道， 美国商品期货交易委员会（CFTC）主席 Mike Selig 表示，该机构将在未来数周内发布政策，为加密永续合约在美国合规落地提供指引，并推动“专业级”永续期货在美推出。他称上一届政府的监管态度将大量流动性和业务推向离岸，当前正通过与美国证券交易委员会（SEC）合作的“Project Crypto”推进统一路径。Selig 还透露，CFTC 将对 DeFi 开发者监管方式及预测...",
+      "url": "https://www.panewslab.com/zh/articles/019cb466-7ad3-711e-9a6d-aa5cbae44316",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772552940000,
+      "engagement": 0
+    },
+    {
+      "title": "外媒：特朗普称伊朗的“发射装置正在耗尽”",
+      "summary": "PANews 3月3日消息，据Politico：美国总统特朗普称伊朗的“发射装置正在耗尽”。",
+      "url": "https://www.panewslab.com/zh/articles/019cb463-4780-7210-a09d-1239a0fa8e02",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772552880000,
+      "engagement": 0
+    },
+    {
+      "title": "Bitcoin dives 3% on global asset rout as $5K gold 'smashed' on oil fears",
+      "summary": "Bitcoin bulls gave up their latest mission to reclaim $70,000 as Iran escalation sparked oil supply fears that gripped stocks and gold.",
+      "url": "https://cointelegraph.com/news/bitcoin-dives-3-percent-asset-rout-5k-gold-smashed-oil-fears?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772552526000,
+      "engagement": 0
+    },
+    {
+      "title": "Netra第九期：10分钟开一个dex 在2026年至关重要",
+      "summary": "本次访谈中，Orderly 市场负责人 Miland 围绕「十分钟即可搭建 DEX」这一产品能力，系统阐述了其背后的技术逻辑、市场需求与长期影响。他指出，Orderly 通过全链共享订单簿与模块化基础设施，显著降低了 DEX 的搭建与运营门槛，使个人、社区与项目方无需高额成本即可创建自有品牌交易入口。",
+      "url": "https://www.panewslab.com/zh/articles/019cb45b-6eed-74b6-b619-12d0cac9ee82",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772552400000,
+      "engagement": 0
+    },
+    {
+      "title": "过去24小时全网合约爆仓3.23亿美元，主爆多单",
+      "summary": "PANews 3月3日消息，CoinAnk数据显示，过去24小时加密货币市场全网合约爆仓3.23亿美元，其中多单爆仓2.15亿美元，空单爆仓1.09亿美元。BTC爆仓总金额1.23亿美元，ETH爆仓总金额6289.89万美元。",
+      "url": "https://www.panewslab.com/zh/articles/019cb455-7cd3-7167-83ee-709672224316",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772551980000,
+      "engagement": 0
+    },
+    {
+      "title": "Netra第八期：Agent 的进化：从交易工具到可被市场预测的可信标的",
+      "summary": "在近期由 Netra Media 主办的一场 AMA 活动中，LinkLayer AI 联合创始人 Evan 围绕「AI Agent 的可信性来源」「Agent 是否可以成为预测标的」「预测悖论与能力定价」以及「多 Agent 系统下的风险与风控路径」等话题展开分享，系统回应了市场对 AI Agent 黑箱、去中心化叙事、预测可行性及系统性风险的核心质疑",
+      "url": "https://www.panewslab.com/zh/articles/019cb454-b91a-7606-8469-b64566529a48",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772551920000,
+      "engagement": 0
+    },
+    {
+      "title": "The momentum trades of 2026 are breaking with gold, silver and South Korea down big",
+      "summary": "Each of these assets caught a bid this year as investors nervous about their exposure to U.S. large cap tech sought out different asset classes.",
+      "url": "https://www.cnbc.com/2026/03/03/the-momentum-trades-of-2026-are-breaking-with-gold-silver-and-south-korea-down-big.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772551825000,
+      "engagement": 0
+    },
+    {
+      "title": "Kalshi 推出可交易名表价格波动市场",
+      "summary": "PANews 3月3日消息，预测市场平台 Kalshi 宣布与奢侈手表交易平台 Bezel 合作，上线可交易 Rolex（劳力士）、Omega（欧米茄）、Cartier（卡地亚）、Tudor（帝舵） 等知名腕表价格走势的合约。",
+      "url": "https://www.panewslab.com/zh/articles/019cb452-a79a-732a-b86b-8e5297fe9f44",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772551620000,
+      "engagement": 0
+    },
+    {
+      "title": "美国政府地址刚刚转出0.0378枚BTC，价值约2520美元",
+      "summary": "PANews 3月3日消息，据Lookonchain报道，美国政府相关比特币地址刚刚转出0.0378枚BTC，按当前价格约2,520美元。",
+      "url": "https://www.panewslab.com/zh/articles/019cb44e-2428-7269-97dd-245ba50ef0f0",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772551440000,
+      "engagement": 0
+    },
+    {
+      "title": "现货黄金失守5000美元关口",
+      "summary": "PANews 3月3日消息，据Bybit行情，现货黄金失守5000美元/盎司，刷新2月20日以来新低，日内跌超6%。",
+      "url": "https://www.panewslab.com/zh/articles/019cb44b-2957-775c-88b3-5936e0731dc4",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772551260000,
+      "engagement": 0
+    },
+    {
+      "title": "Trump Brothers' American Bitcoin Boosts Mining Capacity Following Q4 Loss",
+      "summary": "American Bitcoin stock is down Tuesday after the firm said it purchased 11,298 new BTC miners to expand its fleet.",
+      "url": "https://decrypt.co/359802/trump-brothers-american-bitcoin-boosts-mining-capacity-q4-loss",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772551062000,
+      "engagement": 0
+    },
+    {
+      "title": "Visa与Stripe拟将其稳定币卡发行扩展至逾百国",
+      "summary": "PANews 3月3日消息，据Solid Intel报道，Visa与Stripe计划将其稳定币卡发行产品扩展至全球超过100个国家。",
+      "url": "https://www.panewslab.com/zh/articles/019cb43c-d0fe-73ca-963f-acee8c54e49b",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772549700000,
+      "engagement": 0
+    },
+    {
+      "title": "现货黄金日内暴跌300美元",
+      "summary": "PANews 3月3日消息，现货黄金日内暴跌300美元，现报5021.03美元/盎司，跌幅5.65%。",
+      "url": "https://www.panewslab.com/zh/articles/019cb432-04db-74d8-9590-fddb68dac49c",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772549640000,
+      "engagement": 0
+    },
+    {
+      "title": "Netra 7：New market opportunities and global financial in the Stock RWA.",
+      "summary": "Over the past year, RWA has transitioned from U.S. Treasury bonds and real estate toward one of the most critical and volatile arenas in global finance: equity markets.",
+      "url": "https://www.panewslab.com/zh/articles/019cb430-a67d-7471-a710-ed775c586cc6",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772549580000,
+      "engagement": 0
+    },
+    {
+      "title": "3个新建钱包地址今日共从BitGo收到1298.46枚BTC，约合8640万美元",
+      "summary": "PANews 3月3日消息， 据 Lookonchain监测 ， 3 个新创建的钱包今日共从 BitGo 接收 1,298.46 枚 BTC ，按当前价格合计约合 8,640 万美元。",
+      "url": "https://www.panewslab.com/zh/articles/019cb430-7870-71da-a0d3-b2af16efb3ec",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772549460000,
+      "engagement": 0
+    },
+    {
+      "title": "Iran war prediction market bets draw heat: 'Insane this is legal'",
+      "summary": "Wagers were placed over the weekend about the fate of Iranian leader Ayatollah Ali Khamenei, who was killed in the bombardment of Iran.",
+      "url": "https://www.cnbc.com/2026/03/02/prediction-markets-iran-strikes-khamenei.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772548801000,
+      "engagement": 0
+    },
+    {
+      "title": "香港空投稳定币，美国明确边界：稳定币的制度化阶段",
+      "summary": "稳定币的发展正从市场实验阶段，进入正式制度化阶段——不再只是加密行业的产品，而是受监管体系认可的合规资产。",
+      "url": "https://www.panewslab.com/zh/articles/019ca37e-be2d-71ff-9d96-dd372b82e12a",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772548680000,
+      "engagement": 0
+    },
+    {
+      "title": "澳大利亚批准基于XRP Ledger的合规澳元稳定币牌照",
+      "summary": "澳大利亚监管机构已向一款在 XRP Ledger 上发行的数字澳元稳定币授予受监管数字货币牌照，允许银行在链上使用符合合规标准的 AUD 稳定币进行业务结算与支付。",
+      "url": "https://www.panewslab.com/zh/articles/019cb423-00ff-7635-9a3a-b9c85048b2d4",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772548680000,
+      "engagement": 0
+    },
+    {
+      "title": "Versant debut earnings report shows continued pay TV pressure, digital growth",
+      "summary": "Versant reported its 2025 earnings, giving Wall Street its first detailed look inside the company that started publicly trading in January.",
+      "url": "https://www.cnbc.com/2026/03/03/versant-vsnt-debut-earnings-report-digital-growth.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772548398000,
+      "engagement": 0
+    },
+    {
+      "title": "Binance推出首批7个AI Agent技能",
+      "summary": "PANews 3月3日消息，Binance宣布推出首批7个AI Agent技能，旨在通过统一接口让AI Agents获得Binance Wallet与Binance Spot的市场洞察、交易执行与安全能力。Binance称，这些技能可帮助AI Agent把碎片化加密信号转化为可执行智能。 首批包含：Binance Spot Skill、Query Address Info、Query Token Info、Crypto Marke...",
+      "url": "https://www.panewslab.com/zh/articles/019cb41d-ee4b-77e5-b552-d4ac703e5159",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772548140000,
+      "engagement": 0
+    },
+    {
+      "title": "Canada and India move to reset ties as trust in U.S. falters",
+      "summary": "India and Canada's relations have thawed with the two sides promising to deepen trade, but it is far from a complete reset.",
+      "url": "https://www.cnbc.com/2026/03/03/canada-india-modi-carney-relationship-trump.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772548134000,
+      "engagement": 0
+    },
+    {
+      "title": "一匿名钱包花费约$25,676押注伊朗于3月31日前关闭霍尔木兹海峡",
+      "summary": "PANews 3月3日消息，链上监测平台Lookonchain指出，约一小时前，有交易者新建匿名钱包，并花费约25,676美元押注“伊朗将在3月31日前关闭霍尔木兹海峡”。据Polymarket实时盘口，该事件现在赔率已经上升到77%。",
+      "url": "https://www.panewslab.com/zh/articles/019cb416-941b-71ba-a96c-fdca3931bb7a",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772547840000,
+      "engagement": 0
+    },
+    {
+      "title": "Google Nano Banana 2 vs ByteDance Seedream 5.0 Lite: Which AI Image Generator Is Best?",
+      "summary": "A hands-on comparison between Google's Nano Banana 2 and ByteDance's Seedream 5.0 shows how the latest image models differ on price, speed, and creative control.",
+      "url": "https://decrypt.co/359700/image-ai-leap-google-bytedances-latest-models",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772547719000,
+      "engagement": 0
+    },
+    {
+      "title": "Swiss sneaker maker plunges 14% on weak guidance, slower than expected 2026 growth",
+      "summary": "On is entering thee third and final year of its strategy to double sales by 2026 in a quest to \"be the most premium global sportswear brand.\"",
+      "url": "https://www.cnbc.com/2026/03/03/on-onon-stock-q4-earnings-record-sales-guidance.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772547463000,
+      "engagement": 0
+    },
+    {
+      "title": "伊拉克官员：伊拉克数日内或将被迫减产超300万桶/日",
+      "summary": "PANews 3月3日消息，两名伊拉克石油官员表示，如果油轮无法自由航行并抵达装油港，伊拉克将在数日内被迫减产，幅度将超过300万桶/日。",
+      "url": "https://www.panewslab.com/zh/articles/019cb40c-ef84-749f-a218-cbbf3f95a4f7",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772547240000,
+      "engagement": 0
+    },
+    {
+      "title": "苹果发布M5 Pro与M5 Max芯片，支持更高强度本地AI工作流",
+      "summary": "PANews 3月3日消息，据苹果官网，Apple 推出用于新款 MacBook Pro 的 M5 Pro 和 M5 Max 芯片，首次采用将两颗第三代 3nm 芯片封装为单一 SoC 的 Fusion Architecture。两款芯片均配备 18 核 CPU（含 6 个 super cores 与 12 个全新 performance cores），多线程性能最高较 M1 Pro/M1 Max 提升至 2.5 倍，部分专业工作...",
+      "url": "https://www.panewslab.com/zh/articles/019cb40b-4c4c-744c-801b-0147e6c9f5ec",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772547060000,
+      "engagement": 0
+    },
+    {
+      "title": "Circle：Nanopayments现已在测试网上线",
+      "summary": "PANews 3月3日消息，稳定币发行商Circle宣布旗下超小额支付服务“Nanopayments”现已在测试网上线，支持发送低至0.000001美元的超小额USDC交易，零Gas费用且支持AI代理。",
+      "url": "https://www.panewslab.com/zh/articles/019cb407-4f84-7184-8c56-ee8173035ae3",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772546760000,
+      "engagement": 0
+    },
+    {
+      "title": "伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击",
+      "summary": "PANews 3月3日消息，当地目击者称，伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击，该机构负责选举最高领袖。",
+      "url": "https://www.panewslab.com/zh/articles/019cb404-32f6-77c7-87e1-e2bf37979d54",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772546460000,
+      "engagement": 0
+    },
+    {
+      "title": "UK finance minister delivers economic update in the Spring Statement",
+      "summary": "Economists didn't expect any major policy announcements as the government prioritizes its \"Autumn Budget\" as the main fiscal event of the year.",
+      "url": "https://www.cnbc.com/2026/03/03/uk-spring-statement-rachel-reeves-uk-economy-uk-budget.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772546446000,
+      "engagement": 0
+    },
+    {
+      "title": "Visa and Stripe’s Bridge plan stablecoin card expansion to over 100 countries",
+      "summary": "Visa and Stripe-owned Bridge aim to expand stablecoin-linked Visa cards to 18 countries, and plan 100-plus by the end of the year, while testing stablecoin settlement with Lead Bank.",
+      "url": "https://cointelegraph.com/news/visa-stripe-bridge-stablecoin-card-rollout-test-onchain-settlement?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772546428000,
+      "engagement": 0
+    },
+    {
+      "title": "伊拉克最大油田日产量已减少70万桶",
+      "summary": "PANews 3月3日消息，伊拉克石油官员表示：由于霍尔木兹海峡紧张局势减缓油轮抵达导致存储设施满载，伊拉克鲁迈拉油田已削减原油产量，周二该油田日产量削减了70万桶。 鲁迈拉油田（Rumaila）位于伊拉克南部巴士拉以西，是伊拉克最大、世界第四大油田。该油田可开采原油储量约170亿桶。",
+      "url": "https://www.panewslab.com/zh/articles/019cb400-4639-7259-a20a-75c660705da9",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772546340000,
+      "engagement": 0
+    },
+    {
+      "title": "欧洲央行（ECB）：稳定币可能削弱银行信贷和货币政策传导",
+      "summary": "欧洲央行在一份新的工作论文中警告称，随着稳定币的采用增加，银行存款可能外流，从而影响贷款和货币政策的传导。",
+      "url": "https://cn.cointelegraph.com/news/stablecoin-deposits-monetary-policy-europe-ecb?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772545960000,
+      "engagement": 0
+    },
+    {
+      "title": "美联储理事鲍曼：应检视流动性规则是否真正提升银行韧性",
+      "summary": "PANews 3月3日消息，美联储理事鲍曼表示，监管机构应评估其流动性规则在动荡时期对贷款机构的影响，并解决该框架中的薄弱环节。鲍曼表示，尽管流动性要求的各组成部分理应协同工作以降低银行破产风险，但该框架并未考虑到贷款机构在压力时期的实际表现。鲍曼在为华盛顿一场活动准备的演讲稿中提到：“我们需要了解这些工具是否真的带来了所承诺的韧性，还是我们创建了一个纸面上看起来很完美，却无法捕捉压力时期所显现漏洞的框架。现在是时候跳出‘银行是否...",
+      "url": "https://www.panewslab.com/zh/articles/019cb3f9-b11b-767c-b030-3fc6ace81afc",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772545740000,
+      "engagement": 0
+    },
+    {
+      "title": "以色列官员：沙特阿拉伯预计将在不久后对伊朗发动攻击",
+      "summary": "PANews 3月3日消息，市场消息：一位以色列高级官员透露，沙特阿拉伯预计将在不久后对伊朗发动攻击，此前沙特遭到袭击。",
+      "url": "https://www.panewslab.com/zh/articles/019cb3f4-b6cf-71ea-ac6f-d21dac127570",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772545620000,
+      "engagement": 0
+    },
+    {
+      "title": "Bybit 称其新反欺诈系统在 2025 年第四季度阻止了 3 亿美元的风险提现",
+      "summary": "Bybit表示，大部分“节省”的3亿美元来自用户在收到实时警告后选择退出，这凸显了交易所正在从事后追责转向事前预防欺诈。",
+      "url": "https://cn.cointelegraph.com/news/ai-driven-onchain-monitoring-300m-losses-bybit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772545572000,
+      "engagement": 0
+    },
+    {
+      "title": "Luxury stocks slump as Middle East conflict risks one of the sector’s 'few bright spots’",
+      "summary": "The Middle East has been one of the few bright spots in a sector that is struggling to get sales back on track.",
+      "url": "https://www.cnbc.com/2026/03/03/luxury-stocks-iran-strikes-lvmh-kering-gucci-richemont.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772545532000,
+      "engagement": 0
+    },
+    {
+      "title": "Strive strategist says AI deflation could push Bitcoin to $11M by 2036",
+      "summary": "Strive’s Joe Burnett argues AI-driven deflation may force looser policy, pushing Bitcoin toward $11 million a coin by 2036 and a $230 trillion market cap.",
+      "url": "https://cointelegraph.com/news/strive-joe-burnett-ai-deflation-bitcoin-11m-2036-forecast?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772545450000,
+      "engagement": 0
+    },
+    {
+      "title": "德林控股“闯关”成功：详解香港首个可复制的RWA业务范式",
+      "summary": "从开曼 SPV + 离岸结构，到 LPF + 本地持牌机构，香港迈出了关键性的一步。",
+      "url": "https://www.panewslab.com/zh/articles/019cacd9-ce2d-767a-a174-a634db2907a4",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772545260000,
+      "engagement": 0
+    },
+    {
+      "title": "Antalpha Q4营收同比增110%至2800万美元",
+      "summary": "PANews 3月3日消息，据GlobeNewswire报道，Antalpha Platform Holding Company（NASDAQ: ANTA）披露，2025年第四季度营收2801万美元，同比增110%；全年营收7,968万美元，同比增68%。公司Q4归属净利润934万美元，同比增461%；调整后EBITDA为1,840万美元，调整后EBITDA利润率66%。",
+      "url": "https://www.panewslab.com/zh/articles/019cb3ee-dd9a-71f9-ad6a-cfa11a9cc862",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772545080000,
+      "engagement": 0
+    },
+    {
+      "title": "法院裁决后，Kalshi 和 Polymarket 在内华达州面临交易暂停",
+      "summary": "这两项独立裁决增加了新的监管压力，因为预测市场还因与事件驱动型合约相关的信息优势和涉嫌内幕活动而受到审查。",
+      "url": "https://cn.cointelegraph.com/news/prediction-markets-trading-block-nevada-court-ruling?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772544910000,
+      "engagement": 0
+    },
+    {
+      "title": "Ether price again rejected at $2K: How low can ETH go in March?",
+      "summary": "Ether needed to hold a key support recently established at $1,800, coinciding with the lower trend line of a classic chart pattern that warns of a drop below $1,500.",
+      "url": "https://cointelegraph.com/news/ethereum-price-again-rejected-2k-how-low-can-eth-go-in-march?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772544548000,
+      "engagement": 0
+    },
+    {
+      "title": "Aave Chan Initiative因治理资金分歧拟退出Aave DAO",
+      "summary": "此举是在一项关于为Aave Labs提供4250万美元资金方案的Snapshot投票（得票率为52.58%）之后作出的，该方案现已进入ARFC阶段，尚未进行任何有约束力的链上决策。",
+      "url": "https://cn.cointelegraph.com/news/aave-aci-exit-dao-governance-vote?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772544392000,
+      "engagement": 0
+    },
+    {
+      "title": "比特币（BTC）价格图表“死亡交叉”再现，重燃周期尾声担忧",
+      "summary": "在出现类似趋势线交叉后，比特币价格平均一个月下跌约35%，这使交易者持续关注下行风险。",
+      "url": "https://cn.cointelegraph.com/news/bitcoin-price-chart-death-cross-back-late-cycle-fears?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772543987000,
+      "engagement": 0
+    },
+    {
+      "title": "Iranian Exchange Outflows Spiked to $10.3M Amid Airstrikes: Chainalysis",
+      "summary": "Some $10.3 million left Iranian exchanges in the days after joint US-Israeli strikes, with hourly volumes approaching $2 million at the peak.",
+      "url": "https://decrypt.co/359789/iranian-exchange-outflows-spiked-to-10-3m-amid-airstrikes-chainalysis",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772543906000,
+      "engagement": 0
+    },
+    {
+      "title": "Aave Chan Initiative to exit Aave DAO after governance clash over funding",
+      "summary": "The move follows a 52.58% Snapshot vote on a $42.5 million funding package for Aave Labs, now headed to the ARFC stage before any binding onchain decision.",
+      "url": "https://cointelegraph.com/news/aave-aci-exit-dao-governance-vote?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772543501000,
+      "engagement": 0
+    },
+    {
+      "title": "德勤为 Tether 的 USDT 稳定币签署 Anchorage 储备金报告",
+      "summary": "四大会计师事务所德勤认证，Tether 由 Anchorage Digital Bank 发行、受美国监管的新稳定币 USAt 拥有 1760 万美元的储备金支持。",
+      "url": "https://cn.cointelegraph.com/news/deloitte-signs-off-reserves-tether-linked-usat-stablecoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772543152000,
+      "engagement": 0
+    },
+    {
+      "title": "Morning Minute: The Banks Are Coming for Crypto Custody",
+      "summary": "It's no longer a matter of if major banks will custody crypto but a matter of when, with Morgan Stanley, Citigroup and Barclays all lining up.",
+      "url": "https://decrypt.co/359790/morning-minute-the-banks-are-coming-for-crypto-custody",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772542812000,
+      "engagement": 0
+    },
+    {
+      "title": "OpenClaw开通官方微博账号，定位开源AI助理框架社区枢纽",
+      "summary": "开源AI助手框架项目 OpenClaw 正式开通官方微博账号，称其目标是“让人人都能解锁AI无穷能力”，并表示将持续在微博同步 OpenClaw 的技术进展。",
+      "url": "https://www.panewslab.com/zh/articles/019cb3ce-4209-72bf-8291-e053641aec14",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772542680000,
+      "engagement": 0
+    },
+    {
+      "title": "特朗普谈伊朗：他们现在想谈判，但为时已晚",
+      "summary": "PANews 3月3日消息，美国总统特朗普在社交平台谈及伊朗局势表示，“他们的防空、空军、海军和领导层都不复存在了。他们想谈判。我说：‘太晚了！’”",
+      "url": "https://www.panewslab.com/zh/articles/019cb3c0-e361-71cb-9f72-f0ef0fd0bab9",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772542200000,
+      "engagement": 0
+    },
+    {
+      "title": "Deloitte signs off on Anchorage reserve report for Tether’s USAT stablecoin",
+      "summary": "Big Four firm Deloitte attested to $17.6 million in reserves backing USAt, Tether’s new US-regulated stablecoin issued by Anchorage Digital Bank.",
+      "url": "https://cointelegraph.com/news/deloitte-signs-off-reserves-tether-linked-usat-stablecoin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772541521000,
+      "engagement": 0
+    },
+    {
+      "title": "CoinAnk与Nansen联动推双会员买一赠一活动",
+      "summary": "PANews 3月3日消息，据CoinAnk公告，双方开启限时合作活动，时间为3月3日至3月10日(UTC+8)：购买任意期限CoinAnk Pro赠1个月Nansen Pro；订阅Nansen Pro赠1个月CoinAnk Pro。用户需在指定链接订阅后联系TG社区管理员领取。",
+      "url": "https://www.panewslab.com/zh/articles/019cb3b9-c12e-73e0-bdd4-b0eebc15a445",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772541480000,
+      "engagement": 0
+    },
+    {
+      "title": "U.S. evacuates diplomats from Middle East. And, what to expect from N.C., Texas primaries",
+      "summary": "The U.S. has evacuated diplomats in the Middle East and closed several embassies as war in Iran intensifies. And, what to expect from the Senate races in the North Carolina and Texas primary elections.",
+      "url": "https://www.npr.org/2026/03/03/g-s1-112278/up-first-newsletter-iran-us-israel-middle-east-nc-texas-primaries-kristi-noem-bill-clinton",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772541389000,
+      "engagement": 0
+    },
+    {
+      "title": "Oil supertanker rates hit all-time high as insurers drop war risk protection in the Middle East",
+      "summary": "The cost of hauling crude oil from the Middle East to China rose more than 94% to hit a record high of $423,736 per day on Monday.",
+      "url": "https://www.cnbc.com/2026/03/03/middle-east-crisis-iran-us-shipping-oil-tankers-strait-of-hormuz.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772541166000,
+      "engagement": 0
+    },
+    {
+      "title": "地址“pension-usdt.eth”加仓BTC三倍多头，累计盈利逾2700万美元",
+      "summary": "PANews 3月3日消息，据Onchain Lens报道，链上巨鲸地址“pension-usdt.eth”新开1,000枚BTC三倍杠杆多头头寸，名义价值约6,757万美元。该地址通过两个钱包的累计已实现及未实现利润目前超过2,728万美元。",
+      "url": "https://www.panewslab.com/zh/articles/019cb3b0-d5e2-73ed-b20c-4128320cc49d",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772541120000,
+      "engagement": 0
+    },
+    {
+      "title": "MARA调整财库策略：或出售囤积比特币",
+      "summary": "PANews 3月3日消息，据The Block报道，MARA Holdings 在最新递交给 SEC 的 10-K 文件中披露，公司已将 2026 年数字资产管理策略从“只出售当年挖矿产出的 BTC”，扩展为允许出售其资产负债表上累积持有的比特币。MARA 表示，将视市场环境和资本配置优先级决定买卖 BTC，用于长期持有或择机交易。截止 2025 年 12 月 31 日，公司共持有 53,822 BTC，其中约 28% 已被“激...",
+      "url": "https://www.panewslab.com/zh/articles/019cb3ba-e1fd-76f9-be67-0e616c9429e1",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772540940000,
+      "engagement": 0
+    },
+    {
+      "title": "Bybit claims new fraud system stopped $300M of risky withdrawals in Q4 2025",
+      "summary": "Bybit says most of the $300 million “saved” came from users backing out after real-time warnings, highlighting how exchanges are shifting from recovery to preemptive fraud stops.",
+      "url": "https://cointelegraph.com/news/ai-driven-onchain-monitoring-300m-losses-bybit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772540836000,
+      "engagement": 0
+    },
+    {
+      "title": "Europe — told of Iran strikes just 'minutes' before they started — struggles to be heard as war escalates",
+      "summary": "Europe appears to have been on the sidelines as the U.S. and Israel pursue Iran, and crisis engulfs the Middle East.",
+      "url": "https://www.cnbc.com/2026/03/03/europe-iran-trump-us-israel-strikes-eu-merz-starmer.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772540720000,
+      "engagement": 0
+    },
+    {
+      "title": "新加坡据悉拟评估将其发展为实物黄金交易枢纽的可行性",
+      "summary": "PANews 3月3日消息，据智通财经报道，新加坡金融管理局与包括两大黄金做市商瑞银、摩通等多家金融机构会谈，评估把新加坡发展为实物黄金交易枢纽的可行性。知情人士透露，新加坡有意发展成为黄金贸易及仓储枢纽，并获央行及家族办公室等机构支持。而新交所亦正评估市场对新黄金合约的需求。相关规划仍处于初步阶段，不排除未来或有调整。",
+      "url": "https://www.panewslab.com/zh/articles/019cb3a2-c231-7318-b37d-557a1de1fbce",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772540220000,
+      "engagement": 0
+    },
+    {
+      "title": "Coinbase将于3月16日暂停25个永续合约交易",
+      "summary": "Coinbase Advanced及Coinbase International Exchange将于2026年3月16日21:00(UTC+8)左右暂停多只永续合约交易，涉及MET-PERP、REZ-PERP、BABY-PERP、SUPER-PERP、SUSHI-PERP、GMX-PERP、ERA-PERP、XAN-PERP、VINE-PERP、T-PERP、YB-PERP、WCT-PERP、HOME-PERP、NOT-PERP...",
+      "url": "https://www.panewslab.com/zh/articles/019cb3a0-3ce8-7499-8969-36449f8ff19a",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772539860000,
+      "engagement": 0
+    },
+    {
+      "title": "Japan PM Takaichi disavows ‘Sanae Token’ after memecoin hits $28M peak",
+      "summary": "Japanese PM Sanae Takaichi said she had no knowledge of the token, as Kyodo reported the FSA was considering whether unregistered operators were involved.",
+      "url": "https://cointelegraph.com/news/sanae-token-27m-japan-pm-denies-links-fsa-probe?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772539319000,
+      "engagement": 0
+    },
+    {
+      "title": "Four Headwinds Stalling Bitcoin's $70K Breakout",
+      "summary": "Bitcoin pulled back from Monday’s peak near $70,000 as geopolitical and economic headwinds hold a recovery rally in check.",
+      "url": "https://decrypt.co/359786/four-headwinds-stalling-bitcoins-70k-breakout",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772538505000,
+      "engagement": 0
+    },
+    {
+      "title": "American Bitcoin增购11298台矿机，算力预计提升12%",
+      "summary": "PANews 3月3日消息，据PR Newswire报道，American Bitcoin Corp.（纳斯达克代码：ABTC）宣布购买11298台比特币矿机，预计新增算力约3.05 EH/s，单机效率约13.5 J/TH。交付和部署预计在2026年3月于Drumheller矿场完成。扩容后，公司自有矿机总数将达89242台，自有算力约28.1 EH/s，平均效率约16.0 J/TH。公司称，此次扩张旨在通过部署高效矿机、优化电力...",
+      "url": "https://www.panewslab.com/zh/articles/019cb389-0131-724e-96c4-7ed2571e7331",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772538480000,
+      "engagement": 0
+    },
+    {
+      "title": "中东能源枢纽再遭重创，阿联酋储运中心起火加剧断供恐慌",
+      "summary": "PANews 3月3日消息，拦截无人机的碎片坠落导致阿联酋主要石油贸易枢纽Fujairah发生大火，这是中东地区一系列影响主要能源设施的最新事件。民防部队正努力控制火势。周二早些时候，该地区还报告了另一起火灾，而一家主要储油终端和一家炼油厂的运营已于前一天暂停。Fujairah是至关重要的加油港，也是中东最大的石油储存和贸易中心之一。由于地处霍尔木兹海峡以外，它对阿联酋具有战略意义。通过一条连接该地区储罐与阿布扎比油田的管道，Fu...",
+      "url": "https://www.panewslab.com/zh/articles/019cb380-fe0b-73fe-a8bb-53eca2d988fd",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772538000000,
+      "engagement": 0
+    },
+    {
+      "title": "机构巨鲸抄底！Saylor再购3015枚比特币，Bitmine增持5万枚ETH",
+      "summary": "在市场回调之际，Strategy 与 Bitmine Immersion Technologies 逆势加码，比特币与以太坊双双迎来机构巨鲸抄底，释放出加密市场或正酝酿新一轮复苏的信号。",
+      "url": "https://cn.cointelegraph.com/news/institutional-whales-buy-the-dip-saylor-adds-3015-btc-bitmine-accumulates-50000-eth?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772537773000,
+      "engagement": 0
+    },
+    {
+      "title": "Stablecoins could weaken bank lending and monetary policy in Europe: ECB",
+      "summary": "The European Central Bank warns in a new working paper that as stablecoin adoption grows, deposits may leave banks, affecting lending and monetary policy transmission.",
+      "url": "https://cointelegraph.com/news/stablecoin-deposits-monetary-policy-europe-ecb?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772537714000,
+      "engagement": 0
+    },
+    {
+      "title": "现货白银日内暴跌12.00%，黄金日内跌幅4.36%",
+      "summary": "PANews 3月3日消息，据Bybit数据，现货黄金失守5090美元/盎司，日内跌幅4.36%。现货白银日内暴跌12.00%，跌破79美元/盎司。",
+      "url": "https://www.panewslab.com/zh/articles/019cb392-dd79-7449-9e34-0ba9a25e3509",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772537640000,
+      "engagement": 0
+    },
+    {
+      "title": "The candy heir vs. chocolate skimpflation",
+      "summary": "The grandson of the Reese's Peanut Butter Cups creator has launched a campaign against The Hershey Company, which owns the Reese's brand. He wants them to stop skimping on ingredients.",
+      "url": "https://www.npr.org/sections/planet-money/2026/03/03/g-s1-111940/the-candy-heir-vs-chocolate-skimpflation",
+      "source": "NPR/NPR",
+      "category": "Geo",
+      "time": 1772537400000,
+      "engagement": 0
+    },
+    {
+      "title": "AI代理框架OpenClaw在GitHub上的Star数突破25万",
+      "summary": "AI代理框架OpenClaw在GitHub上的Star数已突破25万，正式超越React的24.3万与Linux的22万，成为平台获星最多的软件项目。React与Linux分别作为主流前端框架和操作系统内核，历经多年才积累至当前Star数。而OpenClaw自发布起仅约四个月即完成反超。",
+      "url": "https://www.panewslab.com/zh/articles/019cb373-5c77-76bc-97ef-7ce4c8467166",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772537100000,
+      "engagement": 0
+    },
+    {
+      "title": "Aave 关键服务商 ACI 拟于 7 月退出 DAO 治理",
+      "summary": "Aave 主要服务提供方 Aave Chan Initiative（ACI）宣布不再续约，将在未来约四个月内逐步退出 Aave DAO。",
+      "url": "https://www.panewslab.com/zh/articles/019cb36a-fef7-74ad-925d-fa5ccf8312f6",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772536560000,
+      "engagement": 0
+    },
+    {
+      "title": "Bitcoin price chart ‘death cross’ is back, reviving late-cycle fears",
+      "summary": "BTC price has slid about 35% on average over a month after similar trend line crossovers, keeping downside risk in focus for traders.",
+      "url": "https://cointelegraph.com/news/bitcoin-price-chart-death-cross-back-late-cycle-fears?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772535848000,
+      "engagement": 0
+    },
+    {
+      "title": "Hash Global 获 YZi Labs 1 亿美元追加战略支持",
+      "summary": "BNB 机构资本层建设进入深化阶段",
+      "url": "https://www.panewslab.com/zh/articles/019cb35a-f8ce-7615-8e0d-f2533468f329",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772535600000,
+      "engagement": 0
+    },
+    {
+      "title": "Kalshi, Polymarket face trading halt in Nevada after court rulings",
+      "summary": "The two separate rulings add new regulatory pressure as prediction markets also face scrutiny over information advantages and suspected insider activity tied to event-driven contracts.",
+      "url": "https://cointelegraph.com/news/prediction-markets-trading-block-nevada-court-ruling?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772535552000,
+      "engagement": 0
+    },
+    {
+      "title": "Hash Global Secures Additional $100 Million Strategic Commitment from YZi Labs",
+      "summary": "BNB Institutional Capital Layer Enters a New Phase of Development",
+      "url": "https://www.panewslab.com/zh/articles/019cb359-aa4b-725e-96ca-7a31912b3ee9",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772535480000,
+      "engagement": 0
+    },
+    {
+      "title": "Riot报告称，2025年收入创下6.47亿美元新高，而其他比特币 (BTC) 矿企正面临困境",
+      "summary": "Riot平台公司公布了2025年创纪录的收入，达到6.47亿美元，其中比特币挖矿收入为5.76亿美元，同时持有18,005枚比特币，价值16亿美元。",
+      "url": "https://cn.cointelegraph.com/news/riot-record-647m-revenue-2025-bitcoin-mining-ai-pivot?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772534754000,
+      "engagement": 0
+    },
+    {
+      "title": "随着中东冲突加剧，现货比特币（BTC）交易型开放式指数基金（ETF）录得4.58亿美元资金流入",
+      "summary": "尽管中东紧张局势加剧及整体市场不确定性增加，美国现货比特币基金周一仍出现强劲资金流入和交易量上升，显示机构需求依然稳健。",
+      "url": "https://cn.cointelegraph.com/news/bitcoin-etf-inflows-458-million-mideast-conflict-widens?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772534546000,
+      "engagement": 0
+    },
+    {
+      "title": "WTI原油日内暴涨7%，布伦特原油日内涨5.7%",
+      "summary": "PANews 3月3日消息，据Bybit数据，WTI原油日内暴涨7%，站上76美元/桶。布伦特原油日内涨5.7%，现报82.14美元/桶。",
+      "url": "https://www.panewslab.com/zh/articles/019cb33f-cdd4-7495-bb5d-788defff94b3",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772533620000,
+      "engagement": 0
+    },
+    {
+      "title": "伊朗对位于卡塔尔、巴林和阿曼境内的美军基地及利益目标实施了打击",
+      "summary": "PANews 3月3日消息，据伊朗媒体Fars News：伊朗对位于卡塔尔、巴林和阿曼境内的美军基地及利益目标实施了打击。",
+      "url": "https://www.panewslab.com/zh/articles/019cb333-f863-768b-9112-eeba42bc6afc",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772533020000,
+      "engagement": 0
+    },
+    {
+      "title": "日本央行测试央行数字资金区块链结算",
+      "summary": "PANews 3月3日消息，据Solid Intel报道，日本央行（Bank of Japan）将测试在区块链上于金融机构间结算央行资金。",
+      "url": "https://www.panewslab.com/zh/articles/019cb32c-957b-724b-a2cb-fa1d24251c16",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772532420000,
+      "engagement": 0
+    },
+    {
+      "title": "伊朗暂时禁止所有食品和农产品出口",
+      "summary": "PANews 3月3日消息，据央视新闻报道，当地时间3月3日，伊朗政府表示，决定优先保障人民所需的基本、关键和必需商品，所有食品和农产品出口暂时被禁止，直至另行通知。",
+      "url": "https://www.panewslab.com/zh/articles/019cb31e-cab5-761f-aa4b-66e27f960f77",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772531580000,
+      "engagement": 0
+    },
+    {
+      "title": "OKX OnchainOS：打造面向AI Agent的Web3基础设施",
+      "summary": "OKX OnchainOS 已正式开放 AI 相关能力，向 AI Agent 全面开放 OKX Wallet 与 DEX 功能。",
+      "url": "https://www.panewslab.com/zh/articles/019cb317-42b1-73da-b97e-fde58d31c4b2",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772531460000,
+      "engagement": 0
+    },
+    {
+      "title": "Machi在Hyperliquid再遭ETH多头爆仓，账户余额剩约7.6万美元",
+      "summary": "PANews 3月3日消息，据Lookonchain报道，交易员 Machi Big Brother 再次在去中心化合约平台 Hyperliquid 上遭遇清算。他在约16小时前向该平台充值25万枚 USDC 以维持其 ETH 多头仓位，但账户余额现仅剩约75,955美元。",
+      "url": "https://www.panewslab.com/zh/articles/019cb31d-83ce-7481-9d72-b2e28c406bc0",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772531400000,
+      "engagement": 0
+    },
+    {
+      "title": "Riot reports record $647M revenue in 2025 as other Bitcoin miners struggle",
+      "summary": "Riot Platforms posted record 2025 revenue of $647 million, driven by $576 million in Bitcoin mining revenue, while holding 18,005 BTC worth $1.6 billion.",
+      "url": "https://cointelegraph.com/news/riot-record-647m-revenue-2025-bitcoin-mining-ai-pivot?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772531318000,
+      "engagement": 0
+    },
+    {
+      "title": "币安将下架CHZ/BNB、ENA/BRL等4个现货交易对",
+      "summary": "PANews 3月3日消息，币安宣布将于2026年3月6日11:00（UTC+8）下架CHZ/BNB、ENA/BRL、NEIRO/JPY和RLC/BTC四个现货交易对。",
+      "url": "https://www.panewslab.com/zh/articles/019cb319-3e31-711e-8cc9-22dae756766e",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772531220000,
+      "engagement": 0
+    },
+    {
+      "title": "Hash Global获YZi Labs追加1亿美元战略支持",
+      "summary": "PANews 3月3日消息，据Hash Global公告，其新设机构版BNB Yield Fund“BNB Holdings Fund”获YZi Labs追加1亿美元支持。基金以机构级托管、透明分配与可审计合规结构，让机构在受监管框架内配置BNB并分享生态收益，推进BNB机构化进入深化阶段。",
+      "url": "https://www.panewslab.com/zh/articles/019cb316-75c1-75de-939b-1162f1e8215f",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772530380000,
+      "engagement": 0
     },
     {
       "title": "Statistical Notice 2026/02 - BEEDS user acceptance testing (UAT) environment – Statistical taxonomy v1.3.1 FINAL",
-      "headlineZh": "Statistical Notice 2026/02 - BEEDS user acceptance testing (UAT) environment – Statistical taxonomy v1.3.1 FINAL",
-      "summaryZh": "【宏观】Statistical Notice 2026/02 - BEEDS user acceptance...。来源：BoE。",
-      "agentReasonZh": "官方/机构信源优先",
+      "summary": "Statistical Notices update the definitions and guidance contained in the Banking Statistics Yellow Folder",
       "url": "https://www.bankofengland.co.uk/statistics/notice/2026/statistical-notice-2026-02",
       "source": "BoE/BoE",
       "category": "Macro",
       "time": 1772529350000,
-      "engagement": 0,
-      "priority": 67.14,
-      "pinnedUntil": 1772676986899,
-      "agentScore": 108.29,
-      "agentRank": 12,
-      "topicZh": "宏观领域"
+      "engagement": 0
+    },
+    {
+      "title": "Spot Bitcoin ETFs see $458M in inflows as Mideast conflict widens",
+      "summary": "US spot Bitcoin funds saw strong inflows and increasing volumes on Monday as institutional demand held up in spite of increasing Middle East tensions and broader market uncertainty.",
+      "url": "https://cointelegraph.com/news/bitcoin-etf-inflows-458-million-mideast-conflict-widens?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772528937000,
+      "engagement": 0
+    },
+    {
+      "title": "OKX OnchainOS开放AI相关能力，打造面向 AI Agent 的 Web3 基础设施",
+      "summary": "OnchainOS 运行在与 OKX Wallet 相同的基础设施上，覆盖 60 余个主流区块链网络，通过 AI Skills、MCP、Open API 三种方式，即可将 AI Agent 构建在OnchainOS 之上，让其自主执行交易、洞察市场行情、地址洞察、链上支付等操作。",
+      "url": "https://www.panewslab.com/zh/articles/019cb2f5-94a8-7304-81e4-b51433827abf",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772528880000,
+      "engagement": 0
+    },
+    {
+      "title": "Telegram创始人：平台内所有机器人已支持实时流式回复，利好AI助手类场景",
+      "summary": "PANews 3月3日消息， Telegram 创始人 Pavel Durov 表示，所有 Telegram 聊天机器人现已支持向用户实时流式输出回复，该功能尤其适用于 AI 助手类机器人。",
+      "url": "https://www.panewslab.com/zh/articles/019cb2f6-0868-70fe-8737-cabb49e30647",
+      "source": "PANews/PANews",
+      "category": "Crypto",
+      "time": 1772528820000,
+      "engagement": 0
+    },
+    {
+      "title": "日本银行在新监管沙盒中测试区块链银行存款结算",
+      "summary": "日本银行行长上田和夫表示，这些实验将研究区块链系统与日本现有结算基础设施之间的联系。",
+      "url": "https://cn.cointelegraph.com/news/boj-blockchain-reserve-settlement-sandbox?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772527376000,
+      "engagement": 0
+    },
+    {
+      "title": "BitMEX联合创始人获特朗普赦免后向伦敦数学研究所捐赠2700万美元",
+      "summary": "本·德洛在2022年认罪承认违反美国银行法规后支付了1000万美元罚款，并于2025年3月获得总统唐纳德·特朗普的赦免。",
+      "url": "https://cn.cointelegraph.com/news/bitmex-cofounder-ben-delo-pledges-27m-london-maths-institute-trump-pardon?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772526982000,
+      "engagement": 0
+    },
+    {
+      "title": "The digital front: Iran’s internet blackout enters fourth day amid reports of cyberattacks",
+      "summary": "Iran is facing widespread internet disruptions following U.S.-Israeli airstrikes over the weekend.",
+      "url": "https://www.cnbc.com/2026/03/02/irans-internet-down-amid-reports-of-us-israel-cyberattacks.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772526849000,
+      "engagement": 0
+    },
+    {
+      "title": "Bank of Japan testing blockchain settlement for bank deposits in new sandbox",
+      "summary": "BOJ Governor Kazuo Ueda said the experiments will examine links between blockchain systems and Japan’s existing settlement infrastructure.",
+      "url": "https://cointelegraph.com/news/boj-blockchain-reserve-settlement-sandbox?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph/Cointelegraph",
+      "category": "Crypto",
+      "time": 1772526354000,
+      "engagement": 0
+    },
+    {
+      "title": "SocialFi、Meme 币与 AI 如何将 Base 推上 Layer 2 榜首",
+      "summary": "Base 借助 SocialFi、Meme 币和 AI 代理登顶以太坊 Layer 2 榜首，随后转向内部，着手重建其核心堆栈。",
+      "url": "https://cn.cointelegraph.com/news/socialfi-memecoins-ai-pushed-base-l2-ladder?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772524721000,
+      "engagement": 0
+    },
+    {
+      "title": "South Korea's Kospi sees worst day in 19 months amid broader decline in Asia markets",
+      "summary": "Oil prices continue to rise Iran's Revolutionary Guard says it has closed the Strait of Hormuz",
+      "url": "https://www.cnbc.com/2026/03/03/asia-markets-live-iran-oil-trump-nikkei-kospi-hang-seng.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772523724000,
+      "engagement": 0
+    },
+    {
+      "title": "South Korea defense stocks soar with heavyweight Hanwha Aerospace surging 20% as traders react to Iran war",
+      "summary": "The sector's gains were a sharp contrast to the wider Kospi, falling over 7% to clock its worst day in 19 months.",
+      "url": "https://www.cnbc.com/2026/03/03/south-korea-defense-stocks-soar-hanwha-aerospace-iran-us-israel-war.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772523246000,
+      "engagement": 0
+    },
+    {
+      "title": "参议院住房法案修正案提议在2030年前禁止美国发行央行数字货币（CBDC）",
+      "summary": "该提议的禁令被悄然加入参议院的一项住房法案中，重新使用了此前独立法案中用来阻止美联储发行数字美元的措辞。",
+      "url": "https://cn.cointelegraph.com/news/fed-blocked-issuing-cbdc-until-2030-proposed-bill?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772522141000,
+      "engagement": 0
+    },
+    {
+      "title": "分析师：比特币（BTC）下跌放缓，但熊市格局仍未改变",
+      "summary": "10x Research表示，波动性收缩、ETF资金流入增强以及Coinbase折价减少，“并不是市场加速进入新一轮下跌阶段的特征”。",
+      "url": "https://cn.cointelegraph.com/news/bitcoin-downside-momentum-fading-but-no-confirmed-trend-reversal-analysts?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772521973000,
+      "engagement": 0
+    },
+    {
+      "title": "Core Scientific第四季度财报不及预期，股价下跌",
+      "summary": "由于比特币价格下跌和成本上升，Core Scientific 在第四季度的营收未达预期。",
+      "url": "https://cn.cointelegraph.com/news/core-scientific-shares-lower-q4-earnings-miss-estimates?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772521321000,
+      "engagement": 0
+    },
+    {
+      "title": "VanEck首席执行官：比特币（BTC）价格正构筑底部，四年周期临近结束",
+      "summary": "Jan van Eck 表示，分析师们一直在过度解读近期的比特币价格走势，并认为四年周期才是压制价格的主要因素。",
+      "url": "https://cn.cointelegraph.com/news/bitcoin-forming-bottom-vaneck-ceo?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772520317000,
+      "engagement": 0
+    },
+    {
+      "title": "纳斯达克申请推出基于纳斯达克 100 指数的预测市场式期权",
+      "summary": "该产品可能使交易员能够押注英伟达、苹果、谷歌和特斯拉等纳斯达克100指数公司股票的表现。",
+      "url": "https://cn.cointelegraph.com/news/nasdaq-files-prediction-market-offering?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772519844000,
+      "engagement": 0
+    },
+    {
+      "title": "“ClickFix”黑客伪装成风投，在最新一轮加密攻击中劫持 QuickLens",
+      "summary": "ClickFix 技术去年在加密货币黑客中变得流行，但安全研究人员自 2024 年以来一直在追踪该技术，其攻击目标涉及多个行业。",
+      "url": "https://cn.cointelegraph.com/news/crypto-fake-vc-clickfix-attack-chrome-extension-hijack?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772519129000,
+      "engagement": 0
+    },
+    {
+      "title": "Qualcomm CEO sees robotics as a 'larger opportunity' within 2 years",
+      "summary": "It comes shortly after Qualcomm launched a processor under the Dragonwing brand name designed for robots.",
+      "url": "https://www.cnbc.com/2026/03/03/qualcomm-ceo-robotics-chips.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772518402000,
+      "engagement": 0
+    },
+    {
+      "title": "OpenZeppelin：OpenAI的EVMbench存在数据污染问题",
+      "summary": "安全审计公司OpenZepplin发现，EVMbench的数据集中存在训练数据泄露，以及至少四项无效的高严重性漏洞分类。",
+      "url": "https://cn.cointelegraph.com/news/openzeppelin-audits-openai-evmbench-finds-data-contamination?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "CointelegraphCN/CointelegraphCN",
+      "category": "Crypto",
+      "time": 1772518135000,
+      "engagement": 0
+    },
+    {
+      "title": "OpenAI's Altman admits defense deal 'looked opportunistic and sloppy' amid backlash",
+      "summary": "Sam Altman says that OpenAI \"shouldn't have rushed\" its deal with the Defense Department and was making \"some additions.\"",
+      "url": "https://www.cnbc.com/2026/03/03/openai-sam-altman-pentagon-deal-amended-surveillance-limits.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772517967000,
+      "engagement": 0
+    },
+    {
+      "title": "Circle Stock Extends Double-Digit Gains Amid Broader Crypto Rally",
+      "summary": "Circle’s post-earnings breakout gains continue to rise as USDC growth, policy shifts, and macro volatility converge.",
+      "url": "https://decrypt.co/359772/circle-stock-extends-double-digit-gains-crypto-rally",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772515457000,
+      "engagement": 0
+    },
+    {
+      "title": "Philip R. Lane: Interview with Financial Times",
+      "summary": "",
+      "url": "https://www.ecb.europa.eu//press/inter/date/2026/html/ecb.in260303~768fa10188.en.html",
+      "source": "ECB/ECB",
+      "category": "Macro",
+      "time": 1772514000000,
+      "engagement": 0
+    },
+    {
+      "title": "Court Ruling Raises Risk of Nevada Trading Halt for Kalshi, Polymarket",
+      "summary": "A federal judge has sent Nevada’s cases against Kalshi and Polymarket back to state court, allowing regulators to seek temporary injunctions.",
+      "url": "https://decrypt.co/359769/court-ruling-raises-risk-nevada-trading-halt-kalshi-polymarket",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772512401000,
+      "engagement": 0
+    },
+    {
+      "title": "Amazon says drone strikes damaged 3 facilities in UAE and Bahrain",
+      "summary": "Amazon Web Services warned that instability is likely to continue in the Middle East, making operations \"unpredictable.\"",
+      "url": "https://www.cnbc.com/2026/03/02/amazon-says-drone-strikes-damaged-3-facilities-in-uae-and-bahrain.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772503442000,
+      "engagement": 0
+    },
+    {
+      "title": "Supreme Court bars redrawing only Republican-held NYC congressional district for 2026 election",
+      "summary": "The Supreme Court ruling is a potentially significant one for Republicans, who are trying to retain their majorities in both chambers of Congress.",
+      "url": "https://www.cnbc.com/2026/03/02/supreme-court-republican-new-york-malliotakis.html",
+      "source": "CNBC/CNBC",
+      "category": "Market",
+      "time": 1772501535000,
+      "engagement": 0
+    },
+    {
+      "title": "Human Brain Cells Learn to Play Doom in Cortical Labs Experiment",
+      "summary": "Living human neurons were trained to play Doom, extending the long-running engineering benchmark into biological computing.",
+      "url": "https://decrypt.co/359697/human-brain-cells-play-doom-cortical-labs-experiment",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772501242000,
+      "engagement": 0
+    },
+    {
+      "title": "Senate Advances Housing Bill With CBDC Ban, Draws White House Backing",
+      "summary": "The vote marks one of the strongest bipartisan showings of this Congress, suggesting the package could clear further procedural hurdles.",
+      "url": "https://decrypt.co/359695/senate-advances-housing-bill-cbdc-ban-draws-white-house",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772498607000,
+      "engagement": 0
+    },
+    {
+      "title": "Tether, Anchorage Tap Deloitte for First USAT Stablecoin Reserve Report",
+      "summary": "Deloitte performed USAT’s first attestation, linking the Big Four accounting firm with Tether’s U.S.-regulated stablecoin.",
+      "url": "https://decrypt.co/359691/tether-anchorage-deloitte-usat-stablecoin-reserve-report",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772491108000,
+      "engagement": 0
+    },
+    {
+      "title": "Scientists Turn Milk Protein Into a Biodegradable Plastic Alternative—Here's How",
+      "summary": "Researchers combined milk protein, starch, and volcanic clay to create a biodegradable packaging film that degrades in 13 weeks.",
+      "url": "https://decrypt.co/359669/scientists-turn-milk-protein-biodegradable-plastic-alternative",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772490584000,
+      "engagement": 0
+    },
+    {
+      "title": "US Prosecutors Seek $327K Crypto Forfeiture Over Romance Scam",
+      "summary": "Prosecutors are trying to recover over $327,000 worth of Tether's USDT stablecoin linked to a crypto romance scam from 2024.",
+      "url": "https://decrypt.co/359666/us-prosecutors-seek-327k-tether-forfeiture-crypto-romance-scam",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772487837000,
+      "engagement": 0
+    },
+    {
+      "title": "OpenAI Claims Safety 'Red Lines' in Pentagon Deal—But Users Aren't Buying It",
+      "summary": "The Pentagon deal sparked a mass exodus from ChatGPT—and pushed Anthropic's Claude to the top of the App Store. But the bigger story is in the contract language.",
+      "url": "https://decrypt.co/359649/openai-claims-safety-red-lines-pentagon-deal",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772486199000,
+      "engagement": 0
+    },
+    {
+      "title": "Supreme Court Declines AI Copyright Case, Extending Legal Setback for AI-Generated Works",
+      "summary": "U.S. justices leave human authorship rule intact, reinforcing legal limits on AI intellectual property claims.",
+      "url": "https://decrypt.co/359661/supreme-court-declines-ai-copyright-case",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772485425000,
+      "engagement": 0
+    },
+    {
+      "title": "Bitcoin Treasury Firm ProCap Adds $31 Million in BTC as Stock Buybacks Grow",
+      "summary": "Publicly traded Bitcoin treasury ProCap Financial boosted its BTC stash to $376 million as it continues buying back its own shares.",
+      "url": "https://decrypt.co/359646/bitcoin-treasury-firm-procap-adds-31-million-stock-buybacks-grow",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772481469000,
+      "engagement": 0
+    },
+    {
+      "title": "Trump’s CFTC Appoints Crypto Lawyer to Lead Shrinking Enforcement Team",
+      "summary": "David Miller, a white-collar attorney specializing in the defense of crypto clients, will lead the CFTC’s reduced enforcement team at a critical juncture for the agency.",
+      "url": "https://decrypt.co/359636/trump-cftc-appoints-crypto-lawyer-lead-shrinking-enforcement-team",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772479775000,
+      "engagement": 0
+    },
+    {
+      "title": "Nasdaq Wants a Piece of the Prediction Market Biz Too",
+      "summary": "Nasdaq wants in on prediction markets—and it's going through the SEC to get there.",
+      "url": "https://decrypt.co/359609/nasdaq-prediction-market-contracts",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772478626000,
+      "engagement": 0
+    },
+    {
+      "title": "Iran Conflict Not Major Concern For Bitcoin Mining Hashrate, Say Experts",
+      "summary": "Despite battlefield blowback fears, Bitcoin’s network is likely to shrug off disruptions, experts told Decrypt.",
+      "url": "https://decrypt.co/359622/iran-conflict-not-major-concern-for-bitcoin-mining-hashrate-say-experts",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772474976000,
+      "engagement": 0
+    },
+    {
+      "title": "Bitcoin Spikes to $70K as Trump Says 'Large-Scale Operations' Continue in Iran",
+      "summary": "The price of Bitcoin immediately fell following bombings on Iran this weekend, but then surged Monday as markets began to recover.",
+      "url": "https://decrypt.co/359626/bitcoin-spikes-near-70k-us-operations-iran",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772473950000,
+      "engagement": 0
+    },
+    {
+      "title": "Calls Mount for UK to Ban Political Donations Made in Crypto",
+      "summary": "A former Labour minister has argued that foreign “enemies of democracy” are using crypto political donations to undermine British politics.",
+      "url": "https://decrypt.co/359598/calls-mount-uk-ban-political-donations-crypto",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772470046000,
+      "engagement": 0
+    },
+    {
+      "title": "Bitcoin, Ethereum ETFs Snap Five-Week Losing Streak as Crypto Funds Add $1 Billion",
+      "summary": "Bitcoin ETFs rebounded as crypto funds saw $1 billion in fresh inflows last week—but is the worst really over?",
+      "url": "https://decrypt.co/359587/bitcoin-ethereum-etfs-snap-losing-streak-crypto-funds-1-billion",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772468967000,
+      "engagement": 0
+    },
+    {
+      "title": "Ethereum Price, BitMine Shares Jump as Tom Lee's Treasury Reports Latest Buy",
+      "summary": "Publicly traded Ethereum treasury BitMine Immersion Technologies added to its ETH stack last week despite its recent decline.",
+      "url": "https://decrypt.co/359594/ethereum-price-bitmine-shares-jump-tom-lee-treasury-latest-buy",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772465687000,
+      "engagement": 0
+    },
+    {
+      "title": "President Lagarde launches EuroSteps Walking Challenge at event promoting women’s financial literacy",
+      "summary": "",
+      "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr260302~9a52d535d2.en.html",
+      "source": "ECB/ECB",
+      "category": "Macro",
+      "time": 1772465400000,
+      "engagement": 0
+    },
+    {
+      "title": "Strategy Spends $200 Million on Bitcoin, Raises STRC Dividend Yet Again",
+      "summary": "Strategy disclosed its third-largest Bitcoin purchase of the year, scooping up the asset using proceeds that partially came from STRC.",
+      "url": "https://decrypt.co/359593/strategy-spends-200-million-bitcoin-raises-strc-dividend",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772464948000,
+      "engagement": 0
+    },
+    {
+      "title": "Anthropic Claude Outage: AI Chatbot Goes Offline Following Trump, Pentagon Blowup",
+      "summary": "Just days after President Trump slammed Anthropic for disputes over wartime use of its AI, a major Claude outage has stretched on for hours.",
+      "url": "https://decrypt.co/359590/anthropic-claude-outage-ai-chatbot-offline-trump-pentagon-blowup",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772463578000,
+      "engagement": 0
+    },
+    {
+      "title": "Oil prices surge, but no panic yet, as Iran war continues",
+      "summary": "Global oil prices are in the high $70s as traffic through Strait of Hormuz comes to a halt. Some analysts have warned they could top $100 a barrel if the stoppage is prolonged.",
+      "url": "https://www.npr.org/2026/03/02/nx-s1-5732287/iran-war-oil-gasoline-prices",
+      "source": "NPR/NPR",
+      "category": "Macro",
+      "time": 1772462533000,
+      "engagement": 0
+    },
+    {
+      "title": "Morning Minute: Bitcoin Crashes, Rebounds as Iran War Begins",
+      "summary": "Hyperliquid that was the weekend's crypto winner, setting a new record and being featured by a major news outlet's weekend market coverage.",
+      "url": "https://decrypt.co/359584/morning-minute-bitcoin-crashes-rebounds-as-iran-war-begins",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772457714000,
+      "engagement": 0
+    },
+    {
+      "title": "Altcoins Outperform Bitcoin With Double-Digit Weekly Gains",
+      "summary": "Polkadot, Near, and Jupiter jumped as Bitcoin stabilized, but experts warn the move is a positioning rebound, not a trend shift.",
+      "url": "https://decrypt.co/359581/altcoins-outperform-bitcoin-with-double-digit-weekly-gains",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772454989000,
+      "engagement": 0
+    },
+    {
+      "title": "How long do electric vehicle batteries actually last?",
+      "summary": "When the modern electric vehicle was still in its infancy, drivers worried that vehicles would need expensive battery replacements within a few years. But battery lifespans are exceeding expectations.",
+      "url": "https://www.npr.org/2026/03/02/nx-s1-5706658/electric-vehicle-battery-lifespan",
+      "source": "NPR/NPR",
+      "category": "Macro",
+      "time": 1772445600000,
+      "engagement": 0
+    },
+    {
+      "title": "Anthropic's AI Used in Iran Strikes After Trump Moved to Cut Ties: WSJ",
+      "summary": "Claude was reportedly embedded in U.S. Central Command even as the White House ordered federal agencies to cut all ties with the company.",
+      "url": "https://decrypt.co/359577/anthropics-ai-iran-strikes-trump-moved-to-cut-ties",
+      "source": "Decrypt/Decrypt",
+      "category": "Crypto",
+      "time": 1772431633000,
+      "engagement": 0
+    },
+    {
+      "title": "Prediction market trader 'Magamyman' made $553,000 on death of Iran's supreme leader",
+      "summary": "It's the latest trade drawing scrutiny on the popular prediction market site for appearing to show an insider making profits on military secrets.",
+      "url": "https://www.npr.org/2026/03/01/nx-s1-5731568/polymarket-trade-iran-supreme-leader-killing",
+      "source": "NPR/NPR",
+      "category": "Macro",
+      "time": 1772420244000,
+      "engagement": 0
+    },
+    {
+      "title": "Oil prices rise sharply in market trading after attacks in Middle East disrupt supply",
+      "summary": "The high prices came as U.S. and Israeli attacks on Iran and retaliatory strikes against Israel and U.S. military installations around the Gulf sent disruptions through the global energy supply chain.",
+      "url": "https://www.npr.org/2026/03/01/nx-s1-5731584/oil-prices-iran-us-israel-attacks-war",
+      "source": "NPR/NPR",
+      "category": "Macro",
+      "time": 1772411922000,
+      "engagement": 0
+    },
+    {
+      "title": "Iran after Khamenei: What's next and what it means for the country?",
+      "summary": "Khamenei assumed power following the death of Ayatollah Ruhollah Khomeini in 1989, inheriting a revolutionary state still consolidating itself.",
+      "url": "https://www.cnbc.com/2026/03/01/iran-khamenei-dead-us-israel-strike-trump-netanyahu.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772409487000,
+      "engagement": 0
+    },
+    {
+      "title": "How war in Iran could impact global energy markets",
+      "summary": "The U.S.-Israeli war with Iran, a major oil producer, threatens to impact oil and natural gas markets worldwide.",
+      "url": "https://www.npr.org/2026/03/01/nx-s1-5731481/how-war-in-iran-could-impact-global-energy-markets",
+      "source": "NPR/NPR",
+      "category": "Macro",
+      "time": 1772404853000,
+      "engagement": 0
+    },
+    {
+      "title": "$100 oil? Prolonged Hormuz closure could spark a 1970s-style energy shock",
+      "summary": "Energy analysts are bracing for a possible oil supply shock after U.S. strikes on Iran reignited fears of disruptions in the Strait of Hormuz.",
+      "url": "https://www.cnbc.com/2026/03/01/experts-weigh-potential-scenarios-for-oil-if-strait-of-hormuz-closes.html",
+      "source": "CNBC/CNBC",
+      "category": "Geo",
+      "time": 1772384154000,
+      "engagement": 0
+    },
+    {
+      "title": "Paramount outbids Netflix to acquire Warner Bros. Discovery for $111 billion",
+      "summary": "Paramount has outbid Netflix to acquire Warner Bros. Discovery, a major shake-up that has many in the film industry worried.",
+      "url": "https://www.npr.org/2026/03/01/nx-s1-5728340/paramount-outbids-netflix-to-acquire-warner-bros-discovery-for-111-billion",
+      "source": "NPR/NPR",
+      "category": "Macro",
+      "time": 1772370480000,
+      "engagement": 0
     }
   ]
 }

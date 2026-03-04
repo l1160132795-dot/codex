@@ -21,10 +21,19 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Run remote collector + OpenAI ranking
+      - name: Run remote collector + remote OpenAI curation
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          REMOTE_CRAWL_ONLY: "0"
+          REMOTE_ALLOW_RULE_FALLBACK: "0"
+          REMOTE_MAX_CANDIDATES: ${{ vars.REMOTE_MAX_CANDIDATES }}
+          REMOTE_MAX_FEED_ITEMS: ${{ vars.REMOTE_MAX_FEED_ITEMS }}
+          OPENAI_STAGE1_CHUNK_SIZE: ${{ vars.OPENAI_STAGE1_CHUNK_SIZE }}
+          OPENAI_STAGE1_PICK_COUNT: ${{ vars.OPENAI_STAGE1_PICK_COUNT }}
+          OPENAI_STAGE2_POOL_LIMIT: ${{ vars.OPENAI_STAGE2_POOL_LIMIT }}
+          OPENAI_REQUEST_GAP_MS: ${{ vars.OPENAI_REQUEST_GAP_MS }}
+          RAW_MAX_AGE_HOURS: ${{ vars.RAW_MAX_AGE_HOURS }}
           REMOTE_OUTPUT_JSON: remote/news.remote.json
           REMOTE_OUTPUT_JS: remote/news.remote.js
         run: node tools/remote-news-openai-agent.mjs
@@ -40,4 +49,3 @@ jobs:
           else
             echo "No changes to commit."
           fi
-

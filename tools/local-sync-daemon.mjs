@@ -5,8 +5,7 @@ const INTERVAL_MS = Math.max(1, Number.isFinite(RAW_INTERVAL_MINUTES) ? RAW_INTE
 const JOBS = [
   "tools/trigger-remote-collector.mjs",
   "tools/pull-remote-news.mjs",
-  "tools/update-news-snapshot.mjs",
-  "tools/news-impact-agent.mjs",
+  "tools/publish-remote-agent.mjs",
   "tools/update-market-snapshot.mjs"
 ];
 

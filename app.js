@@ -7,6 +7,7 @@ const NEWS_MIN_COUNT = 8;
 const NEWS_MAX_AGE_HOURS = 72;
 const MARKET_SOURCE_MODE = "snapshot";
 const NEWS_SOURCE_MODE = "snapshot";
+const NEWS_REMOTE_AGENT_ONLY = true;
 const LOCAL_SNAPSHOT_TIMEOUT_MS = 5000;
 const NEWS_HOVER_SCALE = 1.35;
 const NEWS_DIM_SCALE = 0.70;
@@ -777,11 +778,12 @@ function normalizeNewsSnapshotPayload(raw, mode = "snapshot") {
 }
 
 async function syncLocalSnapshotFiles() {
-  const settled = await Promise.allSettled([
+  const jobs = [
     fetchLocalSnapshotJson("market.snapshot.json"),
-    fetchLocalSnapshotJson("news.agent.json"),
-    fetchLocalSnapshotJson("news.snapshot.json")
-  ]);
+    fetchLocalSnapshotJson("news.agent.json")
+  ];
+  if (!NEWS_REMOTE_AGENT_ONLY) jobs.push(fetchLocalSnapshotJson("news.snapshot.json"));
+  const settled = await Promise.allSettled(jobs);
 
   if (settled[0].status === "fulfilled" && settled[0].value && typeof settled[0].value === "object") {
     const payload = settled[0].value;
@@ -798,7 +800,7 @@ async function syncLocalSnapshotFiles() {
     }
   }
 
-  if (settled[2].status === "fulfilled") {
+  if (!NEWS_REMOTE_AGENT_ONLY && settled[2]?.status === "fulfilled") {
     const payload = normalizeNewsSnapshotPayload(settled[2].value, "snapshot");
     if (payload.rows.length) {
       localSnapshot.newsRows = payload.rows;
@@ -840,7 +842,7 @@ function readSnapshotNewsPayload() {
     };
   }
 
-  if (Array.isArray(localSnapshot.newsRows) && localSnapshot.newsRows.length) {
+  if (!NEWS_REMOTE_AGENT_ONLY && Array.isArray(localSnapshot.newsRows) && localSnapshot.newsRows.length) {
     return {
       rows: localSnapshot.newsRows,
       snapshotAtRaw: localSnapshot.newsSnapshotAtRaw || "",
@@ -858,6 +860,10 @@ function readSnapshotNewsPayload() {
       mode: "agent",
       meta: root.__NEWS_AGENT_META__ && typeof root.__NEWS_AGENT_META__ === "object" ? root.__NEWS_AGENT_META__ : {}
     };
+  }
+
+  if (NEWS_REMOTE_AGENT_ONLY) {
+    return { rows: [], snapshotAtRaw: "", mode: "agent", meta: {} };
   }
 
   const rows = Array.isArray(root.__NEWS_SNAPSHOT__) ? root.__NEWS_SNAPSHOT__ : [];
