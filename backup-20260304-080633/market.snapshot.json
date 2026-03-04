@@ -1,0 +1,356 @@
+{
+  "snapshotAt": "2026-03-04T00:03:14.397Z",
+  "ticker": {
+    "price": 68295.1,
+    "changePct": -0.75,
+    "volumeUsd": 38041845054.18404,
+    "source": "CoinLore"
+  },
+  "fearGreed": {
+    "value": 10,
+    "classification": "Extreme Fear"
+  },
+  "globalData": {
+    "btcDominance": 62.7252247736972,
+    "totalMarketCapUsd": 2177120059389
+  },
+  "altBoard": [
+    {
+      "id": "ethereum",
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "aliases": [
+        "eth",
+        "ethereum"
+      ],
+      "price": 1982.49,
+      "changePct": -2.21,
+      "volumeUsd": 17668966719.625637,
+      "rank": 2,
+      "source": "CoinLore"
+    },
+    {
+      "id": "solana",
+      "symbol": "SOL",
+      "name": "Solana",
+      "aliases": [
+        "sol",
+        "solana"
+      ],
+      "price": 87.13,
+      "changePct": 0.57,
+      "volumeUsd": 3278946429.2186694,
+      "rank": 7,
+      "source": "CoinLore"
+    },
+    {
+      "id": "ripple",
+      "symbol": "XRP",
+      "name": "Ripple",
+      "aliases": [
+        "xrp",
+        "ripple",
+        "xrpl"
+      ],
+      "price": 1.36,
+      "changePct": -2.18,
+      "volumeUsd": 2074895935.0883975,
+      "rank": 5,
+      "source": "CoinLore"
+    },
+    {
+      "id": "dogecoin",
+      "symbol": "DOGE",
+      "name": "Dogecoin",
+      "aliases": [
+        "doge",
+        "dogecoin"
+      ],
+      "price": 0.090006,
+      "changePct": -3.8,
+      "volumeUsd": 1074525368.8466604,
+      "rank": 10,
+      "source": "CoinLore"
+    },
+    {
+      "id": "cardano",
+      "symbol": "ADA",
+      "name": "Cardano",
+      "aliases": [
+        "ada",
+        "cardano"
+      ],
+      "price": 0.26296,
+      "changePct": -5.01,
+      "volumeUsd": 501386788.9274126,
+      "rank": 13,
+      "source": "CoinLore"
+    },
+    {
+      "id": "sui",
+      "symbol": "SUI",
+      "name": "Sui",
+      "aliases": [
+        "sui"
+      ],
+      "price": 0.90927,
+      "changePct": -1.46,
+      "volumeUsd": 395903154.9979007,
+      "rank": 31,
+      "source": "CoinLore"
+    },
+    {
+      "id": "chainlink",
+      "symbol": "LINK",
+      "name": "Chainlink",
+      "aliases": [
+        "link",
+        "chainlink"
+      ],
+      "price": 8.81,
+      "changePct": -1.55,
+      "volumeUsd": 289312068.960569,
+      "rank": 22,
+      "source": "CoinLore"
+    },
+    {
+      "id": "avalanche-2",
+      "symbol": "AVAX",
+      "name": "Avalanche",
+      "aliases": [
+        "avax",
+        "avalanche"
+      ],
+      "price": 9.18,
+      "changePct": 0.03,
+      "volumeUsd": 232736824.31880414,
+      "rank": 28,
+      "source": "CoinLore"
+    },
+    {
+      "id": "tron",
+      "symbol": "TRX",
+      "name": "Tron",
+      "aliases": [
+        "trx",
+        "tron"
+      ],
+      "price": 0.28046,
+      "changePct": -0.98,
+      "volumeUsd": 404512013.4917067,
+      "rank": 8,
+      "source": "CoinLore"
+    },
+    {
+      "id": "toncoin",
+      "symbol": "TON",
+      "name": "Toncoin",
+      "aliases": [
+        "ton",
+        "toncoin"
+      ],
+      "price": 1.25,
+      "changePct": 2.04,
+      "volumeUsd": 63868808.454804115,
+      "rank": 33,
+      "source": "CoinLore"
+    },
+    {
+      "id": "polkadot",
+      "symbol": "DOT",
+      "name": "Polkadot",
+      "aliases": [
+        "dot",
+        "polkadot"
+      ],
+      "price": 1.53,
+      "changePct": 1.5,
+      "volumeUsd": 161302233.14511093,
+      "rank": 37,
+      "source": "CoinLore"
+    },
+    {
+      "id": "litecoin",
+      "symbol": "LTC",
+      "name": "Litecoin",
+      "aliases": [
+        "ltc",
+        "litecoin"
+      ],
+      "price": 54.77,
+      "changePct": 0.44,
+      "volumeUsd": 365530602.1056667,
+      "rank": 25,
+      "source": "CoinLore"
+    },
+    {
+      "id": "bitcoin-cash",
+      "symbol": "BCH",
+      "name": "Bitcoin Cash",
+      "aliases": [
+        "bch",
+        "bitcoin cash"
+      ],
+      "price": 446,
+      "changePct": 0.26,
+      "volumeUsd": 198812619.93014592,
+      "rank": 14,
+      "source": "CoinLore"
+    },
+    {
+      "id": "aptos",
+      "symbol": "APT",
+      "name": "Aptos",
+      "aliases": [
+        "apt",
+        "aptos"
+      ],
+      "price": 1.01,
+      "changePct": 4.34,
+      "volumeUsd": 111939342.11877239,
+      "rank": 70,
+      "source": "CoinLore"
+    },
+    {
+      "id": "arbitrum",
+      "symbol": "ARB",
+      "name": "Arbitrum",
+      "aliases": [
+        "arb",
+        "arbitrum"
+      ],
+      "price": 0.102634,
+      "changePct": 0.88,
+      "volumeUsd": 60100654.05975504,
+      "rank": 82,
+      "source": "CoinLore"
+    },
+    {
+      "id": "near",
+      "symbol": "NEAR",
+      "name": "Near",
+      "aliases": [
+        "near"
+      ],
+      "price": 1.36,
+      "changePct": -0.81,
+      "volumeUsd": 447473352.3106809,
+      "rank": 41,
+      "source": "CoinLore"
+    },
+    {
+      "id": "cosmos",
+      "symbol": "ATOM",
+      "name": "Cosmos",
+      "aliases": [
+        "atom",
+        "cosmos"
+      ],
+      "price": 1.81,
+      "changePct": -1.72,
+      "volumeUsd": 42081161.91300613,
+      "rank": 59,
+      "source": "CoinLore"
+    },
+    {
+      "id": "filecoin",
+      "symbol": "FIL",
+      "name": "Filecoin",
+      "aliases": [
+        "fil",
+        "filecoin"
+      ],
+      "price": 1,
+      "changePct": 1.37,
+      "volumeUsd": 81370088.45240282,
+      "rank": 73,
+      "source": "CoinLore"
+    },
+    {
+      "id": "stellar",
+      "symbol": "XLM",
+      "name": "Stellar",
+      "aliases": [
+        "xlm",
+        "stellar"
+      ],
+      "price": 0.151506,
+      "changePct": -2.65,
+      "volumeUsd": 95826416.03909773,
+      "rank": 24,
+      "source": "CoinLore"
+    },
+    {
+      "id": "uniswap",
+      "symbol": "UNI",
+      "name": "Uniswap",
+      "aliases": [
+        "uni",
+        "uniswap"
+      ],
+      "price": 3.91,
+      "changePct": -0.26,
+      "volumeUsd": 122111447.43146758,
+      "rank": 36,
+      "source": "CoinLore"
+    }
+  ],
+  "officialEvents": [
+    {
+      "coin": "XRP",
+      "source": "GitHub",
+      "title": "XRP 仓库动态",
+      "url": "https://github.com/XRPLF/rippled/events",
+      "time": 1772582384000
+    },
+    {
+      "coin": "SUI",
+      "source": "GitHub",
+      "title": "SUI 仓库动态",
+      "url": "https://github.com/MystenLabs/sui/events",
+      "time": 1772582188000
+    },
+    {
+      "coin": "LINK",
+      "source": "GitHub",
+      "title": "LINK 代码提交",
+      "url": "https://github.com/smartcontractkit/chainlink/events",
+      "time": 1772582159000
+    },
+    {
+      "coin": "AVAX",
+      "source": "GitHub",
+      "title": "AVAX 分支/标签创建",
+      "url": "https://github.com/ava-labs/avalanchego/events",
+      "time": 1772581983000
+    },
+    {
+      "coin": "ETH",
+      "source": "GitHub",
+      "title": "ETH 代码提交",
+      "url": "https://github.com/ethereum/go-ethereum/events",
+      "time": 1772580211000
+    },
+    {
+      "coin": "ADA",
+      "source": "GitHub",
+      "title": "ADA 代码提交",
+      "url": "https://github.com/IntersectMBO/cardano-node/events",
+      "time": 1772579041000
+    },
+    {
+      "coin": "TON",
+      "source": "GitHub",
+      "title": "TON 仓库动态",
+      "url": "https://github.com/ton-blockchain/ton/events",
+      "time": 1772573040000
+    },
+    {
+      "coin": "DOGE",
+      "source": "GitHub",
+      "title": "DOGE 仓库动态",
+      "url": "https://github.com/dogecoin/dogecoin/events",
+      "time": 1772549038000
+    }
+  ]
+}

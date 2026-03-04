@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BTC Atmosphere Live</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="mood-bull scene-hero">
+  <canvas id="fxCanvas" class="fx-canvas"></canvas>
+
+  <main class="stage">
+    <section class="hero" id="hero">
+      <header class="hud">
+        <div class="brand">
+          <strong>BTC Atmosphere</strong>
+          <span>Real-time Market + Geo Pulse</span>
+        </div>
+
+        <div class="ticker-box">
+          <div id="price" class="price">$ --</div>
+          <div class="meta">
+            <span id="change24h">24h: --</span>
+            <span id="updatedAt">更新时间: --</span>
+            <span id="dataSource">数据源: --</span>
+          </div>
+          <div id="moodLine" class="mood-line">正在连接实时行情...</div>
+        </div>
+
+        <div id="sentimentBadge" class="pill bull">加载中</div>
+      </header>
+
+      <section class="brief-zone" id="briefZone">
+        <button id="briefTrigger" class="brief-trigger" type="button">
+          <span class="geo-dot" id="geoDot"></span>
+          鼠标滑入查看当日报告
+        </button>
+        <article class="report-card" id="reportCard">
+          <h2>今日市场报告</h2>
+          <div id="reportContent" class="report-content">报告生成中...</div>
+          <div id="reportHeadlines" class="headlines"></div>
+        </article>
+      </section>
+
+      <div class="decor sun"></div>
+      <div class="decor moon"></div>
+      <div class="rocket">🚀</div>
+      <div class="mascot-bear">🐻</div>
+
+      <div id="coinLayer" class="coins">
+        <div class="coin" data-x="7" data-y="58" data-depth="20" style="--dur:3.2s;--delay:0.1s;">₿</div>
+        <div class="coin" data-x="18" data-y="34" data-depth="34" style="--dur:3.8s;--delay:0.4s;">₿</div>
+        <div class="coin" data-x="31" data-y="62" data-depth="16" style="--dur:3.5s;--delay:0.8s;">₿</div>
+        <div class="coin" data-x="44" data-y="44" data-depth="30" style="--dur:4.1s;--delay:0.2s;">₿</div>
+        <div class="coin" data-x="57" data-y="68" data-depth="12" style="--dur:3.6s;--delay:0.6s;">₿</div>
+        <div class="coin" data-x="71" data-y="37" data-depth="28" style="--dur:3.7s;--delay:0.3s;">₿</div>
+        <div class="coin" data-x="84" data-y="60" data-depth="14" style="--dur:3.9s;--delay:0.7s;">₿</div>
+      </div>
+
+      <div class="scroll-tip" aria-hidden="true">⌄</div>
+    </section>
+
+    <section class="section reveal" id="newsSection">
+      <h2 class="section-title">市场新闻</h2>
+      <p class="section-sub">按影响力聚合为热力墙，大事件更大块，小事件更紧凑。</p>
+
+      <article class="focus-panel">
+        <div class="focus-grid news">
+          <div class="panel-block">
+            <h3>影响力新闻墙</h3>
+            <div id="newsWall" class="news-wall"></div>
+            <div id="newsMeta" class="status-line">新闻源连接中...</div>
+          </div>
+
+          <div class="panel-block">
+            <h3>市场温度快照</h3>
+            <div class="quick-metrics">
+              <div class="quick-row"><span>恐慌贪婪</span><strong id="fearGreedValue">--</strong></div>
+              <div id="fearGreedSub" class="quick-sub">等待数据</div>
+
+              <div class="quick-row"><span>BTC Dominance</span><strong id="dominanceValue">--</strong></div>
+              <div id="dominanceSub" class="quick-sub">等待数据</div>
+
+              <div class="quick-row"><span>24h 成交额</span><strong id="volumeValue">--</strong></div>
+              <div id="volumeSub" class="quick-sub">等待数据</div>
+
+              <div class="quick-row"><span>地缘温度</span><strong id="geoRiskValue">--</strong></div>
+              <div id="geoRiskSub" class="quick-sub">等待数据</div>
+            </div>
+
+            <div id="sourceStrip" class="source-strip"></div>
+            <div id="marketCapLine" class="note">总市值：--</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section reveal" id="altSection">
+      <h2 class="section-title">山寨动态</h2>
+      <article class="alt-surface">
+        <div id="cellStage" class="cell-stage" aria-label="山寨币聚合细胞图">
+          <div id="altCluster" class="alt-cluster"></div>
+          <div id="cellInsight" class="cell-insight">将鼠标移到任意细胞，查看该币种近期活动与政策走向。</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="news.agent.js"></script>
+  <script src="news.snapshot.js"></script>
+  <script src="market.snapshot.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

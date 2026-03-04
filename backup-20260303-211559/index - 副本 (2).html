@@ -1,0 +1,1707 @@
+﻿
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BTC Atmosphere Live</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap");
+
+    :root {
+      --ink: #e8f1ff;
+      --ink-soft: rgba(232, 241, 255, 0.78);
+      --line: rgba(255, 255, 255, 0.16);
+      --panel-soft: rgba(6, 20, 36, 0.34);
+      --panel-strong: rgba(6, 18, 32, 0.5);
+      --bull: #58eba6;
+      --bear: #ff7d74;
+      --warn: #f8c34a;
+      --aura1: #0b2c49;
+      --aura2: #0d4059;
+      --aura3: #135239;
+      --section-gap: 12vh;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100%;
+      font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      overflow-y: auto;
+      background:
+        radial-gradient(1200px 640px at 15% 20%, rgba(60, 217, 154, 0.22), transparent 56%),
+        radial-gradient(920px 640px at 85% 22%, rgba(61, 185, 255, 0.22), transparent 58%),
+        linear-gradient(145deg, var(--aura1), var(--aura2) 52%, var(--aura3));
+      transition: background 420ms ease;
+    }
+
+    body.mood-bear {
+      --ink: #ffeef0;
+      --ink-soft: rgba(255, 238, 240, 0.76);
+      --line: rgba(255, 188, 188, 0.22);
+      --panel-soft: rgba(38, 9, 21, 0.36);
+      --panel-strong: rgba(28, 8, 16, 0.56);
+      background:
+        radial-gradient(1000px 620px at 12% 20%, rgba(255, 107, 99, 0.23), transparent 56%),
+        radial-gradient(980px 640px at 88% 18%, rgba(255, 143, 49, 0.24), transparent 58%),
+        linear-gradient(145deg, #2d1020, #4a1126 52%, #261116);
+    }
+
+    .fx-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .stage {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 2.2vh 2.8vw;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: -10vw;
+      right: -10vw;
+      bottom: -38vh;
+      height: 62vh;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(67, 240, 165, 0.22), rgba(8, 20, 32, 0.86) 68%);
+      z-index: -1;
+      transition: background 400ms ease;
+    }
+
+    body.mood-bear .hero::before {
+      background: radial-gradient(ellipse at center, rgba(255, 106, 99, 0.22), rgba(22, 8, 12, 0.9) 70%);
+    }
+
+    .hud {
+      position: relative;
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      max-width: min(72vw, 980px);
+      z-index: 4;
+    }
+
+    .brand {
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    .brand strong {
+      font-size: clamp(1.12rem, 1.4vw, 1.68rem);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .brand span {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+
+    .ticker-box {
+      min-width: min(48vw, 560px);
+      padding: 0.8rem 1rem 0.95rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    .price {
+      font-size: clamp(1.4rem, 2.4vw, 2.5rem);
+      line-height: 1.05;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.03em;
+    }
+
+    .meta {
+      margin-top: 0.48rem;
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+
+    .mood-line {
+      margin-top: 0.65rem;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    .pill {
+      align-self: center;
+      padding: 0.48rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.81rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+
+    .pill.bull {
+      color: #062112;
+      background: linear-gradient(100deg, #69f1af, #44dd93);
+      border-color: rgba(255, 255, 255, 0.32);
+    }
+
+    .pill.bear {
+      color: #3c0a0a;
+      background: linear-gradient(100deg, #ff8d87, #ff6860);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .chart-shell {
+      position: absolute;
+      left: 50%;
+      top: 18vh;
+      transform: translateX(-50%);
+      width: min(86vw, 1180px);
+      height: min(40vh, 360px);
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(175deg, rgba(7, 24, 39, 0.2), rgba(5, 14, 26, 0.05));
+      backdrop-filter: blur(1px);
+      opacity: 0.66;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      mix-blend-mode: screen;
+    }
+
+    .chart-head {
+      position: absolute;
+      top: 0.82rem;
+      left: 1rem;
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+      z-index: 2;
+      color: rgba(228, 240, 255, 0.8);
+    }
+
+    .chart-head strong {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .chart-head span {
+      font-size: 0.78rem;
+      color: rgba(228, 240, 255, 0.7);
+    }
+
+    .chart-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .brief-zone {
+      position: absolute;
+      right: 3vw;
+      top: 20vh;
+      z-index: 5;
+    }
+
+    .brief-trigger {
+      all: unset;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 195, 74, 0.52);
+      background: rgba(248, 195, 74, 0.2);
+      color: #ffe9b1;
+      font-size: 0.84rem;
+      letter-spacing: 0.05em;
+      animation: pulse 2.3s ease-in-out infinite;
+    }
+
+    .brief-trigger .geo-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #78ffbd;
+      box-shadow: 0 0 12px rgba(120, 255, 189, 0.9);
+      transition: background 260ms ease, box-shadow 260ms ease;
+    }
+
+    .report-card {
+      margin-top: 0.72rem;
+      width: min(37vw, 460px);
+      max-height: min(64vh, 600px);
+      overflow: auto;
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      backdrop-filter: blur(11px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateY(6px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 210ms ease, transform 220ms ease;
+    }
+
+    .brief-zone:hover .report-card,
+    .brief-zone.open .report-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .report-card h2 {
+      margin: 0;
+      font-size: 0.98rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .report-content {
+      margin-top: 0.66rem;
+      white-space: pre-line;
+      line-height: 1.5;
+      font-size: 0.86rem;
+      color: var(--ink);
+    }
+
+    .headlines {
+      margin-top: 0.74rem;
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .headlines a {
+      color: #a7e7ff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      line-height: 1.35;
+    }
+
+    .headlines a:hover {
+      color: #d1f4ff;
+      text-decoration: underline;
+    }
+    .decor {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .sun {
+      right: 8vw;
+      top: 8.4vh;
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 32%, #fff6c2, #ffc95d 52%, #ff9b0a 84%);
+      box-shadow: 0 0 38px rgba(255, 196, 80, 0.62);
+      opacity: 1;
+      transition: opacity 300ms ease;
+    }
+
+    .moon {
+      right: 8vw;
+      top: 8.4vh;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 28% 28%, #f9fbff, #b1b8c8 73%);
+      box-shadow: 0 0 25px rgba(197, 205, 223, 0.5);
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+
+    body.mood-bear .sun {
+      opacity: 0;
+    }
+
+    body.mood-bear .moon {
+      opacity: 1;
+    }
+
+    .rocket,
+    .bear {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.32));
+    }
+
+    .rocket {
+      left: 8vw;
+      bottom: 24vh;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      opacity: 1;
+      animation: launch 5.2s linear infinite;
+      transition: opacity 280ms ease;
+    }
+
+    body.mood-bear .rocket {
+      opacity: 0;
+      animation: none;
+    }
+
+    .bear {
+      right: 12vw;
+      bottom: 22vh;
+      font-size: clamp(2.5rem, 4.2vw, 4rem);
+      opacity: 0;
+      animation: sway 1.8s ease-in-out infinite;
+      transition: opacity 280ms ease;
+    }
+
+    body.mood-bear .bear {
+      opacity: 1;
+    }
+
+    .coins {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .coin {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      color: #6a2c01;
+      background: radial-gradient(circle at 32% 32%, #fff5bf, #f7b733 64%, #ea9f1c);
+      border: 2px solid rgba(255, 231, 168, 0.85);
+      box-shadow: 0 8px 18px rgba(123, 73, 14, 0.35);
+      transform: translate3d(0, 0, 0);
+      animation: bob var(--dur, 3.4s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      transition: filter 250ms ease, opacity 250ms ease;
+    }
+
+    body.mood-bear .coin {
+      filter: grayscale(0.64) brightness(0.86);
+      opacity: 0.74;
+    }
+
+    .play-pods {
+      position: absolute;
+      left: 2.9vw;
+      bottom: 17vh;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.62rem;
+      z-index: 4;
+    }
+
+    .play-chip {
+      all: unset;
+      cursor: pointer;
+      padding: 0.48rem 0.78rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(8px);
+      transition: transform 140ms ease, background 220ms ease, color 220ms ease;
+    }
+
+    .play-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    body.chip-boost .coin {
+      animation-duration: 2.1s;
+    }
+
+    body.chip-boost .rocket {
+      animation-duration: 3.5s;
+    }
+
+    body.chip-chaos .chart-shell {
+      animation: chartSwing 1.3s ease-in-out infinite;
+    }
+
+    body.chip-shield .bear {
+      opacity: 0.18;
+    }
+
+    .scroll-tip {
+      position: absolute;
+      left: 50%;
+      bottom: 3.5vh;
+      transform: translateX(-50%);
+      z-index: 4;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      animation: tipFloat 1.9s ease-in-out infinite;
+    }
+
+    .scroll-tip::after {
+      content: "▼";
+      font-size: 0.7rem;
+    }
+
+    .section {
+      position: relative;
+      min-height: 84vh;
+      padding: 5.6vh 3vw;
+      display: grid;
+      align-content: center;
+      gap: 1.2rem;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(1.1rem, 2.1vw, 1.8rem);
+      letter-spacing: 0.04em;
+    }
+
+    .section-sub {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 480ms ease, transform 500ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nodes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 0.92rem;
+    }
+
+    .signal-node,
+    .metric-card,
+    .headline-board {
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+      overflow: hidden;
+      transform: perspective(640px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+      transition: transform 130ms linear, border-color 240ms ease;
+    }
+
+    .signal-node::after,
+    .metric-card::after,
+    .headline-board::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at var(--lx, 50%) var(--ly, 50%), rgba(255, 255, 255, 0.2), transparent 52%);
+      opacity: 0;
+      transition: opacity 220ms ease;
+      pointer-events: none;
+    }
+
+    .signal-node:hover::after,
+    .metric-card:hover::after,
+    .headline-board:hover::after {
+      opacity: 1;
+    }
+
+    .signal-node {
+      padding: 1rem 1rem 0.95rem;
+    }
+
+    .node-title {
+      font-size: 0.76rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+
+    .node-value {
+      margin-top: 0.55rem;
+      font-size: 1.18rem;
+      font-weight: 800;
+      line-height: 1.22;
+    }
+
+    .node-sub {
+      margin-top: 0.44rem;
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-soft);
+      min-height: 2.2em;
+    }
+
+    .allocation {
+      margin-top: 0.68rem;
+      height: 11px;
+      width: 100%;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .seg {
+      height: 100%;
+      transition: width 340ms ease;
+    }
+
+    .seg.add {
+      width: 34%;
+      background: linear-gradient(90deg, #4bee9e, #31b673);
+    }
+
+    .seg.hold {
+      width: 43%;
+      background: linear-gradient(90deg, #f0be4b, #d7982f);
+    }
+
+    .seg.trim {
+      width: 23%;
+      background: linear-gradient(90deg, #ff8a84, #e15f59);
+    }
+
+    .alloc-label {
+      margin-top: 0.42rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 0.84rem;
+    }
+
+    .metric-card {
+      padding: 0.95rem 0.9rem;
+    }
+
+    .metric-card .label {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+
+    .metric-card .value {
+      margin-top: 0.55rem;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-card .sub {
+      margin-top: 0.4rem;
+      color: var(--ink-soft);
+      font-size: 0.8rem;
+      line-height: 1.35;
+      min-height: 2.2em;
+    }
+
+    .headline-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 0.95rem;
+      align-items: start;
+    }
+
+    .headline-board {
+      padding: 1rem;
+    }
+
+    .headline-board h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .headline-list {
+      margin-top: 0.78rem;
+      display: grid;
+      gap: 0.46rem;
+    }
+
+    .headline-list a {
+      color: #b8ecff;
+      text-decoration: none;
+      line-height: 1.35;
+      font-size: 0.84rem;
+    }
+
+    .headline-list a:hover {
+      color: #d7f7ff;
+      text-decoration: underline;
+    }
+
+    .note {
+      color: var(--ink-soft);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .footnote {
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+    }
+
+    .error-tip {
+      color: #ffd6d5;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        box-shadow: 0 0 0 rgba(248, 195, 74, 0.32);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(248, 195, 74, 0.26);
+      }
+    }
+
+    @keyframes launch {
+      0% {
+        transform: translate(0, 0) rotate(-10deg);
+      }
+      100% {
+        transform: translate(57vw, -33vh) rotate(14deg);
+      }
+    }
+
+    @keyframes sway {
+      0%,
+      100% {
+        transform: rotate(-2deg);
+      }
+      50% {
+        transform: rotate(2deg);
+      }
+    }
+
+    @keyframes bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-17px);
+      }
+    }
+
+    @keyframes chartSwing {
+      0%,
+      100% {
+        transform: translateX(-50%) rotate(0deg);
+      }
+      50% {
+        transform: translateX(-50%) rotate(-0.55deg);
+      }
+    }
+
+    @keyframes tipFloat {
+      0%,
+      100% {
+        transform: translate(-50%, 0);
+      }
+      50% {
+        transform: translate(-50%, -6px);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .chart-shell {
+        width: 92vw;
+        top: 20vh;
+        height: min(34vh, 300px);
+      }
+
+      .brief-zone {
+        top: auto;
+        right: 2.5vw;
+        bottom: 29vh;
+      }
+
+      .report-card {
+        width: min(92vw, 460px);
+        max-height: 40vh;
+      }
+
+      .nodes {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+
+      .headline-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        padding: 1.8vh 2.1vw;
+      }
+
+      .ticker-box {
+        min-width: 92vw;
+      }
+
+      .play-pods {
+        left: 2vw;
+        bottom: 15vh;
+      }
+
+      .scroll-tip {
+        bottom: 2vh;
+      }
+
+      .section {
+        padding: 4.4vh 2.2vw;
+      }
+
+      .sun,
+      .moon {
+        right: 4vw;
+      }
+
+      .brief-zone {
+        right: 2vw;
+      }
+    }
+  </style>
+</head>
+<body class="mood-bull">
+  <canvas id="fxCanvas" class="fx-canvas"></canvas>
+
+  <main class="stage">
+    <section class="hero" id="hero">
+      <header class="hud">
+        <div class="brand">
+          <strong>BTC Atmosphere</strong>
+          <span>Real-time Market + Geo Pulse</span>
+        </div>
+
+        <div class="ticker-box">
+          <div id="price" class="price">$ --</div>
+          <div class="meta">
+            <span id="change24h">24h: --</span>
+            <span id="updatedAt">更新时间: --</span>
+            <span id="dataSource">数据源: --</span>
+          </div>
+          <div id="moodLine" class="mood-line">正在连接实时行情...</div>
+        </div>
+
+        <div id="sentimentBadge" class="pill bull">加载中</div>
+      </header>
+
+      <section class="chart-shell" aria-label="Bitcoin 4小时走势图">
+        <div class="chart-head">
+          <strong>BTC 4H TREND</strong>
+          <span id="chartCaption">过去 7 天收盘轨迹（4 小时粒度）</span>
+        </div>
+        <canvas id="chartCanvas" class="chart-canvas"></canvas>
+      </section>
+
+      <section class="brief-zone" id="briefZone">
+        <button id="briefTrigger" class="brief-trigger" type="button">
+          <span class="geo-dot" id="geoDot"></span>
+          鼠标滑入查看当日报告
+        </button>
+        <article class="report-card" id="reportCard">
+          <h2>今日市场报告</h2>
+          <div id="reportContent" class="report-content">报告生成中...</div>
+          <div id="reportHeadlines" class="headlines"></div>
+        </article>
+      </section>
+
+      <div class="play-pods">
+        <button class="play-chip" data-mode="boost" type="button">火箭推进</button>
+        <button class="play-chip" data-mode="shield" type="button">护盾模式</button>
+        <button class="play-chip" data-mode="chaos" type="button">波动模式</button>
+      </div>
+
+      <div class="decor sun"></div>
+      <div class="decor moon"></div>
+      <div class="rocket">🚀</div>
+      <div class="bear">🐻</div>
+
+      <div id="coinLayer" class="coins">
+        <div class="coin" data-x="7" data-y="58" data-depth="20" style="--dur:3.2s;--delay:0.1s;">₿</div>
+        <div class="coin" data-x="18" data-y="34" data-depth="34" style="--dur:3.8s;--delay:0.4s;">₿</div>
+        <div class="coin" data-x="31" data-y="62" data-depth="16" style="--dur:3.5s;--delay:0.8s;">₿</div>
+        <div class="coin" data-x="44" data-y="44" data-depth="30" style="--dur:4.1s;--delay:0.2s;">₿</div>
+        <div class="coin" data-x="57" data-y="68" data-depth="12" style="--dur:3.6s;--delay:0.6s;">₿</div>
+        <div class="coin" data-x="71" data-y="37" data-depth="28" style="--dur:3.7s;--delay:0.3s;">₿</div>
+        <div class="coin" data-x="84" data-y="60" data-depth="14" style="--dur:3.9s;--delay:0.7s;">₿</div>
+      </div>
+
+      <div class="scroll-tip">Scroll for more market layers</div>
+    </section>
+
+    <section class="section reveal" id="signalSection">
+      <h2 class="section-title">市场结构层</h2>
+      <p class="section-sub">随着滚动逐层展开：山寨情绪、机构情绪与仓位建议。</p>
+
+      <section class="nodes">
+        <article class="signal-node" id="altNode">
+          <div class="node-title">山寨情绪</div>
+          <div id="altValue" class="node-value">读取中...</div>
+          <div id="altSub" class="node-sub">基于 BTC Dominance 与市场结构</div>
+        </article>
+
+        <article class="signal-node" id="instNode">
+          <div class="node-title">机构情绪</div>
+          <div id="instValue" class="node-value">读取中...</div>
+          <div id="instSub" class="node-sub">基于成交量、风险偏好、价格动量</div>
+        </article>
+
+        <article class="signal-node" id="actionNode">
+          <div class="node-title">仓位罗盘</div>
+          <div id="actionValue" class="node-value">策略生成中...</div>
+          <div class="allocation">
+            <span id="segAdd" class="seg add"></span>
+            <span id="segHold" class="seg hold"></span>
+            <span id="segTrim" class="seg trim"></span>
+          </div>
+          <div id="actionSub" class="node-sub">加仓/观望/减仓建议计算中</div>
+          <div id="allocLabel" class="alloc-label">加仓 34% · 观望 43% · 减仓 23%</div>
+        </article>
+      </section>
+    </section>
+
+    <section class="section reveal" id="macroSection">
+      <h2 class="section-title">宏观温度层</h2>
+      <p class="section-sub">向下滚动继续查看市场温度、地缘风险与总量指标。</p>
+
+      <section class="metrics-grid">
+        <article class="metric-card" id="fgCard">
+          <div class="label">恐慌贪婪</div>
+          <div id="fearGreedValue" class="value">--</div>
+          <div id="fearGreedSub" class="sub">等待数据</div>
+        </article>
+        <article class="metric-card" id="domCard">
+          <div class="label">BTC Dominance</div>
+          <div id="dominanceValue" class="value">--</div>
+          <div id="dominanceSub" class="sub">等待数据</div>
+        </article>
+        <article class="metric-card" id="volCard">
+          <div class="label">24h 成交额</div>
+          <div id="volumeValue" class="value">--</div>
+          <div id="volumeSub" class="sub">等待数据</div>
+        </article>
+        <article class="metric-card" id="geoCard">
+          <div class="label">地缘温度</div>
+          <div id="geoRiskValue" class="value">--</div>
+          <div id="geoRiskSub" class="sub">等待数据</div>
+        </article>
+      </section>
+    </section>
+
+    <section class="section reveal" id="newsSection">
+      <h2 class="section-title">叙事与新闻层</h2>
+      <p class="section-sub">地缘新闻与当日策略说明，在背景上半透明融合展示。</p>
+
+      <section class="headline-layout">
+        <article class="headline-board">
+          <h3>地缘新闻流</h3>
+          <div id="scrollHeadlines" class="headline-list"></div>
+        </article>
+
+        <article class="headline-board">
+          <h3>执行备注</h3>
+          <div id="footnote" class="note">提示：右侧悬浮胶囊可查看当日报告全文，滚动区用于分层展示实时结构信息。</div>
+          <div id="marketCapLine" class="footnote" style="margin-top:0.6rem;">总市值：--</div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const REFRESH_MS = 60000;
+    const CHART_POINTS = 42;
+    const numberFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
+    const pctFmt = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const compactFmt = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 2 });
+
+    const els = {
+      body: document.body,
+      price: document.getElementById("price"),
+      change24h: document.getElementById("change24h"),
+      updatedAt: document.getElementById("updatedAt"),
+      dataSource: document.getElementById("dataSource"),
+      moodLine: document.getElementById("moodLine"),
+      badge: document.getElementById("sentimentBadge"),
+      chartCanvas: document.getElementById("chartCanvas"),
+      chartCaption: document.getElementById("chartCaption"),
+      reportContent: document.getElementById("reportContent"),
+      reportHeadlines: document.getElementById("reportHeadlines"),
+      briefZone: document.getElementById("briefZone"),
+      briefTrigger: document.getElementById("briefTrigger"),
+      geoDot: document.getElementById("geoDot"),
+      altValue: document.getElementById("altValue"),
+      altSub: document.getElementById("altSub"),
+      instValue: document.getElementById("instValue"),
+      instSub: document.getElementById("instSub"),
+      actionValue: document.getElementById("actionValue"),
+      actionSub: document.getElementById("actionSub"),
+      allocLabel: document.getElementById("allocLabel"),
+      segAdd: document.getElementById("segAdd"),
+      segHold: document.getElementById("segHold"),
+      segTrim: document.getElementById("segTrim"),
+      fearGreedValue: document.getElementById("fearGreedValue"),
+      fearGreedSub: document.getElementById("fearGreedSub"),
+      dominanceValue: document.getElementById("dominanceValue"),
+      dominanceSub: document.getElementById("dominanceSub"),
+      volumeValue: document.getElementById("volumeValue"),
+      volumeSub: document.getElementById("volumeSub"),
+      geoRiskValue: document.getElementById("geoRiskValue"),
+      geoRiskSub: document.getElementById("geoRiskSub"),
+      scrollHeadlines: document.getElementById("scrollHeadlines"),
+      marketCapLine: document.getElementById("marketCapLine"),
+      footnote: document.getElementById("footnote"),
+      fxCanvas: document.getElementById("fxCanvas"),
+      coinLayer: document.getElementById("coinLayer")
+    };
+
+    const sceneState = {
+      changePct: 0,
+      mood: "bull",
+      geoRisk: 0
+    };
+
+    let latestChartPoints = [];
+
+    const mouse = {
+      x: window.innerWidth * 0.5,
+      y: window.innerHeight * 0.5,
+      active: false
+    };
+
+    function toLocalTime(ts) {
+      return new Date(ts).toLocaleString("zh-CN", { hour12: false });
+    }
+
+    function clamp(val, min, max) {
+      return Math.max(min, Math.min(max, val));
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    async function fetchJson(url) {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    }
+
+    async function fetchTickerBinance() {
+      const data = await fetchJson("https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT");
+      const price = Number(data.lastPrice);
+      const changePct = Number(data.priceChangePercent);
+      const volumeUsd = Number(data.quoteVolume);
+      if (!Number.isFinite(price) || !Number.isFinite(changePct)) {
+        throw new Error("Binance payload invalid");
+      }
+      return {
+        price,
+        changePct,
+        volumeUsd: Number.isFinite(volumeUsd) ? volumeUsd : NaN,
+        source: "Binance"
+      };
+    }
+
+    async function fetchTickerCoinGecko() {
+      const list = await fetchJson("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&price_change_percentage=24h");
+      const btc = Array.isArray(list) ? list[0] : null;
+      if (!btc) throw new Error("CoinGecko payload invalid");
+      const price = Number(btc.current_price);
+      const changePct = Number(btc.price_change_percentage_24h);
+      const volumeUsd = Number(btc.total_volume);
+      if (!Number.isFinite(price) || !Number.isFinite(changePct)) {
+        throw new Error("CoinGecko fields invalid");
+      }
+      return {
+        price,
+        changePct,
+        volumeUsd: Number.isFinite(volumeUsd) ? volumeUsd : NaN,
+        source: "CoinGecko"
+      };
+    }
+
+    async function fetchTicker() {
+      try {
+        return await fetchTickerBinance();
+      } catch (e1) {
+        try {
+          return await fetchTickerCoinGecko();
+        } catch (e2) {
+          throw new Error(`${e1.message}; ${e2.message}`);
+        }
+      }
+    }
+
+    async function fetchChartBinance() {
+      const rows = await fetchJson(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=4h&limit=${CHART_POINTS}`);
+      if (!Array.isArray(rows)) throw new Error("Klines payload invalid");
+      const points = rows
+        .map((r) => ({ t: Number(r[0]), p: Number(r[4]) }))
+        .filter((p) => Number.isFinite(p.t) && Number.isFinite(p.p));
+      if (points.length < 8) throw new Error("Insufficient klines");
+      return { points, source: "Binance 4h" };
+    }
+
+    async function fetchChartCoinGecko() {
+      const data = await fetchJson("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7&interval=hourly");
+      const prices = Array.isArray(data.prices) ? data.prices : [];
+      const sampled = prices
+        .filter((_, idx) => idx % 4 === 0)
+        .slice(-CHART_POINTS)
+        .map((item) => ({ t: Number(item[0]), p: Number(item[1]) }))
+        .filter((p) => Number.isFinite(p.t) && Number.isFinite(p.p));
+      if (sampled.length < 8) throw new Error("Insufficient sampled prices");
+      return { points: sampled, source: "CoinGecko sampled 4h" };
+    }
+
+    async function fetchChartData() {
+      try {
+        return await fetchChartBinance();
+      } catch (e1) {
+        try {
+          return await fetchChartCoinGecko();
+        } catch (e2) {
+          throw new Error(`${e1.message}; ${e2.message}`);
+        }
+      }
+    }
+
+    async function fetchFearGreed() {
+      const data = await fetchJson("https://api.alternative.me/fng/?limit=1&format=json");
+      const item = data?.data?.[0];
+      if (!item) throw new Error("FearGreed payload invalid");
+      const value = Number(item.value);
+      if (!Number.isFinite(value)) throw new Error("FearGreed value invalid");
+      return {
+        value,
+        classification: item.value_classification || "Unknown"
+      };
+    }
+
+    async function fetchGlobalData() {
+      const data = await fetchJson("https://api.coingecko.com/api/v3/global");
+      const d = data?.data;
+      if (!d) throw new Error("Global payload invalid");
+      const btcDominance = Number(d?.market_cap_percentage?.btc);
+      const totalMarketCapUsd = Number(d?.total_market_cap?.usd);
+      return {
+        btcDominance: Number.isFinite(btcDominance) ? btcDominance : NaN,
+        totalMarketCapUsd: Number.isFinite(totalMarketCapUsd) ? totalMarketCapUsd : NaN
+      };
+    }
+
+    async function fetchGeoNews() {
+      const query = encodeURIComponent("(geopolitics OR war OR sanctions OR tariff OR oil supply OR conflict)");
+      const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${query}&mode=ArtList&maxrecords=6&format=json&sort=DateDesc`;
+      const data = await fetchJson(url);
+      const articles = Array.isArray(data.articles) ? data.articles : [];
+      return articles
+        .map((a) => ({
+          title: (a.title || "").trim(),
+          url: (a.url || "").trim(),
+          source: (a.sourcecommonname || a.domain || "News").trim()
+        }))
+        .filter((a) => a.title && a.url);
+    }
+
+    function evaluateGeoRisk(headlines) {
+      const riskWords = ["war", "conflict", "sanction", "tariff", "attack", "missile", "tension", "embargo", "strike", "crisis"];
+      const easeWords = ["ceasefire", "deal", "agreement", "talks", "summit", "truce", "negotiation"];
+      let score = 0;
+
+      for (const item of headlines) {
+        const text = item.title.toLowerCase();
+        for (const word of riskWords) {
+          if (text.includes(word)) score += 1.9;
+        }
+        for (const word of easeWords) {
+          if (text.includes(word)) score -= 1.2;
+        }
+      }
+
+      score = clamp(score, 0, 20);
+      const tone = score >= 11 ? "高压偏紧" : score >= 5 ? "中性偏紧" : "相对平稳";
+      return { score, tone };
+    }
+
+    function deriveAltSentiment(changePct, btcDominance) {
+      let score = changePct * 1.35;
+      if (Number.isFinite(btcDominance)) {
+        score += (50 - btcDominance) * 0.95;
+      }
+
+      if (score >= 16) {
+        return { label: "山寨热度升温", detail: "资金有扩散迹象，题材轮动偏活跃。", score };
+      }
+      if (score >= 5) {
+        return { label: "山寨结构分化", detail: "强势币种更集中，追高需控制节奏。", score };
+      }
+      return { label: "山寨偏防守", detail: "主流币主导，山寨弹性不足。", score };
+    }
+
+    function deriveInstitutionSentiment(changePct, volumeUsd, fearGreedValue) {
+      const volB = Number.isFinite(volumeUsd) ? volumeUsd / 1e9 : 0;
+      let score = changePct * 1.5 + (volB - 30) * 0.42;
+      if (Number.isFinite(fearGreedValue)) {
+        score += (fearGreedValue - 50) * 0.35;
+      }
+
+      if (score >= 18) {
+        return { label: "机构风险偏好增强", detail: "量能配合较好，趋势资金在场。", score };
+      }
+      if (score >= 6) {
+        return { label: "机构中性偏多", detail: "有配置动作，但仍偏审慎。", score };
+      }
+      return { label: "机构偏谨慎", detail: "以防守与轮动为主，追击意愿较弱。", score };
+    }
+
+    function deriveActionPlan(changePct, altScore, instScore, geoRisk) {
+      const total = changePct * 1.4 + altScore * 0.55 + instScore * 0.45 - geoRisk * 1.1;
+      let add = 34;
+      let hold = 43;
+      let trim = 23;
+      let summary = "中性均衡仓位";
+      let detail = "建议分层执行，避免一次性重仓。";
+
+      if (total >= 22) {
+        add = 58;
+        hold = 30;
+        trim = 12;
+        summary = "偏进攻：分批加仓";
+        detail = "优先顺势品种，设置移动止盈。";
+      } else if (total >= 10) {
+        add = 46;
+        hold = 38;
+        trim = 16;
+        summary = "温和进攻：轻度加仓";
+        detail = "聚焦龙头，控制单笔风险敞口。";
+      } else if (total <= -8) {
+        add = 16;
+        hold = 38;
+        trim = 46;
+        summary = "防守模式：减仓为先";
+        detail = "先降杠杆，保留现金等待明确信号。";
+      } else if (total <= 2) {
+        add = 24;
+        hold = 48;
+        trim = 28;
+        summary = "观望模式：偏防守";
+        detail = "等待波动收敛再做方向选择。";
+      }
+
+      return { total, add, hold, trim, summary, detail };
+    }
+
+    function updateMoodUI(snapshot) {
+      const mood = snapshot.changePct >= 0 ? "bull" : "bear";
+      sceneState.changePct = snapshot.changePct;
+      sceneState.mood = mood;
+
+      els.body.classList.toggle("mood-bear", mood === "bear");
+      els.price.textContent = `$ ${numberFmt.format(snapshot.price)}`;
+      els.change24h.textContent = `24h: ${snapshot.changePct >= 0 ? "+" : ""}${pctFmt.format(snapshot.changePct)}%`;
+      els.updatedAt.textContent = `更新时间: ${toLocalTime(Date.now())}`;
+      els.dataSource.textContent = `数据源: ${snapshot.source}`;
+
+      if (mood === "bull") {
+        els.badge.className = "pill bull";
+        els.badge.textContent = "BULLISH";
+        els.moodLine.textContent = "市场偏乐观：首屏保持趣味上行动画。";
+      } else {
+        els.badge.className = "pill bear";
+        els.badge.textContent = "CAUTIOUS";
+        els.moodLine.textContent = "市场偏谨慎：首屏切换为防守观察动画。";
+      }
+    }
+
+    function updateSignalNodes(altSig, instSig, actionPlan) {
+      els.altValue.textContent = altSig.label;
+      els.altSub.textContent = altSig.detail;
+      els.instValue.textContent = instSig.label;
+      els.instSub.textContent = instSig.detail;
+      els.actionValue.textContent = actionPlan.summary;
+      els.actionSub.textContent = actionPlan.detail;
+      els.allocLabel.textContent = `加仓 ${actionPlan.add}% · 观望 ${actionPlan.hold}% · 减仓 ${actionPlan.trim}%`;
+      els.segAdd.style.width = `${actionPlan.add}%`;
+      els.segHold.style.width = `${actionPlan.hold}%`;
+      els.segTrim.style.width = `${actionPlan.trim}%`;
+    }
+
+    function updateGeoDot(geoRisk) {
+      sceneState.geoRisk = geoRisk;
+      if (geoRisk >= 11) {
+        els.geoDot.style.background = "#ff766f";
+        els.geoDot.style.boxShadow = "0 0 12px rgba(255,118,111,0.9)";
+      } else if (geoRisk >= 5) {
+        els.geoDot.style.background = "#ffc168";
+        els.geoDot.style.boxShadow = "0 0 12px rgba(255,193,104,0.9)";
+      } else {
+        els.geoDot.style.background = "#78ffbd";
+        els.geoDot.style.boxShadow = "0 0 12px rgba(120,255,189,0.9)";
+      }
+    }
+
+    function updateMacroCards(fearGreed, globalData, ticker, geoTone) {
+      els.fearGreedValue.textContent = fearGreed ? `${fearGreed.value}` : "--";
+      els.fearGreedSub.textContent = fearGreed ? fearGreed.classification : "暂无可用数据";
+
+      els.dominanceValue.textContent = Number.isFinite(globalData?.btcDominance)
+        ? `${pctFmt.format(globalData.btcDominance)}%`
+        : "--";
+      els.dominanceSub.textContent = "BTC 市值占比";
+
+      els.volumeValue.textContent = Number.isFinite(ticker?.volumeUsd)
+        ? `$${compactFmt.format(ticker.volumeUsd)}`
+        : "--";
+      els.volumeSub.textContent = "BTC 24h 报价成交额";
+
+      els.geoRiskValue.textContent = `${geoTone.score.toFixed(1)} / 20`;
+      els.geoRiskSub.textContent = `风险状态：${geoTone.tone}`;
+
+      els.marketCapLine.textContent = Number.isFinite(globalData?.totalMarketCapUsd)
+        ? `总市值：$${compactFmt.format(globalData.totalMarketCapUsd)}`
+        : "总市值：暂无可用数据";
+    }
+
+    function buildReportText(payload) {
+      const { snapshot, fearGreed, globalData, geoTone, actionPlan, altSig, instSig } = payload;
+      const dateText = new Date().toLocaleDateString("zh-CN");
+      const changeText = `${snapshot.changePct >= 0 ? "+" : ""}${pctFmt.format(snapshot.changePct)}%`;
+      const fngText = fearGreed ? `${fearGreed.value} (${fearGreed.classification})` : "暂无可用数据";
+      const domText = Number.isFinite(globalData?.btcDominance) ? `${pctFmt.format(globalData.btcDominance)}%` : "暂无可用数据";
+
+      return [
+        `日期：${dateText}`,
+        `BTC 当日变动：${changeText}，现价 $${numberFmt.format(snapshot.price)}。`,
+        `市场情绪：恐慌贪婪指数 ${fngText}，BTC Dominance ${domText}。`,
+        `结构判断：${altSig.label}；${instSig.label}。`,
+        `地缘政治：风险温度 ${geoTone.tone}（评分 ${geoTone.score.toFixed(1)}/20）。`,
+        `策略建议：${actionPlan.summary}，仓位建议为 加仓 ${actionPlan.add}% / 观望 ${actionPlan.hold}% / 减仓 ${actionPlan.trim}%。`,
+        `执行提示：${actionPlan.detail}`
+      ].join("\n");
+    }
+
+    function renderHeadlines(headlines) {
+      if (!headlines.length) {
+        const fallback = "<span class='error-tip'>未获取到地缘新闻标题，已使用市场数据生成报告。</span>";
+        els.reportHeadlines.innerHTML = fallback;
+        els.scrollHeadlines.innerHTML = fallback;
+        return;
+      }
+
+      const rows = headlines.slice(0, 6).map((h) => {
+        const title = escapeHtml(h.title);
+        const source = escapeHtml(h.source || "News");
+        const url = escapeHtml(h.url);
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">[${source}] ${title}</a>`;
+      });
+
+      els.reportHeadlines.innerHTML = rows.slice(0, 4).join("");
+      els.scrollHeadlines.innerHTML = rows.join("");
+    }
+
+    function drawChart(points) {
+      const canvas = els.chartCanvas;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width < 10 || rect.height < 10) return;
+
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, rect.width, rect.height);
+
+      if (!points || points.length < 2) {
+        return;
+      }
+
+      const padL = 18;
+      const padR = 18;
+      const padT = 28;
+      const padB = 20;
+      const w = rect.width - padL - padR;
+      const h = rect.height - padT - padB;
+      const prices = points.map((p) => p.p);
+      const min = Math.min(...prices);
+      const max = Math.max(...prices);
+      const span = Math.max(1, max - min);
+
+      const bull = sceneState.mood === "bull";
+      const lineColor = bull ? "rgba(103, 246, 183, 0.9)" : "rgba(255, 141, 132, 0.9)";
+      const fillA = bull ? "rgba(77, 223, 148, 0.28)" : "rgba(255, 109, 105, 0.25)";
+      const fillB = bull ? "rgba(77, 223, 148, 0.01)" : "rgba(255, 109, 105, 0.01)";
+
+      ctx.strokeStyle = "rgba(255,255,255,0.11)";
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 4; i += 1) {
+        const y = padT + (h / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(padL, y);
+        ctx.lineTo(rect.width - padR, y);
+        ctx.stroke();
+      }
+
+      const coords = points.map((point, idx) => {
+        const x = padL + (idx / (points.length - 1)) * w;
+        const y = padT + ((max - point.p) / span) * h;
+        return { x, y };
+      });
+
+      const grad = ctx.createLinearGradient(0, padT, 0, rect.height - padB);
+      grad.addColorStop(0, fillA);
+      grad.addColorStop(1, fillB);
+
+      ctx.beginPath();
+      ctx.moveTo(coords[0].x, rect.height - padB);
+      for (const c of coords) {
+        ctx.lineTo(c.x, c.y);
+      }
+      ctx.lineTo(coords[coords.length - 1].x, rect.height - padB);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.beginPath();
+      for (let i = 0; i < coords.length; i += 1) {
+        const c = coords[i];
+        if (i === 0) ctx.moveTo(c.x, c.y);
+        else ctx.lineTo(c.x, c.y);
+      }
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+    function bindTilt(selector) {
+      const cards = document.querySelectorAll(selector);
+      cards.forEach((card) => {
+        card.addEventListener("pointermove", (ev) => {
+          const rect = card.getBoundingClientRect();
+          const px = (ev.clientX - rect.left) / rect.width;
+          const py = (ev.clientY - rect.top) / rect.height;
+          const rx = (0.5 - py) * 6.5;
+          const ry = (px - 0.5) * 7.5;
+          card.style.setProperty("--rx", `${rx.toFixed(2)}deg`);
+          card.style.setProperty("--ry", `${ry.toFixed(2)}deg`);
+          card.style.setProperty("--lx", `${(px * 100).toFixed(1)}%`);
+          card.style.setProperty("--ly", `${(py * 100).toFixed(1)}%`);
+        });
+
+        card.addEventListener("pointerleave", () => {
+          card.style.setProperty("--rx", "0deg");
+          card.style.setProperty("--ry", "0deg");
+          card.style.setProperty("--lx", "50%");
+          card.style.setProperty("--ly", "50%");
+        });
+      });
+    }
+
+    function bindRevealOnScroll() {
+      const targets = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        }
+      }, { threshold: 0.18 });
+
+      targets.forEach((el) => io.observe(el));
+    }
+
+    function bindReportToggle() {
+      els.briefTrigger.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        els.briefZone.classList.toggle("open");
+      });
+
+      document.addEventListener("click", (ev) => {
+        if (!els.briefZone.contains(ev.target)) {
+          els.briefZone.classList.remove("open");
+        }
+      });
+    }
+
+    function placeCoins() {
+      const coins = els.coinLayer.querySelectorAll(".coin");
+      coins.forEach((coin) => {
+        const bx = Number(coin.dataset.x) || 20;
+        const by = Number(coin.dataset.y) || 50;
+        coin.style.left = `${bx}%`;
+        coin.style.top = `${by}%`;
+      });
+    }
+
+    function bindMouseParallax() {
+      const coins = els.coinLayer.querySelectorAll(".coin");
+
+      window.addEventListener("pointermove", (ev) => {
+        mouse.x = ev.clientX;
+        mouse.y = ev.clientY;
+        mouse.active = true;
+
+        const nx = (ev.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (ev.clientY / window.innerHeight - 0.5) * 2;
+        coins.forEach((coin) => {
+          const depth = Number(coin.dataset.depth) || 20;
+          const tx = nx * depth;
+          const ty = ny * depth;
+          coin.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px)`;
+        });
+      });
+
+      window.addEventListener("pointerleave", () => {
+        mouse.active = false;
+        coins.forEach((coin) => {
+          coin.style.transform = "translate(0px, 0px)";
+        });
+      });
+    }
+
+    function bindPlayChips() {
+      const chips = document.querySelectorAll(".play-chip");
+      let timer = null;
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const mode = chip.dataset.mode;
+          els.body.classList.remove("chip-boost", "chip-shield", "chip-chaos");
+          if (mode === "boost") els.body.classList.add("chip-boost");
+          if (mode === "shield") els.body.classList.add("chip-shield");
+          if (mode === "chaos") els.body.classList.add("chip-chaos");
+
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(() => {
+            els.body.classList.remove("chip-boost", "chip-shield", "chip-chaos");
+          }, 6000);
+        });
+      });
+    }
+
+    function setupFxCanvas() {
+      const canvas = els.fxCanvas;
+      const ctx = canvas.getContext("2d");
+      let w = 0;
+      let h = 0;
+      const particles = [];
+
+      function resize() {
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = `${w}px`;
+        canvas.style.height = `${h}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const count = Math.floor(Math.min(120, Math.max(56, w / 16)));
+        particles.length = 0;
+        for (let i = 0; i < count; i += 1) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            r: Math.random() * 2.7 + 1.1
+          });
+        }
+      }
+
+      function frame() {
+        const bull = sceneState.mood === "bull";
+        ctx.clearRect(0, 0, w, h);
+        const color = bull ? "100,245,182" : "255,130,118";
+
+        for (const p of particles) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const distSq = dx * dx + dy * dy;
+
+          if (mouse.active && distSq < 21000) {
+            const dist = Math.max(18, Math.sqrt(distSq));
+            const force = (21000 - distSq) / 21000;
+            p.vx += (dx / dist) * force * 0.4;
+            p.vy += (dy / dist) * force * 0.4;
+          }
+
+          p.vx *= 0.985;
+          p.vy *= 0.985;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10;
+          if (p.y > h + 10) p.y = -10;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${color}, 0.54)`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(frame);
+      }
+
+      resize();
+      frame();
+      window.addEventListener("resize", resize);
+    }
+
+    async function refresh() {
+      const results = await Promise.allSettled([
+        fetchTicker(),
+        fetchChartData(),
+        fetchFearGreed(),
+        fetchGlobalData(),
+        fetchGeoNews()
+      ]);
+
+      const tickerRes = results[0].status === "fulfilled" ? results[0].value : null;
+      const chartRes = results[1].status === "fulfilled" ? results[1].value : null;
+      const fearGreedRes = results[2].status === "fulfilled" ? results[2].value : null;
+      const globalRes = results[3].status === "fulfilled" ? results[3].value : null;
+      const geoRes = results[4].status === "fulfilled" ? results[4].value : [];
+
+      if (!tickerRes) {
+        els.badge.className = "pill bear";
+        els.badge.textContent = "OFFLINE";
+        els.moodLine.textContent = "行情接口短暂不可用，页面将自动重试。";
+        els.footnote.innerHTML = `<span class="error-tip">获取核心行情失败：${escapeHtml(results[0].reason?.message || "Unknown error")}</span>`;
+        return;
+      }
+
+      updateMoodUI(tickerRes);
+
+      if (chartRes) {
+        latestChartPoints = chartRes.points;
+        drawChart(latestChartPoints);
+        els.chartCaption.textContent = `过去 7 天收盘轨迹（4 小时粒度） · ${chartRes.source}`;
+      } else {
+        drawChart(latestChartPoints);
+        els.chartCaption.textContent = "走势图获取失败";
+      }
+
+      const geoTone = evaluateGeoRisk(geoRes);
+      updateGeoDot(geoTone.score);
+
+      const altSig = deriveAltSentiment(tickerRes.changePct, globalRes?.btcDominance);
+      const instSig = deriveInstitutionSentiment(tickerRes.changePct, tickerRes.volumeUsd, fearGreedRes?.value);
+      const actionPlan = deriveActionPlan(tickerRes.changePct, altSig.score, instSig.score, geoTone.score);
+
+      updateSignalNodes(altSig, instSig, actionPlan);
+      updateMacroCards(fearGreedRes, globalRes, tickerRes, geoTone);
+
+      const reportText = buildReportText({
+        snapshot: tickerRes,
+        fearGreed: fearGreedRes,
+        globalData: globalRes,
+        geoTone,
+        actionPlan,
+        altSig,
+        instSig
+      });
+      els.reportContent.textContent = reportText;
+      renderHeadlines(geoRes);
+
+      const failedCount = results.filter((r) => r.status === "rejected").length;
+      if (failedCount === 0) {
+        els.footnote.textContent = "提示：右侧胶囊保持原有打开方式；向下滚动可分层查看实时市场信息。";
+      } else {
+        els.footnote.innerHTML = `<span class="error-tip">部分数据源不可用（${failedCount}/5），已使用可用数据继续生成页面。</span>`;
+      }
+    }
+
+    function init() {
+      placeCoins();
+      bindReportToggle();
+      bindMouseParallax();
+      bindPlayChips();
+      bindRevealOnScroll();
+      bindTilt(".signal-node");
+      bindTilt(".metric-card");
+      bindTilt(".headline-board");
+      setupFxCanvas();
+      drawChart(latestChartPoints);
+      refresh();
+      setInterval(refresh, REFRESH_MS);
+
+      window.addEventListener("resize", () => {
+        drawChart(latestChartPoints);
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

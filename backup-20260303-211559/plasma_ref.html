@@ -1,0 +1,795 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Mon Feb 23 2026 15:52:02 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.plasma.to" data-wf-page="68762d4ac364502c1ae19240" data-wf-site="68762d4ac364502c1ae1924b" lang="en-US"><head><meta charset="utf-8"/><title>Plasma - Stablecoin infrastructure for instant payments</title><link rel="alternate" hrefLang="x-default" href="https://www.plasma.to/"/><link rel="alternate" hrefLang="en-US" href="https://www.plasma.to/"/><link rel="alternate" hrefLang="zh" href="https://www.plasma.to/zh"/><link rel="alternate" hrefLang="ja" href="https://www.plasma.to/ja"/><link rel="alternate" hrefLang="ko" href="https://www.plasma.to/ko"/><link rel="alternate" hrefLang="pt" href="https://www.plasma.to/pt"/><link rel="alternate" hrefLang="es" href="https://www.plasma.to/es"/><link rel="alternate" hrefLang="vi" href="https://www.plasma.to/vi"/><link rel="alternate" hrefLang="tr" href="https://www.plasma.to/tr"/><meta content="Plasma is a high‑performance Layer 1 built for USD₮ payments at global scale. Instant transfers, low fees and full EVM compatibility." name="description"/><meta content="Plasma - Stablecoin infrastructure for instant payments" property="og:title"/><meta content="Plasma is a high‑performance Layer 1 built for USD₮ payments at global scale. Instant transfers, low fees and full EVM compatibility." property="og:description"/><meta content="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68d50498e58578b3a508786e_OG%20Image.png" property="og:image"/><meta content="Plasma - Stablecoin infrastructure for instant payments" property="twitter:title"/><meta content="Plasma is a high‑performance Layer 1 built for USD₮ payments at global scale. Instant transfers, low fees and full EVM compatibility." property="twitter:description"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/css/plasma-revamp.webflow.shared.72eea6de1.min.css" rel="stylesheet" type="text/css" integrity="sha384-cu6m3hJpiCLLKmedGtbo4KyN/jRzxvKvzQppJP+htsizlB5KacgLFr1ch+2s1QEW" crossorigin="anonymous"/><link href="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/css/plasma-revamp.webflow.68762d4ac364502c1ae19240-0a67d332b.min.css" rel="stylesheet" type="text/css" integrity="sha384-6qeUJWD3mNRfl8Qn/IKuIvDe3d36oCR4uttPLFAGz1HWds+ot+FvvyMvr+A+MTsQ" crossorigin="anonymous"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Vollkorn:400,400italic,700,700italic"]  }});</script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/689dfbe8eea249d71902247c_Plasma_logo_32x32.png" rel="shortcut icon" type="image/x-icon"/><link href="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/689dfbedcd6a33a92b3a6e55_Plasma_logo_256x256.png" rel="apple-touch-icon"/><link href="https://www.plasma.to/" rel="canonical"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-E2S1Q7F2X2"></script><script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('set', 'developer_id.dZGVlNj', true);gtag('js', new Date());gtag('config', 'G-E2S1Q7F2X2');</script><!-- Start cookieyes banner --> 
+<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/95ce523174511c1de0c2e056/script.js"></script> 
+<!-- End cookieyes banner -->
+
+<!--Global Script-->
+<!--script defer src="http://localhost:8080/main.js"></script-->
+<script defer src="https://cdn.jsdelivr.net/npm/@wonderstruck_dev/plasma@0.7.4/dist/main.js"></script>
+
+<script>
+  const url = window.location.href;
+  const hostname = window.location.hostname;
+
+  if (url.includes('/dev/') && !hostname.includes('webflow.io')) {
+    window.location.href = '/';
+  }
+</script>
+
+<script>
+  // Function to update favicon based on color scheme
+  function updateFavicon(isDark) {
+    const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+
+    if (isDark) {
+      link.href = 'https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68a48eaec70ff135da562e7c_Plasma_logo_white_32x32.png'; // Replace with your white favicon URL
+    } else {
+      link.href = 'https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68a48eae628be8bf1eb6b0a6_Plasma_logo_black_32x32.png'; // Replace with your black favicon URL
+    }
+
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }
+
+  // Check if user prefers dark mode on page load
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    updateFavicon(true); // Set white favicon for dark mode
+  } else {
+    updateFavicon(false); // Set black favicon for light mode
+  }
+
+  // Listen for changes in color scheme preference
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    if (e.matches) {
+      updateFavicon(true); // User switched to dark mode
+    } else {
+      updateFavicon(false); // User switched to light mode
+    }
+  });
+</script>
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init Br Vr ci Wr Jr zr qr capture Ni calculateEventProperties Xr register register_once register_for_session unregister unregister_for_session es getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Zr Yr createPersonProfile ts Nr rs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Kr debug O Qr getPageViewId captureTraceFeedback captureTraceMetric Dr".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_d64ZL9nAlew45OMK27ro79wvw3kuHJFHCVxmLD6o04o', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2025-11-30',
+        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+    })
+</script></head><body><div class="page-wrapper"><div class="global-el__wrap"><div class="global-css w-embed"><!--link href="http://localhost:8080/main.css" rel="stylesheet" type="text/css"-->
+<!--link href="https://cdn.jsdelivr.net/npm/@wonderstruck_dev/plasma@0.7.4/dist/main.css" rel="stylesheet" type="text/css"-->
+<style>
+  /*
+  Page scaling params
+  */
+
+  html {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 992px) and (max-width: 1440px) {
+    html {
+      font-size: clamp(0.75rem, 0.1964rem + 0.8929vw, 1rem);
+    }
+  }
+
+  @media (max-width: 479px) {
+    html {
+      font-size: clamp(0.75rem, -0.0063rem + 3.3613vw, 1rem);
+    }
+  }
+
+  /*
+  Page wide normalizing
+  */
+
+  * {
+    text-underline-position: under;
+    outline: none;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* -webkit-user-select: none;
+    user-select: none; */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  li,
+  blockquote,
+  fieldset {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .page-wrapper {
+    overflow-x: clip;
+  }
+
+  .w-checkbox::before,
+  .w-checkbox::after {
+    display: none;
+  }
+
+  input[type='date'] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  /*
+  Utility Classes
+  */
+
+  /*-- Display Params --*/
+
+  .visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .display--block {
+    display: block;
+  }
+
+  .display--inline-block {
+    display: inline-block;
+  }
+
+  .display--inline {
+    display: inline;
+  }
+
+  .display--flex {
+    display: flex;
+  }
+
+  .display--inline-flex {
+    display: inline-flex;
+  }
+
+  .display--none {
+    display: none;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .home-impact__graphic-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    touch-action: none;
+  }
+
+  canvas {
+    display: block;
+    pointer-events: auto; /* ✅ Allow clicks/touches on canvas */
+    -webkit-touch-callout: none; /* ✅ Prevent iOS popup */
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: none;
+  }
+
+  .home-impact__graphic-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* ✅ Overlay does not block clicks/taps */
+    gap: 0;
+    flex-direction: column;
+  }
+
+  .home-impact__graphic-label {
+    background: #ececec;
+    color: #000;
+    padding: 16px;
+    margin-bottom: -12px;
+    font-size: 20px;
+    transform: translateY(-10px) scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s ease;
+    border-radius: 0;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .home-impact__graphic-label {
+      max-width: calc(132px);
+      white-space: normal; /* 👈 allow text to wrap */
+      word-wrap: break-word; /* 👈 break long words if needed */
+      overflow-wrap: break-word; /* 👈 safe fallback */
+      font-size: 16px;
+      padding: 12px;
+    }
+  }
+
+  .home-impact__graphic-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 60px);
+    grid-auto-rows: 60px;
+    gap: 0;
+    max-width: calc(60px * 5);
+    line-height: 0; /* kill any inline gaps */
+    /* image-rendering: pixelated;
+    background-color: #ececec; fallback background for transparency */
+  }
+
+  .home-impact__graphic-logos img {
+    display: block;
+    width: 101%;
+    height: 101%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    object-fit: cover; /* Ensures no letterboxing */
+    transform: scale(1);
+    transform-origin: 0 0;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 600px) {
+    .home-impact__graphic-logos {
+      max-width: calc(52px * 3); /* ✅ Max 3 logos per row mobile */
+      grid-template-columns: repeat(auto-fill, 52px);
+      grid-auto-rows: 52px; /* ✅ Match row height */
+    }
+    .home-impact__graphic-logos img {
+      width: 100%; /* ✅ Fill the grid cell */
+      height: 100%; /* ✅ Fill the grid cell */
+    }
+  }
+
+  :root {
+    --partners-icon-outline: #a8a8a8;
+    --partners-icon-fill: #ececec;
+    --partners-icon-duration: 0.3s;
+    --partners-icon-ease: ease;
+  }
+
+  section {
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+  }
+
+  .navbar--colored {
+    color: white;
+  }
+
+  .navbar__menu-btn {
+    /* stylelint-disable-next-line declaration-no-important */
+    color: inherit !important;
+  }
+
+  @media (width < 992px) {
+    .navbar:has(.w--open) {
+      color: black;
+      background-color: white;
+    }
+
+    .navbar:has(.w--open) .navbar__menu-burger-line:nth-child(1) {
+      transform: translateY(5px) rotateZ(45deg);
+    }
+
+    .navbar:has(.w--open) .navbar__menu-burger-line:nth-child(3) {
+      transform: translateY(-5px) rotateZ(-45deg);
+    }
+    .navbar:has(.w--open) .navbar__menu-burger-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navbar__buttons-container .navbar__dashboard-cta {
+      display: none;
+    }
+  }
+
+  .navbar--alt-active {
+    background-color: white;
+    color: black;
+  }
+
+  .navbar[data-wf--global-navbar--variant='alt']:not(.navbar--alt-active)
+  .button {
+    background-color: white;
+    color: black;
+  }
+
+  .navbar[data-wf--global-navbar--variant='alt']:not(.navbar--alt-active)
+  .button:hover {
+    background-color: var(--color--button-white-hover);
+  }
+
+  .button__icon {
+    width: 1rem;
+    height: 1rem;
+    background-color: currentColor;
+    mask-image: url(https://cdn.prod.website-files.com/686294612d064c19739f718e/6867b31f7daac3673ded8f2a_button-arrow.svg);
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+
+  @media (width > 1441px) {
+    .home-hero__title {
+      font-size: clamp(5rem, -2.5209rem + 8.3507vw, 7.5rem);
+      width: clamp(49.5rem, 34.4582rem + 16.7015vw, 54.5rem);
+    }
+  }
+
+  .home-partners__marquee {
+    /* stylelint-disable-next-line no-unknown-animations */
+    animation: marquee 30s linear infinite;
+  }
+
+  .home-partners__card-graphic {
+    transition: padding var(--partners-icon-duration) var(--partners-icon-ease);
+  }
+
+  .home-partners__card:hover .home-partners__card-graphic,
+  .home-partners__card.active .home-partners__card-graphic {
+    padding-top: 0%;
+    padding-right: 0%;
+  }
+
+  .home-partners__card-icon-bg {
+    --color: var(--partners-icon-fill);
+
+    color: var(--color);
+    background-color: var(--color);
+    transition: color var(--partners-icon-duration) var(--partners-icon-ease),
+      background-color var(--partners-icon-duration) var(--partners-icon-ease);
+  }
+
+  .home-partners__card--countries:hover .home-partners__card-icon-bg,
+  .home-partners__card--countries.active .home-partners__card-icon-bg {
+    --color: #7f6430;
+  }
+
+  .home-partners__card--currencies:hover .home-partners__card-icon-bg,
+  .home-partners__card--currencies.active .home-partners__card-icon-bg {
+    --color: #306a7f;
+  }
+
+  .home-partners__card--payment:hover .home-partners__card-icon-bg,
+  .home-partners__card--payment.active .home-partners__card-icon-bg {
+    --color: #307f61;
+  }
+
+  .home-partners__card:hover .card-icon--active,
+  .home-partners__card.active .card-icon--active {
+    opacity: 1;
+  }
+
+  /* font-size: clamp(2.375rem, -7.9583rem + 16.6667vw, 5.375rem); */
+
+  .home-investors {
+    background-size: clamp(2.375rem, -7.9583rem + 16.6667vw, 5.375rem);
+  }
+
+  @media (min-width: 992px) {
+    .home-investors__marquee:not(:first-child) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .home-investors__marquee {
+      /* stylelint-disable-next-line no-unknown-animations */
+      animation: marquee 25s linear infinite;
+    }
+  }
+
+  .home-impact__card--alt * {
+    opacity: 1;
+    color: inherit;
+  }
+
+  .testimonials-slider__slide.active {
+    z-index: 2;
+  }
+
+  .testimonials-slider__client * {
+    display: inline;
+  }
+
+  .testimonials-slider__navigation.disabled {
+    color: rgb(255 255 255 / 0.25);
+    pointer-events: none;
+  }
+
+  .footer__nav-divider {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 48%,
+      rgb(255 255 255 / 0.1) 48%,
+      rgb(255 255 255 / 0.1) 52%,
+      transparent 53%,
+      transparent 100%
+    );
+  }
+
+  .insights__featured-card .insights__img-wrp {
+    aspect-ratio: 812/484;
+  }
+
+  .insights__featured-card:hover .insights__img,
+  .insights__card:hover .insights__img {
+    transform: scale(1.05);
+  }
+
+  .insights__card-time::after {
+    content: ' min read';
+  }
+
+  .faq__accordion.open .faq__accordion-icon .accordion-icon-line--plus {
+    transform: rotateZ(-180deg);
+  }
+
+  .faq__toc .toc-link {
+    padding: 0.25rem 0.375rem;
+    font-size: var(--text-14);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    background-color: #ececec;
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .chain-docs-swiper__slide.active {
+    z-index: 2;
+  }
+
+  .chain-docs-swiper__bullet-template .chain-docs-swiper__bullet-title {
+    opacity: 0.5;
+  }
+
+  .chain-docs-swiper__bullet-template.active .chain-docs-swiper__bullet-title {
+    opacity: 1;
+  }
+
+  .chain-docs-swiper__bullet-template .chain-docs-swiper__bullet-desc {
+    height: 0;
+  }
+
+  .chain-docs-swiper__bullet-template.active .chain-docs-swiper__bullet-desc {
+    height: auto;
+  }
+
+  .chain-docs-swiper__bullet-template .chain-docs-swiper__bullet-progress-bar {
+    opacity: 0;
+  }
+
+  .chain-docs-swiper__bullet-template.active
+  .chain-docs-swiper__bullet-progress-bar {
+    opacity: 1;
+  }
+
+  .chain-features__card:hover,
+  .chain-features__card.active {
+    color: white;
+  }
+
+  .chain-features__card.chain-features__card--transfers:hover,
+  .chain-features__card.chain-features__card--transfers.active {
+    background-color: var(--color--plasma-green);
+  }
+
+  .chain-features__card.chain-features__card--tokens:hover,
+  .chain-features__card.chain-features__card--tokens.active {
+    background-color: #be6d41;
+  }
+
+  .chain-features__card.chain-features__card--payments:hover,
+  .chain-features__card.chain-features__card--payments.active {
+    background-color: var(--color--plasma-brown);
+  }
+
+  .chain-features__card:hover .chain-features__card-icon-wrp,
+  .chain-features__card.active .chain-features__card-icon-wrp {
+    width: 15.5rem;
+  }
+
+  .chain-features__card:hover .card-icon--active,
+  .chain-features__card.active .card-icon--active {
+    opacity: 1;
+  }
+
+  .chain-features__card:hover .chain-features__card-hide,
+  .chain-features__card.active .chain-features__card-hide {
+    max-height: 12.5rem;
+  }
+
+  .chain-features__card:hover .button,
+  .chain-features__card.active .button {
+    color: white;
+  }
+
+  .w-richtext [fs-inject-element='element'] {
+    display: block;
+  }
+
+  .xpl-division__marquee {
+    /* stylelint-disable-next-line no-unknown-animations */
+    animation: marquee 20s linear infinite;
+  }
+
+  .xpl-market__card:hover .xpl-market__card-logo,
+  .xpl-market__card:hover .xpl-market__text {
+    transform: translateY(-1.125rem);
+  }
+
+  .xpl-market__card:hover .xpl-market__card-tag {
+    opacity: 1;
+  }
+
+  .xpl-market__radio-filter input {
+    position: absolute;
+    z-index: -1;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .xpl-market__radio-filter.is-list-active {
+    color: var(--color--white);
+    background-color: var(--color--plasma-green-dark);
+  }
+
+  .mica_richtext > :last-child {
+    margin-bottom: 0;
+  }
+</style></div><div class="navbar_wrap"><div data-wf--global-navbar--variant="alt" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-variant-737d8cd5-25ab-fb0f-47b3-c2e10e404fee w-nav"><div class="navbar__container container"><a id="w-node-bbd23a94-d10e-e7a1-602f-d3e090a2fd48-90a2fd46" href="/?r=0" aria-current="page" class="navbar__brand w-nav-brand w--current"><div class="navbar__brand-icon w-embed"><svg
+      width="100%"
+      viewBox="0 0 312 73"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style="display: block;"
+    >
+      <path
+        d="M72.5826 36.6945C72.5826 37.0625 72.5774 37.4305 72.5669 37.7985H72.5252H55.0261V36.9942H38.1434C38.1434 36.826 38.1486 36.6577 38.1486 36.4947C38.1486 36.3318 38.1486 36.1583 38.1434 35.9953H55.0261V35.1962H55.0522H72.5513C72.5722 35.6956 72.5826 36.1951 72.5826 36.6945ZM37.8456 33.0723L54.3679 31.0273L54.4672 31.8264L71.914 29.6657C71.7468 28.8035 71.5483 27.9518 71.3237 27.1159L54.1485 29.2451L54.2478 30.0442L37.6471 32.0997C37.7203 32.4257 37.7882 32.7516 37.8456 33.0828V33.0723ZM36.9837 29.8549L52.7747 25.8857L52.968 26.6638L69.7253 22.4528C69.3805 21.6379 69.0097 20.8336 68.6127 20.0503L52.3464 24.1403L52.5396 24.9184L36.6181 28.9244C36.7487 29.2346 36.8688 29.5447 36.9837 29.8602V29.8549ZM35.5838 26.8425L50.3457 21.2331L50.6278 21.9849L66.2464 16.0495C65.7397 15.303 65.2069 14.5775 64.6427 13.8731L49.7137 19.5456L49.9957 20.2973L35.0562 25.9751C35.2391 26.259 35.4167 26.5481 35.5838 26.8425ZM33.6459 24.0562L46.684 17.2166L47.0496 17.9316L61.4668 10.3665C60.8034 9.71987 60.1139 9.10478 59.4035 8.51072L45.8534 15.6184L46.2191 16.3334L32.9616 23.2887C33.1914 23.541 33.4212 23.7934 33.6406 24.0562H33.6459ZM30.5013 21.0491L42.3066 13.4945L42.7349 14.1727L55.7626 5.83481C54.9425 5.30909 54.1067 4.82017 53.2448 4.3628L41.3507 11.9752L41.779 12.6534L29.6341 20.4235C29.9319 20.6233 30.2192 20.8336 30.5065 21.0491H30.5013ZM27.7118 19.2932L37.6054 11.1288L38.112 11.7492L49.254 2.54907C48.3085 2.18632 47.3369 1.86038 46.3549 1.57649L36.4718 9.73565L36.9785 10.356L26.7246 18.8201C27.0589 18.9673 27.388 19.125 27.7118 19.2932ZM24.0188 17.8475L31.8333 10.0195L32.3922 10.5873L42.3223 0.656479C41.2462 0.477735 40.1545 0.346305 39.0471 0.26219L30.5796 8.74204L31.1385 9.30981L22.8852 17.5741C23.2666 17.653 23.6427 17.7423 24.0188 17.8475ZM19.6988 17.1903L25.9306 9.58845L26.547 10.0984L34.6592 0.204361C33.4265 0.26219 32.2094 0.383105 31.0132 0.56185L24.5516 8.44238L25.168 8.95232L18.4191 17.1851C18.6071 17.1798 18.8004 17.1746 18.9884 17.1746C19.2287 17.1746 19.4638 17.1746 19.6988 17.1851V17.1903ZM15.964 17.4164L20.7645 9.94068L21.4331 10.377L27.2365 1.33466C25.9097 1.68163 24.6143 2.10221 23.3501 2.59113L19.2653 8.95758L19.9339 9.39393L14.6163 17.6793C15.0603 17.5741 15.5095 17.4847 15.964 17.4111V17.4164ZM11.8164 18.5782L15.2692 12.0646L15.9692 12.4431L20.5398 3.82656C19.072 4.5468 17.6616 5.36166 16.3139 6.2659L13.6865 11.2182L14.3917 11.5967L10.3277 19.2617C10.8083 19.0146 11.3045 18.7885 11.8112 18.5835L11.8164 18.5782ZM8.83896 20.1081L10.3068 15.9128L11.059 16.181L13.9111 8.03232C12.4641 9.1889 11.106 10.4506 9.84712 11.8122L8.61957 15.3188L9.37177 15.5869L7.44949 21.0754C7.89872 20.7337 8.35839 20.413 8.83374 20.1133L8.83896 20.1081ZM5.17722 23.1099L5.82494 20.0608L6.60326 20.229L7.90916 14.0886C6.53535 15.8445 5.31825 17.7318 4.27876 19.7243L4.85858 19.8505L3.6676 24.8974C4.1325 24.2718 4.63919 23.6725 5.17722 23.1099ZM2.48706 26.6743V22.6368C1.51547 25.2181 0.825954 28.4302 0.455078 31.5793C0.909532 29.8339 1.59905 28.1884 2.48706 26.6743ZM0.481196 41.5154C0.862519 44.2018 1.53114 46.7936 2.46094 49.2592V46.2784C1.60427 44.8064 0.930426 43.2082 0.481196 41.5154ZM3.79296 48.2709L4.83246 53.1495L4.25264 53.2757C5.29214 55.2734 6.50924 57.1555 7.88304 58.9114L6.57714 52.771L5.79883 52.9392L5.14065 49.8533C4.6653 49.3486 4.21085 48.8229 3.79296 48.2656V48.2709ZM7.41292 51.8983L9.34565 57.4184L8.59345 57.6865L9.821 61.193C11.0799 62.5546 12.438 63.8164 13.885 64.9729L11.0329 56.8243L10.2807 57.0924L8.80762 52.8762C8.33227 52.5712 7.86737 52.2505 7.41814 51.9088L7.41292 51.8983ZM10.2963 53.7226L14.3708 61.4086L13.6656 61.7871L16.293 66.7394C17.6407 67.6436 19.0511 68.4585 20.5189 69.1787L15.9483 60.5622L15.2431 60.9407L11.7799 54.4112C11.2732 54.2062 10.7769 53.9749 10.2911 53.7278L10.2963 53.7226ZM14.5849 55.3102L19.9078 63.6061L19.2392 64.0424L23.324 70.4089C24.5881 70.8978 25.8836 71.3184 27.2104 71.6653L21.407 62.623L20.7383 63.0593L15.9326 55.5731C15.4782 55.4995 15.0237 55.4101 14.5797 55.305L14.5849 55.3102ZM18.3877 55.8149L25.1366 64.0477L24.5202 64.5576L30.9818 72.4381C32.178 72.6169 33.3951 72.7378 34.6279 72.7956L26.5156 62.8964L25.8993 63.4063L19.6675 55.8044C19.4429 55.8149 19.213 55.8149 18.9832 55.8149C18.7847 55.8149 18.581 55.8149 18.3825 55.8044L18.3877 55.8149ZM22.8643 55.4259L31.1124 63.6849L30.5535 64.2527L39.021 72.7326C40.1284 72.6484 41.2201 72.517 42.2962 72.3383L32.3713 62.4022L31.8072 62.9752L23.9979 55.1525C23.627 55.2524 23.2457 55.347 22.8643 55.4259ZM26.7089 54.1904L36.9524 62.6493L36.4457 63.2696L46.3288 71.4288C47.3108 71.1449 48.2824 70.8189 49.2279 70.4562L38.0807 61.2561L37.574 61.8765L27.691 53.7173C27.3671 53.8855 27.038 54.0432 26.7037 54.1904H26.7089ZM29.6132 52.5817L41.7425 60.3466L41.3141 61.0248L53.2083 68.6372C54.0702 68.1798 54.9112 67.6857 55.726 67.1652L42.6984 58.8273L42.27 59.5055L30.4804 51.9614C30.1931 52.1769 29.9058 52.3872 29.608 52.587L29.6132 52.5817ZM32.9563 49.7218L46.1982 56.6666L45.8325 57.3816L59.3826 64.4893C60.093 63.8952 60.7825 63.2801 61.4459 62.6335L47.0287 55.0684L46.6631 55.7834L33.6406 48.9543C33.4212 49.2171 33.1966 49.4748 32.9616 49.7218H32.9563ZM35.051 47.0302L49.9696 52.7027L49.6876 53.4544L64.6166 59.1269C65.1755 58.4225 65.7084 57.697 66.2203 56.9505L50.6017 51.0151L50.3196 51.7669L35.5786 46.1627C35.4114 46.4571 35.2338 46.7463 35.051 47.0302ZM36.6129 44.0861L52.5083 48.0816L52.315 48.8597L68.5813 52.9497C68.9836 52.1664 69.3544 51.3621 69.6992 50.5472L52.9419 46.3362L52.7486 47.1143L36.9785 43.1503C36.8636 43.4658 36.7382 43.776 36.6129 44.0861ZM37.6471 40.9108L54.2216 42.9611L54.1224 43.7602L71.2976 45.8893C71.5222 45.0482 71.7207 44.1965 71.8879 43.3396L54.441 41.1789L54.3418 41.978L37.8456 39.9329C37.7882 40.2642 37.7203 40.5901 37.6471 40.916V40.9108Z"
+        fill="currentColor"
+      />
+      <path
+        d="M95.2779 60.7279H89.4619V12.2611H112.38C122.489 12.2611 127.889 18.7002 127.889 26.4549C127.889 36.2868 120.965 41.5489 112.38 41.5489H95.2779V60.7279ZM95.2779 17.5924V36.2175H112.657C118.68 36.2175 121.935 31.8555 121.935 26.4549C121.935 20.7082 117.78 17.5924 112.657 17.5924H95.2779Z"
+        fill="currentColor"
+      />
+      <path d="M140.125 60.7279H134.378V12.261H140.125V60.7279Z" fill="currentColor" />
+      <path
+        d="M160.87 61.2818C152.561 61.2818 147.23 56.989 147.23 50.2729C147.23 41.8258 155.4 40.2334 162.739 39.4717C168.347 38.9178 173.194 38.9871 173.263 36.0098C173.194 31.3709 169.386 28.1167 163.847 28.1167C158.515 28.1167 154.361 31.0939 153.738 35.4559H148.06C148.753 28.2551 155.261 23.2007 163.985 23.2007C173.055 23.2007 178.872 28.6013 178.872 36.356V54.2195C178.872 55.3965 178.872 56.0197 178.872 56.0197V60.7279C174.925 60.7279 176.532 60.7279 173.54 60.7279V54.4272C171.394 58.6507 167.239 61.2818 160.87 61.2818ZM161.7 56.3659C168.555 56.3659 173.263 52.0039 173.263 45.9109V41.1335C171.671 43.2798 167.586 43.6953 163.085 44.1799C158.031 44.7338 152.976 45.4262 152.976 50.1344C152.976 53.9425 156.438 56.3659 161.7 56.3659Z"
+        fill="currentColor"
+      />
+      <path
+        d="M200.191 61.4895C191.467 61.4895 185.028 56.9198 184.544 49.1651H190.152C190.567 53.9425 194.929 56.5736 200.468 56.5736C205.661 56.5736 208.154 54.5657 208.154 50.8961C208.154 47.4341 205.453 46.6725 201.645 45.357L196.314 43.5568C190.913 41.7566 185.513 40.0949 185.513 33.448C185.513 27.2166 190.36 23.2007 198.391 23.2007C206.492 23.2007 212.1 27.5628 213 35.7329H207.392C206.769 30.6092 203.169 28.1167 198.183 28.1167C193.683 28.1167 191.052 30.1246 191.052 33.3095C191.052 37.1176 195.068 37.8793 198.114 38.9178L203.099 40.5796C209.815 42.7952 213.831 45.08 213.831 51.173C213.831 57.6122 209.123 61.4895 200.191 61.4895Z"
+        fill="currentColor"
+      />
+      <path
+        d="M225.536 60.7279H219.789V24.0316H224.358L224.912 29.7091C227.405 25.7626 232.182 23.2007 237.445 23.2007C242.984 23.2007 247.138 26.0395 249.007 30.4708C251.361 26.178 256.416 23.2007 262.024 23.2007C269.779 23.2007 274.764 28.6706 274.764 36.1483V60.7279H269.017V36.356C269.017 31.4401 265.971 28.2551 261.055 28.2551C254.2 28.2551 250.184 32.8249 250.115 38.4332V60.7279H244.438V36.356C244.438 31.4401 241.391 28.2551 236.475 28.2551C229.621 28.2551 225.605 32.8249 225.536 38.4332V60.7279Z"
+        fill="currentColor"
+      />
+      <path
+        d="M293.329 61.2818C285.02 61.2818 279.689 56.989 279.689 50.2729C279.689 41.8258 287.859 40.2334 295.198 39.4717C300.806 38.9178 305.653 38.9871 305.722 36.0098C305.653 31.3709 301.845 28.1167 296.306 28.1167C290.975 28.1167 286.82 31.0939 286.197 35.4559H280.52C281.212 28.2551 287.72 23.2007 296.444 23.2007C305.515 23.2007 311.331 28.6013 311.331 36.356V54.2195C311.331 55.3965 311.331 56.0197 311.331 56.0197V60.7279C307.384 60.7279 308.991 60.7279 305.999 60.7279V54.4272C303.853 58.6507 299.699 61.2818 293.329 61.2818ZM294.16 56.3659C301.014 56.3659 305.722 52.0039 305.722 45.9109V41.1335C304.13 43.2798 300.045 43.6953 295.544 44.1799C290.49 44.7338 285.436 45.4262 285.436 50.1344C285.436 53.9425 288.897 56.3659 294.16 56.3659Z"
+        fill="currentColor"
+      />
+    </svg></div></a><nav role="navigation" id="w-node-bbd23a94-d10e-e7a1-602f-d3e090a2fd4a-90a2fd46" class="navbar__menu w-nav-menu"><ul role="list" class="navbar__menu-container"><li><a dev-attribute="" href="/chain" class="navbar__link">Chain</a></li><li><a dev-attribute="navbar-link-one" href="/one" class="navbar__link">One</a></li><li><a dev-attribute="" href="/insights" class="navbar__link">Insights</a></li><li><a dev-attribute="" href="https://www.plasma.to/learn" class="navbar__link">Learn</a></li><li><a dev-attribute="" href="https://www.plasma.to/docs/get-started/introduction/start-here" target="_blank" class="navbar__link">Documentation</a></li><li><a dev-attribute="" href="https://jobs.ashbyhq.com/plasma" target="_blank" class="navbar__link">Careers</a></li><li><a dev-attribute="" href="/faq" class="navbar__link">FAQ</a></li><li class="navbar__menu-dashboard-cta-wrp"><div class="navbar__dashboard-cta"><a data-wf--button--color="black" href="https://app.plasma.to/" target="_blank" class="button w-variant-03839d16-eecc-654a-90e6-175fa6497beb w-inline-block"><div data-wf--button-inside--variant="with-icon" class="button__isnide"><div class="button_icon-download w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 16" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+<path d="M2 12.6663H14V13.9997H2V12.6663ZM8.66667 8.78074L12.7141 4.73334L13.6569 5.67615L8 11.333L2.34315 5.67615L3.28595 4.73334L7.33333 8.78074V1.33301H8.66667V8.78074Z" fill="currentColor"/>
+</svg></div><div>Go to Dashboard</div><div class="button__icon"></div></div></a></div></li></ul></nav><div id="w-node-c7a8b470-cc7c-42b0-a5f0-eb8221c958ee-90a2fd46" class="navbar__buttons-container"><div data-hover="false" data-delay="0" class="navbar__locale-dd w-dropdown"><div class="navbar__locale-toggle w-dropdown-toggle"><svg viewBox="0 0 40 40" class="navbar__locale-icon"><path d="M20 27C23.866 27 27 23.866 27 20C27 16.134 23.866 13 20 13C16.134 13 13 16.134 13 20C13 23.866 16.134 27 20 27ZM20 14C20.516 14 21.1415 14.474 21.6675 15.6135C21.854 16.0185 22.0165 16.485 22.1475 17H17.8525C17.9835 16.485 18.146 16.018 18.3325 15.6135C18.8585 14.474 19.484 14 20 14ZM17.425 15.1945C17.18 15.7245 16.977 16.3335 16.8245 17H14.8025C15.4947 15.8033 16.5777 14.8814 17.8695 14.389C17.7008 14.6456 17.552 14.9147 17.4245 15.194M16.639 18C16.5449 18.6625 16.4985 19.3309 16.5 20C16.5 20.693 16.5485 21.365 16.6395 22H14.3415C14.115 21.3576 13.9995 20.6812 14 20C14 19.299 14.12 18.6255 14.3415 18H16.639ZM16.824 23C16.9765 23.6665 17.1795 24.2755 17.424 24.8055C17.5555 25.0905 17.704 25.3615 17.869 25.6105C16.5775 25.1182 15.4947 24.1964 14.8025 23H16.824ZM17.8525 23H22.1465C22.0293 23.4759 21.8686 23.94 21.6665 24.3865C21.142 25.526 20.5165 26 20 26C19.4835 26 18.8585 25.526 18.3325 24.3865C18.1304 23.94 17.9697 23.4759 17.8525 23ZM22.349 22H17.65C17.5486 21.3382 17.4984 20.6695 17.5 20C17.5 19.2965 17.5535 18.624 17.65 18H22.35C22.4465 18.624 22.5 19.2965 22.5 20C22.5 20.7035 22.4465 21.376 22.35 22M23.176 23H25.198C24.5057 24.1965 23.4227 25.1183 22.131 25.6105C22.296 25.3615 22.4445 25.0905 22.576 24.8055C22.8205 24.2755 23.0235 23.6665 23.176 23ZM25.659 22H23.361C23.452 21.365 23.5005 20.693 23.5005 20C23.5005 19.307 23.452 18.635 23.361 18H25.659C25.8854 18.6425 26.0007 19.3188 26 20C26 20.701 25.88 21.3745 25.6585 22M22.1305 14.389C23.4223 14.8814 24.5053 15.8033 25.1975 17H23.175C23.0225 16.3335 22.8195 15.7245 22.575 15.1945C22.4475 14.9152 22.2987 14.6461 22.13 14.3895" fill="currentColor" class="path"></path></svg></div><nav class="navbar__locale-list w-dropdown-list"><div class="locales-wrapper w-locales-list"><div role="list" class="w-locales-items"><div role="listitem" class="w-locales-item"><a hreflang="en-US" href="/?r=0" aria-current="page" class="navbar__locale-link w--current">EN</a></div><div role="listitem" class="w-locales-item"><a hreflang="zh" href="/zh" class="navbar__locale-link">ZH</a></div><div role="listitem" class="w-locales-item"><a hreflang="ja" href="/ja" class="navbar__locale-link">JA</a></div><div role="listitem" class="w-locales-item"><a hreflang="ko" href="/ko" class="navbar__locale-link">KO</a></div><div role="listitem" class="w-locales-item"><a hreflang="pt" href="/pt" class="navbar__locale-link">PT</a></div><div role="listitem" class="w-locales-item"><a hreflang="es" href="/es" class="navbar__locale-link">ES</a></div><div role="listitem" class="w-locales-item"><a hreflang="vi" href="/vi" class="navbar__locale-link">VI</a></div><div role="listitem" class="w-locales-item"><a hreflang="tr" href="/tr" class="navbar__locale-link">TR</a></div></div></div></nav></div><div class="navbar__dashboard-cta"><a data-wf--button--color="black" href="https://app.plasma.to/" target="_blank" class="button w-variant-03839d16-eecc-654a-90e6-175fa6497beb w-inline-block"><div data-wf--button-inside--variant="with-icon" class="button__isnide"><div class="button_icon-download w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 16" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+<path d="M2 12.6663H14V13.9997H2V12.6663ZM8.66667 8.78074L12.7141 4.73334L13.6569 5.67615L8 11.333L2.34315 5.67615L3.28595 4.73334L7.33333 8.78074V1.33301H8.66667V8.78074Z" fill="currentColor"/>
+</svg></div><div>Go to Dashboard</div><div class="button__icon"></div></div></a></div><div class="navbar__menu-btn w-nav-button"><div class="navbar__menu-burger"><div class="navbar__menu-burger-line"></div><div class="navbar__menu-burger-line"></div><div class="navbar__menu-burger-line"></div></div></div></div></div></div></div><div class="hide w-embed w-script"><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get language code from URL or HTML lang attribute
+    const langFromUrl = window.location.pathname.split('/').find(segment => segment.length === 2);
+    const langFromHtml = document.documentElement.lang?.split('-')[0];
+    const langCode = langFromUrl || langFromHtml;
+
+    if (langCode && langCode !== 'en') {
+      const navLink = document.querySelector('[dev-attribute="navbar-link-one"]');
+
+      if (navLink) {
+        const currentHref = navLink.getAttribute('href');
+        navLink.setAttribute('href', `${currentHref}/${langCode}`);
+      }
+    }
+  });
+</script></div></div><div class="custom-code"><div class="w-embed"><style>
+  /* Blog Card Hover Animation */
+  .blog_card .blog_card-image,
+  .blog_card .blog_card-video
+  {
+    transform: scale(1);
+  }
+  .blog_card:hover .blog_card-image,
+  .blog_card:hover .blog_card-video
+  {
+    transform: scale(1.2);
+  }
+  .blog_card:hover .blog_card-heading {
+  	color: #2F5046;
+  }
+</style></div></div><main class="main-wrapper"><section data-section-navbar="" class="home-hero"><div class="columns-container container"><div id="w-node-_91188956-4c4f-b65b-f7df-0464e1616391-1ae19240" class="columns-second"><h1 home-animation-hero="title" class="home-hero__title">Redefining how money moves</h1><p home-animation-hero="text" class="home-hero__desc">Stablecoin infrastructure for a new global financial system.</p></div></div><video autoplay="" loop="" muted="" playsinline="" poster="https://cdn.prod.website-files.com/686294612d064c19739f718e/6876260a681afcbedc81838d_first-frame%201.jpg" width="100%" height="100%" class="home-hero__background"><source src="https://d2mauh2ajufnc1.cloudfront.net/plasma/hero-footage-v2.webm" type="video/webm"/><source src="https://d2mauh2ajufnc1.cloudfront.net/plasma/hero-footage-v2.mp4" type="video/mp4"/></video></section><section class="home-tldr"><div class="columns-container container"><h2 class="text-18">About</h2><div class="columns-second columns-second--tldr"><h3 data-animation-heading="split" class="home-tldr__title text-44">Plasma is a high-performance layer 1 blockchain purpose-built for stablecoins.</h3><p data-animation-text="split" class="text-16">Designed for stablecoins from the ground up, Plasma powers near instant, fee-free payments with institutional-grade security.</p></div><div id="w-node-_91188956-4c4f-b65b-f7df-0464e16163a2-1ae19240" class="home--tldr__logos-wrp"><div class="home-tldr__logo-main"><img width="33" height="27" alt="" src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6957e6d9ba2de3fdc968af18_Tether-symbol.svg" loading="lazy" class="home-tldr__logo-img is-tether"/></div><div id="w-node-_91188956-4c4f-b65b-f7df-0464e16163a5-1ae19240" class="home-tldr__logos-spacing"></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae1929f_Frame%201597880415.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae1928b_sNUSD%20-%20Option%205.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae1928d_Frame%201597880471.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae1928a_Frame%201597880475.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae1929e_Frame%201597880416.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192d9_Axis.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c5_AUSD.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192dd_USD.ai.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c7_USDS.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192d8_Uranium.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192de_USDtb.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e3c5c36ff8e6d2bc5145ca_b026887cfde9a261f8955f071e21af17_DAYLIGHT%20profile%20icon%20Universal%201000x1000%202.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae1929c_Frame%201597880469.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68b5880172d5570ff7cc6d84_55db5f71eac46161063a3a6f0f8fcca4_crvUSD.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192db_lvlUSD.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192df_USDO.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c6_Neutrl%20USD.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c3_Argentine%20Pesos.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c8_Indonesian%20Rupiah.avif" loading="eager" alt="" class="home-tldr__logo-img"/></div><div data-animation-array="element" class="home-tldr__logo-card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/687a434a103de5a173e515d1_rUSD.svg" loading="eager" alt="" class="home-tldr__logo-img"/></div></div></div></section><section class="home-stats"><div class="columns-container container"><div id="w-node-_91188956-4c4f-b65b-f7df-0464e16163bc-1ae19240" class="div-block-4"></div><div class="home-stats__container"><h2 data-animation-heading="split" class="text-32">Designed for stablecoins</h2><div class="home-stats__wrp"><div data-animation-array="element" class="home-stats__card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19288_stats-icon.avif" loading="lazy" alt="" class="home-stats__card-icon"/><h3 class="home-stats__card-title text-24">1000+</h3><div class="text-18">Transactions per second</div></div><div data-animation-array="element" class="home-stats__wrp-divider"></div><div data-animation-array="element" class="home-stats__card"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19287_stats-icon-1.avif" loading="lazy" alt="" class="home-stats__card-icon"/><h3 class="home-stats__card-title text-24">&lt;1s</h3><div class="text-18">Block times</div></div></div></div><div id="w-node-_91188956-4c4f-b65b-f7df-0464e16163c6-1ae19240" class="columns-second"><div class="home-stats__graphic"><div class="home-stats__graphic-text grahic-text--inner"><div class="home-stats__graphic-counter"><span class="home-stats__graphic-number">20</span>$</div><div class="text-24">USD₮ transfer fees</div></div><div class="home-stats__graphic-square square--left"><div class="home-stats__graphic-text grahic-text--outer"><div class="home-stats__graphic-counter"><span class="home-stats__graphic-number">20</span>$</div><div class="text-24">USD₮ transfer fees</div></div></div><div class="home-stats__graphic-square square--right"></div></div></div></div></section><section class="home-partners"><div class="columns-container container"><h2 data-animation-heading="split" id="w-node-_91188956-4c4f-b65b-f7df-0464e16163da-1ae19240" class="home-partners__title text-32">The best tooling to build stablecoin applications</h2><div id="w-node-_91188956-4c4f-b65b-f7df-0464e16163dc-1ae19240" class="columns-second columns-second--partners-list"><h3 class="text-14">Partners</h3><div class="home-partners__marquee-wrp"><div class="home-partners__marquee"><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19269_yellow-card.png" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19264_prive.png" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19265_walapay.png" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68f1fe9478b404246d809098_Frame-1.svg" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68f1fe94e56c697ab629d0c6_Vector.svg" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68f1fe940620769c171a9040_Frame.svg" loading="lazy" alt="" class="home-partners__marquee-logo"/></div></div><div class="home-partners__marquee"><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19269_yellow-card.png" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19264_prive.png" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19265_walapay.png" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68f1fe9478b404246d809098_Frame-1.svg" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68f1fe94e56c697ab629d0c6_Vector.svg" loading="lazy" alt="" class="home-partners__marquee-logo"/></div><div class="home-partners__marquee-item"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68f1fe940620769c171a9040_Frame.svg" loading="lazy" alt="" class="home-partners__marquee-logo"/></div></div></div></div></div><div class="home-partners__card-wrp container"><div class="home-partners__card home-partners__card--countries"><div class="home-partners__card-graphic"><div class="home-partners__card-icon-bg"><div class="progress-bar"></div><div class="home-partners__card-icon"></div><div class="home-partners__card-icon card-icon--active"></div></div></div><h3 class="home-partners__card-title text-32">100+</h3><div class="text-18">Countries</div></div><div class="home-partners__card home-partners__card--currencies"><div class="home-partners__card-graphic"><div class="home-partners__card-icon-bg"><div class="progress-bar"></div><div class="home-partners__card-icon"></div><div class="home-partners__card-icon card-icon--active"></div></div></div><h3 class="home-partners__card-title text-32">100+</h3><div class="text-18">Currencies</div></div><div class="home-partners__card home-partners__card--payment"><div class="home-partners__card-graphic"><div class="home-partners__card-icon-bg"><div class="progress-bar"></div><div class="home-partners__card-icon"></div><div class="home-partners__card-icon card-icon--active"></div></div></div><h3 class="home-partners__card-title text-32">200+</h3><div class="text-18">Payment Methods</div></div></div></section><section data-section-navbar="" data-w-id="91188956-4c4f-b65b-f7df-0464e1616401" class="home-investors"><div class="container"><h2 class="home-investors__title text-24">Backed by</h2><div class="home-investors__marquee-wrp"><div class="home-investors__marquee"><div data-wf--marquee-investor-card--variant="smaller" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356c77f18bcb15b294ffb_bitfinex.svg" loading="eager" alt="" class="home-investors__card-logo w-variant-fe1e3a4f-2c3f-d4a4-1383-3e7123a8fca8"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355a5a472f12a0c81c3e0_136021533876d9f931b390a8c2b3278d_bitfinex.svg" loading="eager" alt="" class="home-investors__card-logo w-variant-fe1e3a4f-2c3f-d4a4-1383-3e7123a8fca8 home-investors__card-logo--alt"/><h3 class="visually-hidden">Bitfinex.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568051ed12c808436a7d_Layer_2.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355546f7240b55b125e5a_Layer_2.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Founders Fund.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356801f5aaa18ed980abf_72af5e9c983d9d45e4f5df00e89e9937_Clip%20path%20group.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355541c0369c4b6f7d4b9_732c758e250cbc3834bde6a4d9b247d8_Clip%20path%20group.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Framework.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69135680ee27115cf44926bd_Flow%20Traders.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355b713a902fe85b4dc88_Flow%20Traders.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Flow Traders.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356806009c8db50a5ab7b_Frame.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355547ab40f737e9d735f_Frame.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">DRW.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568051bfac03996dc462_Frame-1.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355541949a21cf0bc83f7_Frame-1.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">USDT.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568052f0049a48718a42_Shine%20Capital.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355b7cccc96039541a8a9_Shine%20Capital.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Shine Capital</h3></div></div></div><div class="home-investors__marquee"><div data-wf--marquee-investor-card--variant="smaller" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356c77f18bcb15b294ffb_bitfinex.svg" loading="eager" alt="" class="home-investors__card-logo w-variant-fe1e3a4f-2c3f-d4a4-1383-3e7123a8fca8"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355a5a472f12a0c81c3e0_136021533876d9f931b390a8c2b3278d_bitfinex.svg" loading="eager" alt="" class="home-investors__card-logo w-variant-fe1e3a4f-2c3f-d4a4-1383-3e7123a8fca8 home-investors__card-logo--alt"/><h3 class="visually-hidden">Bitfinex.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568051ed12c808436a7d_Layer_2.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355546f7240b55b125e5a_Layer_2.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Founders Fund.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356801f5aaa18ed980abf_72af5e9c983d9d45e4f5df00e89e9937_Clip%20path%20group.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355541c0369c4b6f7d4b9_732c758e250cbc3834bde6a4d9b247d8_Clip%20path%20group.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Framework.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69135680ee27115cf44926bd_Flow%20Traders.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355b713a902fe85b4dc88_Flow%20Traders.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Flow Traders.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356806009c8db50a5ab7b_Frame.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355547ab40f737e9d735f_Frame.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">DRW.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568051bfac03996dc462_Frame-1.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355541949a21cf0bc83f7_Frame-1.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">USDT.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568052f0049a48718a42_Shine%20Capital.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355b7cccc96039541a8a9_Shine%20Capital.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Shine Capital</h3></div></div></div><div class="home-investors__marquee"><div data-wf--marquee-investor-card--variant="smaller" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356c77f18bcb15b294ffb_bitfinex.svg" loading="eager" alt="" class="home-investors__card-logo w-variant-fe1e3a4f-2c3f-d4a4-1383-3e7123a8fca8"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355a5a472f12a0c81c3e0_136021533876d9f931b390a8c2b3278d_bitfinex.svg" loading="eager" alt="" class="home-investors__card-logo w-variant-fe1e3a4f-2c3f-d4a4-1383-3e7123a8fca8 home-investors__card-logo--alt"/><h3 class="visually-hidden">Bitfinex.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568051ed12c808436a7d_Layer_2.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355546f7240b55b125e5a_Layer_2.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Founders Fund.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356801f5aaa18ed980abf_72af5e9c983d9d45e4f5df00e89e9937_Clip%20path%20group.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355541c0369c4b6f7d4b9_732c758e250cbc3834bde6a4d9b247d8_Clip%20path%20group.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Framework.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69135680ee27115cf44926bd_Flow%20Traders.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355b713a902fe85b4dc88_Flow%20Traders.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Flow Traders.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691356806009c8db50a5ab7b_Frame.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355547ab40f737e9d735f_Frame.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">DRW.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568051bfac03996dc462_Frame-1.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355541949a21cf0bc83f7_Frame-1.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">USDT.</h3></div></div><div data-wf--marquee-investor-card--variant="base" class="home-investors__card"><div class="home-investors__card-logo-wrp"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6913568052f0049a48718a42_Shine%20Capital.svg" loading="eager" alt="" class="home-investors__card-logo"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/691355b7cccc96039541a8a9_Shine%20Capital.svg" loading="eager" alt="" class="home-investors__card-logo home-investors__card-logo--alt"/><h3 class="visually-hidden">Shine Capital</h3></div></div></div></div></div></section><section data-section-navbar="" class="testimonials"><div class="testimonials__container container"><h2 class="testimonials__title">Perspectives</h2></div><div class="testimonials-slider"><div class="testimonials-slider__track"><div class="testimonials-slider__slide"><div class="testimonials-slider__slide-progress-wrp"><div class="testimonials-slider__slide-progress"></div></div><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19284_testimonial-bg.avif" loading="lazy" alt="" sizes="(max-width: 2880px) 100vw, 2880px" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19284_testimonial-bg-p-500.avif 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19284_testimonial-bg-p-800.avif 800w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19284_testimonial-bg-p-1080.avif 1080w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19284_testimonial-bg-p-1600.avif 1600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19284_testimonial-bg-p-2000.avif 2000w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae19284_testimonial-bg.avif 2880w" class="testimonials-slider__bg"/><div class="testimonials-slider__bg-blur"></div><div class="testimonials-slider__content container"><div class="div-block"><p class="testimonials-slider__feedback-text">“With strong growth in both supply and users, we are entering a new phase of mainstream adoption for stablecoins. To meet this challenge, it’s more important than ever to have secure, decentralized, and scalable infrastructure in place. Plasma is designed to provide these essential rails”</p><div class="testimonials-slider__client"><div>Paolo Ardoino, </div><div class="testimonials-slider__client-highlight-text">CEO, Tether</div></div></div></div></div><div class="testimonials-slider__slide"><div class="testimonials-slider__slide-progress-wrp"><div class="testimonials-slider__slide-progress"></div></div><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent.avif" loading="lazy" alt="" sizes="(max-width: 2880px) 100vw, 2880px" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent-p-500.avif 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent-p-800.avif 800w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent-p-1080.avif 1080w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent-p-1600.avif 1600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent-p-2000.avif 2000w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent-p-2600.avif 2600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/6877a879e031c64f83340379_Scrott%20Bessent.avif 2880w" class="testimonials-slider__bg"/><div class="testimonials-slider__bg-blur"></div><div class="testimonials-slider__content container"><div class="div-block"><p class="testimonials-slider__feedback-text">“We are going to keep the U.S. the dominant reserve currency in the world, and we will use stablecoins to do that.”</p><div class="testimonials-slider__client"><div>Scott Bessent,  </div><div class="testimonials-slider__client-highlight-text">U.S. Treasury Secretary</div></div></div></div></div><div class="testimonials-slider__slide"><div class="testimonials-slider__slide-progress-wrp"><div class="testimonials-slider__slide-progress"></div></div><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%20-%20Chris%20Giancarlo.avif" loading="lazy" alt="" sizes="(max-width: 2880px) 100vw, 2880px" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%2520-%2520Chris%2520Giancarlo-p-500.avif 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%2520-%2520Chris%2520Giancarlo-p-800.avif 800w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%2520-%2520Chris%2520Giancarlo-p-1080.avif 1080w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%2520-%2520Chris%2520Giancarlo-p-1600.avif 1600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%2520-%2520Chris%2520Giancarlo-p-2000.avif 2000w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%2520-%2520Chris%2520Giancarlo-p-2600.avif 2600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68762d4ac364502c1ae192c0_Perspective%20-%20Chris%20Giancarlo.avif 2880w" class="testimonials-slider__bg"/><div class="testimonials-slider__bg-blur"></div><div class="testimonials-slider__content container"><div class="div-block"><p class="testimonials-slider__feedback-text">&quot;We’re talking about a market that could be trillions of dollars—stablecoins could fundamentally change how we think about money movement globally.&quot;</p><div class="testimonials-slider__client"><div>Chris Giancarlo, </div><div class="testimonials-slider__client-highlight-text">former Chairman of the CFTC</div></div></div></div></div><div class="testimonials-slider__slide"><div class="testimonials-slider__slide-progress-wrp"><div class="testimonials-slider__slide-progress"></div></div><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68763750e570140d5cb2932d_David%20Sacks.avif" loading="lazy" alt="" sizes="(max-width: 2880px) 100vw, 2880px" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68763750e570140d5cb2932d_David%20Sacks-p-500.avif 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68763750e570140d5cb2932d_David%20Sacks-p-800.avif 800w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68763750e570140d5cb2932d_David%20Sacks-p-1080.avif 1080w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68763750e570140d5cb2932d_David%20Sacks-p-1600.avif 1600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68763750e570140d5cb2932d_David%20Sacks-p-2000.avif 2000w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68763750e570140d5cb2932d_David%20Sacks.avif 2880w" class="testimonials-slider__bg"/><div class="testimonials-slider__bg-blur"></div><div class="testimonials-slider__content container"><div class="div-block"><p class="testimonials-slider__feedback-text">“Stablecoins have the potential to ensure American dollar dominance internationally to increase the usage of the US dollar digitally as the world’s reserve currency, and in the process create potentially trillions of dollars of demand for US Treasuries, which could lower long-term interest rates.”</p><div class="testimonials-slider__client"><div>David Sacks, </div><div class="testimonials-slider__client-highlight-text">Crypto and AI Czar</div></div></div></div></div></div></div><div class="testimonials__container testimonials__container--sliden-navigation container"><button type="button" class="testimonials-slider__navigation testimonials-slider__navigation--prev"><svg viewBox="0 0 40 40" class="testimonials-slider__navigation-icon"><path d="M21.3333 24L17.3333 20L21.3333 16L22.2667 16.9333L19.2 20L22.2667 23.0667L21.3333 24Z" fill="currentColor"></path></svg></button><button type="button" class="testimonials-slider__navigation testimonials-slider__navigation--next"><svg viewBox="0 0 40 40" class="testimonials-slider__navigation-icon"><path d="M18.6667 16L22.6667 20L18.6667 24L17.7333 23.0667L20.8 20L17.7333 16.9333L18.6667 16Z" fill="currentColor"></path></svg></button></div></section><section data-section-navbar="" class="section_blog"><div class="container"><div class="blog_heading-wrap"><h2 class="blog_heading">Learn Center</h2><a data-wf--button--color="grey" href="https://www.plasma.to/learn" target="_blank" class="button w-variant-ad27f901-7729-33b4-f8dd-18b5bc5b6079 w-inline-block"><div data-wf--button-inside--variant="with-icon" class="button__isnide"><div class="button_icon-download w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 16" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+<path d="M2 12.6663H14V13.9997H2V12.6663ZM8.66667 8.78074L12.7141 4.73334L13.6569 5.67615L8 11.333L2.34315 5.67615L3.28595 4.73334L7.33333 8.78074V1.33301H8.66667V8.78074Z" fill="currentColor"/>
+</svg></div><div>See more articles</div><div class="button__icon"></div></div></a></div><div class="blog_grid"><a id="w-node-_99268414-3d90-7076-da6d-75bd46675b6c-1ae19240" href="/learn/how-stablecoin-payments-work" target="_blank" class="blog_card w-inline-block"><div class="blog_card-asset"><div data-poster-url="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b%2F69651e199d90d1d4bce6b6f1_%5B012%5D%20How%20Stablecoin%20Payments%20Work_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b%2F69651e199d90d1d4bce6b6f1_%5B012%5D%20How%20Stablecoin%20Payments%20Work_mp4.mp4,https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b%2F69651e199d90d1d4bce6b6f1_%5B012%5D%20How%20Stablecoin%20Payments%20Work_webm.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="blog_card-video w-background-video w-background-video-atom"><video id="48727a01-ca80-0abc-3d01-0014d9c5b1f0-video" autoplay="" loop="" style="background-image:url(&quot;https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b%2F69651e199d90d1d4bce6b6f1_%5B012%5D%20How%20Stablecoin%20Payments%20Work_poster.0000000.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover"><source src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b%2F69651e199d90d1d4bce6b6f1_%5B012%5D%20How%20Stablecoin%20Payments%20Work_mp4.mp4" data-wf-ignore="true"/><source src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b%2F69651e199d90d1d4bce6b6f1_%5B012%5D%20How%20Stablecoin%20Payments%20Work_webm.webm" data-wf-ignore="true"/></video></div></div><div class="blog_card-content"><h3 class="blog_card-heading">How Stablecoin Payments Work</h3><p class="blog_card-text">A deep dive into how stablecoin payments work, how they differ from traditional bank transfers, and where they already add value in real-world payments.</p><div class="blog_card-reading"><div class="icon-embed-xxsmall w-embed"><svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.9987 13.3335C10.932 13.3335 13.332 10.9335 13.332 8.00016C13.332 5.06683 10.932 2.66683 7.9987 2.66683C5.06536 2.66683 2.66536 5.06683 2.66536 8.00016C2.66536 10.9335 5.06536 13.3335 7.9987 13.3335ZM7.9987 1.3335C11.6654 1.3335 14.6654 4.3335 14.6654 8.00016C14.6654 11.6668 11.6654 14.6668 7.9987 14.6668C4.33203 14.6668 1.33203 11.6668 1.33203 8.00016C1.33203 4.3335 4.33203 1.3335 7.9987 1.3335ZM11.332 9.26683L10.8654 10.1335L7.33203 8.20016V4.66683H8.33203V7.60016L11.332 9.26683Z" fill="currentColor"/>
+</svg></div><div>10 min read</div></div></div></a><a href="/learn/crypto-collateralized-stablecoins" target="_blank" class="blog_card w-inline-block"><div class="blog_card-asset"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0b7a693e165417454a_%5B58%5D%20What%20are%20Crypto-Collateralized%20Stablecoins_.jpg" loading="lazy" sizes="(max-width: 2400px) 100vw, 2400px" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0b7a693e165417454a_%5B58%5D%20What%20are%20Crypto-Collateralized%20Stablecoins_-p-500.jpg 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0b7a693e165417454a_%5B58%5D%20What%20are%20Crypto-Collateralized%20Stablecoins_-p-800.jpg 800w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0b7a693e165417454a_%5B58%5D%20What%20are%20Crypto-Collateralized%20Stablecoins_-p-1080.jpg 1080w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0b7a693e165417454a_%5B58%5D%20What%20are%20Crypto-Collateralized%20Stablecoins_-p-1600.jpg 1600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0b7a693e165417454a_%5B58%5D%20What%20are%20Crypto-Collateralized%20Stablecoins_-p-2000.jpg 2000w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0b7a693e165417454a_%5B58%5D%20What%20are%20Crypto-Collateralized%20Stablecoins_.jpg 2400w" alt="" class="blog_card-image"/></div><div class="blog_card-content"><h3 class="blog_card-heading">What are Crypto-Collateralized Stablecoins?</h3><p class="blog_card-text">Crypto-collateralized stablecoins use crypto assets to maintain stable value in DeFi markets.</p><div class="blog_card-reading"><div class="icon-embed-xxsmall w-embed"><svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.9987 13.3335C10.932 13.3335 13.332 10.9335 13.332 8.00016C13.332 5.06683 10.932 2.66683 7.9987 2.66683C5.06536 2.66683 2.66536 5.06683 2.66536 8.00016C2.66536 10.9335 5.06536 13.3335 7.9987 13.3335ZM7.9987 1.3335C11.6654 1.3335 14.6654 4.3335 14.6654 8.00016C14.6654 11.6668 11.6654 14.6668 7.9987 14.6668C4.33203 14.6668 1.33203 11.6668 1.33203 8.00016C1.33203 4.3335 4.33203 1.3335 7.9987 1.3335ZM11.332 9.26683L10.8654 10.1335L7.33203 8.20016V4.66683H8.33203V7.60016L11.332 9.26683Z" fill="currentColor"/>
+</svg></div><div>12 min read</div></div></div></a><a href="/learn/cbdc-vs-stablecoin" target="_blank" class="blog_card w-inline-block"><div class="blog_card-asset"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0c8bf472f38a3c2fd6_%5B006%5D%20CBDC%20vs%20Stablecoin_%20What%27s%20The%20Difference_.jpg" loading="lazy" sizes="(max-width: 2400px) 100vw, 2400px" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0c8bf472f38a3c2fd6_%5B006%5D%20CBDC%20vs%20Stablecoin_%20What%27s%20The%20Difference_-p-500.jpg 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0c8bf472f38a3c2fd6_%5B006%5D%20CBDC%20vs%20Stablecoin_%20What%27s%20The%20Difference_-p-800.jpg 800w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0c8bf472f38a3c2fd6_%5B006%5D%20CBDC%20vs%20Stablecoin_%20What%27s%20The%20Difference_-p-1080.jpg 1080w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0c8bf472f38a3c2fd6_%5B006%5D%20CBDC%20vs%20Stablecoin_%20What%27s%20The%20Difference_-p-1600.jpg 1600w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0c8bf472f38a3c2fd6_%5B006%5D%20CBDC%20vs%20Stablecoin_%20What%27s%20The%20Difference_-p-2000.jpg 2000w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/69651e0c8bf472f38a3c2fd6_%5B006%5D%20CBDC%20vs%20Stablecoin_%20What%27s%20The%20Difference_.jpg 2400w" alt="" class="blog_card-image"/></div><div class="blog_card-content"><h3 class="blog_card-heading">CBDC vs Stablecoins: What Are The Differences?</h3><p class="blog_card-text">Understand the trade-offs between CBDC oversight and stablecoin flexibility in global payments and savings.</p><div class="blog_card-reading"><div class="icon-embed-xxsmall w-embed"><svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.9987 13.3335C10.932 13.3335 13.332 10.9335 13.332 8.00016C13.332 5.06683 10.932 2.66683 7.9987 2.66683C5.06536 2.66683 2.66536 5.06683 2.66536 8.00016C2.66536 10.9335 5.06536 13.3335 7.9987 13.3335ZM7.9987 1.3335C11.6654 1.3335 14.6654 4.3335 14.6654 8.00016C14.6654 11.6668 11.6654 14.6668 7.9987 14.6668C4.33203 14.6668 1.33203 11.6668 1.33203 8.00016C1.33203 4.3335 4.33203 1.3335 7.9987 1.3335ZM11.332 9.26683L10.8654 10.1335L7.33203 8.20016V4.66683H8.33203V7.60016L11.332 9.26683Z" fill="currentColor"/>
+</svg></div><div>17 min read</div></div></div></a></div></div></section><section class="impact-globe"><div class="columns-container container"><div class="home-stats__container home-stats__container--impact"><h2 data-animation-heading="split" class="text-32">Global Reach.<br/>Real Impact.</h2><div class="home-impact__container"><div data-animation-array="element" data-wf--home-impact-card--variant="base" class="home-impact__card"><h3 class="text-24">$7B</h3><div class="text-16">Stablecoin Deposits</div></div><div data-animation-array="element" data-wf--home-impact-card--variant="base" class="home-impact__card"><h3 class="text-24">25+</h3><div class="text-16">Supported Stablecoins</div></div><div data-animation-array="element" data-wf--home-impact-card--variant="w-border" class="home-impact__card w-variant-e28d67da-0180-d391-e3d2-a9823c4f35ce"><h3 class="text-24">4th</h3><div class="text-16">Network by USD₮ balance</div></div><div data-animation-array="element" data-wf--home-impact-card--variant="w-border" class="home-impact__card w-variant-e28d67da-0180-d391-e3d2-a9823c4f35ce"><h3 class="text-24">100+</h3><div class="text-16">Partnerships</div></div></div></div><div class="columns-second"><div class="home-impact__graphic"><div class="home-impact__graphic-canvas"></div><div class="home-impact__graphic-ui"><div class="home-impact__graphic-label"></div><div class="home-impact__graphic-logos"></div></div></div></div></div></section><section class="newsletter"><div class="container container--flex-vertical-center container--newsletter"><div class="newsletter_wrap"><div id="w-node-de844db6-039b-c5b6-c558-3f9f9b2bede2-4a704974" class="newsletter_img-wrap"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e3c1f4635cc4e948e18ccc_Frame%201597880890.avif" loading="lazy" width="464" alt="" class="newsletter_image"/></div><div class="newsletter_content"><div class="newsletter_top">Where Money Moves</div><h2 class="newsletter__title">Sign up for the newsletter</h2><p class="newsletter__desc"><span class="opacity-70">Get regular updates and in-depth research on all things stablecoins.</span><br/>Never spammed, never shared<span class="opacity-70">, just the info you need to stay ahead.</span></p><div class="newsletter__form-block w-form"><form id="wf-form-Newsletter-Subscription-Form" name="wf-form-Newsletter-Subscription-Form" data-name="Newsletter Subscription Form" method="get" class="newsletter__form" data-wf-page-id="68762d4ac364502c1ae19240" data-wf-element-id="492ede69-7d87-be10-12c6-a9a54a70497e"><input class="newsletter__form-input w-input" maxlength="256" name="email" data-name="Email" placeholder="Enter your email" type="email" id="email" required=""/><input type="submit" data-wait="Please wait..." class="newsletter__form-submit w-button" value="Subscribe"/></form><div class="success-message w-form-done"><div class="text-16">Thank you! You have signup!</div></div><div class="w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div><div class="newsletter__legal-disclaimer"><span class="opacity-60">By submitting this form I have read and acknowledged the</span> <a href="/privacy-policy" class="link-underline">Privacy Policy</a></div></div></div></div></section></main><footer class="footer"><div class="container"><div class="footer__container"><div class="footer_1st-block"><div class="footer_1st-block-left"><h3 class="footer_heading">Designed for stablecoins</h3><div class="footer_systems-wrap"><div class="footer_systems-dot-wrap"><div class="footer_systems-dot base"></div><div class="footer_systems-dot scale"></div><div class="w-embed"><style>
+  .footer_systems-dot.base {
+    animation: dotPulse 0.3s ease-in-out forwards;
+  }
+
+  .footer_systems-dot.scale {
+    animation: dotScale 2s ease-out 0.3s infinite;
+  }
+
+  @keyframes dotPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes dotScale {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+</style></div></div><div>All systems operational</div></div></div><nav class="footer__navigation"><div class="footer__navigation-item"><h3 class="footer_nav-heading">Products</h3><a href="/chain" class="footer__nav-link">Chain</a><a href="https://www.plasma.to/docs/get-started/introduction/start-here" target="_blank" class="footer__nav-link">Documentation</a><a href="/one" class="footer__nav-link">Plasma One</a></div><div class="footer__navigation-item"><h3 class="footer_nav-heading">About</h3><a href="https://jobs.ashbyhq.com/plasma" target="_blank" class="footer__nav-link">Careers</a><a href="/brand" class="footer__nav-link">Brand Kit</a></div><div class="footer__navigation-item"><h3 class="footer_nav-heading">Learn</h3><a href="https://www.plasma.to/learn" class="footer__nav-link">Learn Center</a><a href="/insights" class="footer__nav-link">Insights</a><a href="/faq" class="footer__nav-link">FAQs</a></div><div class="footer__navigation-item"><h3>Legal</h3><a href="#" class="footer__nav-link cky-banner-element">Cookie Settings</a><a href="/cookie-policy" class="footer__nav-link">Cookie Policy</a><a href="/terms-of-service" class="footer__nav-link">Terms of Service</a><a href="/privacy-policy" class="footer__nav-link">Privacy Policy</a><a href="/uk-disclaimer" class="footer__nav-link">UK Disclaimer</a></div></nav></div><div class="footer_cta-blocks"><a href="/one" class="footer_cta-block w-inline-block"><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e3d57ff33efb5efaed93b2_Layer_1%20(3).svg" loading="lazy" width="Auto" height="Auto" alt="" class="footer_cta-image"/><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e4fe0a65d43966ab41eb0b_bf4e70336f1bad98dfc3f3f45607db73_Group%2010122716.avif" loading="lazy" sizes="100vw" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e4fe0a65d43966ab41eb0b_bf4e70336f1bad98dfc3f3f45607db73_Group%2010122716-p-500.avif 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e4fe0a65d43966ab41eb0b_bf4e70336f1bad98dfc3f3f45607db73_Group%2010122716-p-800.avif 800w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e4fe0a65d43966ab41eb0b_bf4e70336f1bad98dfc3f3f45607db73_Group%2010122716.avif 1674w" alt="" class="footer_cta-image-background plasma-one"/></a><a href="https://x.com/Plasma" target="_blank" class="footer_cta-block w-inline-block"><div class="footer_block-text-wrap"><div>Join the community</div><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e3d5e3680a287df26a5213_Frame%20(25).svg" loading="lazy" alt=""/></div><img src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e3d60abc50b6e492dd88d6_a5bff82767918f786d7b6c33b773db6e_Group%20%285%29.avif" loading="lazy" sizes="100vw" srcset="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e3d60abc50b6e492dd88d6_a5bff82767918f786d7b6c33b773db6e_Group%20%285%29-p-500.avif 500w, https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/68e3d60abc50b6e492dd88d6_a5bff82767918f786d7b6c33b773db6e_Group%20%285%29.avif 837w" alt="" class="footer_cta-image-background"/></a><div class="w-embed"><style>
+	.footer_cta-block:hover .footer_cta-image-background {
+  	transform: scale(1.1);
+  }
+</style></div></div><div class="footer_divider"></div><div class="footer_bottom-wrap"><div>© 2026 Plasma</div><div class="footer__socials-wrp"><a href="https://discord.com/invite/plasmafdn" target="_blank" class="footer_social-link w-inline-block"><div class="icon-embed-xxsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 16" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+<path d="M13.5535 2.81854C12.5178 2.33396 11.4104 1.98178 10.2526 1.78125C10.1104 2.03832 9.94429 2.38409 9.82976 2.65915C8.599 2.47406 7.37956 2.47406 6.17144 2.65915C6.05693 2.38409 5.88704 2.03832 5.74357 1.78125C4.58454 1.98178 3.47584 2.33525 2.44013 2.8211C0.351095 5.97791 -0.215207 9.0563 0.0679444 12.091C1.4535 13.1257 2.79627 13.7542 4.11638 14.1655C4.44233 13.7169 4.73302 13.2401 4.98345 12.7375C4.5065 12.5563 4.04969 12.3326 3.61805 12.073C3.73256 11.9882 3.84457 11.8995 3.95279 11.8082C6.58546 13.0396 9.44593 13.0396 12.0472 11.8082C12.1566 11.8995 12.2686 11.9882 12.3819 12.073C11.949 12.3339 11.4909 12.5576 11.014 12.7388C11.2644 13.2401 11.5538 13.7182 11.881 14.1668C13.2024 13.7555 14.5464 13.127 15.932 12.091C16.2642 8.57301 15.3644 5.52289 13.5535 2.81854ZM5.34212 10.2247C4.55181 10.2247 3.9037 9.48688 3.9037 8.58843C3.9037 7.68998 4.53797 6.95091 5.34212 6.95091C6.14628 6.95091 6.79437 7.68868 6.78053 8.58843C6.78178 9.48688 6.14628 10.2247 5.34212 10.2247ZM10.6578 10.2247C9.86752 10.2247 9.21941 9.48688 9.21941 8.58843C9.21941 7.68998 9.85366 6.95091 10.6578 6.95091C11.462 6.95091 12.1101 7.68868 12.0962 8.58843C12.0962 9.48688 11.462 10.2247 10.6578 10.2247Z" fill="currentColor"/>
+</svg></div></a><a href="https://discord.com/invite/plasmafdn" target="_blank" class="old_footer__social-link w-inline-block"><svg viewBox="0 0 40 40" class="footer__social-link-icon"><path d="M26.9419 13.5232C25.6473 12.9174 24.263 12.4772 22.8157 12.2266C22.638 12.5479 22.4304 12.9801 22.2872 13.3239C20.7487 13.0926 19.2245 13.0926 17.7143 13.3239C17.5712 12.9801 17.3588 12.5479 17.1795 12.2266C15.7307 12.4772 14.3448 12.9191 13.0502 13.5264C10.4389 17.4724 9.73099 21.3204 10.0849 25.1137C11.8169 26.4071 13.4953 27.1928 15.1455 27.7069C15.5529 27.1462 15.9163 26.5501 16.2293 25.9219C15.6331 25.6954 15.0621 25.4158 14.5226 25.0912C14.6657 24.9852 14.8057 24.8743 14.941 24.7603C18.2318 26.2995 21.8074 26.2995 25.0589 24.7603C25.1958 24.8743 25.3358 24.9852 25.4774 25.0912C24.9362 25.4174 24.3637 25.6969 23.7675 25.9235C24.0805 26.5501 24.4423 27.1478 24.8513 27.7085C26.503 27.1944 28.183 26.4087 29.915 25.1137C30.3303 20.7163 29.2056 16.9036 26.9419 13.5232ZM16.6776 22.7809C15.6898 22.7809 14.8796 21.8586 14.8796 20.7355C14.8796 19.6125 15.6725 18.6886 16.6776 18.6886C17.6829 18.6886 18.493 19.6109 18.4757 20.7355C18.4772 21.8586 17.6829 22.7809 16.6776 22.7809ZM23.3223 22.7809C22.3344 22.7809 21.5243 21.8586 21.5243 20.7355C21.5243 19.6125 22.3171 18.6886 23.3223 18.6886C24.3275 18.6886 25.1376 19.6109 25.1203 20.7355C25.1203 21.8586 24.3275 22.7809 23.3223 22.7809Z" fill="currentColor"></path></svg></a><a href="https://x.com/Plasma" target="_blank" class="old_footer__social-link w-inline-block"><svg viewBox="0 0 40 40" class="footer__social-link-icon"><path d="M21.5225 18.7757L27.4748 12H26.0648L20.8942 17.882L16.7675 12H12.0067L18.2484 20.8955L12.0067 27.9999H13.4167L18.8735 21.787L23.2325 27.9999H27.9933M13.9256 13.0413H16.0918L26.0637 27.0098H23.897" fill="currentColor"></path></svg></a></div></div></div></div></footer></div><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=68762d4ac364502c1ae1924b" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/68762d4ac364502c1ae1924b/js/webflow.b516e2a6.2d2a21f9341148b3.js" type="text/javascript" integrity="sha384-F5+gHejCmZOeIPmZUP4pn2AcqWlyU/z83Vw71i7H4W+oKJAxllLHw59bKiq2c1tg" crossorigin="anonymous"></script><script>
+  /*
+  // UK Banner Script with ipdata
+  const IPDATA_API_KEY = '32905ad1ee408fa69ed08423e42c7854ee58cd1975ececefe3fd5932';
+
+  function displayUKBanner() {
+    async function checkCountryAndDisplayBanner() {
+      const ukBanner = document.querySelector('[banner="uk"]');
+
+      if (!ukBanner) {
+        return;
+      }
+
+      // Vérifier si le cookie existe déjà
+      const name = 'user_location_country=';
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookieArray = decodedCookie.split(';');
+      let countryCode = null;
+
+      for (let cookie of cookieArray) {
+        cookie = cookie.trim();
+        if (cookie.indexOf(name) === 0) {
+          countryCode = cookie.substring(name.length, cookie.length);
+          break;
+        }
+      }
+
+      // Si pas de cookie, appeler ipdata
+      if (!countryCode) {
+        try {
+          const apiUrl = `https://api.ipdata.co?api-key=${IPDATA_API_KEY}`;
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+
+          countryCode = data.country_code;
+
+          // Sauvegarder en cookie (15 jours)
+          const expiresDate = new Date();
+          expiresDate.setTime(expiresDate.getTime() + (15 * 24 * 60 * 60 * 1000));
+          document.cookie = `user_location_country=${countryCode}; expires=${expiresDate.toUTCString()}; path=/`;
+
+        } catch (error) {
+          return;
+        }
+      }
+
+      // Afficher/cacher la bannière
+      if (countryCode === 'GB') {
+        ukBanner.style.display = 'block';
+      } else {
+        ukBanner.style.display = 'none';
+      }
+    }
+
+    checkCountryAndDisplayBanner();
+  }
+
+  displayUKBanner();
+  */
+</script>
+<script>
+  /*
+  // Check if domain contains "webflow.io"
+  function hideLocaleDropdownIfNotWebflow() {
+    // Get current domain name
+    const currentDomain = window.location.hostname;
+    console.log(currentDomain)
+
+    // Check if domain does not contain "webflow.io"
+    if (currentDomain.includes('webflow.io') || currentDomain.includes('workflow.design')) {
+      console.log('Webflow.io domain detected - locale dropdown remains visible');
+    } else {
+      // Select the locale dropdown element
+      const localeDropdown = document.querySelector('.navbar__locale-dd');
+
+      // Hide dropdown if it exists
+      if (localeDropdown) {
+        localeDropdown.style.display = 'none';
+        console.log('Locale dropdown hidden - domain does not contain webflow.io');
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', hideLocaleDropdownIfNotWebflow);
+  */
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                                      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                            })(window,document,'script','dataLayer','GTM-5NWTG4QK');</script>
+<!-- End Google Tag Manager -->
+<!-- script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="a59c3eb5-4dc8-46e1-8bc6-1152aaf5b429" data-blockingmode="auto" type="text/javascript"></script></body></html>

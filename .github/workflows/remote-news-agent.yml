@@ -1,0 +1,43 @@
+name: Remote News Agent
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run remote collector + OpenAI ranking
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          REMOTE_OUTPUT_JSON: remote/news.remote.json
+          REMOTE_OUTPUT_JS: remote/news.remote.js
+        run: node tools/remote-news-openai-agent.mjs
+
+      - name: Commit and push if changed
+        run: |
+          if [ -n "$(git status --porcelain -- remote/news.remote.json remote/news.remote.js)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add remote/news.remote.json remote/news.remote.js
+            git commit -m "chore(remote-news): refresh snapshot [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
