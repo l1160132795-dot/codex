@@ -11,14 +11,18 @@ const OPENAI_APP_NAME = String(process.env.OPENAI_APP_NAME || "").trim();
 const REMOTE_CRAWL_ONLY = String(process.env.REMOTE_CRAWL_ONLY || "0") === "1";
 const REMOTE_ALLOW_RULE_FALLBACK = String(process.env.REMOTE_ALLOW_RULE_FALLBACK || "0") === "1";
 const RAW_MAX_AGE_HOURS = Math.max(24, Number(process.env.RAW_MAX_AGE_HOURS || 72));
+const IS_FREE_MODEL = /:free$/i.test(OPENAI_MODEL);
 
 const TARGET_COUNT = 12;
-const MAX_CANDIDATES = Math.max(120, Number(process.env.REMOTE_MAX_CANDIDATES || 1200));
-const MAX_FEED_ITEMS = Math.max(MAX_CANDIDATES, Number(process.env.REMOTE_MAX_FEED_ITEMS || 3000));
-const OPENAI_STAGE1_CHUNK_SIZE = Math.max(40, Number(process.env.OPENAI_STAGE1_CHUNK_SIZE || 120));
-const OPENAI_STAGE1_PICK_COUNT = Math.max(10, Number(process.env.OPENAI_STAGE1_PICK_COUNT || 24));
-const OPENAI_STAGE2_POOL_LIMIT = Math.max(120, Number(process.env.OPENAI_STAGE2_POOL_LIMIT || 360));
-const OPENAI_REQUEST_GAP_MS = Math.max(0, Number(process.env.OPENAI_REQUEST_GAP_MS || 180));
+const MAX_CANDIDATES = Math.max(120, Number(process.env.REMOTE_MAX_CANDIDATES || (IS_FREE_MODEL ? 240 : 1200)));
+const MAX_FEED_ITEMS = Math.max(MAX_CANDIDATES, Number(process.env.REMOTE_MAX_FEED_ITEMS || (IS_FREE_MODEL ? 720 : 3000)));
+const OPENAI_STAGE1_CHUNK_SIZE = Math.max(40, Number(process.env.OPENAI_STAGE1_CHUNK_SIZE || (IS_FREE_MODEL ? 80 : 120)));
+const OPENAI_STAGE1_PICK_COUNT = Math.max(10, Number(process.env.OPENAI_STAGE1_PICK_COUNT || (IS_FREE_MODEL ? 16 : 24)));
+const OPENAI_STAGE2_POOL_LIMIT = Math.max(120, Number(process.env.OPENAI_STAGE2_POOL_LIMIT || (IS_FREE_MODEL ? 160 : 360)));
+const OPENAI_REQUEST_GAP_MS = Math.max(0, Number(process.env.OPENAI_REQUEST_GAP_MS || (IS_FREE_MODEL ? 1200 : 180)));
+const OPENAI_MAX_RETRIES = Math.max(0, Number(process.env.OPENAI_MAX_RETRIES || (IS_FREE_MODEL ? 5 : 3)));
+const OPENAI_RETRY_BASE_MS = Math.max(200, Number(process.env.OPENAI_RETRY_BASE_MS || (IS_FREE_MODEL ? 1800 : 900)));
+const OPENAI_RETRY_MAX_MS = Math.max(1000, Number(process.env.OPENAI_RETRY_MAX_MS || 20000));
 
 const BASE_RSS_FEEDS = [
   { url: "https://www.federalreserve.gov/feeds/press_all.xml", source: "Fed", category: "Policy" },
@@ -627,13 +631,50 @@ function createOpenAiFinalPayload(poolRows, nowIso) {
 function cleanJsonText(text) {
   const raw = String(text || "").trim();
   if (!raw) return "";
-  if (raw.startsWith("{")) return raw;
   const m = raw.match(/```json\s*([\s\S]*?)```/i) || raw.match(/```\s*([\s\S]*?)```/i);
-  if (m) return m[1].trim();
-  const l = raw.indexOf("{");
-  const r = raw.lastIndexOf("}");
-  if (l >= 0 && r > l) return raw.slice(l, r + 1);
+  const core = m ? m[1].trim() : raw;
+  const jsonObj = extractFirstJsonObject(core);
+  if (jsonObj) return jsonObj;
+  const l = core.indexOf("{");
+  const r = core.lastIndexOf("}");
+  if (l >= 0 && r > l) return core.slice(l, r + 1);
   return raw;
+}
+
+function extractFirstJsonObject(text) {
+  const raw = String(text || "");
+  const start = raw.indexOf("{");
+  if (start < 0) return "";
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let i = start; i < raw.length; i += 1) {
+    const ch = raw[i];
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === "\\") {
+        escaped = true;
+      } else if (ch === "\"") {
+        inString = false;
+      }
+      continue;
+    }
+    if (ch === "\"") {
+      inString = true;
+      continue;
+    }
+    if (ch === "{") {
+      depth += 1;
+      continue;
+    }
+    if (ch === "}") {
+      depth -= 1;
+      if (depth === 0) return raw.slice(start, i + 1).trim();
+      continue;
+    }
+  }
+  return "";
 }
 
 function toChineseCategory(category) {
@@ -807,7 +848,46 @@ async function runOpenAi(candidates, nowIso) {
     const content = json?.choices?.[0]?.message?.content;
     const text = cleanJsonText(content);
     if (!text) throw new Error("OpenAI empty response");
-    return JSON.parse(text);
+    try {
+      return JSON.parse(text);
+    } catch (error) {
+      const repaired = extractFirstJsonObject(text);
+      if (repaired && repaired !== text) return JSON.parse(repaired);
+      throw new Error(`OpenAI JSON parse failed: ${error.message}`);
+    }
+  };
+
+  const isRetryableOpenAiError = (error) => {
+    const msg = String(error?.message || "").toLowerCase();
+    if (msg.includes("http 429")) return true;
+    if (msg.includes("http 408") || msg.includes("http 409")) return true;
+    if (msg.includes("http 500") || msg.includes("http 502") || msg.includes("http 503") || msg.includes("http 504")) return true;
+    if (msg.includes("temporarily rate-limited") || msg.includes("provider returned error")) return true;
+    if (msg.includes("fetch failed") || msg.includes("timeout")) return true;
+    if (msg.includes("openai json parse failed")) return true;
+    return false;
+  };
+
+  const retryDelayMs = (attempt) => {
+    const expo = OPENAI_RETRY_BASE_MS * (2 ** Math.max(0, attempt - 1));
+    const jitter = Math.floor(Math.random() * Math.max(80, Math.floor(OPENAI_RETRY_BASE_MS * 0.3)));
+    return Math.min(OPENAI_RETRY_MAX_MS, expo + jitter);
+  };
+
+  const callOpenAiRawWithRetry = async (body) => {
+    let lastError = null;
+    for (let attempt = 0; attempt <= OPENAI_MAX_RETRIES; attempt += 1) {
+      try {
+        return await callOpenAiRaw(body);
+      } catch (error) {
+        lastError = error;
+        if (!isRetryableOpenAiError(error) || attempt >= OPENAI_MAX_RETRIES) break;
+        const waitMs = retryDelayMs(attempt + 1);
+        console.error(`[remote] openai transient error, retry ${attempt + 1}/${OPENAI_MAX_RETRIES} in ${waitMs}ms -> ${error.message}`);
+        await sleep(waitMs);
+      }
+    }
+    throw lastError || new Error("OpenAI call failed");
   };
 
   const shouldRetryWithoutSchema = (error) => {
@@ -823,7 +903,7 @@ async function runOpenAi(candidates, nowIso) {
 
   const callOpenAi = async (body) => {
     try {
-      return await callOpenAiRaw(body);
+      return await callOpenAiRawWithRetry(body);
     } catch (error) {
       if (!body?.response_format || !shouldRetryWithoutSchema(error)) {
         throw error;
@@ -836,7 +916,7 @@ async function runOpenAi(candidates, nowIso) {
         ...baseMessages,
         { role: "system", content: "Return valid JSON only. No markdown fences, no commentary." }
       ];
-      return await callOpenAiRaw(retryBody);
+      return await callOpenAiRawWithRetry(retryBody);
     }
   };
 

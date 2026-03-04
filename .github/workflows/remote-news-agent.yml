@@ -2,7 +2,7 @@ name: Remote News Agent
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -37,6 +37,9 @@ jobs:
           OPENAI_API_BASE: ${{ vars.OPENAI_API_BASE }}
           OPENAI_SITE_URL: ${{ vars.OPENAI_SITE_URL }}
           OPENAI_APP_NAME: ${{ vars.OPENAI_APP_NAME }}
+          OPENAI_MAX_RETRIES: ${{ vars.OPENAI_MAX_RETRIES }}
+          OPENAI_RETRY_BASE_MS: ${{ vars.OPENAI_RETRY_BASE_MS }}
+          OPENAI_RETRY_MAX_MS: ${{ vars.OPENAI_RETRY_MAX_MS }}
           REMOTE_CRAWL_ONLY: "0"
           REMOTE_ALLOW_RULE_FALLBACK: "0"
           REMOTE_MAX_CANDIDATES: ${{ vars.REMOTE_MAX_CANDIDATES }}
