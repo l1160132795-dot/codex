@@ -1,8 +1,10 @@
 {
-  "pulledAt": "2026-03-04T02:28:24.473Z",
+  "pulledAt": "2026-03-04T02:33:36.392Z",
   "remoteAgentAt": "2026-03-04T02:16:26.899Z",
   "remoteVersion": "remote-openai-agent.v1",
   "remoteModel": "gpt-4.1-mini",
+  "remoteFailedFeeds": 0,
+  "remoteFailedSources": [],
   "sourceUrl": "https://raw.githubusercontent.com/l1160132795-dot/codex/main/remote/news.remote.json",
   "globalSummaryZh": "已基于全球源抽取高影响新闻，并按市场外溢效应完成Top12排序。",
   "items": [
