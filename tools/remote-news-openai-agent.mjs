@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+﻿import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const OUTPUT_JSON_FILE = process.env.REMOTE_OUTPUT_JSON || "remote/news.remote.json";
@@ -96,11 +96,11 @@ const GOOGLE_NEWS_QUERIES = [
   { query: "banking crisis OR credit spread OR liquidity risk OR treasury market", category: "Macro", hl: "en-US", gl: "US", ceid: "US:en" },
   { query: "opec OR brent OR wti OR oil supply shock OR strait of hormuz", category: "Geo", hl: "en-US", gl: "US", ceid: "US:en" },
   { query: "stablecoin regulation OR sec enforcement OR cftc OR crypto policy", category: "Policy", hl: "en-US", gl: "US", ceid: "US:en" },
-  { query: "股市 OR 纳斯达克 OR 标普 OR 美元指数 OR 黄金 OR 原油", category: "Market", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
-  { query: "美联储 OR CPI OR 通胀 OR 非农 OR 美债收益率", category: "Macro", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
-  { query: "比特币 OR 以太坊 OR 加密ETF OR 稳定币", category: "Crypto", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
-  { query: "地缘冲突 OR 制裁 OR 航运 OR 中东 OR 战争风险", category: "Geo", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
-  { query: "央行 OR 货币政策 OR 加息 OR 降息 OR 金融监管", category: "Policy", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" }
+  { query: "\u80a1\u5e02 OR \u7eb3\u65af\u8fbe\u514b OR \u6807\u666e OR \u7f8e\u5143\u6307\u6570 OR \u9ec4\u91d1 OR \u539f\u6cb9", category: "Market", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "\u7f8e\u8054\u50a8 OR CPI OR \u901a\u80c0 OR \u975e\u519c OR \u7f8e\u503a\u6536\u76ca\u7387", category: "Macro", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "\u6bd4\u7279\u5e01 OR \u4ee5\u592a\u574a OR \u52a0\u5bc6ETF OR \u7a33\u5b9a\u5e01", category: "Crypto", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "\u5730\u7f18\u51b2\u7a81 OR \u5236\u88c1 OR \u822a\u8fd0 OR \u4e2d\u4e1c OR \u6218\u4e89\u98ce\u9669", category: "Geo", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "\u592e\u884c OR \u8d27\u5e01\u653f\u7b56 OR \u52a0\u606f OR \u964d\u606f OR \u91d1\u878d\u76d1\u7ba1", category: "Policy", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" }
 ];
 
 const BING_NEWS_QUERIES = [
@@ -659,6 +659,67 @@ function createOpenAiFinalPayload(poolRows, nowIso) {
   };
 }
 
+function idSelectOutputSchema() {
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: ["ids"],
+    properties: {
+      ids: {
+        type: "array",
+        minItems: TARGET_COUNT,
+        maxItems: TARGET_COUNT,
+        items: { type: "integer", minimum: 1 }
+      }
+    }
+  };
+}
+
+function createOpenAiIdSelectPayload(poolRows, nowIso) {
+  const conciseRows = poolRows.map((row) => ({
+    id: Number(row.id),
+    title: String(row.title || ""),
+    source: String(row.source || ""),
+    category: String(row.category || "Market"),
+    time: Number(row.time) || Date.now(),
+    preScore: Number(row.preScore) || 0,
+    url: String(row.url || "")
+  }));
+
+  const systemPrompt = [
+    "\u4f60\u662f\u5168\u7403\u91d1\u878d\u65b0\u95fb\u603b\u7f16\u8f91\u3002",
+    "\u53ea\u9700\u5728\u7ed9\u5b9a ID \u5019\u9009\u4e2d\u9009\u51fa Top12\uff0c\u8fd4\u56de ids \u6570\u7ec4\u5373\u53ef\u3002",
+    "\u6392\u5e8f\u903b\u8f91\uff1a\u5f71\u54cd\u9762>\u65f6\u6548>\u6743\u5a01>\u5916\u6ea2\u6548\u5e94\u3002"
+  ].join("\n");
+
+  const userPrompt = JSON.stringify({
+    now: nowIso,
+    requirements: {
+      targetCount: TARGET_COUNT,
+      return: "ids_only",
+      uniqueIds: true
+    },
+    candidates: conciseRows
+  });
+
+  return {
+    model: OPENAI_MODEL,
+    temperature: 0,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt }
+    ],
+    response_format: {
+      type: "json_schema",
+      json_schema: {
+        name: "remote_news_id_select_payload",
+        strict: true,
+        schema: idSelectOutputSchema()
+      }
+    }
+  };
+}
+
 function cleanJsonText(text) {
   const raw = String(text || "").trim();
   if (!raw) return "";
@@ -666,6 +727,8 @@ function cleanJsonText(text) {
   const core = m ? m[1].trim() : raw;
   const jsonObj = extractFirstJsonObject(core);
   if (jsonObj) return jsonObj;
+  const jsonArr = extractFirstJsonArray(core);
+  if (jsonArr) return jsonArr;
   const l = core.indexOf("{");
   const r = core.lastIndexOf("}");
   if (l >= 0 && r > l) return core.slice(l, r + 1);
@@ -700,6 +763,42 @@ function extractFirstJsonObject(text) {
       continue;
     }
     if (ch === "}") {
+      depth -= 1;
+      if (depth === 0) return raw.slice(start, i + 1).trim();
+      continue;
+    }
+  }
+  return "";
+}
+
+function extractFirstJsonArray(text) {
+  const raw = String(text || "");
+  const start = raw.indexOf("[");
+  if (start < 0) return "";
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let i = start; i < raw.length; i += 1) {
+    const ch = raw[i];
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === "\\") {
+        escaped = true;
+      } else if (ch === "\"") {
+        inString = false;
+      }
+      continue;
+    }
+    if (ch === "\"") {
+      inString = true;
+      continue;
+    }
+    if (ch === "[") {
+      depth += 1;
+      continue;
+    }
+    if (ch === "]") {
       depth -= 1;
       if (depth === 0) return raw.slice(start, i + 1).trim();
       continue;
@@ -853,42 +952,72 @@ function buildSourceStats(items) {
   return out;
 }
 
-function normalizeModelItem(raw, fallbackTime = Date.now()) {
+function findRefRowByTitle(title, refRows) {
+  const key = normalizeDedupTitle(title);
+  if (!key || !refRows.length) return null;
+  let best = null;
+  let bestScore = 0;
+  for (const row of refRows) {
+    const rowKey = normalizeDedupTitle(row?.title || "");
+    if (!rowKey) continue;
+    if (rowKey === key) return row;
+    let score = 0;
+    if (rowKey.includes(key) || key.includes(rowKey)) score = Math.min(rowKey.length, key.length);
+    if (score > bestScore) {
+      best = row;
+      bestScore = score;
+    }
+  }
+  return best;
+}
+
+function normalizeModelItem(raw, fallbackTime = Date.now(), refRows = []) {
   if (!raw || typeof raw !== "object") return null;
-  const title = String(raw.title || raw.headline || raw.headlineZh || raw.标题 || "").trim();
-  const url = String(raw.url || raw.link || raw.href || "").trim();
+  const id = safeNumber(raw.id, 0);
+  const byId = id > 0 ? refRows.find((row) => safeNumber(row?.id, 0) === id) : null;
+  const titleRaw = String(raw.title || raw.headline || raw.headlineZh || "").trim();
+  const byTitle = titleRaw ? findRefRowByTitle(titleRaw, refRows) : null;
+  const match = byId || byTitle || null;
+
+  const title = String(titleRaw || match?.title || "").trim();
+  const url = String(raw.url || raw.link || raw.href || match?.url || "").trim();
   if (!title || !url) return null;
-  const source = String(raw.source || raw.media || "Remote").trim();
-  const category = String(raw.category || raw.cat || "Market").trim();
+  const source = String(raw.source || raw.media || match?.source || "Remote").trim();
+  const category = String(raw.category || raw.cat || match?.category || "Market").trim();
+  const score = safeNumber(raw.agentScore, safeNumber(match?.preScore, 0) * 7.2);
+
   return {
     title,
     headlineZh: String(raw.headlineZh || raw.headline || title).trim(),
-    summaryZh: String(raw.summaryZh || raw.summary || "").trim(),
-    agentReasonZh: String(raw.agentReasonZh || raw.reasonZh || raw.reason || "").trim(),
+    summaryZh: String(raw.summaryZh || raw.summary || match?.summary || "").trim(),
+    agentReasonZh: String(raw.agentReasonZh || raw.reasonZh || raw.reason || match?.reasonZh || "").trim(),
     url,
     source,
     category,
-    time: safeNumber(raw.time, fallbackTime),
-    priority: safeNumber(raw.priority, 0),
+    time: safeNumber(raw.time, safeNumber(match?.time, fallbackTime)),
+    priority: safeNumber(raw.priority, Number((score * 0.62).toFixed(2))),
     pinnedUntil: safeNumber(raw.pinnedUntil, 0),
-    agentScore: safeNumber(raw.agentScore, 0),
+    agentScore: score,
     agentRank: safeNumber(raw.agentRank, 0),
-    topicZh: String(raw.topicZh || raw.topic || "").trim()
+    topicZh: String(raw.topicZh || raw.topic || match?.topicZh || "").trim()
   };
 }
 
 function isLikelyModelItem(raw) {
   if (!raw || typeof raw !== "object") return false;
-  const title = raw.title || raw.headline || raw.headlineZh || raw.标题;
+  const title = raw.title || raw.headline || raw.headlineZh;
   const url = raw.url || raw.link || raw.href;
-  return typeof title === "string" && title.trim() && typeof url === "string" && url.trim();
+  const id = Number(raw.id);
+  return (typeof title === "string" && title.trim())
+    || (typeof url === "string" && url.trim())
+    || Number.isFinite(id);
 }
 
-function extractModelItemsFromPayload(payload) {
+function extractModelItemsFromPayload(payload, refRows = []) {
   if (!payload || typeof payload !== "object") return [];
   const direct = Array.isArray(payload.items) ? payload.items : null;
   if (direct && direct.length) {
-    return direct.map((x) => normalizeModelItem(x)).filter(Boolean);
+    return direct.map((x) => normalizeModelItem(x, Date.now(), refRows)).filter(Boolean);
   }
 
   const queue = [payload];
@@ -901,7 +1030,8 @@ function extractModelItemsFromPayload(payload) {
 
     if (Array.isArray(node)) {
       if (node.length && node.some((x) => isLikelyModelItem(x))) {
-        return node.map((x) => normalizeModelItem(x)).filter(Boolean);
+        const mapped = node.map((x) => normalizeModelItem(x, Date.now(), refRows)).filter(Boolean);
+        if (mapped.length) return mapped;
       }
       for (const item of node) {
         if (item && typeof item === "object") queue.push(item);
@@ -917,6 +1047,94 @@ function extractModelItemsFromPayload(payload) {
   return [];
 }
 
+function extractIdsFromPayload(payload, validIdSet) {
+  const ids = [];
+  const pushId = (value) => {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return;
+    const id = Math.round(n);
+    if (id <= 0) return;
+    if (validIdSet && !validIdSet.has(id)) return;
+    if (!ids.includes(id)) ids.push(id);
+  };
+
+  const scan = (node) => {
+    if (node == null) return;
+    if (Array.isArray(node)) {
+      for (const item of node) {
+        if (typeof item === "number" || typeof item === "string") pushId(item);
+        else scan(item);
+      }
+      return;
+    }
+    if (typeof node === "object") {
+      for (const [k, v] of Object.entries(node)) {
+        if (k.toLowerCase() === "id") {
+          pushId(v);
+          continue;
+        }
+        scan(v);
+      }
+      return;
+    }
+    if (typeof node === "string") {
+      const arr = node.match(/\b\d+\b/g) || [];
+      for (const token of arr) pushId(token);
+    }
+  };
+
+  scan(payload);
+  return ids.slice(0, TARGET_COUNT);
+}
+
+function buildItemsFromSelectedIds(ids, refRows, now) {
+  const rowsById = new Map(refRows.map((row) => [safeNumber(row?.id, -1), row]));
+  const selected = [];
+  const seen = new Set();
+  for (const id of ids) {
+    const row = rowsById.get(id);
+    if (!row) continue;
+    const key = newsDedupKey(row);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    selected.push(row);
+    if (selected.length >= TARGET_COUNT) break;
+  }
+
+  if (selected.length < TARGET_COUNT) {
+    const fill = [...refRows].sort((a, b) => {
+      if (Math.abs((safeNumber(b.preScore, 0) - safeNumber(a.preScore, 0))) > 0.001) return safeNumber(b.preScore, 0) - safeNumber(a.preScore, 0);
+      return safeNumber(b.time, 0) - safeNumber(a.time, 0);
+    });
+    for (const row of fill) {
+      const key = newsDedupKey(row);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      selected.push(row);
+      if (selected.length >= TARGET_COUNT) break;
+    }
+  }
+
+  return selected.slice(0, TARGET_COUNT).map((row, idx) => {
+    const score = Number(clamp(safeNumber(row.preScore, 4) * 7.8, 15, 96).toFixed(2));
+    const highImpact = score >= 72 || HIGH_IMPACT_PATTERNS.some((re) => re.test(String(row.title || "")));
+    return {
+      title: String(row.title || "").trim(),
+      headlineZh: String(row.headlineZh || row.title || "").trim(),
+      summaryZh: String(row.summary || row.summaryZh || fallbackSummaryZh(row)).trim(),
+      agentReasonZh: String(row.reasonZh || row.agentReasonZh || "Model selected this as high-impact").trim(),
+      url: String(row.url || "").trim(),
+      source: String(row.source || "Remote").trim(),
+      category: String(row.category || "Market").trim(),
+      time: safeNumber(row.time, now),
+      priority: Number((score * 0.62).toFixed(2)),
+      pinnedUntil: highImpact ? now + 24 * 3600 * 1000 : 0,
+      agentScore: score,
+      agentRank: idx + 1,
+      topicZh: String(row.topicZh || fallbackTopicZh(row)).trim()
+    };
+  });
+}
 async function runOpenAi(candidates, nowIso) {
   if (!OPENAI_API_KEY) {
     throw new Error("OPENAI_API_KEY not set in remote mode.");
@@ -961,6 +1179,8 @@ async function runOpenAi(candidates, nowIso) {
     } catch (error) {
       const repaired = extractFirstJsonObject(text);
       if (repaired && repaired !== text) return JSON.parse(repaired);
+      const repairedArr = extractFirstJsonArray(text);
+      if (repairedArr && repairedArr !== text) return JSON.parse(repairedArr);
       throw new Error(`OpenAI JSON parse failed: ${error.message}`);
     }
   };
@@ -1066,9 +1286,23 @@ async function runOpenAi(candidates, nowIso) {
 
   const ensureFinalItems = async (parsed, poolRows) => {
     if (!parsed || typeof parsed !== "object") return parsed;
-    let items = extractModelItemsFromPayload(parsed);
+    let items = extractModelItemsFromPayload(parsed, poolRows);
     if (items.length) {
       return { ...parsed, items };
+    }
+
+    const validIdSet = new Set(poolRows.map((row) => safeNumber(row?.id, -1)).filter((x) => x > 0));
+    try {
+      const idRescue = await callOpenAi(createOpenAiIdSelectPayload(poolRows, nowIso));
+      const pickedIds = extractIdsFromPayload(idRescue, validIdSet);
+      if (pickedIds.length) {
+        const rescued = buildItemsFromSelectedIds(pickedIds, poolRows, nowMs);
+        if (rescued.length) return { ...parsed, items: rescued };
+      } else {
+        console.error("[remote] id-rescue returned no valid ids.");
+      }
+    } catch (error) {
+      console.error(`[remote] id-rescue failed -> ${error.message}`);
     }
 
     // Some free models return incomplete shape; do one compact rescue call.
@@ -1077,8 +1311,16 @@ async function runOpenAi(candidates, nowIso) {
     try {
       console.error("[remote] openai final returned no items, retrying compact final prompt.");
       const retry = await callOpenAi(createOpenAiFinalPayload(compactPool, nowIso));
-      items = extractModelItemsFromPayload(retry);
+      items = extractModelItemsFromPayload(retry, compactPool);
       if (items.length) return { ...(retry || {}), items };
+      const rescue2 = await callOpenAi(createOpenAiIdSelectPayload(compactPool, nowIso));
+      const ids2 = extractIdsFromPayload(rescue2, new Set(compactPool.map((row) => safeNumber(row?.id, -1)).filter((x) => x > 0)));
+      if (ids2.length) {
+        const rescued2 = buildItemsFromSelectedIds(ids2, compactPool, nowMs);
+        if (rescued2.length) return { ...(retry || {}), items: rescued2 };
+      } else {
+        console.error("[remote] compact id-rescue returned no valid ids.");
+      }
     } catch (error) {
       console.error(`[remote] compact final retry failed -> ${error.message}`);
     }
@@ -1158,7 +1400,8 @@ async function runOpenAi(candidates, nowIso) {
       return (b.time || 0) - (a.time || 0);
     })
     .slice(0, OPENAI_STAGE2_POOL_LIMIT)
-    .map((row) => ({
+    .map((row, idx) => ({
+      id: idx + 1,
       title: row.title,
       summary: row.summaryZh,
       url: row.url,
