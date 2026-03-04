@@ -14,15 +14,41 @@ const RAW_MAX_AGE_HOURS = Math.max(24, Number(process.env.RAW_MAX_AGE_HOURS || 7
 const IS_FREE_MODEL = /:free$/i.test(OPENAI_MODEL);
 
 const TARGET_COUNT = 12;
-const MAX_CANDIDATES = Math.max(120, Number(process.env.REMOTE_MAX_CANDIDATES || (IS_FREE_MODEL ? 240 : 1200)));
-const MAX_FEED_ITEMS = Math.max(MAX_CANDIDATES, Number(process.env.REMOTE_MAX_FEED_ITEMS || (IS_FREE_MODEL ? 720 : 3000)));
-const OPENAI_STAGE1_CHUNK_SIZE = Math.max(40, Number(process.env.OPENAI_STAGE1_CHUNK_SIZE || (IS_FREE_MODEL ? 80 : 120)));
-const OPENAI_STAGE1_PICK_COUNT = Math.max(10, Number(process.env.OPENAI_STAGE1_PICK_COUNT || (IS_FREE_MODEL ? 16 : 24)));
-const OPENAI_STAGE2_POOL_LIMIT = Math.max(120, Number(process.env.OPENAI_STAGE2_POOL_LIMIT || (IS_FREE_MODEL ? 160 : 360)));
-const OPENAI_REQUEST_GAP_MS = Math.max(0, Number(process.env.OPENAI_REQUEST_GAP_MS || (IS_FREE_MODEL ? 1200 : 180)));
-const OPENAI_MAX_RETRIES = Math.max(0, Number(process.env.OPENAI_MAX_RETRIES || (IS_FREE_MODEL ? 5 : 3)));
-const OPENAI_RETRY_BASE_MS = Math.max(200, Number(process.env.OPENAI_RETRY_BASE_MS || (IS_FREE_MODEL ? 1800 : 900)));
+const FREE_CAPS = {
+  maxCandidates: 240,
+  maxFeedItems: 720,
+  chunkSize: 80,
+  pickCount: 16,
+  poolLimit: 160,
+  maxRetries: 3
+};
+
+function readEnvNumber(name, fallback) {
+  const n = Number(process.env[name]);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+const maxCandidatesRaw = Math.max(120, readEnvNumber("REMOTE_MAX_CANDIDATES", IS_FREE_MODEL ? FREE_CAPS.maxCandidates : 1200));
+const MAX_CANDIDATES = IS_FREE_MODEL ? Math.min(FREE_CAPS.maxCandidates, maxCandidatesRaw) : maxCandidatesRaw;
+
+const maxFeedItemsRaw = Math.max(MAX_CANDIDATES, readEnvNumber("REMOTE_MAX_FEED_ITEMS", IS_FREE_MODEL ? FREE_CAPS.maxFeedItems : 3000));
+const MAX_FEED_ITEMS = IS_FREE_MODEL ? Math.min(FREE_CAPS.maxFeedItems, Math.max(MAX_CANDIDATES, maxFeedItemsRaw)) : maxFeedItemsRaw;
+
+const chunkSizeRaw = Math.max(40, readEnvNumber("OPENAI_STAGE1_CHUNK_SIZE", IS_FREE_MODEL ? FREE_CAPS.chunkSize : 120));
+const OPENAI_STAGE1_CHUNK_SIZE = IS_FREE_MODEL ? Math.min(FREE_CAPS.chunkSize, chunkSizeRaw) : chunkSizeRaw;
+
+const pickCountRaw = Math.max(10, readEnvNumber("OPENAI_STAGE1_PICK_COUNT", IS_FREE_MODEL ? FREE_CAPS.pickCount : 24));
+const OPENAI_STAGE1_PICK_COUNT = Math.min(OPENAI_STAGE1_CHUNK_SIZE, IS_FREE_MODEL ? Math.min(FREE_CAPS.pickCount, pickCountRaw) : pickCountRaw);
+
+const stage2PoolRaw = Math.max(120, readEnvNumber("OPENAI_STAGE2_POOL_LIMIT", IS_FREE_MODEL ? FREE_CAPS.poolLimit : 360));
+const OPENAI_STAGE2_POOL_LIMIT = IS_FREE_MODEL ? Math.min(FREE_CAPS.poolLimit, stage2PoolRaw) : stage2PoolRaw;
+
+const OPENAI_REQUEST_GAP_MS = Math.max(0, readEnvNumber("OPENAI_REQUEST_GAP_MS", IS_FREE_MODEL ? 1200 : 180));
+const retriesRaw = Math.max(0, readEnvNumber("OPENAI_MAX_RETRIES", IS_FREE_MODEL ? 2 : 3));
+const OPENAI_MAX_RETRIES = IS_FREE_MODEL ? Math.min(FREE_CAPS.maxRetries, retriesRaw) : retriesRaw;
+const OPENAI_RETRY_BASE_MS = Math.max(200, readEnvNumber("OPENAI_RETRY_BASE_MS", IS_FREE_MODEL ? 1800 : 900));
 const OPENAI_RETRY_MAX_MS = Math.max(1000, Number(process.env.OPENAI_RETRY_MAX_MS || 20000));
+const OPENAI_TIMEOUT_MS = Math.max(6000, Number(process.env.OPENAI_TIMEOUT_MS || (IS_FREE_MODEL ? 45000 : 30000)));
 
 const BASE_RSS_FEEDS = [
   { url: "https://www.federalreserve.gov/feeds/press_all.xml", source: "Fed", category: "Policy" },
@@ -835,11 +861,24 @@ async function runOpenAi(candidates, nowIso) {
     if (OPENAI_SITE_URL) headers["HTTP-Referer"] = OPENAI_SITE_URL;
     if (OPENAI_APP_NAME) headers["X-Title"] = OPENAI_APP_NAME;
 
-    const res = await fetch(`${OPENAI_API_BASE}/chat/completions`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body)
-    });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), OPENAI_TIMEOUT_MS);
+    let res;
+    try {
+      res = await fetch(`${OPENAI_API_BASE}/chat/completions`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+        signal: controller.signal
+      });
+    } catch (error) {
+      if (error?.name === "AbortError") {
+        throw new Error(`OpenAI timeout after ${OPENAI_TIMEOUT_MS}ms`);
+      }
+      throw error;
+    } finally {
+      clearTimeout(timer);
+    }
     if (!res.ok) {
       const errText = await res.text().catch(() => "");
       throw new Error(`OpenAI HTTP ${res.status}: ${errText.slice(0, 400)}`);
@@ -878,6 +917,7 @@ async function runOpenAi(candidates, nowIso) {
     let lastError = null;
     for (let attempt = 0; attempt <= OPENAI_MAX_RETRIES; attempt += 1) {
       try {
+        console.log(`[remote] openai request attempt ${attempt + 1}/${OPENAI_MAX_RETRIES + 1}`);
         return await callOpenAiRaw(body);
       } catch (error) {
         lastError = error;
@@ -901,10 +941,27 @@ async function runOpenAi(candidates, nowIso) {
       || msg.includes("not support");
   };
 
+  const shouldRetryWithJsonObject = (error) => {
+    const msg = String(error?.message || "").toLowerCase();
+    return msg.includes("openai json parse failed")
+      || msg.includes("unexpected token")
+      || msg.includes("not valid json");
+  };
+
   const callOpenAi = async (body) => {
     try {
       return await callOpenAiRawWithRetry(body);
     } catch (error) {
+      if (shouldRetryWithJsonObject(error)) {
+        console.error("[remote] model output is not valid JSON, retrying with response_format=json_object.");
+        const retryBody = { ...body, response_format: { type: "json_object" } };
+        const baseMessages = Array.isArray(body.messages) ? body.messages : [];
+        retryBody.messages = [
+          ...baseMessages,
+          { role: "system", content: "Return valid JSON object only. No markdown, no prose." }
+        ];
+        return await callOpenAiRawWithRetry(retryBody);
+      }
       if (!body?.response_format || !shouldRetryWithoutSchema(error)) {
         throw error;
       }
@@ -948,6 +1005,7 @@ async function runOpenAi(candidates, nowIso) {
 
   for (let i = 0; i < chunks.length; i += 1) {
     const chunkRows = chunks[i];
+    console.log(`[remote] openai chunk start ${i + 1}/${chunks.length} (rows=${chunkRows.length})`);
     try {
       const parsed = await callOpenAi(createOpenAiChunkPayload(chunkRows, nowIso, i, chunks.length));
       const picked = Array.isArray(parsed?.items) ? parsed.items : [];
@@ -978,6 +1036,7 @@ async function runOpenAi(candidates, nowIso) {
           impactScore: Number(raw?.impactScore) || Number((Math.max(1, chunkRows.find((x) => x.url === url)?.preScore || 1) * 8.2).toFixed(2))
         });
       }
+      console.log(`[remote] openai chunk done ${i + 1}/${chunks.length} (picked=${picked.length})`);
     } catch (error) {
       console.error(`[remote] openai chunk failed (${i + 1}/${chunks.length}) -> ${error.message}`);
       stage1Rows.push(...chunkFallback(chunkRows));
@@ -1023,7 +1082,9 @@ async function runOpenAi(candidates, nowIso) {
 
   if (!stage2Pool.length) throw new Error("OpenAI stage1 produced empty pool.");
 
+  console.log(`[remote] openai final start (pool=${stage2Pool.length})`);
   const finalParsed = await callOpenAi(createOpenAiFinalPayload(stage2Pool, nowIso));
+  console.log("[remote] openai final done");
   if (typeof finalParsed !== "object" || !finalParsed) throw new Error("OpenAI final parsed payload invalid.");
   if (!finalParsed.globalSummaryZh && chunkSummaries.length) {
     finalParsed.globalSummaryZh = chunkSummaries.slice(0, 3).join("；");
@@ -1050,6 +1111,7 @@ async function runSourceJob(name, runner) {
 async function main() {
   const now = Date.now();
   const nowIso = new Date(now).toISOString();
+  console.log(`[remote] model=${OPENAI_MODEL} free=${IS_FREE_MODEL} maxCandidates=${MAX_CANDIDATES} chunk=${OPENAI_STAGE1_CHUNK_SIZE} pick=${OPENAI_STAGE1_PICK_COUNT} stage2=${OPENAI_STAGE2_POOL_LIMIT} retries=${OPENAI_MAX_RETRIES}`);
 
   const jobs = [];
   for (const feed of BASE_RSS_FEEDS) {
