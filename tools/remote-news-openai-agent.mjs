@@ -202,6 +202,28 @@ function cleanText(input, maxLen = 220) {
   return `${raw.slice(0, Math.max(0, maxLen - 3)).trim()}...`;
 }
 
+function hasChineseText(text) {
+  return /[\u4e00-\u9fff]/.test(String(text || ""));
+}
+
+function latinRatio(text) {
+  const sample = String(text || "");
+  const latin = (sample.match(/[A-Za-z]/g) || []).length;
+  const useful = (sample.match(/[A-Za-z\u4e00-\u9fff]/g) || []).length;
+  return useful ? latin / useful : 0;
+}
+
+function cleanOutputText(input, maxLen = 220) {
+  const raw = String(input || "");
+  const cleaned = stripHtml(decodeEntities(raw))
+    .replace(/&nbsp;|&#160;|\u00a0/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!cleaned) return "";
+  if (cleaned.length <= maxLen) return cleaned;
+  return `${cleaned.slice(0, Math.max(0, maxLen - 3)).trim()}...`;
+}
+
 function normalizeTitle(raw) {
   const text = cleanText(raw, 180);
   if (!text) return "";
@@ -720,6 +742,80 @@ function createOpenAiIdSelectPayload(poolRows, nowIso) {
   };
 }
 
+function zhPolishOutputSchema() {
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: ["items"],
+    properties: {
+      items: {
+        type: "array",
+        minItems: 1,
+        maxItems: TARGET_COUNT,
+        items: {
+          type: "object",
+          additionalProperties: false,
+          required: ["id", "headlineZh", "summaryZh", "agentReasonZh", "topicZh"],
+          properties: {
+            id: { type: "integer", minimum: 1 },
+            headlineZh: { type: "string" },
+            summaryZh: { type: "string" },
+            agentReasonZh: { type: "string" },
+            topicZh: { type: "string" }
+          }
+        }
+      }
+    }
+  };
+}
+
+function createOpenAiZhPolishPayload(items, nowIso) {
+  const rows = items.map((row) => ({
+    id: Number(row.id),
+    title: cleanOutputText(row.title || "", 160),
+    source: cleanOutputText(row.source || "", 80),
+    category: String(row.category || "Market"),
+    headlineZh: cleanOutputText(row.headlineZh || "", 160),
+    summaryZh: cleanOutputText(row.summaryZh || row.summary || "", 260),
+    agentReasonZh: cleanOutputText(row.agentReasonZh || "", 120),
+    topicZh: cleanOutputText(row.topicZh || "", 40)
+  }));
+
+  const systemPrompt = [
+    "\u4f60\u662f\u91d1\u878d\u4e2d\u6587\u7f16\u8f91\u3002",
+    "\u8bf7\u5bf9\u8f93\u5165\u7684 12 \u6761\u65b0\u95fb\u8fdb\u884c\u4ec5\u201c\u4e2d\u6587\u5316\u4fee\u8272\u201d\uff1a",
+    "1) headlineZh \u5fc5\u987b\u4e3a\u7b80\u4f53\u4e2d\u6587\uff1b2) summaryZh \u5fc5\u987b\u4e3a 1~2 \u53e5\u4e2d\u6587\uff1b3) agentReasonZh \u4e3a\u4e2d\u6587\u7406\u7531\uff1b4) topicZh \u4e3a\u4e2d\u6587\u8bdd\u9898\u8bcd\u3002",
+    "\u4e25\u7981\u8f93\u51fa &nbsp;/HTML \u5b9e\u4f53\uff0c\u4e25\u7981\u8f93\u51fa\u82f1\u6587\u53e5\u5b50\u3002",
+    "\u4e0d\u8981\u589e\u52a0\u6216\u5220\u9664\u6761\u76ee\uff0c\u4ec5\u6839\u636e id \u8fd4\u56de\u4fee\u6b63\u540e\u5b57\u6bb5\u3002"
+  ].join("\n");
+
+  const userPrompt = JSON.stringify({
+    now: nowIso,
+    requirements: {
+      language: "zh-CN",
+      keepIds: true
+    },
+    items: rows
+  });
+
+  return {
+    model: OPENAI_MODEL,
+    temperature: 0.1,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt }
+    ],
+    response_format: {
+      type: "json_schema",
+      json_schema: {
+        name: "remote_news_zh_polish_payload",
+        strict: true,
+        schema: zhPolishOutputSchema()
+      }
+    }
+  };
+}
+
 function cleanJsonText(text) {
   const raw = String(text || "").trim();
   if (!raw) return "";
@@ -815,9 +911,11 @@ function toChineseCategory(category) {
 function fallbackSummaryZh(item) {
   const cat = toChineseCategory(item.category);
   const src = String(item.source || "News").split("/")[0];
-  const title = String(item.title || "").trim();
-  const short = title.length > 50 ? `${title.slice(0, 50)}...` : title;
-  return `\u3010${cat}\u3011${short}\u3002\u6765\u6e90\uff1a${src}\u3002`;
+  const title = cleanOutputText(item.title || "", 56);
+  if (hasChineseText(title)) {
+    return `\u3010${cat}\u3011${title}\u3002\u6765\u6e90\uff1a${src}\u3002`;
+  }
+  return `\u3010${cat}\u3011\u91cd\u70b9\u4e8b\u4ef6\uff1a${src}\u76f8\u5173\u52a8\u6001\u3002\u8be6\u89c1\u539f\u6587\u94fe\u63a5\u3002`;
 }
 
 function fallbackReasonZh(item) {
@@ -896,9 +994,9 @@ function sanitizeItems(items, candidates, now) {
 
   const sorted = [...items].sort((a, b) => safeNumber(a.agentRank, 999) - safeNumber(b.agentRank, 999));
   for (const raw of sorted) {
-    const title = String(raw?.title || "").trim();
+    const title = cleanOutputText(raw?.title || "", 180);
     const url = String(raw?.url || "").trim();
-    const source = String(raw?.source || "").trim();
+    const source = cleanOutputText(raw?.source || "", 80);
     const category = String(raw?.category || "Market").trim();
     if (!title || !url || !source) continue;
     const key = newsDedupKey({ title, source, url });
@@ -910,12 +1008,34 @@ function sanitizeItems(items, candidates, now) {
     const score = safeNumber(raw?.agentScore, 35);
     const highImpact = score >= 72 || HIGH_IMPACT_PATTERNS.some((re) => re.test(title));
     const pinnedDefault = highImpact ? now + 24 * 3600 * 1000 : 0;
+    const headlineRaw = cleanOutputText(raw?.headlineZh || title, 120);
+    const summaryRaw = cleanOutputText(raw?.summaryZh || fallbackSummaryZh({ title, source, category }), 240);
+    const reasonRaw = cleanOutputText(raw?.agentReasonZh || fallbackReasonZh({ title, source }), 120);
+    const topicRaw = cleanOutputText(raw?.topicZh || fallbackTopicZh({ title, category }), 40);
+
+    const headlineZh = (hasChineseText(headlineRaw) && latinRatio(headlineRaw) <= 0.65)
+      ? headlineRaw
+      : (() => {
+        const cat = toChineseCategory(category);
+        const src = source.split("/")[0] || "来源";
+        const short = hasChineseText(title) ? cleanOutputText(title, 72) : `${src}发布重要${cat}动态`;
+        return `\u3010${cat}\u3011${short}`;
+      })();
+    const summaryZh = (hasChineseText(summaryRaw) && latinRatio(summaryRaw) <= 0.72)
+      ? summaryRaw
+      : fallbackSummaryZh({ title, source, category });
+    const agentReasonZh = (hasChineseText(reasonRaw) && latinRatio(reasonRaw) <= 0.8)
+      ? reasonRaw
+      : fallbackReasonZh({ title, source });
+    const topicZh = (hasChineseText(topicRaw) && latinRatio(topicRaw) <= 0.8)
+      ? topicRaw
+      : fallbackTopicZh({ title, category });
 
     dedup.push({
       title,
-      headlineZh: String(raw?.headlineZh || title).trim(),
-      summaryZh: String(raw?.summaryZh || fallbackSummaryZh({ title, source, category })).trim(),
-      agentReasonZh: String(raw?.agentReasonZh || fallbackReasonZh({ title, source })).trim(),
+      headlineZh,
+      summaryZh,
+      agentReasonZh,
       url,
       source,
       category,
@@ -924,7 +1044,7 @@ function sanitizeItems(items, candidates, now) {
       pinnedUntil: safeNumber(raw?.pinnedUntil, pinnedDefault),
       agentScore: score,
       agentRank: safeNumber(raw?.agentRank, dedup.length + 1),
-      topicZh: String(raw?.topicZh || fallbackTopicZh({ title, category })).trim()
+      topicZh
     });
   }
 
@@ -975,22 +1095,22 @@ function normalizeModelItem(raw, fallbackTime = Date.now(), refRows = []) {
   if (!raw || typeof raw !== "object") return null;
   const id = safeNumber(raw.id, 0);
   const byId = id > 0 ? refRows.find((row) => safeNumber(row?.id, 0) === id) : null;
-  const titleRaw = String(raw.title || raw.headline || raw.headlineZh || "").trim();
+  const titleRaw = cleanOutputText(raw.title || raw.headline || raw.headlineZh || "", 180);
   const byTitle = titleRaw ? findRefRowByTitle(titleRaw, refRows) : null;
   const match = byId || byTitle || null;
 
-  const title = String(titleRaw || match?.title || "").trim();
+  const title = cleanOutputText(titleRaw || match?.title || "", 180);
   const url = String(raw.url || raw.link || raw.href || match?.url || "").trim();
   if (!title || !url) return null;
-  const source = String(raw.source || raw.media || match?.source || "Remote").trim();
+  const source = cleanOutputText(raw.source || raw.media || match?.source || "Remote", 80);
   const category = String(raw.category || raw.cat || match?.category || "Market").trim();
   const score = safeNumber(raw.agentScore, safeNumber(match?.preScore, 0) * 7.2);
 
   return {
     title,
-    headlineZh: String(raw.headlineZh || raw.headline || title).trim(),
-    summaryZh: String(raw.summaryZh || raw.summary || match?.summary || "").trim(),
-    agentReasonZh: String(raw.agentReasonZh || raw.reasonZh || raw.reason || match?.reasonZh || "").trim(),
+    headlineZh: cleanOutputText(raw.headlineZh || raw.headline || title, 120),
+    summaryZh: cleanOutputText(raw.summaryZh || raw.summary || match?.summary || "", 240),
+    agentReasonZh: cleanOutputText(raw.agentReasonZh || raw.reasonZh || raw.reason || match?.reasonZh || "", 120),
     url,
     source,
     category,
@@ -999,7 +1119,7 @@ function normalizeModelItem(raw, fallbackTime = Date.now(), refRows = []) {
     pinnedUntil: safeNumber(raw.pinnedUntil, 0),
     agentScore: score,
     agentRank: safeNumber(raw.agentRank, 0),
-    topicZh: String(raw.topicZh || raw.topic || match?.topicZh || "").trim()
+    topicZh: cleanOutputText(raw.topicZh || raw.topic || match?.topicZh || "", 40)
   };
 }
 
@@ -1119,22 +1239,58 @@ function buildItemsFromSelectedIds(ids, refRows, now) {
     const score = Number(clamp(safeNumber(row.preScore, 4) * 7.8, 15, 96).toFixed(2));
     const highImpact = score >= 72 || HIGH_IMPACT_PATTERNS.some((re) => re.test(String(row.title || "")));
     return {
-      title: String(row.title || "").trim(),
-      headlineZh: String(row.headlineZh || row.title || "").trim(),
-      summaryZh: String(row.summary || row.summaryZh || fallbackSummaryZh(row)).trim(),
-      agentReasonZh: String(row.reasonZh || row.agentReasonZh || "Model selected this as high-impact").trim(),
+      title: cleanOutputText(row.title || "", 180),
+      headlineZh: cleanOutputText(row.headlineZh || row.title || "", 120),
+      summaryZh: cleanOutputText(row.summary || row.summaryZh || fallbackSummaryZh(row), 240),
+      agentReasonZh: cleanOutputText(row.reasonZh || row.agentReasonZh || "\u6a21\u578b\u5224\u5b9a\u4e3a\u9ad8\u5f71\u54cd\u6761\u76ee", 120),
       url: String(row.url || "").trim(),
-      source: String(row.source || "Remote").trim(),
+      source: cleanOutputText(row.source || "Remote", 80),
       category: String(row.category || "Market").trim(),
       time: safeNumber(row.time, now),
       priority: Number((score * 0.62).toFixed(2)),
       pinnedUntil: highImpact ? now + 24 * 3600 * 1000 : 0,
       agentScore: score,
       agentRank: idx + 1,
-      topicZh: String(row.topicZh || fallbackTopicZh(row)).trim()
+      topicZh: cleanOutputText(row.topicZh || fallbackTopicZh(row), 40)
     };
   });
 }
+
+function needsZhPolish(items) {
+  return items.some((row) => {
+    const headline = String(row?.headlineZh || "");
+    const summary = String(row?.summaryZh || "");
+    const reason = String(row?.agentReasonZh || "");
+    const topic = String(row?.topicZh || "");
+    const merged = `${headline} ${summary} ${reason} ${topic}`;
+    if (/&nbsp;|&#160;|\u00a0/i.test(merged)) return true;
+    if (!hasChineseText(headline) || latinRatio(headline) > 0.65) return true;
+    if (!hasChineseText(summary) || latinRatio(summary) > 0.75) return true;
+    if (!hasChineseText(reason) || latinRatio(reason) > 0.85) return true;
+    return false;
+  });
+}
+
+function applyZhPolish(baseItems, patchItems) {
+  const byId = new Map();
+  for (const raw of patchItems || []) {
+    const id = safeNumber(raw?.id, 0);
+    if (id > 0) byId.set(id, raw);
+  }
+  return baseItems.map((row) => {
+    const id = safeNumber(row?.id, 0);
+    const patch = byId.get(id);
+    if (!patch) return row;
+    return {
+      ...row,
+      headlineZh: cleanOutputText(patch.headlineZh || row.headlineZh || row.title, 120),
+      summaryZh: cleanOutputText(patch.summaryZh || row.summaryZh || row.summary || "", 240),
+      agentReasonZh: cleanOutputText(patch.agentReasonZh || row.agentReasonZh || "", 120),
+      topicZh: cleanOutputText(patch.topicZh || row.topicZh || "", 40)
+    };
+  });
+}
+
 async function runOpenAi(candidates, nowIso) {
   if (!OPENAI_API_KEY) {
     throw new Error("OPENAI_API_KEY not set in remote mode.");
@@ -1423,6 +1579,38 @@ async function runOpenAi(candidates, nowIso) {
   if (typeof finalParsed !== "object" || !finalParsed) throw new Error("OpenAI final parsed payload invalid.");
   if (!finalParsed.globalSummaryZh && chunkSummaries.length) {
     finalParsed.globalSummaryZh = chunkSummaries.slice(0, 3).join("；");
+  }
+
+  if (Array.isArray(finalParsed.items) && finalParsed.items.length) {
+    const baseItems = finalParsed.items.map((row, idx) => ({ ...row, id: idx + 1 }));
+    if (needsZhPolish(baseItems)) {
+      try {
+        console.log("[remote] openai zh-polish start");
+        const polished = await callOpenAi(createOpenAiZhPolishPayload(baseItems, nowIso));
+        const patches = Array.isArray(polished?.items) ? polished.items : [];
+        if (patches.length) {
+          finalParsed.items = applyZhPolish(baseItems, patches).map((row) => {
+            const out = { ...row };
+            delete out.id;
+            return out;
+          });
+        } else {
+          finalParsed.items = baseItems.map((row) => {
+            const out = { ...row };
+            delete out.id;
+            return out;
+          });
+        }
+        console.log("[remote] openai zh-polish done");
+      } catch (error) {
+        console.error(`[remote] zh-polish failed -> ${error.message}`);
+        finalParsed.items = baseItems.map((row) => {
+          const out = { ...row };
+          delete out.id;
+          return out;
+        });
+      }
+    }
   }
   return finalParsed;
 }

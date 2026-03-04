@@ -15,18 +15,79 @@ function safeNumber(value, fallback = 0) {
   return Number.isFinite(n) ? n : fallback;
 }
 
+function decodeEntities(input) {
+  return String(input || "")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCharCode(parseInt(n, 16)))
+    .replace(/&quot;/g, "\"")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+}
+
+function cleanText(input, maxLen = 240) {
+  const raw = decodeEntities(input)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;|\u00a0/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!raw) return "";
+  if (raw.length <= maxLen) return raw;
+  return `${raw.slice(0, Math.max(0, maxLen - 3)).trim()}...`;
+}
+
+function hasChineseText(text) {
+  return /[\u4e00-\u9fff]/.test(String(text || ""));
+}
+
+function latinRatio(text) {
+  const sample = String(text || "");
+  const latin = (sample.match(/[A-Za-z]/g) || []).length;
+  const useful = (sample.match(/[A-Za-z\u4e00-\u9fff]/g) || []).length;
+  return useful ? latin / useful : 0;
+}
+
+function toChineseCategory(category) {
+  const map = { Policy: "政策", Geo: "地缘", Macro: "宏观", Market: "市场", Crypto: "加密", Social: "社区" };
+  return map[String(category || "")] || "市场";
+}
+
 function normalizeItem(raw) {
-  const title = String(raw?.title || "").trim();
+  const title = cleanText(raw?.title || "", 180);
   const url = String(raw?.url || "").trim();
-  const source = String(raw?.source || "Remote").trim();
+  const source = cleanText(raw?.source || "Remote", 80);
   const category = String(raw?.category || "Market").trim();
   if (!title || !url) return null;
+  const summaryRaw = cleanText(raw?.summary || raw?.summaryZh || "", 240);
+  const headlineRaw = cleanText(raw?.headlineZh || "", 120);
+  const reasonRaw = cleanText(raw?.agentReasonZh || "", 120);
+  const topicRaw = cleanText(raw?.topicZh || "", 40);
+
+  const headlineZh = (hasChineseText(headlineRaw) && latinRatio(headlineRaw) <= 0.65)
+    ? headlineRaw
+    : (() => {
+      const cat = toChineseCategory(category);
+      const src = source.split("/")[0] || "来源";
+      const short = hasChineseText(title) ? cleanText(title, 72) : `${src}发布重要${cat}动态`;
+      return `【${cat}】${short}`;
+    })();
+  const summaryZh = (hasChineseText(cleanText(raw?.summaryZh || "", 240)) && latinRatio(raw?.summaryZh || "") <= 0.75)
+    ? cleanText(raw?.summaryZh || "", 240)
+    : (hasChineseText(summaryRaw) ? summaryRaw : `【${toChineseCategory(category)}】来自${source.split("/")[0]}的重点动态，详见原文链接。`);
+  const agentReasonZh = (hasChineseText(reasonRaw) && latinRatio(reasonRaw) <= 0.85)
+    ? reasonRaw
+    : "来源权威性与市场影响较高";
+  const topicZh = (hasChineseText(topicRaw) && latinRatio(topicRaw) <= 0.8)
+    ? topicRaw
+    : `${toChineseCategory(category)}领域`;
+
   return {
     title,
-    headlineZh: String(raw?.headlineZh || "").trim(),
-    summaryZh: String(raw?.summaryZh || "").trim(),
-    agentReasonZh: String(raw?.agentReasonZh || "").trim(),
-    summary: String(raw?.summary || raw?.summaryZh || "").trim(),
+    headlineZh,
+    summaryZh,
+    agentReasonZh,
+    summary: summaryRaw,
     url,
     source,
     category,
@@ -36,7 +97,7 @@ function normalizeItem(raw) {
     pinnedUntil: safeNumber(raw?.pinnedUntil, 0),
     agentScore: safeNumber(raw?.agentScore, 0),
     agentRank: safeNumber(raw?.agentRank, 0),
-    topicZh: String(raw?.topicZh || "").trim()
+    topicZh
   };
 }
 
@@ -92,7 +153,7 @@ async function main() {
       remoteCollectedCount: safeNumber(remotePayload?.collectedCount, 0),
       remoteRawCount: safeNumber(remotePayload?.rawCount, items.length),
       sourceUrl: REMOTE_NEWS_URL,
-      globalSummaryZh: String(remotePayload?.globalSummaryZh || "").trim(),
+      globalSummaryZh: cleanText(remotePayload?.globalSummaryZh || "", 500),
       items
     };
 
