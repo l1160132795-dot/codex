@@ -84,6 +84,8 @@ async function main() {
       remoteAgentAt: String(remotePayload?.agentAt || ""),
       remoteVersion: String(remotePayload?.version || ""),
       remoteModel: String(remotePayload?.model || ""),
+      remoteFailedFeeds: safeNumber(remotePayload?.failedFeeds, 0),
+      remoteFailedSources: Array.isArray(remotePayload?.failedSources) ? remotePayload.failedSources.slice(0, 80) : [],
       sourceUrl: REMOTE_NEWS_URL,
       globalSummaryZh: String(remotePayload?.globalSummaryZh || "").trim(),
       items
@@ -113,4 +115,3 @@ main().catch((error) => {
   console.error(`[remote-pull] fatal: ${error.stack || error.message}`);
   if (REMOTE_NEWS_STRICT) process.exit(1);
 });
-

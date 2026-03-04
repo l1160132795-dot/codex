@@ -10,7 +10,7 @@ const TARGET_COUNT = 12;
 const MAX_CANDIDATES = 72;
 const MAX_FEED_ITEMS = 220;
 
-const FEEDS = [
+const BASE_RSS_FEEDS = [
   { url: "https://www.federalreserve.gov/feeds/press_all.xml", source: "Fed", category: "Policy" },
   { url: "https://www.sec.gov/news/pressreleases.rss", source: "SEC", category: "Policy" },
   { url: "https://www.ecb.europa.eu/rss/press.html", source: "ECB", category: "Macro" },
@@ -24,12 +24,57 @@ const FEEDS = [
   { url: "https://www.nasdaq.com/feed/rssoutbound?category=Markets", source: "Nasdaq", category: "Market" }
 ];
 
+const EXTRA_RSS_FEEDS = [
+  { url: "https://finance.yahoo.com/news/rssindex", source: "YahooFinance", category: "Market" },
+  { url: "https://feeds.reuters.com/reuters/businessNews", source: "Reuters", category: "Market" },
+  { url: "https://feeds.reuters.com/reuters/worldNews", source: "Reuters", category: "Geo" },
+  { url: "https://www.coindesk.com/arc/outboundfeeds/rss/", source: "CoinDesk", category: "Crypto" }
+];
+
+const GOOGLE_NEWS_QUERIES = [
+  { query: "stock market OR nasdaq OR s&p 500 OR dollar index OR oil OR gold", category: "Market", hl: "en-US", gl: "US", ceid: "US:en" },
+  { query: "federal reserve OR cpi OR inflation OR treasury yield", category: "Macro", hl: "en-US", gl: "US", ceid: "US:en" },
+  { query: "bitcoin OR ethereum OR crypto etf", category: "Crypto", hl: "en-US", gl: "US", ceid: "US:en" },
+  { query: "geopolitics OR sanctions OR conflict OR middle east", category: "Geo", hl: "en-US", gl: "US", ceid: "US:en" },
+  { query: "股市 OR 纳斯达克 OR 标普 OR 美元指数 OR 黄金 OR 原油", category: "Market", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "美联储 OR CPI OR 通胀 OR 非农 OR 美债收益率", category: "Macro", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" },
+  { query: "比特币 OR 以太坊 OR 加密ETF OR 稳定币", category: "Crypto", hl: "zh-CN", gl: "CN", ceid: "CN:zh-Hans" }
+];
+
+const REDDIT_HOT_FEEDS = [
+  { subreddit: "worldnews", category: "Geo" },
+  { subreddit: "CryptoCurrency", category: "Crypto" },
+  { subreddit: "stocks", category: "Market" },
+  { subreddit: "investing", category: "Macro" },
+  { subreddit: "economics", category: "Macro" }
+];
+
+const REDDIT_SEARCH_QUERIES = [
+  { query: "federal reserve OR CPI OR treasury yield OR stock market OR oil", category: "Macro" },
+  { query: "geopolitics OR sanctions OR conflict OR middle east", category: "Geo" },
+  { query: "bitcoin OR ethereum OR crypto ETF OR SEC", category: "Crypto" }
+];
+
+const GDELT_FEEDS = [
+  { category: "Geo", query: "(geopolitics OR war OR sanctions OR tariff OR oil supply OR conflict OR central bank)" },
+  { category: "Market", query: "(stock market OR equities OR treasury yield OR bond market OR dollar index OR oil OR gold) AND (volatility OR risk assets OR recession OR earnings)" },
+  { category: "Policy", query: "(SEC OR regulation OR policy OR lawsuit OR approval OR ban OR framework OR bill) AND (crypto OR ETF OR stablecoin OR exchange OR digital asset)" },
+  { category: "Macro", query: "(fed OR cpi OR inflation OR treasury yield OR interest rate OR dollar index OR jobs report OR unemployment) AND (stock market OR bond market OR risk assets OR commodities OR currencies)" },
+  { category: "Crypto", query: "(bitcoin OR ethereum OR solana OR xrp OR stablecoin OR ETF OR exchange) AND (market OR regulation OR inflow OR volatility OR institutional adoption)" }
+];
+
 const SOURCE_WEIGHTS = {
   Fed: 9.6,
   SEC: 9.4,
   ECB: 9.0,
   BoE: 8.8,
+  Reuters: 8.1,
   Nasdaq: 7.3,
+  YahooFinance: 6.8,
+  CoinDesk: 6.4,
+  GoogleNews: 6.1,
+  GDELT: 5.6,
+  Reddit: 3.8,
   CNBC: 7.1,
   FXStreet: 6.4,
   Cointelegraph: 5.9,
@@ -183,14 +228,86 @@ async function fetchText(url, timeoutMs = 16000, retries = 2) {
   throw lastError || new Error("fetch failed");
 }
 
+async function fetchJson(url, timeoutMs = 16000, retries = 2) {
+  const text = await fetchText(url, timeoutMs, retries);
+  return JSON.parse(text);
+}
+
 async function loadFeed(feed) {
-  try {
-    const xml = await fetchText(feed.url, 16000, 1);
-    return parseRss(xml, feed.source, feed.category);
-  } catch (error) {
-    console.error(`[remote] feed failed: ${feed.source} ${feed.url} -> ${error.message}`);
-    return [];
-  }
+  const xml = await fetchText(feed.url, 16000, 1);
+  return parseRss(xml, feed.source, feed.category);
+}
+
+function buildGoogleNewsRssUrl(cfg) {
+  const q = encodeURIComponent(String(cfg.query || ""));
+  return `https://news.google.com/rss/search?q=${q}&hl=${encodeURIComponent(cfg.hl || "en-US")}&gl=${encodeURIComponent(cfg.gl || "US")}&ceid=${encodeURIComponent(cfg.ceid || "US:en")}`;
+}
+
+async function loadGoogleNewsRss(cfg) {
+  const rssUrl = buildGoogleNewsRssUrl(cfg);
+  const xml = await fetchText(rssUrl, 16000, 1);
+  return parseRss(xml, "GoogleNews", cfg.category || "Market");
+}
+
+async function loadRedditHot(cfg) {
+  const subreddit = String(cfg.subreddit || "").trim();
+  const category = String(cfg.category || "Social").trim();
+  const url = `https://www.reddit.com/r/${encodeURIComponent(subreddit)}/hot.json?limit=10`;
+  const data = await fetchJson(url, 16000, 1);
+  const rows = Array.isArray(data?.data?.children) ? data.data.children : [];
+  return rows
+    .map((item) => item?.data)
+    .filter(Boolean)
+    .map((post) => ({
+      title: normalizeTitle(post?.title || ""),
+      summary: cleanText(post?.selftext || "", 220),
+      url: cleanText(post?.url || "", 500),
+      source: `Reddit/r/${subreddit}`,
+      category,
+      time: Number(post?.created_utc) * 1000 || Date.now(),
+      engagement: Number(post?.score || 0) + Number(post?.num_comments || 0)
+    }))
+    .filter((row) => row.title && row.url);
+}
+
+async function loadRedditSearch(cfg) {
+  const query = String(cfg.query || "").trim();
+  const category = String(cfg.category || "Social").trim();
+  const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=new&t=day&limit=16`;
+  const data = await fetchJson(url, 16000, 1);
+  const rows = Array.isArray(data?.data?.children) ? data.data.children : [];
+  return rows
+    .map((item) => item?.data)
+    .filter(Boolean)
+    .map((post) => ({
+      title: normalizeTitle(post?.title || ""),
+      summary: cleanText(post?.selftext || "", 220),
+      url: cleanText(post?.url || "", 500),
+      source: `Reddit/Search/${String(post?.subreddit || "all")}`,
+      category,
+      time: Number(post?.created_utc) * 1000 || Date.now(),
+      engagement: Number(post?.score || 0) + Number(post?.num_comments || 0)
+    }))
+    .filter((row) => row.title && row.url);
+}
+
+async function loadGdelt(cfg) {
+  const category = String(cfg.category || "Market").trim();
+  const query = encodeURIComponent(String(cfg.query || ""));
+  const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${query}&mode=ArtList&maxrecords=12&format=json&sort=DateDesc`;
+  const data = await fetchJson(url, 16000, 1);
+  const articles = Array.isArray(data?.articles) ? data.articles : [];
+  return articles
+    .map((a) => ({
+      title: normalizeTitle(a?.title || ""),
+      summary: cleanText(a?.socialimage || a?.seendate || "", 180),
+      url: cleanText(a?.url || "", 500),
+      source: `GDELT/${cleanText(a?.sourcecommonname || a?.domain || "GDELT", 80)}`,
+      category,
+      time: Date.parse(cleanText(a?.seendate || "", 120)) || Date.now(),
+      engagement: 0
+    }))
+    .filter((row) => row.title && row.url);
 }
 
 function clamp(value, min, max) {
@@ -527,17 +644,62 @@ async function ensureOutputDir(filePath) {
   await mkdir(dir, { recursive: true });
 }
 
+async function runSourceJob(name, runner) {
+  try {
+    const rows = await runner();
+    return { name, ok: true, rows };
+  } catch (error) {
+    console.error(`[remote] source failed: ${name} -> ${error.message}`);
+    return { name, ok: false, rows: [], error: error.message };
+  }
+}
+
 async function main() {
   const now = Date.now();
   const nowIso = new Date(now).toISOString();
 
-  const settled = await Promise.allSettled(FEEDS.map((feed) => loadFeed(feed)));
-  const rows = [];
-  let failedFeeds = 0;
-  for (const row of settled) {
-    if (row.status === "fulfilled") rows.push(...row.value);
-    else failedFeeds += 1;
+  const jobs = [];
+  for (const feed of BASE_RSS_FEEDS) {
+    jobs.push({
+      name: `RSS ${feed.source} ${feed.url}`,
+      run: () => loadFeed(feed)
+    });
   }
+  for (const feed of EXTRA_RSS_FEEDS) {
+    jobs.push({
+      name: `RSS ${feed.source} ${feed.url}`,
+      run: () => loadFeed(feed)
+    });
+  }
+  for (const cfg of GOOGLE_NEWS_QUERIES) {
+    jobs.push({
+      name: `GoogleNews ${cfg.hl} ${cfg.category} ${cfg.query}`,
+      run: () => loadGoogleNewsRss(cfg)
+    });
+  }
+  for (const cfg of REDDIT_HOT_FEEDS) {
+    jobs.push({
+      name: `Reddit hot r/${cfg.subreddit}`,
+      run: () => loadRedditHot(cfg)
+    });
+  }
+  for (const cfg of REDDIT_SEARCH_QUERIES) {
+    jobs.push({
+      name: `Reddit search ${cfg.query}`,
+      run: () => loadRedditSearch(cfg)
+    });
+  }
+  for (const cfg of GDELT_FEEDS) {
+    jobs.push({
+      name: `GDELT ${cfg.category}`,
+      run: () => loadGdelt(cfg)
+    });
+  }
+
+  const results = await Promise.all(jobs.map((job) => runSourceJob(job.name, job.run)));
+  const rows = results.flatMap((row) => row.rows);
+  const failedFeeds = results.filter((row) => !row.ok).length;
+  const failedSources = results.filter((row) => !row.ok).map((row) => row.name);
 
   const candidates = pickCandidates(rows, now);
   if (!candidates.length) throw new Error("No remote candidates available from feeds.");
@@ -559,7 +721,8 @@ async function main() {
     version: "remote-openai-agent.v1",
     model: OPENAI_MODEL,
     failedFeeds,
-    totalFeeds: FEEDS.length,
+    failedSources,
+    totalFeeds: jobs.length,
     collectedCount: rows.length,
     candidateCount: candidates.length,
     globalSummaryZh,
@@ -575,6 +738,7 @@ async function main() {
       model: payload.model,
       candidateCount: payload.candidateCount,
       failedFeeds: payload.failedFeeds,
+      failedSources: payload.failedSources,
       totalFeeds: payload.totalFeeds
     }, null, 2)};`,
     `window.__REMOTE_NEWS__ = ${JSON.stringify(payload.items, null, 2)};`,
@@ -593,4 +757,3 @@ main().catch((error) => {
   console.error(`[remote] failed: ${error.stack || error.message}`);
   process.exit(1);
 });
-

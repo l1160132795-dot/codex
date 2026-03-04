@@ -1,12 +1,12 @@
 {
   "version": "news-impact-agent.v1",
-  "updatedAt": "2026-03-04T01:38:52.183Z",
+  "updatedAt": "2026-03-04T02:28:32.255Z",
   "carry": [
     {
       "key": "federal reserve board issues enforcement actions with former employee of east cambridge savings bank and former employee of united bank",
-      "holdUntil": 1772717932176,
+      "holdUntil": 1772720912248,
       "majorLevel": 5,
-      "score": 73.15,
+      "score": 72.984,
       "item": {
         "title": "Federal Reserve Board issues enforcement actions with former employee of East Cambridge Savings Bank and former employee of United Bank",
         "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260303a.htm",
@@ -15,15 +15,15 @@
         "time": 1772553600000,
         "engagement": 0,
         "priority": 100.93,
-        "pinnedUntil": 1772717932176,
+        "pinnedUntil": 1772720912248,
         "summaryZh": "【政策】Federal Reserve Board issues enforcement actions w...。来源：Fed。"
       }
     },
     {
       "key": "prediction market gambling needs state regulation not feds mick mulvaney says after iran war bets",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 71.373,
+      "score": 71.207,
       "item": {
         "title": "Prediction market 'gambling' needs state regulation, not feds, Mick Mulvaney says after Iran war bets",
         "url": "https://www.cnbc.com/2026/03/03/prediction-market-gambling-mick-mulvaney-polymarket-kalshi.html",
@@ -32,15 +32,15 @@
         "time": 1772581019000,
         "engagement": 0,
         "priority": 91.03,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【市场】Prediction market 'gambling' needs state regulatio...。来源：CNBC。"
       }
     },
     {
       "key": "nvidia amazon temporarily close dubai offices google employees stranded amid u s iran war",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 70.512,
+      "score": 70.347,
       "item": {
         "title": "Nvidia, Amazon temporarily close Dubai offices, Google employees stranded amid U.S.-Iran war",
         "url": "https://www.cnbc.com/2026/03/03/nvidia-amazon-offices-google-dubai-iran-war.html",
@@ -49,15 +49,15 @@
         "time": 1772585324000,
         "engagement": 0,
         "priority": 95.75,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【地缘】Nvidia, Amazon temporarily close Dubai offices, Go...。来源：CNBC。"
       }
     },
     {
       "key": "south korea s kospi plunges 7 amid selloff in the region as middle east war escalates",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 69.719,
+      "score": 69.553,
       "item": {
         "title": "South Korea's Kospi plunges 7% amid selloff in the region as Middle East war escalates",
         "url": "https://www.cnbc.com/2026/03/04/asia-markets-hang-seng-index-kospi-nikkei-225.html",
@@ -66,15 +66,15 @@
         "time": 1772583648000,
         "engagement": 0,
         "priority": 91.64,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【市场】South Korea's Kospi plunges 7% amid selloff in the...。来源：CNBC。"
       }
     },
     {
       "key": "gold falls to near 5 100 as inflation fears weigh amidst middle east conflict",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 2,
-      "score": 66.691,
+      "score": 66.525,
       "item": {
         "title": "Gold falls to near $5,100 as inflation fears weigh amidst Middle East conflict",
         "url": "https://www.fxstreet.com/news/gold-falls-to-near-5-100-as-inflation-fears-weigh-amidst-middle-east-conflict-202603032312",
@@ -83,15 +83,15 @@
         "time": 1772579541000,
         "engagement": 0,
         "priority": 89.75,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【宏观】Gold falls to near $5,100 as inflation fears weigh...。来源：FXStreet。"
       }
     },
     {
       "key": "indonesia inflation temporary surge oil risks uob",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 2,
-      "score": 66.41,
+      "score": 66.244,
       "item": {
         "title": "Indonesia inflation: Temporary surge, oil risks – UOB",
         "url": "https://www.fxstreet.com/news/indonesia-inflation-temporary-surge-oil-risks-uob-202603032148",
@@ -100,15 +100,15 @@
         "time": 1772574480000,
         "engagement": 0,
         "priority": 88.58,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【宏观】Indonesia inflation: Temporary surge, oil risks – ...。来源：FXStreet。"
       }
     },
     {
       "key": "eur usd falls as middle east tensions lift usd despite hot ez inflation",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 2,
-      "score": 66.219,
+      "score": 66.053,
       "item": {
         "title": "EUR/USD falls as Middle East tensions lift USD despite hot EZ inflation",
         "url": "https://www.fxstreet.com/news/eur-usd-falls-as-middle-east-tensions-lift-usd-despite-hot-ez-inflation-202603032050",
@@ -117,15 +117,83 @@
         "time": 1772571042000,
         "engagement": 0,
         "priority": 87.78,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【宏观】EUR/USD falls as Middle East tensions lift USD des...。来源：FXStreet。"
       }
     },
     {
-      "key": "australian market sharply lower",
-      "holdUntil": 1772674732176,
+      "key": "gran tierra energy inc q4 loss widens",
+      "holdUntil": 1772677712248,
       "majorLevel": 2,
-      "score": 66.027,
+      "score": 66.05,
+      "item": {
+        "title": "Gran Tierra Energy, Inc. Q4 Loss Widens",
+        "url": "https://www.nasdaq.com/articles/gran-tierra-energy-inc-q4-loss-widens",
+        "source": "Nasdaq/Nasdaq",
+        "category": "Market",
+        "time": 1772588981000,
+        "engagement": 0,
+        "priority": 71.7,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "【市场】Gran Tierra Energy, Inc. Q4 Loss Widens。来源：Nasdaq。"
+      }
+    },
+    {
+      "key": "japanese market sharply lower",
+      "holdUntil": 1772677712248,
+      "majorLevel": 2,
+      "score": 65.995,
+      "item": {
+        "title": "Japanese Market Sharply Lower",
+        "url": "https://www.nasdaq.com/articles/japanese-market-sharply-lower-2",
+        "source": "Nasdaq/Nasdaq",
+        "category": "Market",
+        "time": 1772587999000,
+        "engagement": 0,
+        "priority": 71.47,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "【市场】Japanese Market Sharply Lower。来源：Nasdaq。"
+      }
+    },
+    {
+      "key": "this ai data center reit just guided for its first 10 billion revenue year is it a buy for 2026",
+      "holdUntil": 1772677712248,
+      "majorLevel": 2,
+      "score": 65.951,
+      "item": {
+        "title": "This AI Data Center REIT Just Guided for Its First $10 Billion Revenue Year. Is It a Buy for 2026?",
+        "url": "https://www.nasdaq.com/articles/ai-data-center-reit-just-guided-its-first-10-billion-revenue-year-it-buy-2026",
+        "source": "Nasdaq/Nasdaq",
+        "category": "Market",
+        "time": 1772587200000,
+        "engagement": 0,
+        "priority": 71.66,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "【市场】This AI Data Center REIT Just Guided for Its First...。来源：Nasdaq。"
+      }
+    },
+    {
+      "key": "continued consolidation called for hong kong stock market",
+      "holdUntil": 1772677712248,
+      "majorLevel": 2,
+      "score": 65.941,
+      "item": {
+        "title": "Continued Consolidation Called For Hong Kong Stock Market",
+        "url": "https://www.nasdaq.com/articles/continued-consolidation-called-hong-kong-stock-market-0",
+        "source": "Nasdaq/Nasdaq",
+        "category": "Market",
+        "time": 1772587017000,
+        "engagement": 0,
+        "priority": 71.62,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "【市场】Continued Consolidation Called For Hong Kong Stock...。来源：Nasdaq。"
+      }
+    },
+    {
+      "key": "australian market sharply lower",
+      "holdUntil": 1772677712248,
+      "majorLevel": 2,
+      "score": 65.861,
       "item": {
         "title": "Australian Market Sharply Lower",
         "url": "https://www.nasdaq.com/articles/australian-market-sharply-lower",
@@ -134,15 +202,15 @@
         "time": 1772585586000,
         "engagement": 0,
         "priority": 71.63,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【市场】Australian Market Sharply Lower。来源：Nasdaq。"
       }
     },
     {
       "key": "rayonier advanced materials inc q4 loss rises",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 2,
-      "score": 66.016,
+      "score": 65.85,
       "item": {
         "title": "Rayonier Advanced Materials Inc. Q4 Loss Rises",
         "url": "https://www.nasdaq.com/articles/rayonier-advanced-materials-inc-q4-loss-rises",
@@ -151,15 +219,15 @@
         "time": 1772585389000,
         "engagement": 0,
         "priority": 71.59,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【市场】Rayonier Advanced Materials Inc. Q4 Loss Rises。来源：Nasdaq。"
       }
     },
     {
       "key": "伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 65.753,
+      "score": 65.587,
       "item": {
         "title": "伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击",
         "url": "https://www.panewslab.com/zh/articles/019cb404-32f6-77c7-87e1-e2bf37979d54",
@@ -168,15 +236,15 @@
         "time": 1772546460000,
         "engagement": 0,
         "priority": 76.95,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【加密】伊朗首都德黑兰靠近伊朗专家会议机构的区域遭到袭击。来源：PANews。"
       }
     },
     {
       "key": "消息人士 中东冲突或使日本央行3月暂缓加息 加息唯一因素是日元大幅贬值",
-      "holdUntil": 1772717932176,
+      "holdUntil": 1772720912248,
       "majorLevel": 4,
-      "score": 65.53,
+      "score": 65.364,
       "item": {
         "title": "消息人士：中东冲突或使日本央行3月暂缓加息，加息唯一因素是日元大幅贬值",
         "url": "https://www.panewslab.com/zh/articles/019cb27a-2716-736f-a006-75cf4ef73b55",
@@ -185,15 +253,15 @@
         "time": 1772520840000,
         "engagement": 0,
         "priority": 70.99,
-        "pinnedUntil": 1772717932176,
+        "pinnedUntil": 1772720912248,
         "summaryZh": "【加密】消息人士：中东冲突或使日本央行3月暂缓加息，加息唯一因素是日元大幅贬值。来源：PANews。"
       }
     },
     {
       "key": "随着中东冲突加剧 现货比特币 btc 交易型开放式指数基金 etf 录得4 58亿美元资金流入",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 65.291,
+      "score": 65.126,
       "item": {
         "title": "随着中东冲突加剧，现货比特币（BTC）交易型开放式指数基金（ETF）录得4.58亿美元资金流入",
         "url": "https://cn.cointelegraph.com/news/bitcoin-etf-inflows-458-million-mideast-conflict-widens?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
@@ -202,15 +270,32 @@
         "time": 1772534546000,
         "engagement": 0,
         "priority": 73.72,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "【加密】随着中东冲突加剧，现货比特币（BTC）交易型开放式指数基金（ETF）录得4.58亿美元资金流入。来源：CointelegraphCN。"
       }
     },
     {
-      "key": "s kashkari too soon to know how iran war will affect inflation",
-      "holdUntil": 1772674732176,
+      "key": "statistical notice 2026 02 beeds user acceptance testing uat environment statistical taxonomy v1 3 1 final",
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 51.684,
+      "score": 60.937,
+      "item": {
+        "title": "Statistical Notice 2026/02 - BEEDS user acceptance testing (UAT) environment – Statistical taxonomy v1.3.1 FINAL",
+        "url": "https://www.bankofengland.co.uk/statistics/notice/2026/statistical-notice-2026-02",
+        "source": "BoE/BoE",
+        "category": "Macro",
+        "time": 1772529350000,
+        "engagement": 0,
+        "priority": 67.14,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "【宏观】Statistical Notice 2026/02 - BEEDS user acceptance...。来源：BoE。"
+      }
+    },
+    {
+      "key": "s kashkari too soon to know how iran war will affect inflation",
+      "holdUntil": 1772677712248,
+      "majorLevel": 3,
+      "score": 51.518,
       "item": {
         "title": "Fed’s Kashkari: Too soon to know how Iran war will affect inflation",
         "url": "https://www.fxstreet.com/news/feds-kashkari-too-soon-to-know-how-iran-war-will-affect-inflation-202603031718",
@@ -219,15 +304,15 @@
         "time": 1772558306000,
         "engagement": 0,
         "priority": 21.969608233333336,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "宏观概括：Fed’s Kashkari: Too soon to know how Iran war wi...。来源：FXStreet。该事件影响面较大，建议持续跟踪。"
       }
     },
     {
       "key": "微博热搜 伊朗导弹击中美第五舰队总部瞬间",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 50.666,
+      "score": 50.501,
       "item": {
         "title": "微博热搜：#伊朗导弹击中美第五舰队总部瞬间#",
         "url": "https://s.weibo.com/weibo?q=%23%E4%BC%8A%E6%9C%97%E5%AF%BC%E5%BC%B9%E5%87%BB%E4%B8%AD%E7%BE%8E%E7%AC%AC%E4%BA%94%E8%88%B0%E9%98%9F%E6%80%BB%E9%83%A8%E7%9E%AC%E9%97%B4%23",
@@ -236,15 +321,15 @@
         "time": 1772586196721,
         "engagement": 292226,
         "priority": 20.799298933333336,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "地缘概括：微博热搜：#伊朗导弹击中美第五舰队总部瞬间#。来源：WeiboHot。该事件影响面较大，建议持续跟踪。"
       }
     },
     {
       "key": "微博热搜 中东冲突让日韩一起慌了",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 50.51,
+      "score": 50.344,
       "item": {
         "title": "微博热搜：#中东冲突让日韩一起慌了#",
         "url": "https://s.weibo.com/weibo?q=%23%E4%B8%AD%E4%B8%9C%E5%86%B2%E7%AA%81%E8%AE%A9%E6%97%A5%E9%9F%A9%E4%B8%80%E8%B5%B7%E6%85%8C%E4%BA%86%23",
@@ -253,15 +338,32 @@
         "time": 1772586128721,
         "engagement": 206433,
         "priority": 20.79703226666667,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "地缘概括：微博热搜：#中东冲突让日韩一起慌了#。来源：WeiboHot。该事件影响面较大，建议持续跟踪。"
       }
     },
     {
+      "key": "australian dollar remains subdued following gdp data",
+      "holdUntil": 1772677712248,
+      "majorLevel": 2,
+      "score": 48.703,
+      "item": {
+        "title": "Australian Dollar remains subdued following GDP data",
+        "url": "https://www.fxstreet.com/news/australian-dollar-remains-subdued-following-gdp-data-202603040116",
+        "source": "FXStreet/FXStreet",
+        "category": "Macro",
+        "time": 1772587019000,
+        "engagement": 0,
+        "priority": 19.735552633333334,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "宏观概括：Australian Dollar remains subdued following GDP ...。来源：FXStreet。建议关注后续进展。"
+      }
+    },
+    {
       "key": "oil supertanker rates hit all time high as insurers drop war risk protection in the middle east",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 48.617,
+      "score": 48.452,
       "item": {
         "title": "Oil supertanker rates hit all-time high as insurers drop war risk protection in the Middle East",
         "url": "https://www.cnbc.com/2026/03/03/middle-east-crisis-iran-us-shipping-oil-tankers-strait-of-hormuz.html",
@@ -270,15 +372,15 @@
         "time": 1772541166000,
         "engagement": 0,
         "priority": 20.3982749,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "地缘概括：Oil supertanker rates hit all-time high as insur...。来源：CNBC。该事件影响面较大，建议持续跟踪。"
       }
     },
     {
       "key": "middle east war sends natural gas prices soaring raising growth shock risk for europe and asia",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 48.454,
+      "score": 48.289,
       "item": {
         "title": "Middle East war sends natural gas prices soaring, raising growth shock risk for Europe and Asia",
         "url": "https://www.cnbc.com/2026/03/03/middle-east-war-gas-energy-lng-drone-qatar-strait-hormuz-price-shock.html",
@@ -287,15 +389,15 @@
         "time": 1772559248000,
         "engagement": 0,
         "priority": 19.10100823333333,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "地缘概括：Middle East war sends natural gas prices soaring...。来源：CNBC。建议关注后续进展。"
       }
     },
     {
       "key": "dow jones industrial average plunges as iran war fears rattle wall street",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 47.894,
+      "score": 47.729,
       "item": {
         "title": "Dow Jones Industrial Average plunges as Iran war fears rattle Wall Street",
         "url": "https://www.fxstreet.com/news/dow-jones-industrial-average-plunges-as-iran-war-fears-rattle-wall-street-202603031659",
@@ -304,15 +406,15 @@
         "time": 1772557145000,
         "engagement": 0,
         "priority": 19.830908233333336,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "宏观概括：Dow Jones Industrial Average plunges as Iran war...。来源：FXStreet。建议关注后续进展。"
       }
     },
     {
       "key": "aud usd drops under 0 7000 as us dollar strengthens amid middle east war",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 47.843,
+      "score": 47.677,
       "item": {
         "title": "AUD/USD drops under 0.7000 as US Dollar strengthens amid Middle East war",
         "url": "https://www.fxstreet.com/news/aud-usd-drops-under-07000-as-usd-strengthens-amid-middle-east-war-202603031649",
@@ -321,15 +423,15 @@
         "time": 1772556542000,
         "engagement": 0,
         "priority": 19.810808233333336,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "宏观概括：AUD/USD drops under 0.7000 as US Dollar strength...。来源：FXStreet。建议关注后续进展。"
       }
     },
     {
       "key": "trump administration offers shifting narrative for u s war in iran as democrats pounce",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 47.717,
+      "score": 47.552,
       "item": {
         "title": "Trump administration offers shifting narrative for U.S. war in Iran as Democrats pounce",
         "url": "https://www.cnbc.com/2026/03/03/trump-iran-shifting-narrative-us-war.html",
@@ -338,15 +440,15 @@
         "time": 1772567230000,
         "engagement": 0,
         "priority": 18.5670749,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "市场概括：Trump administration offers shifting narrative f...。来源：CNBC。建议关注后续进展。"
       }
     },
     {
       "key": "gbp usd slides to 1 3300 as middle east war lifts us dollar",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 47.542,
+      "score": 47.376,
       "item": {
         "title": "GBP/USD slides to 1.3300 as Middle East war lifts US Dollar",
         "url": "https://www.fxstreet.com/news/gbp-usd-slides-to-13300-as-middle-east-tensions-lift-us-dollar-202603031550",
@@ -355,15 +457,49 @@
         "time": 1772553021000,
         "engagement": 0,
         "priority": 19.693441566666667,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "宏观概括：GBP/USD slides to 1.3300 as Middle East war lift...。来源：FXStreet。建议关注后续进展。"
       }
     },
     {
+      "key": "china s ratingdog manufacturing pmi climbs to 62 1 in february services pmi rises to 56 7",
+      "holdUntil": 1772677712248,
+      "majorLevel": 2,
+      "score": 47.146,
+      "item": {
+        "title": "China’s RatingDog Manufacturing PMI climbs to 62.1 in February, Services PMI rises to 56.7",
+        "url": "https://www.fxstreet.com/news/chinas-ratingdog-manufacturing-pmi-climbs-to-621-in-february-services-pmi-rises-to-567-202603040146",
+        "source": "FXStreet/FXStreet",
+        "category": "Macro",
+        "time": 1772588816000,
+        "engagement": 0,
+        "priority": 17.895452633333335,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "宏观概括：China’s RatingDog Manufacturing PMI climbs to 62...。来源：FXStreet。建议关注后续进展。"
+      }
+    },
+    {
+      "key": "china s nbs manufacturing pmi declines to 49 0 in february non manufacturing pmi rises to 49 5",
+      "holdUntil": 1772677712248,
+      "majorLevel": 2,
+      "score": 47.072,
+      "item": {
+        "title": "China's NBS Manufacturing PMI declines to 49.0 in February, Non-Manufacturing PMI rises to 49.5",
+        "url": "https://www.fxstreet.com/news/chinas-nbs-manufacturing-pmi-declines-to-490-in-february-non-manufacturing-pmi-rises-to-495-202603040132",
+        "source": "FXStreet/FXStreet",
+        "category": "Macro",
+        "time": 1772587943000,
+        "engagement": 0,
+        "priority": 17.866352633333335,
+        "pinnedUntil": 1772677712248,
+        "summaryZh": "宏观概括：China's NBS Manufacturing PMI declines to 49.0 i...。来源：FXStreet。建议关注后续进展。"
+      }
+    },
+    {
       "key": "europe told of iran strikes just minutes before they started struggles to be heard as war escalates",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 46.869,
+      "score": 46.704,
       "item": {
         "title": "Europe — told of Iran strikes just 'minutes' before they started — struggles to be heard as war escalates",
         "url": "https://www.cnbc.com/2026/03/03/europe-iran-trump-us-israel-strikes-eu-merz-starmer.html",
@@ -372,15 +508,15 @@
         "time": 1772540720000,
         "engagement": 0,
         "priority": 18.483408233333332,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "地缘概括：Europe — told of Iran strikes just 'minutes' bef...。来源：CNBC。建议关注后续进展。"
       }
     },
     {
       "key": "iran war prediction market bets draw heat insane this is legal",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 46.141,
+      "score": 45.975,
       "item": {
         "title": "Iran war prediction market bets draw heat: 'Insane this is legal'",
         "url": "https://www.cnbc.com/2026/03/02/prediction-markets-iran-strikes-khamenei.html",
@@ -389,15 +525,15 @@
         "time": 1772548801000,
         "engagement": 0,
         "priority": 17.9527749,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "市场概括：Iran war prediction market bets draw heat: 'Insa...。来源：CNBC。建议关注后续进展。"
       }
     },
     {
       "key": "south korea defense stocks soar with heavyweight hanwha aerospace surging 20 as traders react to iran war",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 45.374,
+      "score": 45.209,
       "item": {
         "title": "South Korea defense stocks soar with heavyweight Hanwha Aerospace surging 20% as traders react to Iran war",
         "url": "https://www.cnbc.com/2026/03/03/south-korea-defense-stocks-soar-hanwha-aerospace-iran-us-israel-war.html",
@@ -406,15 +542,15 @@
         "time": 1772523246000,
         "engagement": 0,
         "priority": 17.900941566666667,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "地缘概括：South Korea defense stocks soar with heavyweight...。来源：CNBC。建议关注后续进展。"
       }
     },
     {
       "key": "x 财经热点 cpi",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 44.142,
+      "score": 43.977,
       "item": {
         "title": "X 财经热点：#CPI",
         "url": "https://x.com/search?q=%23CPI",
@@ -423,15 +559,15 @@
         "time": 1772586205753,
         "engagement": 1452,
         "priority": 16.661566616364077,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "宏观概括：X 财经热点：#CPI。来源：X。建议关注后续进展。"
       }
     },
     {
       "key": "new york s williams says tariff burden falls overwhelmingly on u s businesses and consumers",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 2,
-      "score": 43.347,
+      "score": 43.181,
       "item": {
         "title": "New York Fed's Williams says tariff burden falls 'overwhelmingly' on U.S. businesses and consumers",
         "url": "https://www.cnbc.com/2026/03/03/new-york-feds-williams-says-tariff-burden-falls-overwhelmingly-on-us-businesses-and-consumers.html",
@@ -440,15 +576,15 @@
         "time": 1772556823000,
         "engagement": 0,
         "priority": 17.0201749,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "市场概括：New York Fed's Williams says tariff burden falls...。来源：CNBC。建议关注后续进展。"
       }
     },
     {
       "key": "fatf警告稳定币成非法交易主要工具 呼吁加强对发行方的监管",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 3,
-      "score": 42.678,
+      "score": 42.512,
       "item": {
         "title": "FATF警告稳定币成非法交易主要工具，呼吁加强对发行方的监管",
         "url": "https://www.panewslab.com/zh/articles/019cb65b-7998-76ac-a0c7-297bdce656cf",
@@ -457,15 +593,15 @@
         "time": 1772585940000,
         "engagement": 0,
         "priority": 16.590741566666665,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "加密概括：FATF警告稳定币成非法交易主要工具，呼吁加强对发行方的监管。来源：PANews。建议关注后续进展。"
       }
     },
     {
       "key": "versant debut earnings report shows continued pay tv pressure digital growth",
-      "holdUntil": 1772674732176,
+      "holdUntil": 1772677712248,
       "majorLevel": 2,
-      "score": 42.626,
+      "score": 42.46,
       "item": {
         "title": "Versant debut earnings report shows continued pay TV pressure, digital growth",
         "url": "https://www.cnbc.com/2026/03/03/versant-vsnt-debut-earnings-report-digital-growth.html",
@@ -474,144 +610,8 @@
         "time": 1772548398000,
         "engagement": 0,
         "priority": 16.739341566666667,
-        "pinnedUntil": 1772674732176,
+        "pinnedUntil": 1772677712248,
         "summaryZh": "市场概括：Versant debut earnings report shows continued pa...。来源：CNBC。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "s schmid inflation is hot",
-      "holdUntil": 1772674732176,
-      "majorLevel": 2,
-      "score": 42.37,
-      "item": {
-        "title": "Fed’s Schmid: Inflation is hot",
-        "url": "https://www.fxstreet.com/news/feds-schmid-inflation-is-hot-202603031553",
-        "source": "FXStreet/FXStreet",
-        "category": "Macro",
-        "time": 1772553236000,
-        "engagement": 0,
-        "priority": 16.600608233333336,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "宏观概括：Fed’s Schmid: Inflation is hot。来源：FXStreet。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "swiss sneaker maker plunges 14 on weak guidance slower than expected 2026 growth",
-      "holdUntil": 1772674732176,
-      "majorLevel": 2,
-      "score": 42.256,
-      "item": {
-        "title": "Swiss sneaker maker plunges 14% on weak guidance, slower than expected 2026 growth",
-        "url": "https://www.cnbc.com/2026/03/03/on-onon-stock-q4-earnings-record-sales-guidance.html",
-        "source": "CNBC/CNBC",
-        "category": "Geo",
-        "time": 1772547463000,
-        "engagement": 0,
-        "priority": 15.6081749,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "地缘概括：Swiss sneaker maker plunges 14% on weak guidance...。来源：CNBC。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "eur gbp eases despite stronger eurozone inflation data",
-      "holdUntil": 1772674732176,
-      "majorLevel": 1,
-      "score": 41.876,
-      "item": {
-        "title": "EUR/GBP eases despite stronger Eurozone inflation data",
-        "url": "https://www.fxstreet.com/news/eur-gbp-eases-despite-stronger-eurozone-inflation-data-202603031417",
-        "source": "FXStreet/FXStreet",
-        "category": "Macro",
-        "time": 1772547467000,
-        "engagement": 0,
-        "priority": 16.408308233333337,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "宏观概括：EUR/GBP eases despite stronger Eurozone inflatio...。来源：FXStreet。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "daily open trump promises insurance and protection for gulf shipping",
-      "holdUntil": 1772674732176,
-      "majorLevel": 1,
-      "score": 41.836,
-      "item": {
-        "title": "CNBC Daily Open: Trump promises insurance and protection for Gulf shipping",
-        "url": "https://www.cnbc.com/2026/03/04/cnbc-daily-open-trump-promises-insurance-and-protection-for-gulf-shipping.html",
-        "source": "CNBC/CNBC",
-        "category": "Geo",
-        "time": 1772585683000,
-        "engagement": 0,
-        "priority": 14.782174900000001,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "地缘概括：CNBC Daily Open: Trump promises insurance and pr...。来源：CNBC。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "微博热搜 伊朗宣称重创美军",
-      "holdUntil": 1772674732176,
-      "majorLevel": 1,
-      "score": 41.78,
-      "item": {
-        "title": "微博热搜：#伊朗宣称重创美军#",
-        "url": "https://s.weibo.com/weibo?q=%23%E4%BC%8A%E6%9C%97%E5%AE%A3%E7%A7%B0%E9%87%8D%E5%88%9B%E7%BE%8E%E5%86%9B%23",
-        "source": "WeiboHot",
-        "category": "Geo",
-        "time": 1772586172721,
-        "engagement": 289474,
-        "priority": 15.598498933333333,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "地缘概括：微博热搜：#伊朗宣称重创美军#。来源：WeiboHot。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "euro area oil shock lifts inflation outlook commerzbank",
-      "holdUntil": 1772674732176,
-      "majorLevel": 1,
-      "score": 41.776,
-      "item": {
-        "title": "Euro area: Oil shock lifts inflation outlook – Commerzbank",
-        "url": "https://www.fxstreet.com/news/euro-area-oil-shock-lifts-inflation-outlook-commerzbank-202603031358",
-        "source": "FXStreet/FXStreet",
-        "category": "Macro",
-        "time": 1772546293000,
-        "engagement": 0,
-        "priority": 16.3691749,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "宏观概括：Euro area: Oil shock lifts inflation outlook – C...。来源：FXStreet。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "x 财经热点 inflation",
-      "holdUntil": 1772674732176,
-      "majorLevel": 1,
-      "score": 41.749,
-      "item": {
-        "title": "X 财经热点：#Inflation",
-        "url": "https://x.com/search?q=%23Inflation",
-        "source": "X/Trends24",
-        "category": "Macro",
-        "time": 1772586208753,
-        "engagement": 1464,
-        "priority": 16.665241076722374,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "宏观概括：X 财经热点：#Inflation。来源：X。建议关注后续进展。"
-      }
-    },
-    {
-      "key": "微博热搜 伊朗遇难学生一个个墓穴让人心碎",
-      "holdUntil": 1772674732176,
-      "majorLevel": 1,
-      "score": 41.62,
-      "item": {
-        "title": "微博热搜：#伊朗遇难学生一个个墓穴让人心碎#",
-        "url": "https://s.weibo.com/weibo?q=%23%E4%BC%8A%E6%9C%97%E9%81%87%E9%9A%BE%E5%AD%A6%E7%94%9F%E4%B8%80%E4%B8%AA%E4%B8%AA%E5%A2%93%E7%A9%B4%E8%AE%A9%E4%BA%BA%E5%BF%83%E7%A2%8E%23",
-        "source": "WeiboHot",
-        "category": "Geo",
-        "time": 1772586120721,
-        "engagement": 202111,
-        "priority": 15.596765600000001,
-        "pinnedUntil": 1772674732176,
-        "summaryZh": "地缘概括：微博热搜：#伊朗遇难学生一个个墓穴让人心碎#。来源：WeiboHot。建议关注后续进展。"
       }
     }
   ]

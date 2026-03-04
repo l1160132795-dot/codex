@@ -67,3 +67,4 @@ node server.mjs
 - 本地日志出现 `[remote-trigger] skip: GITHUB_REMOTE_OWNER/REPO/TOKEN not configured.`：未启用主动触发（可忽略）。
 - 远程没有产出文件：检查 Actions 任务是否执行成功、`OPENAI_API_KEY` 是否有效。
 - 私有仓库 404/401：检查 `REMOTE_NEWS_AUTH_TOKEN` 权限（至少能读取仓库内容）。
+- 远程哪些源失败：看 `remote/news.remote.json` 里的 `failedFeeds` 和 `failedSources` 字段。
