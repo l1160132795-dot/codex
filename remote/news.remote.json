@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "agentAt": "2026-03-04T08:08:51.570Z",
+=======
+  "agentAt": "2026-03-04T08:34:37.132Z",
+>>>>>>> fbd4579abb71d96a1876fcb4e1318047c28bbc24
   "version": "remote-openai-agent.v1",
   "model": "openai/gpt-oss-120b:free",
   "failedFeeds": 15,
@@ -21,6 +25,7 @@
     "GDELT Crypto"
   ],
   "totalFeeds": 59,
+<<<<<<< HEAD
   "collectedCount": 2088,
   "candidateCount": 40,
   "globalSummaryZh": "",
@@ -48,11 +53,42 @@
       "time": 1772609525000,
       "priority": 59.52,
       "pinnedUntil": 1772698131570,
+=======
+  "collectedCount": 2107,
+  "candidateCount": 40,
+  "globalSummaryZh": "",
+  "sourceStats": {
+    "GoogleNews/凤凰网": 1,
+    "GoogleNews/chinanews.com.cn": 1,
+    "GoogleNews/Al Jazeera": 1,
+    "GoogleNews/DW.com": 1,
+    "GoogleNews/京报网": 1,
+    "AlJazeera/AlJazeera": 2,
+    "NYTimes/NYTimes": 1,
+    "Guardian/Guardian": 1,
+    "GoogleNews/Bloomberg": 1,
+    "GoogleNews/cnfol": 1,
+    "GoogleNews/新浪财经": 1
+  },
+  "items": [
+    {
+      "title": "泽连斯基喊话中东国家：给我爱国者导弹，我给你们无人机_凤凰网",
+      "headlineZh": "泽连斯基喊话中东国家：给我爱国者导弹，我给你们无人机_凤凰网",
+      "summaryZh": "泽连斯基喊话中东国家：给我爱国者导弹，我给你们无人机_凤凰网 &nbsp;&nbsp; 凤凰网",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE4yQ2tkQjRhU1c3M1lvRGlWOVRHNlpGR0F0bmNoMmhDY0gzajRkQ05zcVQ0VjlXSjV6cTdpRFZYMV8wM3Q3UFJjQjJzOW0?oc=5",
+      "source": "GoogleNews/凤凰网",
+      "category": "Geo",
+      "time": 1772613016000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+>>>>>>> fbd4579abb71d96a1876fcb4e1318047c28bbc24
       "agentScore": 96,
       "agentRank": 1,
-      "topicZh": "地缘冲突与能源"
+      "topicZh": "地缘领域"
     },
     {
+<<<<<<< HEAD
       "title": "Middle East crisis live: US says nearly 2,000 targets hit in Iran war; Iran insists it has ‘complete control’ of strait of Hormuz",
       "headlineZh": "Middle East crisis live: US says nearly 2,000 targets hit in Iran war; Iran insists it has ‘complete control’ of strait of Hormuz",
       "summaryZh": "Revolutionary Guards again claim control of crucial of strait after Trump offers navy escort for tankers Trump administration has still not settled on reasons for war Middle East attacks intensify as Trump rejects Ira...",
@@ -78,11 +114,39 @@
       "time": 1772611221000,
       "priority": 59.52,
       "pinnedUntil": 1772698131570,
+=======
+      "title": "伊拉克记者方浩明谈伊朗遇袭：很心酸 中东人的梦想是过和平的日子",
+      "headlineZh": "伊拉克记者方浩明谈伊朗遇袭：很心酸 中东人的梦想是过和平的日子",
+      "summaryZh": "伊拉克记者方浩明谈伊朗遇袭：很心酸 中东人的梦想是过和平的日子 &nbsp;&nbsp; chinanews.com.cn",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE12X0l6aVBXdEpfYmZfeFZ5em1OSFUtbk13SEpnby1hZmJTeEdrNHNzbkhQa3NsMDhMenVJZk8zWHEwR3dieVM4aUdIc0xiXzF1VmQ3QXBpbEtXbFZaYXRJNmdGd1AwVHZ0R19yeERreUd1WlNMN3c?oc=5",
+      "source": "GoogleNews/chinanews.com.cn",
+      "category": "Geo",
+      "time": 1772612880000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+      "agentScore": 96,
+      "agentRank": 2,
+      "topicZh": "地缘领域"
+    },
+    {
+      "title": "IRGC says Iran in ‘complete control’ of Strait of Hormuz amid Trump threats",
+      "headlineZh": "IRGC says Iran in ‘complete control’ of Strait of Hormuz amid Trump threats",
+      "summaryZh": "IRGC says Iran in ‘complete control’ of Strait of Hormuz amid Trump threats &nbsp;&nbsp; Al Jazeera",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSWxGdVQ1dGgwYWNWdTNfcTJKOE92WjBjNnNOTHpMSW4wSmIyTklYdWhpMjV4N2J0LVI1d2RVTGRwUEFKaGRRZERiNy1HSkdic0psR1FvN0hTWTFUNHNETzhtLThGWjNhVlUxSzRkSjFocl84ZFJxb0FORnI5UVhyeW1JTUdCRlp4WnpnQ0E4ZzJnY1dQbno1N2tjNE1ud2VRUnRHRk45TGV3MG5nV2NUU1oyb9IBuAFBVV95cUxNRldUZTlFZ2JoWjNoV3ZXMGZNVUk4a0t3aGsyalZLMDR3cmJ0RUpXX3psWDVKV0JlcVhoZS0xanVHRU8yUlRtYzVTSDBPMXBVaUkweGVkTGItWEh0OERVM1h0NnR0dER5Qm1iT3dfT2tOaW9mRklTdmcxcnlNTVhrOU92ODJqT3NvQkJYcFk5TXZubTdyS3F2a0RBTHVI...",
+      "source": "GoogleNews/Al Jazeera",
+      "category": "Geo",
+      "time": 1772612558000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+>>>>>>> fbd4579abb71d96a1876fcb4e1318047c28bbc24
       "agentScore": 96,
       "agentRank": 3,
       "topicZh": "地缘领域"
     },
     {
+<<<<<<< HEAD
       "title": "Wall Street futures slip on Middle East conflict, oil-driven inflation concerns",
       "headlineZh": "Wall Street futures slip on Middle East conflict, oil-driven inflation concerns",
       "summaryZh": "Wall Street futures slip on Middle East conflict, oil-driven inflation concerns &nbsp;&nbsp; Reuters",
@@ -93,11 +157,24 @@
       "time": 1772611020000,
       "priority": 59.52,
       "pinnedUntil": 1772698131570,
+=======
+      "title": "Iran attacks on Gulf oil and gas sites trigger energy fears",
+      "headlineZh": "Iran attacks on Gulf oil and gas sites trigger energy fears",
+      "summaryZh": "Iran attacks on Gulf oil and gas sites trigger energy fears &nbsp;&nbsp; DW.com",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTHlDMFFXeXk1dkVDM1c2RHIwR0ZWVDBLSDB4Tm9zX0JUZUQ1LUF0WmhRc3BJVl9PdDdtdl9pVFZRTTBJanZRZ2lNSWRlUThIRlZldENVOTQ2S09fWDlXYkdqNkgxOTZzSFRtWC01cmhTWnFyckl5UmtqVFJFQmR0TUZlc3Zjd2tqdnlXYVpma1R2SndYMHZv0gGXAUFVX3lxTE5PanpRSDBITWtZdmkycVhjOElfWDd3MmYzMzIxdHdfbmdwdzh4Nm8zMjk4dDlTMWloMHdwaHFJaGdyWWNPN0Y3Q0t5QnF4TTNxVlJhdmw1bDFTeWtzSnRIMVhYdDAzSGJTMXFvYS0wSHJSTkFqVVdYY0I2dVk5YzdyeHgzOHZEbjJDLXl2X2lpcG1CTGNob0E?oc=5",
+      "source": "GoogleNews/DW.com",
+      "category": "Geo",
+      "time": 1772612465000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+>>>>>>> fbd4579abb71d96a1876fcb4e1318047c28bbc24
       "agentScore": 96,
       "agentRank": 4,
       "topicZh": "地缘冲突与能源"
     },
     {
+<<<<<<< HEAD
       "title": "Indian Rupee remains under pressure as Oil prices rise on Middle East war",
       "headlineZh": "Indian Rupee remains under pressure as Oil prices rise on Middle East war",
       "summaryZh": "The Indian Rupee (INR) declines against the US Dollar (USD), extending its losing streak for the fifth successive session. The USD/INR pair reached a fresh record high of 92.66 during the Asian hours on Wednesday.",
@@ -153,11 +230,69 @@
       "time": 1772610954000,
       "priority": 59.52,
       "pinnedUntil": 1772698131570,
+=======
+      "title": "中东多国关闭领空，上万航班取消，三大航空枢纽同时停运",
+      "headlineZh": "中东多国关闭领空，上万航班取消，三大航空枢纽同时停运",
+      "summaryZh": "中东多国关闭领空，上万航班取消，三大航空枢纽同时停运 &nbsp;&nbsp; 京报网",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBrNUNybDJkWGp6akVtMzBCY2FIRUtGVzJsT0JZVElUeG11d0wtbGFISnpQUEpwRVJtaUY4Nm1IUGk0dVlCUXkyTnNIS3NnWi11eGJFWXRGMldDSTJwZXc?oc=5",
+      "source": "GoogleNews/京报网",
+      "category": "Geo",
+      "time": 1772611800000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
       "agentScore": 96,
-      "agentRank": 8,
-      "topicZh": "宏观领域"
+      "agentRank": 5,
+      "topicZh": "地缘领域"
     },
     {
+      "title": "Israeli air attack targets hotel in Beirut",
+      "headlineZh": "Israeli air attack targets hotel in Beirut",
+      "summaryZh": "Al Jazeera’s Zeina Khodr reports from the site of an Israeli attack on a hotel in Beirut’s Hazmiyeh suburb.",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/3/4/israeli-air-attack-targets-hotel-in-beirut?traffic_source=rss",
+      "source": "AlJazeera/AlJazeera",
+      "category": "Geo",
+      "time": 1772611757000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+      "agentScore": 96,
+      "agentRank": 6,
+      "topicZh": "地缘领域"
+    },
+    {
+      "title": "Iran Live Updates: Israel Begins ‘Broad Wave of Strikes’ on Iran’s Infrastructure",
+      "headlineZh": "Iran Live Updates: Israel Begins ‘Broad Wave of Strikes’ on Iran’s Infrastructure",
+      "summaryZh": "The U.S. announced the names of four soldiers who were killed by an Iranian drone on Sunday. The leader of the U.S. Central Command said more than 50,000 troops, 200 fighters, two aircraft carriers and bombers were pa...",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://www.nytimes.com/live/2026/03/03/world/iran-war-israel-lebanon-trump",
+      "source": "NYTimes/NYTimes",
+      "category": "Geo",
+      "time": 1772611544000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+      "agentScore": 96,
+      "agentRank": 7,
+      "topicZh": "地缘冲突与能源"
+    },
+    {
+      "title": "How long can Israel sustain a military conflict with Iran?",
+      "headlineZh": "How long can Israel sustain a military conflict with Iran?",
+      "summaryZh": "Public support for Israel's war effort contrasts with doubts over its long-term military and economic sustainability.",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://www.aljazeera.com/news/2026/3/4/how-long-can-israel-sustain-a-military-conflict-with-iran?traffic_source=rss",
+      "source": "AlJazeera/AlJazeera",
+      "category": "Geo",
+      "time": 1772611308000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+>>>>>>> fbd4579abb71d96a1876fcb4e1318047c28bbc24
+      "agentScore": 96,
+      "agentRank": 8,
+      "topicZh": "地缘冲突与能源"
+    },
+    {
+<<<<<<< HEAD
       "title": "全球市场开启无差别抛售，历史复盘：冲突后股市、原油、黄金怎么走",
       "headlineZh": "全球市场开启无差别抛售，历史复盘：冲突后股市、原油、黄金怎么走",
       "summaryZh": "全球市场开启无差别抛售，历史复盘：冲突后股市、原油、黄金怎么走 &nbsp;&nbsp; SOHU",
@@ -216,6 +351,66 @@
       "agentScore": 96,
       "agentRank": 12,
       "topicZh": "市场领域"
+=======
+      "title": "Spain’s Sánchez says ‘no to war’ after Trump’s threats over Nato spending and use of bases – Europe live",
+      "headlineZh": "Spain’s Sánchez says ‘no to war’ after Trump’s threats over Nato spending and use of bases – Europe live",
+      "summaryZh": "Spain’s prime minister Pedro Sánchez says he opposes ‘repeating the mistakes of the past’ Sánchez says his position is not naive – and says “what is naive is thinking that violence is the solution” or that “democracie...",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://www.theguardian.com/world/live/2026/mar/04/europe-latest-news-updates-pedro-sanchez-spain-nato-eu",
+      "source": "Guardian/Guardian",
+      "category": "Geo",
+      "time": 1772612685000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+      "agentScore": 96,
+      "agentRank": 9,
+      "topicZh": "地缘冲突与能源"
+    },
+    {
+      "title": "More Questions Than Answers",
+      "headlineZh": "More Questions Than Answers",
+      "summaryZh": "More Questions Than Answers &nbsp;&nbsp; Bloomberg",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPMkp0N1hXR3AyNWJ4b3ppSUNhQjdBb3kyRDB4My1hbE12Mk9LVk9LZV8wYW1DdkdHaU5jQkFOVzN6Yms2Z29GbVRMVGlaWS01amZvZDJZeGNxVFN5SmJ3VnFmNU0ySzJSNTFxXzhQOUE3bDBoU3VCVUpnSlVPRkVmQjZlQXM2UnVBUEV4aEV1MUR4Nm4zVVhlNFZVRFNZSW5sa0NOc0dTVHc0V004c0xzai1id3UzYmcxS0d4N0NtWmNZcHRFV3Z4M2l4XzJ0UzZ5M0pZ?oc=5",
+      "source": "GoogleNews/Bloomberg",
+      "category": "Geo",
+      "time": 1772612715000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+      "agentScore": 96,
+      "agentRank": 10,
+      "topicZh": "地缘领域"
+    },
+    {
+      "title": "影子供应链的“血栓”：2026中东战云下的汽车产业生存劫_车市动态_汽车_中金在线",
+      "headlineZh": "影子供应链的“血栓”：2026中东战云下的汽车产业生存劫_车市动态_汽车_中金在线",
+      "summaryZh": "影子供应链的“血栓”：2026中东战云下的汽车产业生存劫_车市动态_汽车_中金在线 &nbsp;&nbsp; cnfol",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5SU0ZtS0oyNEFwWDMxR2NNVjZQb016UGUtYW9oX1Jnc21NOVg5Z1B2Wk93UEJUb1dJdzIzdE5wYldxSTRxZ3drdzFOd2JaZW5va3lIOTdROW9NR3cwSWpWSHYyODlpNEkwQ1Zr?oc=5",
+      "source": "GoogleNews/cnfol",
+      "category": "Geo",
+      "time": 1772612583000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+      "agentScore": 96,
+      "agentRank": 11,
+      "topicZh": "地缘领域"
+    },
+    {
+      "title": "在重大地缘冲突面前，金油股都遵循同一个历史规律",
+      "headlineZh": "在重大地缘冲突面前，金油股都遵循同一个历史规律",
+      "summaryZh": "在重大地缘冲突面前，金油股都遵循同一个历史规律 &nbsp;&nbsp; 新浪财经",
+      "agentReasonZh": "Model selected this as high-impact",
+      "url": "https://news.google.com/rss/articles/CBMilwJBVV95cUxQdWh6NnlrR3hBaFMwV1p4akZBRjNrRWVTdnFwdUJwWERwa2QtMDBKdFJ3VzBFeldsUnc2eDNnaGJDdWU1dFdNRXRrdzBXTzBHUFJRbGNpVUhlMUxONkdrWEtHZ2J1WFhWd3hWNGJTNXNkcTQ1alRsX0M5X2p1T3gxWnFtNVAySGJOYVEzeGZPaWVuZ2ZGdFpIZjZudVNOUDNaWlh3Yl91ZTNrWGQ2ZnpmWEhPbEczVHZPVkE3WWVpc2lWMDRyNHg2MUpzdGRrYTJNU2hnMXBDTDcyYnZHTFNabHFzMjFrOGVaVWw3bGxURzIxTDNDblc0NHFfVXZlMEtjX1FuV3RqUWhZTnl3RmZRa2NWM0NhTFU?oc=5",
+      "source": "GoogleNews/新浪财经",
+      "category": "Geo",
+      "time": 1772613236000,
+      "priority": 59.52,
+      "pinnedUntil": 1772699677132,
+      "agentScore": 96,
+      "agentRank": 12,
+      "topicZh": "地缘领域"
+>>>>>>> fbd4579abb71d96a1876fcb4e1318047c28bbc24
     }
   ]
 }
