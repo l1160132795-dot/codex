@@ -1,9 +1,9 @@
 {
-  "snapshotAt": "2026-03-04T08:41:49.980Z",
+  "snapshotAt": "2026-03-04T08:46:53.084Z",
   "ticker": {
-    "price": 69495.41,
-    "changePct": 2.87,
-    "volumeUsd": 41768408615.92014,
+    "price": 69531.26,
+    "changePct": 3.01,
+    "volumeUsd": 41795342940.300446,
     "source": "CoinLore"
   },
   "fearGreed": {
@@ -11,8 +11,8 @@
     "classification": "Extreme Fear"
   },
   "globalData": {
-    "btcDominance": 62.963762193892,
-    "totalMarketCapUsd": 2208013755593
+    "btcDominance": 63.006690210968294,
+    "totalMarketCapUsd": 2213707945421
   },
   "altBoard": [
     {
@@ -23,9 +23,9 @@
         "eth",
         "ethereum"
       ],
-      "price": 2011.97,
-      "changePct": 1.84,
-      "volumeUsd": 18163906195.08828,
+      "price": 2014.56,
+      "changePct": 2.79,
+      "volumeUsd": 18144343921.86711,
       "rank": 2,
       "source": "CoinLore"
     },
@@ -37,9 +37,9 @@
         "sol",
         "solana"
       ],
-      "price": 87.41,
-      "changePct": 3.31,
-      "volumeUsd": 3606032739.258139,
+      "price": 87.62,
+      "changePct": 3.89,
+      "volumeUsd": 3612809951.598382,
       "rank": 7,
       "source": "CoinLore"
     },
@@ -52,9 +52,9 @@
         "ripple",
         "xrpl"
       ],
-      "price": 1.37,
-      "changePct": 1.28,
-      "volumeUsd": 2117099621.4521904,
+      "price": 1.38,
+      "changePct": 1.86,
+      "volumeUsd": 2122885722.242715,
       "rank": 5,
       "source": "CoinLore"
     },
@@ -66,9 +66,9 @@
         "doge",
         "dogecoin"
       ],
-      "price": 0.090199,
-      "changePct": -0.44,
-      "volumeUsd": 1095547329.490837,
+      "price": 0.090342,
+      "changePct": 0.28,
+      "volumeUsd": 1094368285.504058,
       "rank": 10,
       "source": "CoinLore"
     },
@@ -80,9 +80,9 @@
         "ada",
         "cardano"
       ],
-      "price": 0.265972,
-      "changePct": -0.58,
-      "volumeUsd": 538999043.1302642,
+      "price": 0.266594,
+      "changePct": -0.03,
+      "volumeUsd": 540831609.4956053,
       "rank": 13,
       "source": "CoinLore"
     },
@@ -93,9 +93,9 @@
       "aliases": [
         "sui"
       ],
-      "price": 0.917624,
-      "changePct": 1.23,
-      "volumeUsd": 395372726.82249683,
+      "price": 0.918944,
+      "changePct": 1.86,
+      "volumeUsd": 397428174.29120797,
       "rank": 31,
       "source": "CoinLore"
     },
@@ -107,9 +107,9 @@
         "link",
         "chainlink"
       ],
-      "price": 8.93,
-      "changePct": 2.36,
-      "volumeUsd": 306825886.1451751,
+      "price": 8.96,
+      "changePct": 3.19,
+      "volumeUsd": 308163888.3033634,
       "rank": 22,
       "source": "CoinLore"
     },
@@ -121,9 +121,9 @@
         "avax",
         "avalanche"
       ],
-      "price": 9.19,
-      "changePct": 1.48,
-      "volumeUsd": 258401927.31521994,
+      "price": 9.2,
+      "changePct": 2.18,
+      "volumeUsd": 257328005.45408174,
       "rank": 28,
       "source": "CoinLore"
     },
@@ -135,9 +135,9 @@
         "trx",
         "tron"
       ],
-      "price": 0.283164,
-      "changePct": 0.44,
-      "volumeUsd": 478710391.1235668,
+      "price": 0.283254,
+      "changePct": 0.56,
+      "volumeUsd": 479998258.07728153,
       "rank": 8,
       "source": "CoinLore"
     },
@@ -150,8 +150,8 @@
         "toncoin"
       ],
       "price": 1.28,
-      "changePct": 3.27,
-      "volumeUsd": 61074011.9466589,
+      "changePct": 3.69,
+      "volumeUsd": 60958239.47799445,
       "rank": 32,
       "source": "CoinLore"
     },
@@ -164,8 +164,8 @@
         "polkadot"
       ],
       "price": 1.53,
-      "changePct": 1.56,
-      "volumeUsd": 156144395.7578045,
+      "changePct": 2.21,
+      "volumeUsd": 156354422.41026366,
       "rank": 37,
       "source": "CoinLore"
     },
@@ -177,10 +177,10 @@
         "ltc",
         "litecoin"
       ],
-      "price": 55.36,
-      "changePct": 3.06,
-      "volumeUsd": 373542325.5655734,
-      "rank": 26,
+      "price": 55.53,
+      "changePct": 3.72,
+      "volumeUsd": 374803986.5903066,
+      "rank": 25,
       "source": "CoinLore"
     },
     {
@@ -191,9 +191,9 @@
         "bch",
         "bitcoin cash"
       ],
-      "price": 452.8,
-      "changePct": 3.05,
-      "volumeUsd": 235152927.7865564,
+      "price": 452.27,
+      "changePct": 3.24,
+      "volumeUsd": 234688382.6988252,
       "rank": 14,
       "source": "CoinLore"
     },
@@ -205,9 +205,9 @@
         "apt",
         "aptos"
       ],
-      "price": 0.999349,
-      "changePct": 0.59,
-      "volumeUsd": 111620143.10796963,
+      "price": 1,
+      "changePct": 2.15,
+      "volumeUsd": 111401695.14071642,
       "rank": 71,
       "source": "CoinLore"
     },
@@ -219,9 +219,9 @@
         "arb",
         "arbitrum"
       ],
-      "price": 0.102939,
-      "changePct": 1.95,
-      "volumeUsd": 59031189.93760835,
+      "price": 0.103009,
+      "changePct": 2.47,
+      "volumeUsd": 59087360.65200202,
       "rank": 82,
       "source": "CoinLore"
     },
@@ -233,8 +233,8 @@
         "near"
       ],
       "price": 1.37,
-      "changePct": 0.97,
-      "volumeUsd": 339819636.21914303,
+      "changePct": 1.52,
+      "volumeUsd": 338461185.10227054,
       "rank": 42,
       "source": "CoinLore"
     },
@@ -247,8 +247,8 @@
         "cosmos"
       ],
       "price": 1.86,
-      "changePct": 2.11,
-      "volumeUsd": 44599050.65899849,
+      "changePct": 3.01,
+      "volumeUsd": 44738550.67942881,
       "rank": 59,
       "source": "CoinLore"
     },
@@ -261,9 +261,9 @@
         "filecoin"
       ],
       "price": 1.01,
-      "changePct": 2.46,
-      "volumeUsd": 74675816.65111004,
-      "rank": 73,
+      "changePct": 3.04,
+      "volumeUsd": 74739598.33469918,
+      "rank": 74,
       "source": "CoinLore"
     },
     {
@@ -274,9 +274,9 @@
         "xlm",
         "stellar"
       ],
-      "price": 0.15254,
-      "changePct": 0.81,
-      "volumeUsd": 95566543.0058705,
+      "price": 0.152772,
+      "changePct": 1.35,
+      "volumeUsd": 96117187.43273257,
       "rank": 24,
       "source": "CoinLore"
     },
@@ -289,68 +289,33 @@
         "uniswap"
       ],
       "price": 3.96,
-      "changePct": 2.61,
-      "volumeUsd": 134816774.23468593,
+      "changePct": 3.29,
+      "volumeUsd": 135114985.7545575,
       "rank": 36,
       "source": "CoinLore"
     }
   ],
   "officialEvents": [
     {
-      "coin": "LINK",
-      "source": "GitHub",
-      "title": "LINK 仓库动态",
-      "url": "https://github.com/smartcontractkit/chainlink/events",
-      "time": 1772613580000
+      "coin": "ETH",
+      "source": "Official",
+      "title": "Ethereum 官方渠道持续跟踪客户端升级进展",
+      "url": "https://github.com/ethereum/go-ethereum/events",
+      "time": 1772610415409
     },
     {
-      "coin": "ADA",
-      "source": "GitHub",
-      "title": "ADA 代码提交",
-      "url": "https://github.com/IntersectMBO/cardano-node/events",
-      "time": 1772613319000
+      "coin": "SOL",
+      "source": "Official",
+      "title": "Solana 官方仓库持续有代码提交与 Issue 更新",
+      "url": "https://github.com/solana-labs/solana/events",
+      "time": 1772608615409
     },
     {
       "coin": "XRP",
-      "source": "GitHub",
-      "title": "XRP 仓库动态",
+      "source": "Official",
+      "title": "XRPL 官方仓库保持协议讨论与维护节奏",
       "url": "https://github.com/XRPLF/rippled/events",
-      "time": 1772612500000
-    },
-    {
-      "coin": "TON",
-      "source": "GitHub",
-      "title": "TON 仓库动态",
-      "url": "https://github.com/ton-blockchain/ton/events",
-      "time": 1772612474000
-    },
-    {
-      "coin": "ETH",
-      "source": "GitHub",
-      "title": "ETH PR 变更",
-      "url": "https://github.com/ethereum/go-ethereum/events",
-      "time": 1772612251000
-    },
-    {
-      "coin": "SUI",
-      "source": "GitHub",
-      "title": "SUI 代码提交",
-      "url": "https://github.com/MystenLabs/sui/events",
-      "time": 1772603504000
-    },
-    {
-      "coin": "AVAX",
-      "source": "GitHub",
-      "title": "AVAX 代码提交",
-      "url": "https://github.com/ava-labs/avalanchego/events",
-      "time": 1772602328000
-    },
-    {
-      "coin": "TRX",
-      "source": "GitHub",
-      "title": "TRX 仓库动态",
-      "url": "https://github.com/tronprotocol/java-tron/events",
-      "time": 1772597723000
+      "time": 1772606815409
     }
   ]
 }
