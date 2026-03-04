@@ -21,10 +21,22 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Preflight required secrets
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error title=Missing Secret::OPENAI_API_KEY is not configured. Go to Settings > Secrets and variables > Actions > New repository secret."
+            exit 1
+          fi
+
       - name: Run remote collector + remote OpenAI curation
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          OPENAI_API_BASE: ${{ vars.OPENAI_API_BASE }}
+          OPENAI_SITE_URL: ${{ vars.OPENAI_SITE_URL }}
+          OPENAI_APP_NAME: ${{ vars.OPENAI_APP_NAME }}
           REMOTE_CRAWL_ONLY: "0"
           REMOTE_ALLOW_RULE_FALLBACK: "0"
           REMOTE_MAX_CANDIDATES: ${{ vars.REMOTE_MAX_CANDIDATES }}

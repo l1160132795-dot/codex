@@ -5,6 +5,9 @@ const OUTPUT_JSON_FILE = process.env.REMOTE_OUTPUT_JSON || "remote/news.remote.j
 const OUTPUT_JS_FILE = process.env.REMOTE_OUTPUT_JS || "remote/news.remote.js";
 const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-4.1-mini";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
+const OPENAI_API_BASE = String(process.env.OPENAI_API_BASE || "https://api.openai.com/v1").trim().replace(/\/+$/, "");
+const OPENAI_SITE_URL = String(process.env.OPENAI_SITE_URL || "").trim();
+const OPENAI_APP_NAME = String(process.env.OPENAI_APP_NAME || "").trim();
 const REMOTE_CRAWL_ONLY = String(process.env.REMOTE_CRAWL_ONLY || "0") === "1";
 const REMOTE_ALLOW_RULE_FALLBACK = String(process.env.REMOTE_ALLOW_RULE_FALLBACK || "0") === "1";
 const RAW_MAX_AGE_HOURS = Math.max(24, Number(process.env.RAW_MAX_AGE_HOURS || 72));
@@ -783,24 +786,58 @@ async function runOpenAi(candidates, nowIso) {
     throw new Error("OPENAI_API_KEY not set in remote mode.");
   }
 
-  const callOpenAi = async (body) => {
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+  const callOpenAiRaw = async (body) => {
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${OPENAI_API_KEY}`
+    };
+    if (OPENAI_SITE_URL) headers["HTTP-Referer"] = OPENAI_SITE_URL;
+    if (OPENAI_APP_NAME) headers["X-Title"] = OPENAI_APP_NAME;
+
+    const res = await fetch(`${OPENAI_API_BASE}/chat/completions`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`
-      },
+      headers,
       body: JSON.stringify(body)
     });
     if (!res.ok) {
       const errText = await res.text().catch(() => "");
-      throw new Error(`OpenAI HTTP ${res.status}: ${errText.slice(0, 240)}`);
+      throw new Error(`OpenAI HTTP ${res.status}: ${errText.slice(0, 400)}`);
     }
     const json = await res.json();
     const content = json?.choices?.[0]?.message?.content;
     const text = cleanJsonText(content);
     if (!text) throw new Error("OpenAI empty response");
     return JSON.parse(text);
+  };
+
+  const shouldRetryWithoutSchema = (error) => {
+    const msg = String(error?.message || "").toLowerCase();
+    if (!msg.includes("http 400") && !msg.includes("http 422")) return false;
+    return msg.includes("response_format")
+      || msg.includes("json_schema")
+      || msg.includes("schema")
+      || msg.includes("strict")
+      || msg.includes("unsupported")
+      || msg.includes("not support");
+  };
+
+  const callOpenAi = async (body) => {
+    try {
+      return await callOpenAiRaw(body);
+    } catch (error) {
+      if (!body?.response_format || !shouldRetryWithoutSchema(error)) {
+        throw error;
+      }
+      console.error("[remote] provider does not support response_format json_schema, retrying without schema.");
+      const retryBody = { ...body };
+      delete retryBody.response_format;
+      const baseMessages = Array.isArray(body.messages) ? body.messages : [];
+      retryBody.messages = [
+        ...baseMessages,
+        { role: "system", content: "Return valid JSON only. No markdown fences, no commentary." }
+      ];
+      return await callOpenAiRaw(retryBody);
+    }
   };
 
   const nowMs = Date.parse(nowIso) || Date.now();
